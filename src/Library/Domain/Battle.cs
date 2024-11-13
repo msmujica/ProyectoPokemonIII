@@ -113,17 +113,21 @@ public class Battle
     /// Valida el estado de los Pokémon activos de ambos jugadores.
     /// Si alguno de los Pokémon está muerto (vida <= 0), se realiza un cambio de Pokémon.
     /// </summary>
-    public void ValidacionPokemon()
+    public bool ValidacionPokemonVivo()
     {
         if (Player1.Activo.Vida <= 0)
         {
             Player1.CambioPokemonMuerto();
+            return true;
         }
 
         if (Player2.Activo.Vida <= 0)
         {
             Player2.CambioPokemonMuerto();
+            return true;
         }
+
+        return false;
     }
 
     /// <summary>
@@ -134,6 +138,10 @@ public class Battle
     /// <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
     public string IntermediarioAtacar(string opcionAtaque)
     {
+        if (ValidacionPokemonVivo())
+        {
+            return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque";
+        }
         
         if (ValidacionWin())
         {

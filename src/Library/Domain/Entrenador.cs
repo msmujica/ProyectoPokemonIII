@@ -153,11 +153,13 @@ public class Entrenador
     /// </summary>
     public void CambioPokemonMuerto()
     {
+        int count = 0;
         foreach (var pok in this.Equipo)
         {
-            if (pok.Vida > 0)
+            if (!pok.EstaDerrotado && count == 0)
             {
                 this.Activo = pok;
+                count++;
             }
         }
 

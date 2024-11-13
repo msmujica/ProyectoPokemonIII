@@ -154,6 +154,7 @@ namespace Library
                         gestorEfectos.AplicarEfecto(efectoEspecial, objetivo);
                     }
                 }
+                Console.WriteLine(dañoTotal);
             }
             else
             {
