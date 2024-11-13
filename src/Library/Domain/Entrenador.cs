@@ -160,6 +160,8 @@ public class Entrenador
             {
                 this.Activo = pok;
                 count++;
+                
+                
             }
         }
 

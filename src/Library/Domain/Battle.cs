@@ -141,6 +141,8 @@ public class Battle
         if (ValidacionPokemonVivo())
         {
             return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque";
+            
+            
         }
         
         if (ValidacionWin())
