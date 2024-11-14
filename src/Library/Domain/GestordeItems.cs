@@ -67,12 +67,12 @@ namespace Library.Items
         /// <param name="contadorCuraTotal">El número de Curaciones Totales disponibles.</param>
         /// <param name="gestorEfectos">El gestor de efectos que se usará para limpiar efectos negativos.</param>
         /// <returns>Un mensaje indicando el resultado de usar la Cura Total.</returns>
-        public string UsarCuraTotal(Pokemon pokemon, int contadorCuraTotal, GestorEfectos gestorEfectos)
+        public string UsarCuraTotal(Pokemon pokemon, int contadorCuraTotal, EffectsManager effectsManager)
         {
             if (contadorCuraTotal > 0)
             {
                 pokemon.Vida = 100; // Cura completamente al Pokémon
-                gestorEfectos.LimpiarEfectos(pokemon);
+                effectsManager.LimpiarEfectos(pokemon);
                 contadorCuraTotal--;
                 return ("Usaste una Cura Total. Usos restantes: " + contadorCuraTotal);
             }

@@ -25,7 +25,7 @@ public class Battle
 
     private Entrenador turnoActual;
     private Entrenador turnoPasado;
-    private GestorEfectos gestorEfectos;
+    private EffectsManager effectsManager;
 
     /// <summary>
     /// Obtiene o establece el jugador que está actuando en el turno actual.
@@ -57,7 +57,7 @@ public class Battle
         Player2 = player2;
         TurnoActual = player1;
         TurnoPasado = player2;
-        gestorEfectos = new GestorEfectos();
+        effectsManager = new EffectsManager();
         player1.SeteodeItems();
         player2.SeteodeItems();
     }
@@ -150,7 +150,7 @@ public class Battle
             return "No tenes los pokemones suficientes para empezar la batalla";
         }
 
-        if (gestorEfectos.ProcesarControlMasa(TurnoActual.Activo))
+        if (effectsManager.ProcesarControlMasa(TurnoActual.Activo))
         {
             CambiarTurno();
             return "No se puede";
@@ -158,8 +158,8 @@ public class Battle
         
         try
         {
-            string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
-            gestorEfectos.ProcesarEfectosDaño();
+            string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, effectsManager);
+            effectsManager.ProcesarEfectosDaño();
             CambiarTurno();
             return valor;
         }
@@ -205,7 +205,7 @@ public class Battle
 
             // Cambiar el Pokémon activo
             string valor = TurnoActual.cambiarActivo(opcionPokemon);
-            gestorEfectos.ProcesarEfectosDaño();
+            effectsManager.ProcesarEfectosDaño();
             CambiarTurno();
             return valor;
         }
@@ -255,9 +255,9 @@ public class Battle
 
             // Aplicar el ítem seleccionado al Pokémon
             
-            gestorEfectos.ProcesarEfectosDaño();
+            effectsManager.ProcesarEfectosDaño();
             CambiarTurno();
-            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos);
+            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, effectsManager);
 
         }
         catch (FormatException)

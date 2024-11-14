@@ -9,13 +9,13 @@ namespace Library
     /// •	Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
     /// •	Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
     /// </summary>
-    public class GestorEfectos
+    public class EffectsManager
     {
         // Diccionario que almacena los efectos activos para cada Pokémon
         private Dictionary<Pokemon, List<IEfecto>> efectosActivos;
 
         // Constructor que inicializa el diccionario de efectos
-        public GestorEfectos()
+        public EffectsManager()
         {
             efectosActivos = new Dictionary<Pokemon, List<IEfecto>>();
         }

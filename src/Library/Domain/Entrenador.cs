@@ -110,9 +110,9 @@ public class Entrenador
     /// <param name="oponente">El Pokémon oponente que recibirá el ataque.</param>
     /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
     /// <returns>El resultado de la acción de atacar.</returns>
-    public string elegirAtaque(string nombre, Pokemon oponente, GestorEfectos gestorEfectos)
+    public string elegirAtaque(string nombre, Pokemon oponente, EffectsManager effectsManager)
     {
-        return activo.atacar(oponente, nombre, gestorEfectos);
+        return activo.atacar(oponente, nombre, effectsManager);
     }
 
     /// <summary>
@@ -122,7 +122,7 @@ public class Entrenador
     /// <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
     /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos del ítem.</param>
     /// <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
-    public string UsarItem(string nombreItem, Pokemon pokemon, GestorEfectos gestorEfectos)
+    public string UsarItem(string nombreItem, Pokemon pokemon, EffectsManager effectsManager)
     {
         string valor = null;
         switch (nombreItem)
@@ -134,7 +134,7 @@ public class Entrenador
                 valor = gestorDeItems.UsarRevivir(pokemon, ContadorRevivir);
                 break;
             case "CuraTotal":
-                valor = gestorDeItems.UsarCuraTotal(pokemon, ContadorCuraTotal, gestorEfectos);
+                valor = gestorDeItems.UsarCuraTotal(pokemon, ContadorCuraTotal, effectsManager);
                 break;
             default:
                 Console.WriteLine("Ítem no válido.");

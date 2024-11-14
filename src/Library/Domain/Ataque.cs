@@ -120,7 +120,7 @@ namespace Library
         /// <param name="gestorEfectos">El objeto que gestiona los efectos especiales que pueden ocurrir.</param>
         /// <returns>El daño calculado para el ataque.</returns>
         public static (int Daño, string Descripcion) CalculeDamage(string nameAttack, Pokemon objetive,
-            GestorEfectos effectsManager)
+            EffectsManager effectsManager)
         {
             string description = "";
             var attack = ObtainAttack(nameAttack);
