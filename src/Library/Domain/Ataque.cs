@@ -191,7 +191,7 @@ namespace Library
         /// <returns>Verdadero si se aplica un efecto especial, falso si no se aplica.</returns>
         public static bool ApplySpecialEffect()
         {
-            return new Random().NextDouble() <= 0.1; // Probabilidad fija del 10%
+            return new Random().NextDouble() <= 1; // Probabilidad fija del 10%
         }
 
         /// <summary>
