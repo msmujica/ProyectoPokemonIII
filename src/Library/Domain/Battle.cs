@@ -253,7 +253,7 @@ public class Battle
 
             Pokemon selectedPokemon = ActualTurn.Team[optionPokemon];
 
-            // Aplicar el ítem seleccionado al Pokémon
+            // Aplicar el ítem seleccionado al pokemon
             
             effectsManager.ProcessDamageEffects();
             ChangeTurn();
