@@ -25,12 +25,12 @@ namespace Library
         /// </summary>
         /// <param name="efecto">El efecto a aplicar.</param>
         /// <param name="pokemon">El Pokémon que recibirá el efecto.</param>
-        public void AplicarEfecto(IEfecto efecto, Pokemon pokemon)
+        public string AplicarEfecto(IEfecto efecto, Pokemon pokemon)
         {
             if (efecto == null || pokemon == null)
-            {
-                Console.WriteLine("El efecto o el Pokémon son nulos y no se puede aplicar el efecto.");
-                return;
+            { 
+                // El efecto o el Pokémon son nulos y no se puede aplicar el efecto.
+                return "";
             }
 
             // Asegura que haya una lista de efectos para el Pokémon en el diccionario
@@ -43,7 +43,7 @@ namespace Library
             efectosActivos[pokemon].Add(efecto);
 
             // Inicia el efecto, lo que podría implicar acciones como mostrar un mensaje
-            efecto.IniciarEfecto(pokemon);
+            return efecto.IniciarEfecto(pokemon);
         }
 
         /// <summary>
@@ -54,15 +54,32 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
         /// <c>false</c> si el efecto ha terminado o no aplica.
         /// </returns>
-        public bool ProcesarControlMasa(Pokemon pokem, out string descripcion)
+        public bool PuedoAtacar(Pokemon pokem)
+        {
+            List<IEfecto> efectos = efectosActivos[pokem];
+            foreach (var v in efectos)
+            {
+                // Procesa efectos como dormir o paralizar
+                if (v is EfectoDormir)
+                {
+                    return v.PuedoAtacar; // Devuelve si el pokemon puede atacar
+                }
+                else if (v is EfectoParalizar)
+                {
+                    return v.PuedoAtacar; // Devuelve si el pokemon puede atacar
+                }
+            }
+
+            return true;
+        }
+        public string ProcesarControlMasa(Pokemon pokem)
         {
             // Inicializamos la descripción vacía
-            descripcion = "";
 
             // Verifica si el Pokémon tiene efectos activos
             if (!efectosActivos.ContainsKey(pokem))
             {
-                return false;
+                return $"El pokemon {pokem} no tiene efectos activos.";
             }
 
             List<IEfecto> efectos = efectosActivos[pokem];
@@ -71,25 +88,24 @@ namespace Library
                 // Procesa efectos como dormir o paralizar
                 if (v is EfectoDormir)
                 {
-                    descripcion = $"{pokem.Name} está dormido. Turnos restantes: {(v as EfectoDormir).turnosDormidos}";
                     return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
                 }
                 else if (v is EfectoParalizar)
                 {
-                    descripcion = (v as EfectoParalizar).description;
                     return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
                 }
             }
 
-            return false; // Si no es un efecto de control como dormir o paralizar, retorna false
+            return ""; // Si no es un efecto de control como dormir o paralizar, retorna false
         }
 
 
         /// <summary>
         /// Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
         /// </summary>
-        public void ProcesarEfectosDaño()
+        public string ProcesarEfectosDaño(Pokemon pokem)
         {
+            string description = "";
             // Recorre todos los efectos activos
             foreach (var entry in efectosActivos)
             {
@@ -100,13 +116,14 @@ namespace Library
                 for (int i = efectos.Count - 1; i >= 0; i--)
                 {
                     IEfecto efecto = efectos[i];
-                    if (efecto is EfectoEnvenenar || efecto is EfectoQuemar)
+                    if (pokemon != pokem)
                     {
                         // Procesa el daño del efecto
-                        efecto.ProcesarEfecto(pokemon);
+                        description += efecto.ProcesarEfecto(pokemon) + "\n";
                     }
                 }
             }
+            return description;
         }
 
         /// <summary>
@@ -122,7 +139,7 @@ namespace Library
                 return ($"Todos los efectos han sido eliminados de {pokemon.Name}.");
             }
             
-            return ($"{pokemon.Name} no tiene efectos activos.");
+            return "";
             
         }
 
@@ -134,6 +151,20 @@ namespace Library
         public bool PokemonConEfecto(Pokemon pokemon)
         {
             return efectosActivos.ContainsKey(pokemon);
+        }
+
+        public bool EsParalisis(Pokemon pokem)
+        {
+            List<IEfecto> efectos = efectosActivos[pokem];
+            foreach (var v in efectos)
+            {
+                // Procesa efectos como dormir o paralizar
+                if (v is EfectoParalizar)
+                {
+                    return true; // Devuelve si el pokemon tiene paralisis.
+                }
+            }
+            return false;
         }
     }
 }

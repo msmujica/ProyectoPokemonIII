@@ -100,7 +100,7 @@ public class Pokemon
             {
                 var (valor, mensaje) = Attack.CalculeDamage(ataque, oponente, gestorEfectos);
                 oponente.recibirDaño(valor);
-                return $"El oponente recibió {valor} de daño con el ataque {ataque}. {mensaje}"; // Devolvemos el mensaje
+                return $"El pokemon {oponente} recibió {valor} de daño con el ataque {ataque}. {mensaje}"; // Devolvemos el mensaje
             }
         }
 

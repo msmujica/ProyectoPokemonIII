@@ -6,17 +6,22 @@ namespace Library
     /// </summary>
     public class EfectoQuemar : IEfecto
     {
+        public bool PuedoAtacar
+        {
+            get { return true; }
+        }
         // Porcentaje de la vida máxima que pierde el Pokémon debido a la quemadura (10%)
         private static double dmgPercentage = 0.10; 
+        private GestorEfectos gestorEfectos;
 
         /// <summary>
         /// Inicia el efecto de "quemar" en el Pokémon.
         /// Este efecto causa daño continuo al Pokémon en cada turno.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será quemado.</param>
-        public void IniciarEfecto(Pokemon pokemon)
+        public string IniciarEfecto(Pokemon pokemon)
         {
-            Console.WriteLine($"{pokemon.Name} ha sido quemado.");
+            return $"El pokemon {pokemon.Name} ha sido quemado.";
         }
 
         /// <summary>
@@ -28,20 +33,21 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue quemado y pierde vida).
         /// <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado KO).
         /// </returns>
-        public bool ProcesarEfecto(Pokemon pokemon)
+        public string ProcesarEfecto(Pokemon pokemon)
         {
-            // Calcula el daño de la quemadura (10% de la vida máxima)
+            // Calcula el daño causado por el veneno (5% de la vida actual del Pokémon)
             int daño = (int)(pokemon.Vida * dmgPercentage);
             pokemon.Vida -= daño;
             
+            // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado
             if (pokemon.Vida <= 0)
-            { 
-                // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado (el Pokémon está KO)
-                return false; 
+            {
+                gestorEfectos.LimpiarEfectos(pokemon);
+                return $"El pokemon {pokemon.Name} ha caído por envenenamiento.";
             }
-
-            // El efecto sigue activo, ya que el Pokémon sigue con vida
-            return true;
+            
+            return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento.";
+            // El efecto continúa (el Pokémon sigue vivo y envenenado)
         }
     }
 }

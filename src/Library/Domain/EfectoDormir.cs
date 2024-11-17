@@ -8,16 +8,19 @@ namespace Library
     {
         // Almacena el número de turnos que el Pokémon permanecerá dormido
         public int turnosDormidos;
+        public bool PuedoAtacar { get; set; }
+        private GestorEfectos gestorEfectos;
 
         /// <summary>
         /// Inicia el efecto de "dormir" en un Pokémon.
         /// El Pokémon será dormido por un número aleatorio de turnos entre 1 y 4.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será afectado por el sueño.</param>
-        public void IniciarEfecto(Pokemon pokemon)
+        public string IniciarEfecto(Pokemon pokemon)
         {
             // Determina cuántos turnos el Pokémon estará dormido, un valor aleatorio entre 1 y 4
             this.turnosDormidos = new Random().Next(1, 5);
+            return $"El pokemon {pokemon} se le aplica el efecto dormir por {this.turnosDormidos} turnos.";
         }
 
         /// <summary>
@@ -29,23 +32,27 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue dormido).
         /// <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha despertado).
         /// </returns>
-        public bool ProcesarEfecto(Pokemon pokemon)
+        public string ProcesarEfecto(Pokemon pokemon)
         {
             if (turnosDormidos > 0)
             {
                 // Reduce el número de turnos restantes del sueño
                 turnosDormidos--;
+                this.PuedoAtacar = false;
 
                 // Si ya no quedan turnos, el Pokémon se despierta
                 if (turnosDormidos == 0)
                 {
-                    return false; // El efecto ha terminado
+                    gestorEfectos.LimpiarEfectos(pokemon);
+                    return $"El pokemon {pokemon} se despierta";
                 }
 
-                return true; // El efecto sigue activo (el Pokémon sigue dormido)
+                return $"Al pokemon {pokemon} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar"; // El efecto sigue activo (el Pokémon sigue dormido)
             }
-
-            return false; // El efecto ha terminado
+            this.PuedoAtacar = true;
+            gestorEfectos.LimpiarEfectos(pokemon);
+            return "";
+            // El efecto ha terminado
         }
     }
 }

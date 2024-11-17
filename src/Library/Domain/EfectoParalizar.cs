@@ -6,15 +6,15 @@ namespace Library
     /// </summary>
     public class EfectoParalizar : IEfecto
     {
-        public string description = "";
+        public bool PuedoAtacar { get; set; }
         /// <summary>
         /// Inicia el efecto de "paralizar" en el Pokémon.
         /// Este efecto impide que el Pokémon pueda atacar con una probabilidad.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será paralizado.</param>
-        public void IniciarEfecto(Pokemon pokemon)
+        public string IniciarEfecto(Pokemon pokemon)
         {
-            Console.WriteLine($"{pokemon.Name} ha sido paralizado.");
+            return $"El pokemon {pokemon.Name} se le aplico el efecto paralisis.";
         }
 
         /// <summary>
@@ -26,18 +26,18 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha atacado debido a la parálisis).
         /// <c>false</c> si el Pokémon ha superado la parálisis y puede atacar.
         /// </returns>
-        public bool ProcesarEfecto(Pokemon pokemon)
+        public string ProcesarEfecto(Pokemon pokemon)
         {
-            if (PuedeAtacar())
+            if (this.PuedoAtacar)
             {
                 // El Pokémon puede atacar este turno.
-                this.description = ($"{pokemon.Name} supera la parálisis en este turno.");
-                return false; // El efecto continúa, ya que el Pokémon puede atacar.
+                return $"El pokemon {pokemon.Name} supera la parálisis en este turno y puede atacar.";
+                // El efecto continúa, ya que el Pokémon puede atacar.
             }
-
+            
             // El Pokémon no puede atacar este turno debido a la parálisis.
-            this.description = ($"{pokemon.Name} está paralizado y no puede atacar este turno.");
-            return true; // El efecto sigue activo, ya que el Pokémon no puede atacar.
+            return $"{pokemon.Name} está paralizado y no puede atacar, perdiste el turno.";
+            // El efecto sigue activo, ya que el Pokémon no puede atacar.
         }
 
         /// <summary>
@@ -52,7 +52,8 @@ namespace Library
         {
             // Genera un número aleatorio para determinar si puede atacar
             // Hay un 30% de probabilidad de que el Pokémon no pueda atacar.
-            return new Random().NextDouble() > 0.3;
+            this.PuedoAtacar = new Random().NextDouble() > 0.3;
+            return this.PuedoAtacar;
         }
     }
 }
