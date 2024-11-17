@@ -149,13 +149,8 @@ namespace Library
                 if (!effectsManager.PokemonConEfecto(objetive) && ApplySpecialEffect())
                 {
                     // Aplica un efecto especial
-                    var (EffectSpecial, descriptioneffect) = SelectSpecialEffect();
-                    effectsManager.AplicarEfecto(EffectSpecial, objetive);
-                    description += $"Se aplica el efecto especial: {descriptioneffect}. ";
-                    if (EffectSpecial is EfectoDormir efectodormir)
-                    {
-                        description += $"por {efectodormir.turnosDormidos}";
-                    }
+                    IEfecto EffectSpecial = SelectSpecialEffect();
+                    description += effectsManager.AplicarEfecto(EffectSpecial, objetive);
                 }
             }
             else
@@ -191,28 +186,28 @@ namespace Library
         /// <returns>Verdadero si se aplica un efecto especial, falso si no se aplica.</returns>
         public static bool ApplySpecialEffect()
         {
-            return new Random().NextDouble() <= 0.1; // Probabilidad fija del 10%
+            return new Random().NextDouble() <= 1; // Probabilidad fija del 10%
         }
 
         /// <summary>
         /// Selecciona un efecto especial aleatorio para aplicar (dormir, paralizar, envenenar, quemar).
         /// </summary>int 
         /// <returns>El efecto especial seleccionado.</returns>
-        public static (IEfecto efecto, string descripcion) SelectSpecialEffect()
+        public static IEfecto SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
             switch (effect)
             {
                 case 1:
-                    return (new EfectoDormir(), "Dormir el cual produce un estado de sueño en el objetivo");
+                    return new EfectoDormir();
                 case 2:
-                    return (new EfectoParalizar(), "Paralizar el cual tiene cierta probabilidad de invalidar el ataque.");
+                    return new EfectoParalizar();
                 case 3:
-                    return (new EfectoEnvenenar(), "Envenenar el cual cuasa daño progresivo.");
+                    return new EfectoEnvenenar();
                 case 4:
-                    return (new EfectoQuemar(), "Quemar el cual causa daño continuo.");
+                    return new EfectoQuemar();
                 default:
-                    return (null, "No se aplica ningún efecto especial."); // Valor por defecto
+                    return (null); // Valor por defecto
             }
         }
 
