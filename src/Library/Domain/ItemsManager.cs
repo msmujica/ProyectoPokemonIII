@@ -14,7 +14,7 @@ namespace Library.Items
         /// Usa una SuperPoción en un Pokémon, restaurando su vida hasta un máximo de 100.
         /// </summary>
         /// <param name="pokemon">El Pokémon al que se le aplicará la SuperPoción.</param>
-        /// <param name="contadorSuperPocion">El número de SuperPociones disponibles.</param>
+        /// <param name="superpotionCounter">El número de SuperPociones disponibles.</param>
         /// <returns>Un mensaje indicando el resultado de usar la SuperPoción.</returns>
         /// 
         public string UseSuperPotion(Pokemon pokemon, int superpotionCounter)
@@ -40,7 +40,7 @@ namespace Library.Items
         /// Usa un Revivir para resucitar a un Pokémon derrotado, restaurándole 50% de vida.
         /// </summary>
         /// <param name="pokemon">El Pokémon que se revivirá.</param>
-        /// <param name="contadorRevivir">El número de Revivir disponibles.</param>
+        /// <param name="reviveCounter">El número de Revivir disponibles.</param>
         /// <returns>Un mensaje indicando el resultado de usar el Revivir.</returns>
         public string UseRevive(Pokemon pokemon, int reviveCounter)
         {
@@ -64,8 +64,8 @@ namespace Library.Items
         /// Usa una Cura Total para restaurar la vida de un Pokémon al 100% y eliminar cualquier efecto negativo.
         /// </summary>
         /// <param name="pokemon">El Pokémon al que se le aplicará la Cura Total.</param>
-        /// <param name="contadorCuraTotal">El número de Curaciones Totales disponibles.</param>
-        /// <param name="gestorEfectos">El gestor de efectos que se usará para limpiar efectos negativos.</param>
+        /// <param name="totalcureCounter">El número de Curaciones Totales disponibles.</param>
+        /// <param name="effectsManager">El gestor de efectos que se usará para limpiar efectos negativos.</param>
         /// <returns>Un mensaje indicando el resultado de usar la Cura Total.</returns>
         public string UseTotalCure(Pokemon pokemon, int totalcureCounter, EffectsManager effectsManager)
         {

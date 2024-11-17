@@ -269,9 +269,9 @@ public class Facade
     /// Permite al jugador atacar con un Pokémon durante una batalla.
     /// </summary>
     /// <param name="playerDisplayName">El nombre del jugador.</param>
-    /// <param name="opcionAtaque">El ataque a realizar.</param>
+    /// <param name="optionAttack">El ataque a realizar.</param>
     /// <returns>El resultado del ataque.</returns>
-    public string AttackPokemon(string playerDisplayName, string opcionAtaque)
+    public string AttackPokemon(string playerDisplayName, string optionAttack)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         
@@ -280,7 +280,7 @@ public class Facade
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediaryAttack(opcionAtaque);
+        return battle.IntermediaryAttack(optionAttack);
     }
 
     /// <summary>
@@ -289,10 +289,10 @@ public class Facade
     /// <param name="playerDisplayName">El nombre del jugador.</param>
     /// <param name="opcion">La opción del Pokémon en el equipo.</param>
     /// <returns>El resultado del cambio de Pokémon.</returns>
-    public string ChangePokemon(string playerDisplayName, int opcion)
+    public string ChangePokemon(string playerDisplayName, int option)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
-        return battle.IntermediaryChangeActivePokemon(opcion);
+        return battle.IntermediaryChangeActivePokemon(option);
     }
 
     /// <summary>

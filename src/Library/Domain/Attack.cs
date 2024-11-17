@@ -98,7 +98,7 @@ namespace Library
         /// <summary>
         /// Obtiene el daño y tipo de un ataque a partir de su nombre.
         /// </summary>
-        /// <param name="nameAttack">Nombre del ataque que se quiere obtener.</param>
+        /// <param name="nameAttacks">Nombre del ataque que se quiere obtener.</param>
         /// <returns>Una tupla con el daño y el tipo del ataque.</returns>
         public static (int Damage, string Type) ObtainAttack(string nameAttacks)
         {
@@ -115,9 +115,9 @@ namespace Library
         /// Calcula el daño de un ataque, teniendo en cuenta la precisión, los críticos, 
         /// la efectividad del tipo y la posibilidad de aplicar efectos especiales.
         /// </summary>
-        /// <param name="nombreAtaque">El nombre del ataque que se quiere calcular.</param>
-        /// <param name="objetivo">El Pokémon objetivo del ataque.</param>
-        /// <param name="gestorEfectos">El objeto que gestiona los efectos especiales que pueden ocurrir.</param>
+        /// <param name="nameAttack">El nombre del ataque que se quiere calcular.</param>
+        /// <param name="objetive">El Pokémon objetivo del ataque.</param>
+        /// <param name="effectsManager">El objeto que gestiona los efectos especiales que pueden ocurrir.</param>
         /// <returns>El daño calculado para el ataque.</returns>
         public static (int Damage, string Description) CalculeDamage(string nameAttack, Pokemon objetive,
             EffectsManager effectsManager)
