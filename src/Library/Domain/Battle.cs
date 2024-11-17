@@ -58,8 +58,8 @@ public class Battle
         ActualTurn = player1;
         LastTurn = player2;
         effectsManager = new EffectsManager();
-        player1.SeteodeItems();
-        player2.SeteodeItems();
+        player1.ItemSetting();
+        player2.ItemSetting();
     }
 
     /// <summary>
@@ -69,12 +69,12 @@ public class Battle
 
     public bool PokemonValidation()
     {
-        if (Player1.Equipo.Count < 6)
+        if (Player1.Team.Count < 6)
         {
             return true;
         }
 
-        if (Player2.Equipo.Count < 6)
+        if (Player2.Team.Count < 6)
         {
             return true;
         }
@@ -90,7 +90,7 @@ public class Battle
     public bool WinValidation()
     {
         int count = 0;
-        foreach (var poke in LastTurn.Equipo)
+        foreach (var poke in LastTurn.Team)
         {
             if (poke.Health <= 0)
             {
@@ -112,13 +112,13 @@ public class Battle
     /// </summary>
     public bool AlivePokemonValidation()
     {
-        if (Player1.Activo.Health <= 0)
+        if (Player1.Active.Health <= 0)
         {
             Player1.ChangeDefeatedPokemon();
             return true;
         }
 
-        if (Player2.Activo.Health <= 0)
+        if (Player2.Active.Health <= 0)
         {
             Player2.ChangeDefeatedPokemon();
             return true;
@@ -133,7 +133,7 @@ public class Battle
     /// </summary>
     /// <param name="opcionAtaque">El nombre del ataque seleccionado por el jugador.</param>
     /// <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
-    public string IntermediarioAtacar(string opcionAtaque)
+    public string IntermediaryAttack(string opcionAtaque)
     {
         if (AlivePokemonValidation())
         {
@@ -150,17 +150,17 @@ public class Battle
             return "No tenes los pokemones suficientes para empezar la batalla";
         }
 
-        if (effectsManager.ProcesarControlMasa(ActualTurn.Activo))
+        if (effectsManager.ProcessMassControl(ActualTurn.Active))
         {
-            CambiarTurno();
+            ChangeTurn();
             return "No se puede";
         }
         
         try
         {
-            string valor = ActualTurn.elegirAtaque(opcionAtaque, LastTurn.Activo, effectsManager);
-            effectsManager.ProcesarEfectosDaño();
-            CambiarTurno();
+            string valor = ActualTurn.elegirAtaque(opcionAtaque, LastTurn.Active, effectsManager);
+            effectsManager.ProcessDamageEffects();
+            ChangeTurn();
             return valor;
         }
         catch (FormatException)
@@ -181,7 +181,7 @@ public class Battle
     /// </summary>
     /// <param name="opcionPokemon">Índice del Pokémon seleccionado para ser el nuevo activo.</param>
     /// <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
-    public string IntermediarioCambiarPokemonActivo(int opcionPokemon)
+    public string IntermediaryChangeActivePokemon(int opcionPokemon)
     {
         PokemonValidation();
         
@@ -198,15 +198,15 @@ public class Battle
         try
         {
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Equipo.Count)
+            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Team.Count)
             {
                 return "Selección de Pokémon inválida. Por favor, intenta de nuevo.";
             }
 
             // Cambiar el Pokémon activo
             string valor = ActualTurn.cambiarActivo(opcionPokemon);
-            effectsManager.ProcesarEfectosDaño();
-            CambiarTurno();
+            effectsManager.ProcessDamageEffects();
+            ChangeTurn();
             return valor;
         }
         catch (FormatException)
@@ -246,17 +246,17 @@ public class Battle
         try
         {
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Equipo.Count)
+            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Team.Count)
             {
                 return "Selección de Pokémon inválida.";
             }
 
-            Pokemon pokemonSeleccionado = ActualTurn.Equipo[opcionPokemon];
+            Pokemon pokemonSeleccionado = ActualTurn.Team[opcionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon
             
-            effectsManager.ProcesarEfectosDaño();
-            CambiarTurno();
+            effectsManager.ProcessDamageEffects();
+            ChangeTurn();
             return ActualTurn.UsarItem(opcionItem, pokemonSeleccionado, effectsManager);
 
         }
@@ -275,13 +275,13 @@ public class Battle
     /// <summary>
     /// Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguiente jugador.
     /// </summary>
-    public void CambiarTurno()
+    public void ChangeTurn()
     {
         // Cambiar al otro jugador
         ActualTurn = (ActualTurn == Player1) ? Player2 : Player1;
         LastTurn = (LastTurn == Player2) ? Player1 : Player2;
 
-        Console.WriteLine($"Es el turno de {ActualTurn.Nombre}");
+        Console.WriteLine($"Es el turno de {ActualTurn.Team}");
     }
 
     /// <summary>
@@ -290,7 +290,7 @@ public class Battle
     /// <returns>Lista de los Pokémon del oponente.</returns>
     public List<Pokemon> MostrarPokemonEnemigo()
     {
-        return LastTurn.Equipo;
+        return LastTurn.Team;
     } 
 
     /// <summary>

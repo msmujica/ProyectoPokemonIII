@@ -31,12 +31,12 @@ public class BattlesList
     {
         foreach (Battle batlle in battles)
         {
-            if (batlle.Player1.Nombre == displayName)
+            if (batlle.Player1.Name == displayName)
             {
                 return batlle.Player1;
             }
 
-            if (batlle.Player2.Nombre == displayName)
+            if (batlle.Player2.Name == displayName)
             {
                 return batlle.Player2;
             }
@@ -54,12 +54,12 @@ public class BattlesList
     {
         foreach (Battle batlle in battles)
         {
-            if (batlle.Player1.Nombre == displayName)
+            if (batlle.Player1.Name == displayName)
             {
                 return batlle;
             }
 
-            if (batlle.Player2.Nombre == displayName)
+            if (batlle.Player2.Name == displayName)
             {
                 return batlle;
             }

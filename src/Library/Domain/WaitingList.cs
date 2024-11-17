@@ -71,7 +71,7 @@ public class WaitingList
     {
         foreach (Trainer trainer in trainers)
         {
-            if (trainer.Nombre == displayName)
+            if (trainer.Name == displayName)
             {
                 return trainer;
             }

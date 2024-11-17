@@ -54,7 +54,7 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
         /// <c>false</c> si el efecto ha terminado o no aplica.
         /// </returns>
-        public bool ProcesarControlMasa(Pokemon pokem)
+        public bool ProcessMassControl(Pokemon pokem)
         {
             // Verifica si el Pokémon tiene efectos activos
             if (!activeEffects.ContainsKey(pokem))
@@ -79,7 +79,7 @@ namespace Library
         /// <summary>
         /// Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
         /// </summary>
-        public void ProcesarEfectosDaño()
+        public void ProcessDamageEffects()
         {
             // Recorre todos los efectos activos
             foreach (var entry in activeEffects)
@@ -104,7 +104,7 @@ namespace Library
         /// Limpia todos los efectos activos de un Pokémon.
         /// </summary>
         /// <param name="pokemon">El Pokémon cuyo efecto se eliminará.</param>
-        public void LimpiarEfectos(Pokemon pokemon)
+        public void CleanEffects(Pokemon pokemon)
         {
             // Elimina los efectos activos del Pokémon si existen
             if (activeEffects.ContainsKey(pokemon))
@@ -123,7 +123,7 @@ namespace Library
         /// </summary>
         /// <param name="pokemon">El Pokémon a verificar.</param>
         /// <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
-        public bool PokemonConEfecto(Pokemon pokemon)
+        public bool PokemonWithEffect(Pokemon pokemon)
         {
             return activeEffects.ContainsKey(pokemon);
         }

@@ -92,7 +92,7 @@ public class Facade
         string result = "Esperan: ";
         foreach (Trainer trainer in WaitingList.GetAllWaiting())
         {
-            result = result + trainer.Nombre + "; ";
+            result = result + trainer.Name + "; ";
         }
         
         return result;
@@ -144,7 +144,7 @@ public class Facade
                 break;
         }
 
-        return $"Comienza {player.Nombre} vs {opponent.Nombre}";
+        return $"Comienza {player.Name} vs {opponent.Name}";
     }
 
     /// <summary>
@@ -225,7 +225,7 @@ public class Facade
     {
         string value = "Pokemon:\n";
         Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        List<Pokemon> pokemones = player.Equipo;
+        List<Pokemon> pokemones = player.Team;
         foreach (var VARIABLE in pokemones)
         {
             value += "\n" + VARIABLE.Name + "Vida: " + VARIABLE.Health + "/100";
@@ -280,7 +280,7 @@ public class Facade
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediarioAtacar(opcionAtaque);
+        return battle.IntermediaryAttack(opcionAtaque);
     }
 
     /// <summary>
@@ -292,7 +292,7 @@ public class Facade
     public string ChangePokemon(string playerDisplayName, int opcion)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
-        return battle.IntermediarioCambiarPokemonActivo(opcion);
+        return battle.IntermediaryChangeActivePokemon(opcion);
     }
 
     /// <summary>
@@ -307,7 +307,7 @@ public class Facade
         {
             return "Entrenador no encontrado.";
         }
-        Pokemon activo = player.Activo;
+        Pokemon activo = player.Active;
         if (activo == null)
         {
             return "El Pokémon activo del entrenador no está disponible.";
@@ -333,7 +333,7 @@ public class Facade
     public bool ValidacionTurno(string playerDisplayName, Battle batt)
     {
         Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        if (player.Nombre != batt.ActualTurn.Nombre)
+        if (player.Name != batt.ActualTurn.Name)
         {
             return true;
         }

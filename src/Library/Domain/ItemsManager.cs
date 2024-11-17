@@ -17,17 +17,17 @@ namespace Library.Items
         /// <param name="contadorSuperPocion">El número de SuperPociones disponibles.</param>
         /// <returns>Un mensaje indicando el resultado de usar la SuperPoción.</returns>
         /// 
-        public string UsarSuperPocion(Pokemon pokemon, int contadorSuperPocion)
+        public string UseSuperPotion(Pokemon pokemon, int superpotionCounter)
         {
-            if (contadorSuperPocion > 0)
+            if (superpotionCounter > 0)
             {
                 if (pokemon.Health < 100)
                 {
                     pokemon.Health += 70;
                     if (pokemon.Health > 100)
                         pokemon.Health = 100; // No superar el 100%
-                    contadorSuperPocion--;
-                    return ("Usaste una Super Pocion. Usos restantes: " + contadorSuperPocion);
+                    superpotionCounter--;
+                    return ("Usaste una Super Pocion. Usos restantes: " + superpotionCounter);
                 }
 
                 return ("El Pokémon ya está a máxima vida.");
@@ -42,16 +42,16 @@ namespace Library.Items
         /// <param name="pokemon">El Pokémon que se revivirá.</param>
         /// <param name="contadorRevivir">El número de Revivir disponibles.</param>
         /// <returns>Un mensaje indicando el resultado de usar el Revivir.</returns>
-        public string UsarRevivir(Pokemon pokemon, int contadorRevivir)
+        public string UsarRevivir(Pokemon pokemon, int reviveCounter)
         {
-            if (contadorRevivir > 0)
+            if (reviveCounter > 0)
             {
                 if (pokemon.IsDefeated)
                 {
                     pokemon.IsDefeated = false;
                     pokemon.Health = 50; // Revive con 50% de vida
-                    contadorRevivir--;
-                    return ("Usaste un Revivir. Usos restantes: " + contadorRevivir);
+                    reviveCounter--;
+                    return ("Usaste un Revivir. Usos restantes: " + reviveCounter);
                 }
 
                 return ("El Pokémon no está derrotado.");
@@ -67,14 +67,14 @@ namespace Library.Items
         /// <param name="contadorCuraTotal">El número de Curaciones Totales disponibles.</param>
         /// <param name="gestorEfectos">El gestor de efectos que se usará para limpiar efectos negativos.</param>
         /// <returns>Un mensaje indicando el resultado de usar la Cura Total.</returns>
-        public string UsarCuraTotal(Pokemon pokemon, int contadorCuraTotal, EffectsManager effectsManager)
+        public string UsarCuraTotal(Pokemon pokemon, int totalcureCounter, EffectsManager effectsManager)
         {
-            if (contadorCuraTotal > 0)
+            if (totalcureCounter > 0)
             {
                 pokemon.Health = 100; // Cura completamente al Pokémon
-                effectsManager.LimpiarEfectos(pokemon);
-                contadorCuraTotal--;
-                return ("Usaste una Cura Total. Usos restantes: " + contadorCuraTotal);
+                effectsManager.CleanEffects(pokemon);
+                totalcureCounter--;
+                return ("Usaste una Cura Total. Usos restantes: " + totalcureCounter);
             }
 
             return ("No tienes Curaciones Totales disponibles.");

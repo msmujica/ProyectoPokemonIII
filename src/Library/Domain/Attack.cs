@@ -145,7 +145,7 @@ namespace Library
                 totaldmg = (int)(totaldmg * multiplier);
                 description += $"Como el ataque es tipo {attack.Type} el daño es {totaldmg}. ";
 
-                if (effectsManager.PokemonConEfecto(objetive) && ApplySpecialEffect())
+                if (effectsManager.PokemonWithEffect(objetive) && ApplySpecialEffect())
                 {
                     // Aplica un efecto especial
                     IEffect effectEspecial = SelectSpecialEffect();

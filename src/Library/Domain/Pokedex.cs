@@ -140,10 +140,10 @@ public static class Pokedex
         // Si se crea un Pokémon, se agrega al equipo del entrenador
         if (nuevoPokemon != null)
         {
-            trainer.Equipo.Add(nuevoPokemon);
-            if (trainer.Activo == null)
+            trainer.Team.Add(nuevoPokemon);
+            if (trainer.Active == null)
             {
-                trainer.Activo = nuevoPokemon;
+                trainer.Active = nuevoPokemon;
             }
         }
 

@@ -15,26 +15,26 @@ namespace Library;
 
 public class Trainer
 {
-    private string nombre;
-    private List<Pokemon> equipo;
-    private Pokemon activo;
+    private string name;
+    private List<Pokemon> team;
+    private Pokemon active;
 
-    public string Nombre
+    public string Name
     {
-        get { return nombre; }
-        set { nombre = value; }
+        get { return name; }
+        set { name = value; }
     }
 
-    public List<Pokemon> Equipo
+    public List<Pokemon> Team
     {
-        get { return equipo; }
-        set { equipo = value; }
+        get { return team; }
+        set { team = value; }
     }
 
-    public Pokemon Activo
+    public Pokemon Active
     {
-        get { return activo; }
-        set { activo = value; }
+        get { return active; }
+        set { active = value; }
     }
     public int ContadorSuperPocion { get; set; }
     public int ContadorRevivir { get; set; }
@@ -46,12 +46,12 @@ public class Trainer
     /// <summary>
     /// Inicializa un nuevo entrenador con el nombre especificado.
     /// </summary>
-    /// <param name="nombre">El nombre del entrenador.</param>
-    public Trainer(string nombre)
+    /// <param name="name">El nombre del entrenador.</param>
+    public Trainer(string name)
     {
-        Nombre = nombre;
-        Equipo = new List<Pokemon>();
-        Activo = null;
+        Name = name;
+        Team = new List<Pokemon>();
+        Active = null;
         itemsManager = new ItemsManager(); 
     }
     
@@ -63,13 +63,13 @@ public class Trainer
 
     public string elegirEquipo(int numero)
     {
-        if (Equipo.Count >= 6)
+        if (Team.Count >= 6)
         {
             return "Ya tienes la cantidad maxima de Pokemones en tu Equipo";
         }
         Pokedex.CrearPokemonPorIndice(numero, this);
-        nombre = Pokedex.MostrarPokemonPorIndice(numero);
-        return $"El pokemon {nombre} se agrego a la lista, quedan {Equipo.Count - 6} espacios.";
+        name = Pokedex.MostrarPokemonPorIndice(numero);
+        return $"El pokemon {name} se agrego a la lista, quedan {Team.Count - 6} espacios.";
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class Trainer
     {
         int numero = 0;
         Console.WriteLine("Lista de Pokemones en tu Pokedex");
-        foreach (var lista in Equipo)
+        foreach (var lista in Team)
         {
             Console.WriteLine($"{numero} - {lista.Name}");
             numero += 1;
@@ -94,10 +94,10 @@ public class Trainer
 
     public string cambiarActivo(int indexPokemonList)
     {
-        if (indexPokemonList >= 0 && indexPokemonList < Equipo.Count)
+        if (indexPokemonList >= 0 && indexPokemonList < Team.Count)
         {
-            Activo = Equipo[indexPokemonList];
-            return Activo.Name;
+            Active = Team[indexPokemonList];
+            return Active.Name;
         }
 
         return ("Indice no valido. No se pudo cambiar el pokemon");
@@ -112,7 +112,7 @@ public class Trainer
     /// <returns>El resultado de la acción de atacar.</returns>
     public string elegirAtaque(string nombre, Pokemon oponente, EffectsManager effectsManager)
     {
-        return activo.atacar(oponente, nombre, effectsManager);
+        return active.atacar(oponente, nombre, effectsManager);
     }
 
     /// <summary>
@@ -122,13 +122,13 @@ public class Trainer
     /// <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
     /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos del ítem.</param>
     /// <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
-    public string UsarItem(string nombreItem, Pokemon pokemon, EffectsManager effectsManager)
+    public string UsarItem(string itemName, Pokemon pokemon, EffectsManager effectsManager)
     {
         string valor = null;
-        switch (nombreItem)
+        switch (itemName)
         {
             case "Superpocion":
-                valor = itemsManager.UsarSuperPocion(pokemon, ContadorSuperPocion);
+                valor = itemsManager.UseSuperPotion(pokemon, ContadorSuperPocion);
                 break;
             case "Revivir":
                 valor = itemsManager.UsarRevivir(pokemon, ContadorRevivir);
@@ -150,11 +150,11 @@ public class Trainer
     public void ChangeDefeatedPokemon()
     {
         int count = 0;
-        foreach (var pok in Equipo)
+        foreach (var pok in Team)
         {
             if (!pok.IsDefeated && count == 0)
             {
-                Activo = pok;
+                Active = pok;
                 count++;
                 
                 
@@ -166,7 +166,7 @@ public class Trainer
     /// <summary>
     /// Inicializa los contadores de ítems disponibles para el entrenador.
     /// </summary>
-    public void SeteodeItems()
+    public void ItemSetting()
     {
         ContadorSuperPocion = 4;
         ContadorCuraTotal = 2;
