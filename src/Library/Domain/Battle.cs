@@ -137,35 +137,34 @@ public class Battle
     /// <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
     public string IntermediarioAtacar(string opcionAtaque)
     {
-        if (ValidacionPokemonVivo())
-        {
-            return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque";
-        }
-        
-        if (ValidacionWin())
-        {
-            Win();
-        }
-        
-        if (validacionPokemon())
-        {
-            return "No tenes los pokemones suficientes para empezar la batalla";
-        }
-        
-        if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
-        { 
-            if (gestorEfectos.EsParalisis(TurnoActual.Activo)) 
-            { 
-                CambiarTurno();
-            return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo); 
-            } 
-            return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
-        }
-        
         try
         {
+            if (ValidacionPokemonVivo())
+            {
+                return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque";
+            }
+        
+            if (ValidacionWin())
+            {
+                Win();
+            }
+        
+            if (validacionPokemon())
+            {
+                return "No tenes los pokemones suficientes para empezar la batalla";
+            }
+        
+            if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
+            { 
+                if (gestorEfectos.EsParalisis(TurnoActual.Activo)) 
+                { 
+                    CambiarTurno();
+                    return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo); 
+                } 
+                return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
+            }
             string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
-            valor += $"Turno terminado. " + "\n" + gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
+            valor += $" Turno terminado. " + "\n" + gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
             CambiarTurno();
             return valor;
         }
@@ -187,20 +186,19 @@ public class Battle
     /// <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
     public string IntermediarioCambiarPokemonActivo(int opcionPokemon)
     {
-        validacionPokemon();
-        
-        if (ValidacionWin())
-        {
-            Win();
-        }
-        
-        if (validacionPokemon())
-        {
-            return "No tenes los pokemones suficientes para empezar la batalla";
-        }
-        
         try
         {
+            validacionPokemon();
+        
+            if (ValidacionWin())
+            {
+                Win();
+            }
+        
+            if (validacionPokemon())
+            {
+                return "No tenes los pokemones suficientes para empezar la batalla";
+            }
             // Verificar si el índice del Pokémon está en el rango
             if (opcionPokemon < 0 || opcionPokemon >= TurnoActual.Equipo.Count)
             {

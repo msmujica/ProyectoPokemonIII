@@ -108,7 +108,7 @@ namespace Library
                 return attacks[nameAttacks];
             }
 
-            Console.WriteLine("Ataque no encontrado.");
+            Console.WriteLine("Ataque no encontrado. ");
             return (0, string.Empty); // Retorna un valor predeterminado si el ataque no existe
         }
 
@@ -156,7 +156,7 @@ namespace Library
             else
             {
                 totaldmg = 0; // Si no es preciso, no causa daño
-                description = "El ataque falló.";
+                description = "El ataque falló. ";
             }
 
             return (totaldmg, description);

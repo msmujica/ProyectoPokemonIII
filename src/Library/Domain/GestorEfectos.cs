@@ -28,7 +28,7 @@ namespace Library
         public string AplicarEfecto(IEfecto efecto, Pokemon pokemon)
         {
             if (efecto == null || pokemon == null)
-            { 
+            {
                 // El efecto o el Pokémon son nulos y no se puede aplicar el efecto.
                 return "";
             }
@@ -56,31 +56,29 @@ namespace Library
         /// </returns>
         public bool PuedoAtacar(Pokemon pokem)
         {
-            List<IEfecto> efectos = efectosActivos[pokem];
-            foreach (var v in efectos)
+            foreach (var entry in efectosActivos)
             {
-                // Procesa efectos como dormir o paralizar
-                if (v is EfectoDormir)
+                Pokemon pokemon = entry.Key;
+                List<IEfecto> efectos = entry.Value;
+                for (int i = efectos.Count - 1; i >= 0; i--)
                 {
-                    return v.PuedoAtacar; // Devuelve si el pokemon puede atacar
-                }
-                else if (v is EfectoParalizar)
-                {
-                    return v.PuedoAtacar; // Devuelve si el pokemon puede atacar
+                    IEfecto efecto = efectos[i];
+                    if ((pokemon == pokem) && (efecto is EfectoParalizar) || (pokemon == pokem)&&(efecto is EfectoDormir))
+                    {
+                        return efecto.PuedoAtacar;
+                    }
+
                 }
             }
-
             return true;
         }
-        public string ProcesarControlMasa(Pokemon pokem)
+
+    public string ProcesarControlMasa(Pokemon pokem)
         {
             // Inicializamos la descripción vacía
 
             // Verifica si el Pokémon tiene efectos activos
-            if (!efectosActivos.ContainsKey(pokem))
-            {
-                return $"El pokemon {pokem} no tiene efectos activos.";
-            }
+            if (!efectosActivos.ContainsKey(pokem)) return $"El pokemon {pokem} no tiene efectos activos.";
 
             List<IEfecto> efectos = efectosActivos[pokem];
             foreach (var v in efectos)
@@ -116,7 +114,7 @@ namespace Library
                 for (int i = efectos.Count - 1; i >= 0; i--)
                 {
                     IEfecto efecto = efectos[i];
-                    if (pokemon != pokem)
+                    if ((pokemon != pokem) || !(efecto is EfectoParalizar))
                     {
                         // Procesa el daño del efecto
                         description += efecto.ProcesarEfecto(pokemon) + "\n";
@@ -155,6 +153,7 @@ namespace Library
 
         public bool EsParalisis(Pokemon pokem)
         {
+            if (!efectosActivos.ContainsKey(pokem)) return false;
             List<IEfecto> efectos = efectosActivos[pokem];
             foreach (var v in efectos)
             {

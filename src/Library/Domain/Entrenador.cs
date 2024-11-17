@@ -68,7 +68,7 @@ public class Entrenador
             return "Ya tienes la cantidad maxima de Pokemones en tu Equipo";
         }
         Pokedex.CrearPokemonPorIndice(numero, this);
-        nombre = Pokedex.MostrarPokemonPorIndice(numero);
+        string nombre = Pokedex.MostrarPokemonPorIndice(numero);
         return $"El pokemon {nombre} se agrego a la lista, quedan {6 - Equipo.Count} espacios.";
     }
 
