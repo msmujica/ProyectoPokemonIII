@@ -36,9 +36,9 @@ public class Trainer
         get { return active; }
         set { active = value; }
     }
-    public int ContadorSuperPocion { get; set; }
-    public int ContadorRevivir { get; set; }
-    public int ContadorCuraTotal { get; set; }
+    public int SuperPotionCounter { get; set; }
+    public int ReviveCounter { get; set; }
+    public int TotalCureCounter { get; set; }
     
     private ItemsManager itemsManager;
 
@@ -61,14 +61,14 @@ public class Trainer
     /// <param name="numero">El número del Pokémon que se desea agregar al equipo.</param>
     /// <returns>Un mensaje indicando si el Pokémon fue agregado con éxito o si el equipo está lleno.</returns>
 
-    public string elegirEquipo(int numero)
+    public string ChooseTeam(int numero)
     {
         if (Team.Count >= 6)
         {
             return "Ya tienes la cantidad maxima de Pokemones en tu Equipo";
         }
         Pokedex.CrearPokemonPorIndice(numero, this);
-        name = Pokedex.MostrarPokemonPorIndice(numero);
+        name = Pokedex.ShowPokemonByIndex(numero);
         return $"El pokemon {name} se agrego a la lista, quedan {Team.Count - 6} espacios.";
     }
 
@@ -110,9 +110,9 @@ public class Trainer
     /// <param name="oponente">El Pokémon oponente que recibirá el ataque.</param>
     /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
     /// <returns>El resultado de la acción de atacar.</returns>
-    public string elegirAtaque(string nombre, Pokemon oponente, EffectsManager effectsManager)
+    public string ChooseAttcack(string name, Pokemon opponent, EffectsManager effectsManager)
     {
-        return active.atacar(oponente, nombre, effectsManager);
+        return active.atacar(opponent, name, effectsManager);
     }
 
     /// <summary>
@@ -122,26 +122,26 @@ public class Trainer
     /// <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
     /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos del ítem.</param>
     /// <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
-    public string UsarItem(string itemName, Pokemon pokemon, EffectsManager effectsManager)
+    public string UseItem(string itemName, Pokemon pokemon, EffectsManager effectsManager)
     {
-        string valor = null;
+        string value = null;
         switch (itemName)
         {
             case "Superpocion":
-                valor = itemsManager.UseSuperPotion(pokemon, ContadorSuperPocion);
+                value = itemsManager.UseSuperPotion(pokemon, SuperPotionCounter);
                 break;
             case "Revivir":
-                valor = itemsManager.UsarRevivir(pokemon, ContadorRevivir);
+                value = itemsManager.UseRevive(pokemon, TotalCureCounter);
                 break;
             case "CuraTotal":
-                valor = itemsManager.UsarCuraTotal(pokemon, ContadorCuraTotal, effectsManager);
+                value = itemsManager.UseTotalCure(pokemon, TotalCureCounter, effectsManager);
                 break;
             default:
                 Console.WriteLine("Ítem no válido.");
                 break;
         }
 
-        return valor;
+        return value;
     }
 
     /// <summary>
@@ -168,8 +168,8 @@ public class Trainer
     /// </summary>
     public void ItemSetting()
     {
-        ContadorSuperPocion = 4;
-        ContadorCuraTotal = 2;
-        ContadorRevivir = 1;
+        SuperPotionCounter = 4;
+        TotalCureCounter = 2;
+        ReviveCounter = 1;
     }
 }

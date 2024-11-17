@@ -42,7 +42,7 @@ namespace Library.Items
         /// <param name="pokemon">El Pokémon que se revivirá.</param>
         /// <param name="contadorRevivir">El número de Revivir disponibles.</param>
         /// <returns>Un mensaje indicando el resultado de usar el Revivir.</returns>
-        public string UsarRevivir(Pokemon pokemon, int reviveCounter)
+        public string UseRevive(Pokemon pokemon, int reviveCounter)
         {
             if (reviveCounter > 0)
             {
@@ -67,7 +67,7 @@ namespace Library.Items
         /// <param name="contadorCuraTotal">El número de Curaciones Totales disponibles.</param>
         /// <param name="gestorEfectos">El gestor de efectos que se usará para limpiar efectos negativos.</param>
         /// <returns>Un mensaje indicando el resultado de usar la Cura Total.</returns>
-        public string UsarCuraTotal(Pokemon pokemon, int totalcureCounter, EffectsManager effectsManager)
+        public string UseTotalCure(Pokemon pokemon, int totalcureCounter, EffectsManager effectsManager)
         {
             if (totalcureCounter > 0)
             {

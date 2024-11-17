@@ -11,7 +11,7 @@ namespace Library;
 /// </summary>
 public static class Pokedex
 {
-    private static List<string> nombresPokemon = new List<string>
+    private static List<string> pokemonNames = new List<string>
     {
         "Squirtle", // Agua
         "Caterpie", // Bicho
@@ -30,7 +30,7 @@ public static class Pokedex
         "Pidgey" // Volador
     };
 
-    private static List<string> tiposPokemon = new List<string>
+    private static List<string> pokemonTypes = new List<string>
     {
         "Agua",
         "Bicho",
@@ -54,21 +54,21 @@ public static class Pokedex
     /// </summary>
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
     /// <returns>El nombre del Pokémon en la Pokedex en el índice especificado.</returns>
-    public static string MostrarPokemonPorIndice(int indice)
+    public static string ShowPokemonByIndex(int index)
     {
-        return nombresPokemon[indice];
+        return pokemonNames[index];
     }
 
     /// <summary>
     /// Muestra una lista con todos los Pokémon en la Pokedex, junto con su tipo.
     /// </summary>
     /// <returns>Una lista de cadenas que representan los Pokémon en la Pokedex, con su nombre y tipo.</returns>
-    public static List<string> MostrarPokedex()
+    public static List<string> ShowPokedex()
     {
         List<string> pokedexList = new List<string>();
-        for (int i = 0; i < nombresPokemon.Count; i++)
+        for (int i = 0; i < pokemonNames.Count; i++)
         {
-            pokedexList.Add($"{i} - {nombresPokemon[i]} ({tiposPokemon[i]})");
+            pokedexList.Add($"{i} - {pokemonNames[i]} ({pokemonTypes[i]})");
         }
 
         return pokedexList;

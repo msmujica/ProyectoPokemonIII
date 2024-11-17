@@ -158,7 +158,7 @@ public class Battle
         
         try
         {
-            string valor = ActualTurn.elegirAtaque(opcionAtaque, LastTurn.Active, effectsManager);
+            string valor = ActualTurn.ChooseAttcack(opcionAtaque, LastTurn.Active, effectsManager);
             effectsManager.ProcessDamageEffects();
             ChangeTurn();
             return valor;
@@ -257,7 +257,7 @@ public class Battle
             
             effectsManager.ProcessDamageEffects();
             ChangeTurn();
-            return ActualTurn.UsarItem(opcionItem, pokemonSeleccionado, effectsManager);
+            return ActualTurn.UseItem(opcionItem, pokemonSeleccionado, effectsManager);
 
         }
         catch (FormatException)
