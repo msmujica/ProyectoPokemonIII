@@ -10,7 +10,7 @@ namespace Library;
 /// •	Creator: Como creadora de objetos Pokemon, facilita la extensibilidad al incorporar nuevos Pokémon fácilmente.
 
 /// </summary>
-public static class LogicaTipos
+public static class TypeLogic
 {
     // Diccionario de cada tipo de debilidades (tipos que son fuertes contra ese tipo).
     private static readonly Dictionary<string, List<string>> Debilidades = new Dictionary<string, List<string>>
@@ -62,7 +62,7 @@ public static class LogicaTipos
     /// <param name="tipoAtaque">El tipo del Pokémon atacante.</param>
     /// <param name="tipoDefensor">El tipo del Pokémon defensor.</param>
     /// <returns>El multiplicador de daño (1: neutral, 2: super efectivo, 0.5: poco efectivo, 0: sin efecto).</returns>
-    public static double CalcularMultiplicador(string tipoAtaque, string tipoDefensor)
+    public static double CalculeMultiplier(string tipoAtaque, string tipoDefensor)
     {
         if (Inmunidades.ContainsKey(tipoDefensor) && Inmunidades[tipoDefensor].Contains(tipoAtaque)){
             return 0;

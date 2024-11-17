@@ -78,9 +78,9 @@ public static class Pokedex
     /// Crea un Pokémon a partir de su índice en la Pokedex y lo agrega al equipo del entrenador.
     /// </summary>
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
-    /// <param name="entrenador">El entrenador al que se le asignará el Pokémon creado.</param>
+    /// <param name="trainer">El entrenador al que se le asignará el Pokémon creado.</param>
     /// <returns>El Pokémon creado, o null si el índice es inválido.</returns>
-    public static Pokemon CrearPokemonPorIndice(int indice, Entrenador entrenador)
+    public static Pokemon CrearPokemonPorIndice(int indice, Trainer trainer)
     {
         int vidaInicial = 100;
         Pokemon nuevoPokemon = null;
@@ -140,10 +140,10 @@ public static class Pokedex
         // Si se crea un Pokémon, se agrega al equipo del entrenador
         if (nuevoPokemon != null)
         {
-            entrenador.Equipo.Add(nuevoPokemon);
-            if (entrenador.Activo == null)
+            trainer.Equipo.Add(nuevoPokemon);
+            if (trainer.Activo == null)
             {
-                entrenador.Activo = nuevoPokemon;
+                trainer.Activo = nuevoPokemon;
             }
         }
 

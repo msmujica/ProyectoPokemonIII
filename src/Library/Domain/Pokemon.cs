@@ -12,10 +12,10 @@ namespace Library;
 public class Pokemon
 {
     private string name;
-    private int vida;
-    private List<string> ataques;
-    private string tipo;
-    private bool estaDerrotado;
+    private int health;
+    private List<string> attacks;
+    private string type;
+    private bool isDefeated;
 
     public string Name
     {
@@ -23,28 +23,28 @@ public class Pokemon
         set { name = value; }
     }
 
-    public int Vida
+    public int Health
     {
-        get { return vida; }
-        set { vida = value; }
+        get { return health; }
+        set { health = value; }
     }
 
-    public List<string> Ataques
+    public List<string> Attacks
     {
-        get { return ataques; }
-        set { ataques = value; }
+        get { return attacks; }
+        set { attacks = value; }
     }
 
-    public string Tipos
+    public string Types
     {
-        get { return tipo; }
-        set { tipo = value; }
+        get { return type; }
+        set { type = value; }
     }
 
-    public bool EstaDerrotado
+    public bool IsDefeated
     {
-        get { return estaDerrotado; }
-        set { estaDerrotado = value; }
+        get { return isDefeated; }
+        set { isDefeated = value; }
     }
     
     /// <summary>
@@ -57,10 +57,10 @@ public class Pokemon
     public Pokemon(string name, int vida, List<string> ataques, string tipo)
     {
         Name = name;
-        Vida = vida;
-        Ataques = ataques;
-        Tipos = tipo;
-        EstaDerrotado = false;
+        Health = vida;
+        Attacks = ataques;
+        Types = tipo;
+        IsDefeated = false;
     }
 
     /// <summary>
@@ -69,13 +69,13 @@ public class Pokemon
     /// <param name="daño">Cantidad de daño recibido.</param>
     public void recibirDaño(int daño)
     {
-        if (!EstaDerrotado)
+        if (!IsDefeated)
         {
-            Vida -= daño;
-            if (Vida <= 0)
+            Health -= daño;
+            if (Health <= 0)
             {
-                EstaDerrotado = true;
-                Vida = 0;
+                IsDefeated = true;
+                Health = 0;
                 Console.WriteLine($"{Name} a sido derrotado");
             }
         }
@@ -94,7 +94,7 @@ public class Pokemon
     /// <returns>El valor del daño causado al oponente como una cadena.</returns>
     public string atacar(Pokemon oponente, string ataque, EffectsManager effectsManager)
     {
-        foreach (var VARIABLE in Ataques)
+        foreach (var VARIABLE in Attacks)
         {
             if (VARIABLE == ataque)
             {

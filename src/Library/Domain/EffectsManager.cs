@@ -12,38 +12,38 @@ namespace Library
     public class EffectsManager
     {
         // Diccionario que almacena los efectos activos para cada Pokémon
-        private Dictionary<Pokemon, List<IEfecto>> efectosActivos;
+        private Dictionary<Pokemon, List<IEffect>> activeEffects;
 
         // Constructor que inicializa el diccionario de efectos
         public EffectsManager()
         {
-            efectosActivos = new Dictionary<Pokemon, List<IEfecto>>();
+            activeEffects = new Dictionary<Pokemon, List<IEffect>>();
         }
 
         /// <summary>
         /// Aplica un efecto específico a un Pokémon.
         /// </summary>
-        /// <param name="efecto">El efecto a aplicar.</param>
+        /// <param name="effect">El efecto a aplicar.</param>
         /// <param name="pokemon">El Pokémon que recibirá el efecto.</param>
-        public void AplicarEfecto(IEfecto efecto, Pokemon pokemon)
+        public void ApplyEffect(IEffect effect, Pokemon pokemon)
         {
-            if (efecto == null || pokemon == null)
+            if (effect == null || pokemon == null)
             {
                 Console.WriteLine("El efecto o el Pokémon son nulos y no se puede aplicar el efecto.");
                 return;
             }
 
             // Asegura que haya una lista de efectos para el Pokémon en el diccionario
-            if (!efectosActivos.ContainsKey(pokemon))
+            if (!activeEffects.ContainsKey(pokemon))
             {
-                efectosActivos[pokemon] = new List<IEfecto>();
+                activeEffects[pokemon] = new List<IEffect>();
             }
 
             // Añade el efecto a la lista de efectos del Pokémon
-            efectosActivos[pokemon].Add(efecto);
+            activeEffects[pokemon].Add(effect);
 
             // Inicia el efecto, lo que podría implicar acciones como mostrar un mensaje
-            efecto.IniciarEfecto(pokemon);
+            effect.StartEffect(pokemon);
         }
 
         /// <summary>
@@ -57,19 +57,19 @@ namespace Library
         public bool ProcesarControlMasa(Pokemon pokem)
         {
             // Verifica si el Pokémon tiene efectos activos
-            if (!efectosActivos.ContainsKey(pokem))
+            if (!activeEffects.ContainsKey(pokem))
             {
                 Console.WriteLine($"{pokem.Name} no tiene efectos activos.");
                 return false;
             }
 
-            List<IEfecto> efectos = efectosActivos[pokem];
+            List<IEffect> efectos = activeEffects[pokem];
             foreach (var v in efectos)
             {
                 // Procesa efectos como dormir o paralizar
-                if (v is EfectoDormir || v is EfectoParalizar)
+                if (v is SleepEffect || v is ParalyzeEffect)
                 {
-                    return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
+                    return v.ProcessEffect(pokem); // Devuelve si el efecto sigue activo
                 }
             }
 
@@ -82,19 +82,19 @@ namespace Library
         public void ProcesarEfectosDaño()
         {
             // Recorre todos los efectos activos
-            foreach (var entry in efectosActivos)
+            foreach (var entry in activeEffects)
             {
                 Pokemon pokemon = entry.Key;
-                List<IEfecto> efectos = entry.Value;
+                List<IEffect> efectos = entry.Value;
 
                 // Recorre cada efecto y aplica los que son de daño continuo
                 for (int i = efectos.Count - 1; i >= 0; i--)
                 {
-                    IEfecto efecto = efectos[i];
-                    if (efecto is EfectoEnvenenar || efecto is EfectoQuemar)
+                    IEffect effect = efectos[i];
+                    if (effect is PosionEffect || effect is BurnEffect)
                     {
                         // Procesa el daño del efecto
-                        efecto.ProcesarEfecto(pokemon);
+                        effect.ProcessEffect(pokemon);
                     }
                 }
             }
@@ -107,9 +107,9 @@ namespace Library
         public void LimpiarEfectos(Pokemon pokemon)
         {
             // Elimina los efectos activos del Pokémon si existen
-            if (efectosActivos.ContainsKey(pokemon))
+            if (activeEffects.ContainsKey(pokemon))
             {
-                efectosActivos.Remove(pokemon);
+                activeEffects.Remove(pokemon);
                 Console.WriteLine($"Todos los efectos han sido eliminados de {pokemon.Name}.");
             }
             else
@@ -125,7 +125,7 @@ namespace Library
         /// <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
         public bool PokemonConEfecto(Pokemon pokemon)
         {
-            return efectosActivos.ContainsKey(pokemon);
+            return activeEffects.ContainsKey(pokemon);
         }
     }
 }

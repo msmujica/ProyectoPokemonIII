@@ -4,7 +4,7 @@ namespace Library
     /// Clase que representa el efecto de "quemar" a un Pokémon.
     /// Un Pokémon quemado pierde un 10% de su vida máxima en cada turno.
     /// </summary>
-    public class EfectoQuemar : IEfecto
+    public class BurnEffect : IEffect
     {
         // Porcentaje de la vida máxima que pierde el Pokémon debido a la quemadura (10%)
         private static double dmgPercentage = 0.10; 
@@ -14,7 +14,7 @@ namespace Library
         /// Este efecto causa daño continuo al Pokémon en cada turno.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será quemado.</param>
-        public void IniciarEfecto(Pokemon pokemon)
+        public void StartEffect(Pokemon pokemon)
         {
             Console.WriteLine($"{pokemon.Name} ha sido quemado.");
         }
@@ -28,13 +28,13 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue quemado y pierde vida).
         /// <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado KO).
         /// </returns>
-        public bool ProcesarEfecto(Pokemon pokemon)
+        public bool ProcessEffect(Pokemon pokemon)
         {
             // Calcula el daño de la quemadura (10% de la vida máxima)
-            int daño = (int)(pokemon.Vida * dmgPercentage);
-            pokemon.Vida -= daño;
+            int daño = (int)(pokemon.Health * dmgPercentage);
+            pokemon.Health -= daño;
             
-            if (pokemon.Vida <= 0)
+            if (pokemon.Health <= 0)
             { 
                 // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado (el Pokémon está KO)
                 return false; 

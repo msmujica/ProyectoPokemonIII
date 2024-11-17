@@ -4,14 +4,14 @@ namespace Library
     /// Clase que representa el efecto de "paralizar" a un Pokémon.
     /// Un Pokémon paralizado tiene un 30% de probabilidad de no poder atacar en cada turno.
     /// </summary>
-    public class EfectoParalizar : IEfecto
+    public class ParalyzeEffect : IEffect
     {
         /// <summary>
         /// Inicia el efecto de "paralizar" en el Pokémon.
         /// Este efecto impide que el Pokémon pueda atacar con una probabilidad.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será paralizado.</param>
-        public void IniciarEfecto(Pokemon pokemon)
+        public void StartEffect(Pokemon pokemon)
         {
             Console.WriteLine($"{pokemon.Name} ha sido paralizado.");
         }
@@ -25,7 +25,7 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha atacado debido a la parálisis).
         /// <c>false</c> si el Pokémon ha superado la parálisis y puede atacar.
         /// </returns>
-        public bool ProcesarEfecto(Pokemon pokemon)
+        public bool ProcessEffect(Pokemon pokemon)
         {
             if (PuedeAtacar())
             {

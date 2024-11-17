@@ -8,7 +8,7 @@ namespace Library.Items
     /// •	Principio de Expert: GestorDeItems conoce y gestiona la lógica de los ítems, por lo que es el experto en esta funcionalidad.
     /// •	Acoplamiento bajo: Usa GestorEfectos para manejar los efectos negativos, reduciendo la dependencia entre clases.
     /// </summary>
-    public class GestorDeItems
+    public class ItemsManager
     {
         /// <summary>
         /// Usa una SuperPoción en un Pokémon, restaurando su vida hasta un máximo de 100.
@@ -21,11 +21,11 @@ namespace Library.Items
         {
             if (contadorSuperPocion > 0)
             {
-                if (pokemon.Vida < 100)
+                if (pokemon.Health < 100)
                 {
-                    pokemon.Vida += 70;
-                    if (pokemon.Vida > 100)
-                        pokemon.Vida = 100; // No superar el 100%
+                    pokemon.Health += 70;
+                    if (pokemon.Health > 100)
+                        pokemon.Health = 100; // No superar el 100%
                     contadorSuperPocion--;
                     return ("Usaste una Super Pocion. Usos restantes: " + contadorSuperPocion);
                 }
@@ -46,10 +46,10 @@ namespace Library.Items
         {
             if (contadorRevivir > 0)
             {
-                if (pokemon.EstaDerrotado)
+                if (pokemon.IsDefeated)
                 {
-                    pokemon.EstaDerrotado = false;
-                    pokemon.Vida = 50; // Revive con 50% de vida
+                    pokemon.IsDefeated = false;
+                    pokemon.Health = 50; // Revive con 50% de vida
                     contadorRevivir--;
                     return ("Usaste un Revivir. Usos restantes: " + contadorRevivir);
                 }
@@ -71,7 +71,7 @@ namespace Library.Items
         {
             if (contadorCuraTotal > 0)
             {
-                pokemon.Vida = 100; // Cura completamente al Pokémon
+                pokemon.Health = 100; // Cura completamente al Pokémon
                 effectsManager.LimpiarEfectos(pokemon);
                 contadorCuraTotal--;
                 return ("Usaste una Cura Total. Usos restantes: " + contadorCuraTotal);

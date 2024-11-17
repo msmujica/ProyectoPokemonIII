@@ -90,7 +90,7 @@ public class Facade
         }
 
         string result = "Esperan: ";
-        foreach (Entrenador trainer in WaitingList.GetAllWaiting())
+        foreach (Trainer trainer in WaitingList.GetAllWaiting())
         {
             result = result + trainer.Nombre + "; ";
         }
@@ -105,7 +105,7 @@ public class Facade
     /// <returns>Un mensaje con el resultado.</returns>
     public string TrainerIsWaiting(string displayName)
     {
-        Entrenador? trainer = WaitingList.FindTrainerByDisplayName(displayName);
+        Trainer? trainer = WaitingList.FindTrainerByDisplayName(displayName);
         if (trainer == null)
         {
             return $"{displayName} no está esperando";
@@ -120,8 +120,8 @@ public class Facade
         // Aunque playerDisplayName y opponentDisplayName no estén en la lista
         // esperando para jugar los removemos igual para evitar preguntar si
         // están para luego removerlos.
-        Entrenador? player = WaitingList.FindTrainerByDisplayName(playerDisplayName);
-        Entrenador? opponent = WaitingList.FindTrainerByDisplayName(opponentDisplayName);
+        Trainer? player = WaitingList.FindTrainerByDisplayName(playerDisplayName);
+        Trainer? opponent = WaitingList.FindTrainerByDisplayName(opponentDisplayName);
 
         if (player == null || opponent == null)
         {
@@ -157,7 +157,7 @@ public class Facade
     {
         // El símbolo ? luego de Trainer indica que la variable opponent puede
         // referenciar una instancia de Trainer o ser null.
-        Entrenador? opponent;
+        Trainer? opponent;
         
         if (!OpponentProvided() && !SomebodyIsWaiting())
         {
@@ -224,11 +224,11 @@ public class Facade
     public string ShowEnemiesPokemon(string playerDisplayName)
     {
         string value = "Pokemon:\n";
-        Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
+        Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
         List<Pokemon> pokemones = player.Equipo;
         foreach (var VARIABLE in pokemones)
         {
-            value += "\n" + VARIABLE.Name + "Vida: " + VARIABLE.Vida + "/100";
+            value += "\n" + VARIABLE.Name + "Vida: " + VARIABLE.Health + "/100";
         }
 
         return value;
@@ -242,7 +242,7 @@ public class Facade
     /// <returns>Un mensaje indicando el Pokémon elegido.</returns>
     public string ChooseTeam(string playerDisplayName, int number)
     {
-        Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
+        Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
         return player.elegirEquipo(number);
     }
 
@@ -302,7 +302,7 @@ public class Facade
     /// <returns>Una cadena con la lista de ataques del Pokémon activo.</returns>
     public string GetPokemonAtacks(string playerDisplayName)
     {
-        Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
+        Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
         if (player == null)
         {
             return "Entrenador no encontrado.";
@@ -314,7 +314,7 @@ public class Facade
         }
         string result = "Ataques:\n";
 
-        foreach (var ataque in activo.Ataques)
+        foreach (var ataque in activo.Attacks)
         {
             var (dañoAtaque, tipoAtaque) = Attack.ObtainAttack(ataque);
 
@@ -332,8 +332,8 @@ public class Facade
     /// <returns>True si es el turno del jugador, False de lo contrario.</returns>
     public bool ValidacionTurno(string playerDisplayName, Battle batt)
     {
-        Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        if (player.Nombre != batt.TurnoActual.Nombre)
+        Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
+        if (player.Nombre != batt.ActualTurn.Nombre)
         {
             return true;
         }

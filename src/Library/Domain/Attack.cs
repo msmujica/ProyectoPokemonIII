@@ -119,7 +119,7 @@ namespace Library
         /// <param name="objetivo">El Pokémon objetivo del ataque.</param>
         /// <param name="gestorEfectos">El objeto que gestiona los efectos especiales que pueden ocurrir.</param>
         /// <returns>El daño calculado para el ataque.</returns>
-        public static (int Daño, string Descripcion) CalculeDamage(string nameAttack, Pokemon objetive,
+        public static (int Damage, string Description) CalculeDamage(string nameAttack, Pokemon objetive,
             EffectsManager effectsManager)
         {
             string description = "";
@@ -141,16 +141,16 @@ namespace Library
                 }
 
                 // Calcula el multiplicador de daño según los tipos
-                double multiplier = LogicaTipos.CalcularMultiplicador(attack.Type, objetive.Tipos);
+                double multiplier = TypeLogic.CalculeMultiplier(attack.Type, objetive.Types);
                 totaldmg = (int)(totaldmg * multiplier);
                 description += $"Como el ataque es tipo {attack.Type} el daño es {totaldmg}. ";
 
                 if (effectsManager.PokemonConEfecto(objetive) && ApplySpecialEffect())
                 {
                     // Aplica un efecto especial
-                    IEfecto efectoEspecial = SelectSpecialEffect();
-                    effectsManager.AplicarEfecto(efectoEspecial, objetive);
-                    description += $"Se aplica el efecto especial: {efectoEspecial}. ";
+                    IEffect effectEspecial = SelectSpecialEffect();
+                    effectsManager.ApplyEffect(effectEspecial, objetive);
+                    description += $"Se aplica el efecto especial: {effectEspecial}. ";
                 }
             }
             else
@@ -193,20 +193,20 @@ namespace Library
         /// Selecciona un efecto especial aleatorio para aplicar (dormir, paralizar, envenenar, quemar).
         /// </summary>
         /// <returns>El efecto especial seleccionado.</returns>
-        public static IEfecto SelectSpecialEffect()
+        public static IEffect SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
 
             switch (effect)
             {
                 case 1:
-                    return new EfectoDormir();
+                    return new SleepEffect();
                 case 2:
-                    return new EfectoParalizar();
+                    return new ParalyzeEffect();
                 case 3:
-                    return new EfectoEnvenenar();
+                    return new PosionEffect();
                 case 4:
-                    return new EfectoQuemar();
+                    return new BurnEffect();
             }
 
             return null; // Si no se selecciona ningún efecto, retorna null
