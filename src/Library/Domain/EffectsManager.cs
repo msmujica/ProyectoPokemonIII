@@ -63,8 +63,8 @@ namespace Library
                 return false;
             }
 
-            List<IEffect> efectos = activeEffects[pokem];
-            foreach (var v in efectos)
+            List<IEffect> effects = activeEffects[pokem];
+            foreach (var v in effects)
             {
                 // Procesa efectos como dormir o paralizar
                 if (v is SleepEffect || v is ParalyzeEffect)
@@ -85,12 +85,12 @@ namespace Library
             foreach (var entry in activeEffects)
             {
                 Pokemon pokemon = entry.Key;
-                List<IEffect> efectos = entry.Value;
+                List<IEffect> effects = entry.Value;
 
                 // Recorre cada efecto y aplica los que son de daño continuo
-                for (int i = efectos.Count - 1; i >= 0; i--)
+                for (int i = effects.Count - 1; i >= 0; i--)
                 {
-                    IEffect effect = efectos[i];
+                    IEffect effect = effects[i];
                     if (effect is PosionEffect || effect is BurnEffect)
                     {
                         // Procesa el daño del efecto

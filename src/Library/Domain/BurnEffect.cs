@@ -31,8 +31,8 @@ namespace Library
         public bool ProcessEffect(Pokemon pokemon)
         {
             // Calcula el daño de la quemadura (10% de la vida máxima)
-            int daño = (int)(pokemon.Health * dmgPercentage);
-            pokemon.Health -= daño;
+            int damage = (int)(pokemon.Health * dmgPercentage);
+            pokemon.Health -= damage;
             
             if (pokemon.Health <= 0)
             { 

@@ -7,7 +7,7 @@ namespace Library
     public class SleepEffect : IEffect
     {
         // Almacena el número de turnos que el Pokémon permanecerá dormido
-        private int turnosDormidos;
+        private int turnsSleeping;
 
         /// <summary>
         /// Inicia el efecto de "dormir" en un Pokémon.
@@ -17,8 +17,8 @@ namespace Library
         public void StartEffect(Pokemon pokemon)
         {
             // Determina cuántos turnos el Pokémon estará dormido, un valor aleatorio entre 1 y 4
-            turnosDormidos = new Random().Next(1, 5);
-            Console.WriteLine($"{pokemon.Name} ha sido dormido por {turnosDormidos} turnos.");
+            turnsSleeping = new Random().Next(1, 5);
+            Console.WriteLine($"{pokemon.Name} ha sido dormido por {turnsSleeping} turnos.");
         }
 
         /// <summary>
@@ -32,13 +32,13 @@ namespace Library
         /// </returns>
         public bool ProcessEffect(Pokemon pokemon)
         {
-            if (turnosDormidos > 0)
+            if (turnsSleeping > 0)
             {
                 // Reduce el número de turnos restantes del sueño
-                turnosDormidos--;
+                turnsSleeping--;
 
                 // Si ya no quedan turnos, el Pokémon se despierta
-                if (turnosDormidos == 0)
+                if (turnsSleeping == 0)
                 {
                     Console.WriteLine($"{pokemon.Name} ha despertado.");
                     return false; // El efecto ha terminado

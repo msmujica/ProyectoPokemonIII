@@ -131,9 +131,9 @@ public class Battle
     /// Intermediario para realizar un ataque en la batalla.
     /// Valida la acción de atacar, gestiona los efectos de daño y cambia el turno al siguiente jugador.
     /// </summary>
-    /// <param name="opcionAtaque">El nombre del ataque seleccionado por el jugador.</param>
+    /// <param name="optionAtaque">El nombre del ataque seleccionado por el jugador.</param>
     /// <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
-    public string IntermediaryAttack(string opcionAtaque)
+    public string IntermediaryAttack(string optionAtaque)
     {
         if (AlivePokemonValidation())
         {
@@ -158,7 +158,7 @@ public class Battle
         
         try
         {
-            string valor = ActualTurn.ChooseAttcack(opcionAtaque, LastTurn.Active, effectsManager);
+            string valor = ActualTurn.ChooseAttcack(optionAtaque, LastTurn.Active, effectsManager);
             effectsManager.ProcessDamageEffects();
             ChangeTurn();
             return valor;
@@ -181,7 +181,7 @@ public class Battle
     /// </summary>
     /// <param name="opcionPokemon">Índice del Pokémon seleccionado para ser el nuevo activo.</param>
     /// <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
-    public string IntermediaryChangeActivePokemon(int opcionPokemon)
+    public string IntermediaryChangeActivePokemon(int optionPokemon)
     {
         PokemonValidation();
         
@@ -198,13 +198,13 @@ public class Battle
         try
         {
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Team.Count)
+            if (optionPokemon < 0 || optionPokemon >= ActualTurn.Team.Count)
             {
                 return "Selección de Pokémon inválida. Por favor, intenta de nuevo.";
             }
 
             // Cambiar el Pokémon activo
-            string valor = ActualTurn.cambiarActivo(opcionPokemon);
+            string valor = ActualTurn.cambiarActivo(optionPokemon);
             effectsManager.ProcessDamageEffects();
             ChangeTurn();
             return valor;
@@ -226,10 +226,10 @@ public class Battle
     /// Intermediario para usar un ítem en el Pokémon activo durante la batalla.
     /// Valida el índice del Pokémon y aplica el ítem seleccionado.
     /// </summary>
-    /// <param name="opcionPokemon">Índice del Pokémon sobre el que se aplicará el ítem.</param>
-    /// <param name="opcionItem">Nombre del ítem a usar.</param>
+    /// <param name="optionPokemon">Índice del Pokémon sobre el que se aplicará el ítem.</param>
+    /// <param name="optionItem">Nombre del ítem a usar.</param>
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
-    public string IntermediarioUsarItem(int opcionPokemon, string opcionItem)
+    public string IntermediaryUseItem(int optionPokemon, string optionItem)
     {
         PokemonValidation();
         
@@ -246,18 +246,18 @@ public class Battle
         try
         {
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Team.Count)
+            if (optionPokemon < 0 || optionPokemon >= ActualTurn.Team.Count)
             {
                 return "Selección de Pokémon inválida.";
             }
 
-            Pokemon pokemonSeleccionado = ActualTurn.Team[opcionPokemon];
+            Pokemon selectedPokemon = ActualTurn.Team[optionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon
             
             effectsManager.ProcessDamageEffects();
             ChangeTurn();
-            return ActualTurn.UseItem(opcionItem, pokemonSeleccionado, effectsManager);
+            return ActualTurn.UseItem(optionItem, selectedPokemon, effectsManager);
 
         }
         catch (FormatException)

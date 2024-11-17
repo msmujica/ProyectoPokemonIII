@@ -80,57 +80,57 @@ public static class Pokedex
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
     /// <param name="trainer">El entrenador al que se le asignará el Pokémon creado.</param>
     /// <returns>El Pokémon creado, o null si el índice es inválido.</returns>
-    public static Pokemon CrearPokemonPorIndice(int indice, Trainer trainer)
+    public static Pokemon CreatePokemonByIndex(int index, Trainer trainer)
     {
-        int vidaInicial = 100;
-        Pokemon nuevoPokemon = null;
+        int initialLife = 100;
+        Pokemon newPokemon = null;
 
-        switch (indice)
+        switch (index)
         {
             case 0:
-                nuevoPokemon = new Pokemon("Squirtle", vidaInicial, new List<string> { "Pistola Agua", "Hidrobomba", "Burbuja" }, "Agua");
+                newPokemon = new Pokemon("Squirtle", initialLife, new List<string> { "Pistola Agua", "Hidrobomba", "Burbuja" }, "Agua");
                 break;
             case 1:
-                nuevoPokemon = new Pokemon("Caterpie", vidaInicial, new List<string> { "Picadura", "Pulso Bicho", "Tijera X" }, "Bicho");
+                newPokemon = new Pokemon("Caterpie", initialLife, new List<string> { "Picadura", "Pulso Bicho", "Tijera X" }, "Bicho");
                 break;
             case 2:
-                nuevoPokemon = new Pokemon("Dratini", vidaInicial, new List<string> { "Garra Dragón", "Cometa Draco", "Aliento Dragón" }, "Dragón");
+                newPokemon = new Pokemon("Dratini", initialLife, new List<string> { "Garra Dragón", "Cometa Draco", "Aliento Dragón" }, "Dragón");
                 break;
             case 3:
-                nuevoPokemon = new Pokemon("Pikachu", vidaInicial, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
+                newPokemon = new Pokemon("Pikachu", initialLife, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
                 break;
             case 4:
-                nuevoPokemon = new Pokemon("Gastly", vidaInicial, new List<string> { "Bola Sombra", "Puño Spectral", "Puño Sombrío" }, "Fantasma");
+                newPokemon = new Pokemon("Gastly", initialLife, new List<string> { "Bola Sombra", "Puño Spectral", "Puño Sombrío" }, "Fantasma");
                 break;
             case 5:
-                nuevoPokemon = new Pokemon("Charmander", vidaInicial, new List<string> { "Llamarada", "Lanzallamas", "Ascuas" }, "Fuego");
+                newPokemon = new Pokemon("Charmander", initialLife, new List<string> { "Llamarada", "Lanzallamas", "Ascuas" }, "Fuego");
                 break;
             case 6:
-                nuevoPokemon = new Pokemon("Jynx", vidaInicial, new List<string> { "Rayo Hielo", "Ventisca", "Nieve Polvo" }, "Hielo");
+                newPokemon = new Pokemon("Jynx", initialLife, new List<string> { "Rayo Hielo", "Ventisca", "Nieve Polvo" }, "Hielo");
                 break;
             case 7:
-                nuevoPokemon = new Pokemon("Machop", vidaInicial, new List<string> { "Golpe Karate", "A Bocajarro", "Puño Dinámico" }, "Lucha");
+                newPokemon = new Pokemon("Machop", initialLife, new List<string> { "Golpe Karate", "A Bocajarro", "Puño Dinámico" }, "Lucha");
                 break;
             case 8:
-                nuevoPokemon = new Pokemon("Eevee", vidaInicial, new List<string> { "Tackle", "Puño Sombra", "Desenlace" }, "Normal");
+                newPokemon = new Pokemon("Eevee", initialLife, new List<string> { "Tackle", "Puño Sombra", "Desenlace" }, "Normal");
                 break;
             case 9:
-                nuevoPokemon = new Pokemon("Bulbasaur", vidaInicial, new List<string> { "Hoja Afilada", "Látigo Cepa", "Rayo Solar" }, "Planta");
+                newPokemon = new Pokemon("Bulbasaur", initialLife, new List<string> { "Hoja Afilada", "Látigo Cepa", "Rayo Solar" }, "Planta");
                 break;
             case 10:
-                nuevoPokemon = new Pokemon("Abra", vidaInicial, new List<string> { "Confusión", "Psíquico", "Premonición" }, "Psíquico");
+                newPokemon = new Pokemon("Abra", initialLife, new List<string> { "Confusión", "Psíquico", "Premonición" }, "Psíquico");
                 break;
             case 11:
-                nuevoPokemon = new Pokemon("Geodude", vidaInicial, new List<string> { "Avalancha", "Lanzarrocas", "Roca Afilada" }, "Roca");
+                newPokemon = new Pokemon("Geodude", initialLife, new List<string> { "Avalancha", "Lanzarrocas", "Roca Afilada" }, "Roca");
                 break;
             case 12:
-                nuevoPokemon = new Pokemon("Diglett", vidaInicial, new List<string> { "Terremoto", "Excavar", "Bofetón Lodo" }, "Tierra");
+                newPokemon = new Pokemon("Diglett", initialLife, new List<string> { "Terremoto", "Excavar", "Bofetón Lodo" }, "Tierra");
                 break;
             case 13:
-                nuevoPokemon = new Pokemon("Ekans", vidaInicial, new List<string> { "Ácido", "Bomba Lodo", "Cola Veneno" }, "Veneno");
+                newPokemon = new Pokemon("Ekans", initialLife, new List<string> { "Ácido", "Bomba Lodo", "Cola Veneno" }, "Veneno");
                 break;
             case 14:
-                nuevoPokemon = new Pokemon("Pidgey", vidaInicial, new List<string> { "Tornado", "Ala de Acero", "Ataque Aéreo" }, "Volador");
+                newPokemon = new Pokemon("Pidgey", initialLife, new List<string> { "Tornado", "Ala de Acero", "Ataque Aéreo" }, "Volador");
                 break;
             default:
                 Console.WriteLine("Índice inválido.");
@@ -138,16 +138,16 @@ public static class Pokedex
         }
 
         // Si se crea un Pokémon, se agrega al equipo del entrenador
-        if (nuevoPokemon != null)
+        if (newPokemon != null)
         {
-            trainer.Team.Add(nuevoPokemon);
+            trainer.Team.Add(newPokemon);
             if (trainer.Active == null)
             {
-                trainer.Active = nuevoPokemon;
+                trainer.Active = newPokemon;
             }
         }
 
-        return nuevoPokemon;
+        return newPokemon;
     }
 
 }

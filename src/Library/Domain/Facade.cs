@@ -132,9 +132,9 @@ public class Facade
         WaitingList.RemoveTrainer(playerDisplayName);
         WaitingList.RemoveTrainer(opponentDisplayName);
         
-        int turnoRandom = new Random().Next(1, 2);
+        int randomTurn = new Random().Next(1, 2);
         
-        switch (turnoRandom)
+        switch (randomTurn)
         {
             case 1:
                 BattlesList.AddBattle(player, opponent);
@@ -253,7 +253,7 @@ public class Facade
     /// <param name="opcionPokemon">La opción del Pokémon en el equipo.</param>
     /// <param name="item">El ítem a usar.</param>
     /// <returns>El resultado de usar el ítem.</returns>
-    public string UseItem(string playerDisplayName, int opcionPokemon, string item)
+    public string UseItem(string playerDisplayName, int optionPokemon, string item)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         
@@ -262,7 +262,7 @@ public class Facade
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediarioUsarItem(opcionPokemon, item);
+        return battle.IntermediaryUseItem(optionPokemon, item);
     }
 
     /// <summary>

@@ -61,21 +61,21 @@ public class Trainer
     /// <param name="numero">El número del Pokémon que se desea agregar al equipo.</param>
     /// <returns>Un mensaje indicando si el Pokémon fue agregado con éxito o si el equipo está lleno.</returns>
 
-    public string ChooseTeam(int numero)
+    public string ChooseTeam(int number)
     {
         if (Team.Count >= 6)
         {
             return "Ya tienes la cantidad maxima de Pokemones en tu Equipo";
         }
-        Pokedex.CrearPokemonPorIndice(numero, this);
-        name = Pokedex.ShowPokemonByIndex(numero);
+        Pokedex.CreatePokemonByIndex(number, this);
+        name = Pokedex.ShowPokemonByIndex(number);
         return $"El pokemon {name} se agrego a la lista, quedan {Team.Count - 6} espacios.";
     }
 
     /// <summary>
     /// Muestra todos los Pokémon que el entrenador tiene en su Equipo.
     /// </summary>
-    public void MostrarmiPokedex()
+    public void ShowMyPokedex()
     {
         int numero = 0;
         Console.WriteLine("Lista de Pokemones en tu Pokedex");

@@ -54,12 +54,12 @@ public class Pokemon
     /// <param name="vida">Puntos de vida iniciales del Pokémon.</param>
     /// <param name="ataques">Lista de ataques que puede realizar el Pokémon.</param>
     /// <param name="tipo">Tipo o tipos del Pokémon.</param>
-    public Pokemon(string name, int vida, List<string> ataques, string tipo)
+    public Pokemon(string name, int health, List<string> attacks, string type)
     {
         Name = name;
-        Health = vida;
-        Attacks = ataques;
-        Types = tipo;
+        Health = health;
+        Attacks = attacks;
+        Types = type;
         IsDefeated = false;
     }
 
@@ -67,11 +67,11 @@ public class Pokemon
     /// Método que permite al Pokémon recibir un cierto daño.
     /// </summary>
     /// <param name="daño">Cantidad de daño recibido.</param>
-    public void recibirDaño(int daño)
+    public void RecibeDamage(int dmg)
     {
         if (!IsDefeated)
         {
-            Health -= daño;
+            Health -= dmg;
             if (Health <= 0)
             {
                 IsDefeated = true;
@@ -92,15 +92,15 @@ public class Pokemon
     /// <param name="ataque">Nombre del ataque que se realizará.</param>
     /// <param name="gestorEfectos">Gestor de efectos para calcular el daño del ataque.</param>
     /// <returns>El valor del daño causado al oponente como una cadena.</returns>
-    public string atacar(Pokemon oponente, string ataque, EffectsManager effectsManager)
+    public string atacar(Pokemon opponent, string attack, EffectsManager effectsManager)
     {
         foreach (var VARIABLE in Attacks)
         {
-            if (VARIABLE == ataque)
+            if (VARIABLE == attack)
             {
-                var (valor, mensaje) = Attack.CalculeDamage(ataque, oponente, effectsManager);
-                oponente.recibirDaño(valor);
-                return $"El oponente recibió {valor} de daño con el ataque {ataque}. {mensaje}"; // Devolvemos el mensaje
+                var (value, message) = Attack.CalculeDamage(attack, opponent, effectsManager);
+                opponent.RecibeDamage(value);
+                return $"El oponente recibió {value} de daño con el ataque {attack}. {message}"; // Devolvemos el mensaje
             }
         }
 
