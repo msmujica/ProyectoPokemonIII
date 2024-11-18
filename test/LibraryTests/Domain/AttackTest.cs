@@ -29,7 +29,7 @@ public class AttackTest
     public void CalculeDamage_WithCritical_ShouldIncreaseDamage()
     {
         var targetpokemon = new Pokemon("Bulbasaur", 100, new List<string>{"Hoja Afilada"},"Planta");
-        var effectsmanager = new GestorEfectos();
+        var effectsmanager = new EffectsManager();
 
         // Configura el daño base para un ataque como "Hoja Afilada" (55 daño)
         var (calculedamage, description) = Attack.CalculeDamage("Hoja Afilada", targetpokemon, effectsmanager);

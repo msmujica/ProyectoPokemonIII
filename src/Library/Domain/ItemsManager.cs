@@ -8,7 +8,7 @@ namespace Library.Items
     /// •	Principio de Expert: GestorDeItems conoce y gestiona la lógica de los ítems, por lo que es el experto en esta funcionalidad.
     /// •	Acoplamiento bajo: Usa GestorEfectos para manejar los efectos negativos, reduciendo la dependencia entre clases.
     /// </summary>
-    public class GestorDeItems
+    public class ItemsManager
     {
         /// <summary>
         /// Usa una SuperPoción en un Pokémon, restaurando su vida hasta un máximo de 100.
@@ -65,15 +65,15 @@ namespace Library.Items
         /// </summary>
         /// <param name="pokemon">El Pokémon al que se le aplicará la Cura Total.</param>
         /// <param name="contadorCuraTotal">El número de Curaciones Totales disponibles.</param>
-        /// <param name="gestorEfectos">El gestor de efectos que se usará para limpiar efectos negativos.</param>
+        /// <param name="effectsManager">El gestor de efectos que se usará para limpiar efectos negativos.</param>
         /// <returns>Un mensaje indicando el resultado de usar la Cura Total.</returns>
-        public string UsarCuraTotal(Pokemon pokemon, int contadorCuraTotal, GestorEfectos gestorEfectos)
+        public string UsarCuraTotal(Pokemon pokemon, int contadorCuraTotal, EffectsManager effectsManager)
         {
             if (contadorCuraTotal > 0)
             {
                 pokemon.Vida = 100; // Cura completamente al Pokémon
                 contadorCuraTotal--;
-                gestorEfectos.LimpiarEfectos(pokemon);
+                effectsManager.LimpiarEfectos(pokemon);
                 return ($"Usaste una Cura Total en el pokemon {pokemon}. Usos restantes: {contadorCuraTotal}. ");
             }
 

@@ -4,12 +4,12 @@ namespace Library
     /// Clase que representa el efecto de "dormir" aplicado a un Pokémon.
     /// Cuando un Pokémon está dormido, pierde turnos y no puede actuar hasta que despierte.
     /// </summary>
-    public class EfectoDormir : IEfecto
+    public class SleepEffect : IEffect
     {
         // Almacena el número de turnos que el Pokémon permanecerá dormido
         public int turnosDormidos;
         public bool PuedoAtacar { get; set; }
-        private GestorEfectos gestorEfectos;
+        private EffectsManager effectsManager;
 
         /// <summary>
         /// Inicia el efecto de "dormir" en un Pokémon.
@@ -43,14 +43,14 @@ namespace Library
                 // Si ya no quedan turnos, el Pokémon se despierta
                 if (turnosDormidos == 0)
                 {
-                    gestorEfectos.LimpiarEfectos(pokemon);
+                    effectsManager.LimpiarEfectos(pokemon);
                     return $"El pokemon {pokemon} se despierta";
                 }
 
                 return $"Al pokemon {pokemon} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar"; // El efecto sigue activo (el Pokémon sigue dormido)
             }
             this.PuedoAtacar = true;
-            gestorEfectos.LimpiarEfectos(pokemon);
+            effectsManager.LimpiarEfectos(pokemon);
             return "";
             // El efecto ha terminado
         }

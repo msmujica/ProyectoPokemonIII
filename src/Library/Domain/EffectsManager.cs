@@ -9,25 +9,25 @@ namespace Library
     /// •	Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
     /// •	Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
     /// </summary>
-    public class GestorEfectos
+    public class EffectsManager
     {
         // Diccionario que almacena los efectos activos para cada Pokémon
-        private Dictionary<Pokemon, List<IEfecto>> efectosActivos;
+        private Dictionary<Pokemon, List<IEffect>> efectosActivos;
 
         // Constructor que inicializa el diccionario de efectos
-        public GestorEfectos()
+        public EffectsManager()
         {
-            efectosActivos = new Dictionary<Pokemon, List<IEfecto>>();
+            efectosActivos = new Dictionary<Pokemon, List<IEffect>>();
         }
 
         /// <summary>
         /// Aplica un efecto específico a un Pokémon.
         /// </summary>
-        /// <param name="efecto">El efecto a aplicar.</param>
+        /// <param name="effect">El efecto a aplicar.</param>
         /// <param name="pokemon">El Pokémon que recibirá el efecto.</param>
-        public string AplicarEfecto(IEfecto efecto, Pokemon pokemon)
+        public string AplicarEfecto(IEffect effect, Pokemon pokemon)
         {
-            if (efecto == null || pokemon == null)
+            if (effect == null || pokemon == null)
             { 
                 // El efecto o el Pokémon son nulos y no se puede aplicar el efecto.
                 return "";
@@ -36,14 +36,14 @@ namespace Library
             // Asegura que haya una lista de efectos para el Pokémon en el diccionario
             if (!efectosActivos.ContainsKey(pokemon))
             {
-                efectosActivos[pokemon] = new List<IEfecto>();
+                efectosActivos[pokemon] = new List<IEffect>();
             }
 
             // Añade el efecto a la lista de efectos del Pokémon
-            efectosActivos[pokemon].Add(efecto);
+            efectosActivos[pokemon].Add(effect);
 
             // Inicia el efecto, lo que podría implicar acciones como mostrar un mensaje
-            return efecto.IniciarEfecto(pokemon);
+            return effect.IniciarEfecto(pokemon);
         }
 
         /// <summary>
@@ -56,15 +56,15 @@ namespace Library
         /// </returns>
         public bool PuedoAtacar(Pokemon pokem)
         {
-            List<IEfecto> efectos = efectosActivos[pokem];
+            List<IEffect> efectos = efectosActivos[pokem];
             foreach (var v in efectos)
             {
                 // Procesa efectos como dormir o paralizar
-                if (v is EfectoDormir)
+                if (v is SleepEffect)
                 {
                     return v.PuedoAtacar; // Devuelve si el pokemon puede atacar
                 }
-                else if (v is EfectoParalizar)
+                else if (v is ParalyzeEffect)
                 {
                     return v.PuedoAtacar; // Devuelve si el pokemon puede atacar
                 }
@@ -82,15 +82,15 @@ namespace Library
                 return $"El pokemon {pokem} no tiene efectos activos.";
             }
 
-            List<IEfecto> efectos = efectosActivos[pokem];
+            List<IEffect> efectos = efectosActivos[pokem];
             foreach (var v in efectos)
             {
                 // Procesa efectos como dormir o paralizar
-                if (v is EfectoDormir)
+                if (v is SleepEffect)
                 {
                     return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
                 }
-                else if (v is EfectoParalizar)
+                else if (v is ParalyzeEffect)
                 {
                     return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
                 }
@@ -110,16 +110,16 @@ namespace Library
             foreach (var entry in efectosActivos)
             {
                 Pokemon pokemon = entry.Key;
-                List<IEfecto> efectos = entry.Value;
+                List<IEffect> efectos = entry.Value;
 
                 // Recorre cada efecto y aplica los que son de daño continuo
                 for (int i = efectos.Count - 1; i >= 0; i--)
                 {
-                    IEfecto efecto = efectos[i];
+                    IEffect effect = efectos[i];
                     if (pokemon != pokem)
                     {
                         // Procesa el daño del efecto
-                        description += efecto.ProcesarEfecto(pokemon) + "\n";
+                        description += effect.ProcesarEfecto(pokemon) + "\n";
                     }
                 }
             }
@@ -155,11 +155,11 @@ namespace Library
 
         public bool EsParalisis(Pokemon pokem)
         {
-            List<IEfecto> efectos = efectosActivos[pokem];
+            List<IEffect> efectos = efectosActivos[pokem];
             foreach (var v in efectos)
             {
                 // Procesa efectos como dormir o paralizar
-                if (v is EfectoParalizar)
+                if (v is ParalyzeEffect)
                 {
                     return true; // Devuelve si el pokemon tiene paralisis.
                 }

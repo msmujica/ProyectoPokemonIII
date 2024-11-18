@@ -25,7 +25,7 @@ public class Battle
 
     private Entrenador turnoActual;
     private Entrenador turnoPasado;
-    private GestorEfectos gestorEfectos;
+    private EffectsManager effectsManager;
 
     /// <summary>
     /// Obtiene o establece el jugador que está actuando en el turno actual.
@@ -57,7 +57,7 @@ public class Battle
         Player2 = player2;
         TurnoActual = player1;
         TurnoPasado = player2;
-        gestorEfectos = new GestorEfectos();
+        effectsManager = new EffectsManager();
         player1.SeteodeItems();
         player2.SeteodeItems();
     }
@@ -114,14 +114,14 @@ public class Battle
     {
         if (Player1.Activo.Vida <= 0)
         {
-            gestorEfectos.LimpiarEfectos(Player1.Activo);
+            effectsManager.LimpiarEfectos(Player1.Activo);
             Player1.CambioPokemonMuerto();
             return true;
         }
 
         if (Player2.Activo.Vida <= 0)
         {
-            gestorEfectos.LimpiarEfectos(Player2.Activo);
+            effectsManager.LimpiarEfectos(Player2.Activo);
             Player2.CambioPokemonMuerto();
             return true;
         }
@@ -152,20 +152,20 @@ public class Battle
             return "No tenes los pokemones suficientes para empezar la batalla";
         }
         
-        if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
+        if (!effectsManager.PuedoAtacar(TurnoActual.Activo))
         { 
-            if (gestorEfectos.EsParalisis(TurnoActual.Activo)) 
+            if (effectsManager.EsParalisis(TurnoActual.Activo)) 
             { 
                 CambiarTurno();
-            return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo); 
+            return effectsManager.ProcesarControlMasa(TurnoActual.Activo); 
             } 
-            return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
+            return effectsManager.ProcesarControlMasa(TurnoActual.Activo);
         }
         
         try
         {
-            string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
-            valor += $"Turno terminado. " + "\n" + gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
+            string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, effectsManager);
+            valor += $"Turno terminado. " + "\n" + effectsManager.ProcesarEfectosDaño(TurnoActual.Activo);
             CambiarTurno();
             return valor;
         }
@@ -211,7 +211,7 @@ public class Battle
             }
 
             // Cambiar el Pokémon activo
-            gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
+            effectsManager.ProcesarEfectosDaño(TurnoActual.Activo);
             string valor = TurnoActual.cambiarActivo(opcionPokemon);
             CambiarTurno();
             return valor;
@@ -265,9 +265,9 @@ public class Battle
 
             // Aplicar el ítem seleccionado al Pokémon
             
-            gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
+            effectsManager.ProcesarEfectosDaño(TurnoActual.Activo);
             CambiarTurno();
-            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos);
+            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, effectsManager);
 
         }
         catch (FormatException)

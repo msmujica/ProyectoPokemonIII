@@ -4,7 +4,7 @@ namespace Library
     /// Clase que representa el efecto de "paralizar" a un Pokémon.
     /// Un Pokémon paralizado tiene un 30% de probabilidad de no poder atacar en cada turno.
     /// </summary>
-    public class EfectoParalizar : IEfecto
+    public class ParalyzeEffect : IEffect
     {
         public bool PuedoAtacar { get; set; }
         /// <summary>

@@ -40,7 +40,7 @@ public class Entrenador
     public int ContadorRevivir { get; set; }
     public int ContadorCuraTotal { get; set; }
     
-    private GestorDeItems gestorDeItems;
+    private ItemsManager itemsManager;
 
     
     /// <summary>
@@ -52,7 +52,7 @@ public class Entrenador
         Nombre = nombre;
         Equipo = new List<Pokemon>();
         Activo = null;
-        gestorDeItems = new GestorDeItems(); 
+        itemsManager = new ItemsManager(); 
     }
     
     /// <summary>
@@ -108,11 +108,11 @@ public class Entrenador
     /// </summary>
     /// <param name="nombre">El nombre del ataque a utilizar.</param>
     /// <param name="oponente">El Pokémon oponente que recibirá el ataque.</param>
-    /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
+    /// <param name="effectsManager">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
     /// <returns>El resultado de la acción de atacar.</returns>
-    public string elegirAtaque(string nombre, Pokemon oponente, GestorEfectos gestorEfectos)
+    public string elegirAtaque(string nombre, Pokemon oponente, EffectsManager effectsManager)
     {
-        return activo.atacar(oponente, nombre, gestorEfectos);
+        return activo.atacar(oponente, nombre, effectsManager);
     }
 
     /// <summary>
@@ -120,21 +120,21 @@ public class Entrenador
     /// </summary>
     /// <param name="nombreItem">El nombre del ítem a usar (Superpocion, Revivir, CuraTotal).</param>
     /// <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
-    /// <param name="gestorEfectos">El gestor de efectos que maneja los efectos del ítem.</param>
+    /// <param name="effectsManager">El gestor de efectos que maneja los efectos del ítem.</param>
     /// <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
-    public string UsarItem(string nombreItem, Pokemon pokemon, GestorEfectos gestorEfectos)
+    public string UsarItem(string nombreItem, Pokemon pokemon, EffectsManager effectsManager)
     {
         string valor = null;
         switch (nombreItem)
         {
             case "Superpocion":
-                valor = gestorDeItems.UsarSuperPocion(pokemon, ContadorSuperPocion);
+                valor = itemsManager.UsarSuperPocion(pokemon, ContadorSuperPocion);
                 break;
             case "Revivir":
-                valor = gestorDeItems.UsarRevivir(pokemon, ContadorRevivir);
+                valor = itemsManager.UsarRevivir(pokemon, ContadorRevivir);
                 break;
             case "CuraTotal":
-                valor = gestorDeItems.UsarCuraTotal(pokemon, ContadorCuraTotal, gestorEfectos);
+                valor = itemsManager.UsarCuraTotal(pokemon, ContadorCuraTotal, effectsManager);
                 break;
             default:
                 Console.WriteLine("Ítem no válido.");
