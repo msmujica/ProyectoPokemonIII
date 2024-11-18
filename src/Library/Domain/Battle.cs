@@ -141,7 +141,7 @@ public class Battle
         {
             if (ValidacionPokemonVivo())
             {
-                return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque";
+                return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
             }
         
             if (ValidacionWin())
@@ -151,7 +151,7 @@ public class Battle
         
             if (validacionPokemon())
             {
-                return "No tenes los pokemones suficientes para empezar la batalla";
+                return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             string description = gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
             if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
@@ -172,7 +172,7 @@ public class Battle
         }
         catch (FormatException)
         {
-            return ("Entrada inválida. Asegúrate de ingresar el nombre correcto.");
+            return ("Entrada inválida. Asegúrate de ingresar el nombre correcto. ");
         }
         catch (Exception ex)
         {
@@ -199,7 +199,7 @@ public class Battle
         
             if (validacionPokemon())
             {
-                return "No tenes los pokemones suficientes para empezar la batalla";
+                return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             // Verificar si el índice del Pokémon está en el rango
             if (opcionPokemon < 0 || opcionPokemon >= TurnoActual.Equipo.Count)
@@ -219,7 +219,7 @@ public class Battle
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ocurrió un error: {ex.Message}");
+            Console.WriteLine($"Ocurrió un error: {ex.Message} ");
         }
 
         return "Hecho";
