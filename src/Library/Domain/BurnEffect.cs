@@ -4,7 +4,7 @@ namespace Library
     /// Clase que representa el efecto de "quemar" a un Pokémon.
     /// Un Pokémon quemado pierde un 10% de su vida máxima en cada turno.
     /// </summary>
-    public class EfectoQuemar : IEfecto
+    public class BurnEffect : IEffect
     {
         public bool PuedoAtacar
         {
@@ -12,7 +12,7 @@ namespace Library
         }
         // Porcentaje de la vida máxima que pierde el Pokémon debido a la quemadura (10%)
         private static double dmgPercentage = 0.10; 
-        private GestorEfectos gestorEfectos;
+        private EffectsManager effectsManager;
 
         /// <summary>
         /// Inicia el efecto de "quemar" en el Pokémon.
@@ -42,7 +42,7 @@ namespace Library
             // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado
             if (pokemon.Vida <= 0)
             {
-                gestorEfectos.LimpiarEfectos(pokemon);
+                effectsManager.LimpiarEfectos(pokemon);
                 return $"El pokemon {pokemon.Name} ha caído por envenenamiento. ";
             }
             

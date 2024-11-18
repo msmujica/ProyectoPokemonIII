@@ -62,18 +62,18 @@ public static class LogicaTipos
     /// <param name="tipoAtaque">El tipo del Pokémon atacante.</param>
     /// <param name="tipoDefensor">El tipo del Pokémon defensor.</param>
     /// <returns>El multiplicador de daño (1: neutral, 2: super efectivo, 0.5: poco efectivo, 0: sin efecto).</returns>
-    public static double CalcularMultiplicador(string tipoAtaque, string tipoDefensor)
+    public static double CalculeMultiplier(string typeAttack, string typeDefender)
     {
-        if (Inmunidades.ContainsKey(tipoDefensor) && Inmunidades[tipoDefensor].Contains(tipoAtaque)){
+        if (Inmunidades.ContainsKey(typeDefender) && Inmunidades[typeDefender].Contains(typeAttack)){
             return 0;
         }
 
-        if (Debilidades.ContainsKey(tipoDefensor) && Debilidades[tipoDefensor].Contains(tipoAtaque))
+        if (Debilidades.ContainsKey(typeDefender) && Debilidades[typeDefender].Contains(typeAttack))
         {
             return 2;
         }
 
-        if (Resistencias.ContainsKey(tipoDefensor) && Resistencias[tipoDefensor].Contains(tipoAtaque))
+        if (Resistencias.ContainsKey(typeDefender) && Resistencias[typeDefender].Contains(typeAttack))
         {
             return 0.5;
         }

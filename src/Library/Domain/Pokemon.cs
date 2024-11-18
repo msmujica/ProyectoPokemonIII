@@ -90,15 +90,15 @@ public class Pokemon
     /// </summary>
     /// <param name="oponente">Pokémon sobre el cual se realizará el ataque.</param>
     /// <param name="ataque">Nombre del ataque que se realizará.</param>
-    /// <param name="gestorEfectos">Gestor de efectos para calcular el daño del ataque.</param>
+    /// <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
     /// <returns>El valor del daño causado al oponente como una cadena.</returns>
-    public string atacar(Pokemon oponente, string ataque, GestorEfectos gestorEfectos)
+    public string atacar(Pokemon oponente, string ataque, EffectsManager effectsManager)
     {
         foreach (var VARIABLE in Ataques)
         {
             if (VARIABLE == ataque)
             {
-                var (valor, mensaje) = Attack.CalculeDamage(ataque, oponente, gestorEfectos);
+                var (valor, mensaje) = Attack.CalculeDamage(ataque, oponente, effectsManager);
                 oponente.recibirDaño(valor);
                 return $"El pokemon {oponente.name} recibió {valor} de daño con el ataque {ataque}. {mensaje}"; // Devolvemos el mensaje
             }
