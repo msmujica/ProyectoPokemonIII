@@ -7,13 +7,13 @@ namespace Library
     /// </summary>
     public interface IEffect
     {
-        public bool PuedoAtacar { get; }
+        public bool IcanAttack { get; }
         /// <summary>
         /// Inicia el efecto sobre un Pokémon. Este método debe definir cómo el efecto
         /// afecta al Pokémon al momento de ser aplicado, como cambiar su estado o estadísticas.
         /// </summary>
         /// <param name="pokemon">El Pokémon al que se le va a aplicar el efecto.</param>
-        public string IniciarEfecto(Pokemon pokemon);
+        public string StartEffect(Pokemon pokemon);
 
         /// <summary>
         /// Procesa el efecto sobre un Pokémon. Este método es responsable de actualizar
@@ -22,6 +22,6 @@ namespace Library
         /// </summary>
         /// <param name="pokemon">El Pokémon sobre el cual se procesará el efecto.</param>
         /// <returns>Un valor booleano que indica si el efecto sigue activo o si ha terminado.</returns>
-        public string ProcesarEfecto(Pokemon pokemon);
+        public string ProcessEffect(Pokemon pokemon);
     }
 }

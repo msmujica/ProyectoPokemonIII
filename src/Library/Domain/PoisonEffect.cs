@@ -6,13 +6,13 @@ namespace Library
     /// </summary>
     public class PoisonEffect : IEffect
     {
-        public bool PuedoAtacar
+        public bool IcanAttack
         {
             get { return true; }
         }
 
         // Porcentaje de vida que el Pokémon pierde por turno debido al veneno (5%)
-        private double porcentajeDaño = 0.05;
+        private double damagePercentage = 0.05;
         private EffectsManager effectsManager;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Library
         /// Este efecto causará daño periódico a la vida del Pokémon.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será envenenado.</param>
-        public string IniciarEfecto(Pokemon pokemon)
+        public string StartEffect(Pokemon pokemon)
         {
             return $"El pokemon {pokemon.Name} ha sido envenenado, perdera vida cada turno.";
         }
@@ -34,10 +34,10 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha muerto debido al veneno).
         /// <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado fuera de combate por el veneno).
         /// </returns>
-        public string ProcesarEfecto(Pokemon pokemon)
+        public string ProcessEffect(Pokemon pokemon)
         {
             // Calcula el daño causado por el veneno (5% de la vida actual del Pokémon)
-            int daño = (int)(pokemon.Vida * porcentajeDaño);
+            int daño = (int)(pokemon.Vida * damagePercentage);
             pokemon.Vida -= daño;
             
             // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado

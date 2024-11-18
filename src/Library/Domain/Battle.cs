@@ -154,7 +154,7 @@ public class Battle
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             string description = effectsManager.ProcesarControlMasa(ActualTurn.Activo);
-            if (!effectsManager.PuedoAtacar(ActualTurn.Activo))
+            if (!effectsManager.IcanAttack(ActualTurn.Activo))
             { 
                 if (effectsManager.EsParalisis(ActualTurn.Activo))
                 {

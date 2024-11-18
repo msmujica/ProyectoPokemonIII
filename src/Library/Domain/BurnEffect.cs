@@ -6,7 +6,7 @@ namespace Library
     /// </summary>
     public class BurnEffect : IEffect
     {
-        public bool PuedoAtacar
+        public bool IcanAttack
         {
             get { return true; }
         }
@@ -19,7 +19,7 @@ namespace Library
         /// Este efecto causa daño continuo al Pokémon en cada turno.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será quemado.</param>
-        public string IniciarEfecto(Pokemon pokemon)
+        public string StartEffect(Pokemon pokemon)
         {
             return $"El pokemon {pokemon.Name} ha sido quemado.";
         }
@@ -33,7 +33,7 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue quemado y pierde vida).
         /// <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado KO).
         /// </returns>
-        public string ProcesarEfecto(Pokemon pokemon)
+        public string ProcessEffect(Pokemon pokemon)
         {
             // Calcula el daño causado por el veneno (5% de la vida actual del Pokémon)
             int daño = (int)(pokemon.Vida * dmgPercentage);
