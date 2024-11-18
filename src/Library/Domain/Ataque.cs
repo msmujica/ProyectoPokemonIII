@@ -149,8 +149,8 @@ namespace Library
                 if (!effectsManager.PokemonConEfecto(objetive) && ApplySpecialEffect())
                 {
                     // Aplica un efecto especial
-                    IEfecto EffectSpecial = SelectSpecialEffect();
-                    description += effectsManager.AplicarEfecto(EffectSpecial, objetive);
+                    IEfecto effectSpecial = SelectSpecialEffect();
+                    description += effectsManager.AplicarEfecto(effectSpecial, objetive);
                 }
             }
             else
@@ -196,6 +196,7 @@ namespace Library
         public static IEfecto SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
+            effect = 2;
             switch (effect)
             {
                 case 1:

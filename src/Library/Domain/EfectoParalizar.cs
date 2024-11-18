@@ -28,15 +28,16 @@ namespace Library
         /// </returns>
         public string ProcesarEfecto(Pokemon pokemon)
         {
+            PuedeAtacar();
             if (this.PuedoAtacar)
             {
                 // El Pokémon puede atacar este turno.
-                return $"El pokemon {pokemon.Name} supera la parálisis en este turno y puede atacar.";
+                return $"El pokemon {pokemon.Name} supera la parálisis en este turno y puede atacar. ";
                 // El efecto continúa, ya que el Pokémon puede atacar.
             }
             
             // El Pokémon no puede atacar este turno debido a la parálisis.
-            return $"{pokemon.Name} está paralizado y no puede atacar, perdiste el turno.";
+            return $"{pokemon.Name} está paralizado y no puede atacar, perdiste el turno. ";
             // El efecto sigue activo, ya que el Pokémon no puede atacar.
         }
 
