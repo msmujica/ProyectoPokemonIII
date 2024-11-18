@@ -10,7 +10,7 @@ namespace Library;
 /// •	Creator: Como creadora de objetos Pokemon, facilita la extensibilidad al incorporar nuevos Pokémon fácilmente.
 
 /// </summary>
-public static class LogicaTipos
+public static class TypeLogic
 {
     // Diccionario de cada tipo de debilidades (tipos que son fuertes contra ese tipo).
     private static readonly Dictionary<string, List<string>> Debilidades = new Dictionary<string, List<string>>

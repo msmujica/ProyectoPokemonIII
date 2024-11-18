@@ -5,7 +5,7 @@ namespace Library
     /// aplicarse a un Pokémon durante una batalla. Cada efecto debe ser capaz de iniciar
     /// su acción y procesar sus efectos de manera periódica.
     /// </summary>
-    public interface IEfecto
+    public interface IEffect
     {
         public bool PuedoAtacar { get; }
         /// <summary>

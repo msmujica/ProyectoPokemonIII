@@ -121,7 +121,7 @@ namespace Library
         /// <param name="gestorEfectos">El objeto que gestiona los efectos especiales que pueden ocurrir.</param>
         /// <returns>El daño calculado para el ataque.</returns>
         public static (int Daño, string Descripcion) CalculeDamage(string nameAttack, Pokemon objetive,
-            GestorEfectos effectsManager)
+            EffectsManager effectsManager)
         {
             string description = "";
             var attack = ObtainAttack(nameAttack);
@@ -142,14 +142,14 @@ namespace Library
                 }
 
                 // Calcula el multiplicador de daño según los tipos
-                double multiplier = LogicaTipos.CalcularMultiplicador(attack.Type, objetive.Tipos);
+                double multiplier = TypeLogic.CalcularMultiplicador(attack.Type, objetive.Tipos);
                 totaldmg = (int)(totaldmg * multiplier);
                 description += $"Como el ataque es tipo {attack.Type} el daño es {totaldmg}. ";
 
                 if (!effectsManager.PokemonConEfecto(objetive) && ApplySpecialEffect())
                 {
                     // Aplica un efecto especial
-                    IEfecto EffectSpecial = SelectSpecialEffect();
+                    IEffect EffectSpecial = SelectSpecialEffect();
                     description += effectsManager.AplicarEfecto(EffectSpecial, objetive);
                 }
             }
@@ -193,19 +193,19 @@ namespace Library
         /// Selecciona un efecto especial aleatorio para aplicar (dormir, paralizar, envenenar, quemar).
         /// </summary>int 
         /// <returns>El efecto especial seleccionado.</returns>
-        public static IEfecto SelectSpecialEffect()
+        public static IEffect SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
             switch (effect)
             {
                 case 1:
-                    return new EfectoDormir();
+                    return new SleepEffect();
                 case 2:
-                    return new EfectoParalizar();
+                    return new ParalyzeEffect();
                 case 3:
-                    return new EfectoEnvenenar();
+                    return new PoisonEffect();
                 case 4:
-                    return new EfectoQuemar();
+                    return new BurnEffect();
                 default:
                     return (null); // Valor por defecto
             }

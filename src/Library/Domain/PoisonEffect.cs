@@ -4,7 +4,7 @@ namespace Library
     /// Clase que representa el efecto de "envenenar" a un Pokémon.
     /// Un Pokémon envenenado pierde una cierta cantidad de vida por cada turno que pasa.
     /// </summary>
-    public class EfectoEnvenenar : IEfecto
+    public class PoisonEffect : IEffect
     {
         public bool PuedoAtacar
         {
@@ -13,7 +13,7 @@ namespace Library
 
         // Porcentaje de vida que el Pokémon pierde por turno debido al veneno (5%)
         private double porcentajeDaño = 0.05;
-        private GestorEfectos gestorEfectos;
+        private EffectsManager effectsManager;
 
         /// <summary>
         /// Inicia el efecto de "envenenar" en el Pokémon.
@@ -43,7 +43,7 @@ namespace Library
             // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado
             if (pokemon.Vida <= 0)
             {
-                gestorEfectos.LimpiarEfectos(pokemon);
+                effectsManager.LimpiarEfectos(pokemon);
                 return $"El pokemon {pokemon.Name} ha caído por envenenamiento.";
             }
             
