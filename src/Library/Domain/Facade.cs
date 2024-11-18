@@ -139,20 +139,24 @@ public class Facade
         // Remover jugadores de la lista de espera
         WaitingList.RemoveTrainer(playerDisplayName);
         WaitingList.RemoveTrainer(opponentDisplayName);
-        
-        int turnoRandom = new Random().Next(1, 2);
+
+        string actual = null;
+        int turnoRandom = new Random().Next(0, 2);
         
         switch (turnoRandom)
         {
-            case 1:
+            case 0:
                 BattlesList.AddBattle(player, opponent);
+                actual = $"Empieza {player.Nombre}";
                 break;
-            case 2:
+            case 1:
                 BattlesList.AddBattle(opponent, player);
+                actual = $"Empieza {opponent.Nombre}";
                 break;
         }
 
-        return $"Comienza {player.Nombre} vs {opponent.Nombre}";
+        return $"Comienza {player.Nombre} vs {opponent.Nombre}\n" +
+               $"{actual}";
     }
 
     /// <summary>
