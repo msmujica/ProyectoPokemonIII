@@ -25,7 +25,7 @@ namespace Library
         /// </summary>
         /// <param name="effect">El efecto a aplicar.</param>
         /// <param name="pokemon">El Pokémon que recibirá el efecto.</param>
-        public string AplicarEfecto(IEffect effect, Pokemon pokemon)
+        public string ApplyEffect(IEffect effect, Pokemon pokemon)
         {
             if (effect == null || pokemon == null)
             { 
@@ -148,7 +148,7 @@ namespace Library
         /// </summary>
         /// <param name="pokemon">El Pokémon a verificar.</param>
         /// <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
-        public bool PokemonConEfecto(Pokemon pokemon)
+        public bool PokemonWithEffect(Pokemon pokemon)
         {
             return efectosActivos.ContainsKey(pokemon);
         }

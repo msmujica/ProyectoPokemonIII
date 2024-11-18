@@ -13,7 +13,7 @@ namespace Library;
 public static class TypeLogic
 {
     // Diccionario de cada tipo de debilidades (tipos que son fuertes contra ese tipo).
-    private static readonly Dictionary<string, List<string>> Debilidades = new Dictionary<string, List<string>>
+    private static readonly Dictionary<string, List<string>> Weaknesses = new Dictionary<string, List<string>>
     {
         { "Agua", new List<string> { "Eléctrico", "Planta" } },
         { "Bicho", new List<string> { "Fuego", "Roca", "Volador", "Veneno" } },
@@ -33,7 +33,7 @@ public static class TypeLogic
     };
 
     // Diccionario de cada tipo de sus resistencias (tipos que son débiles contra ese tipo).
-    private static readonly Dictionary<string, List<string>> Resistencias = new Dictionary<string, List<string>>
+    private static readonly Dictionary<string, List<string>> Recistance = new Dictionary<string, List<string>>
     {
         { "Agua", new List<string> { "Agua", "Fuego", "Hielo" } },
         { "Bicho", new List<string> { "Lucha", "Planta", "Tierra" } },
@@ -49,7 +49,7 @@ public static class TypeLogic
     };
 
     // Diccionario de cada tipo de sus inmunidades (tipos contra los que no tienen ningún efecto).
-    private static readonly Dictionary<string, List<string>> Inmunidades = new Dictionary<string, List<string>>
+    private static readonly Dictionary<string, List<string>> Immunities = new Dictionary<string, List<string>>
     {
         { "Eléctrico", new List<string> { "Eléctrico" } },
         { "Fantasma", new List<string> { "Normal" } },
@@ -59,21 +59,21 @@ public static class TypeLogic
     /// <summary>
     /// Calcula el multiplicador de daño que se aplica a un ataque según el tipo del atacante y el tipo del defensor.
     /// </summary>
-    /// <param name="tipoAtaque">El tipo del Pokémon atacante.</param>
-    /// <param name="tipoDefensor">El tipo del Pokémon defensor.</param>
+    /// <param name="typeAttack">El tipo del Pokémon atacante.</param>
+    /// <param name="typeDefender">El tipo del Pokémon defensor.</param>
     /// <returns>El multiplicador de daño (1: neutral, 2: super efectivo, 0.5: poco efectivo, 0: sin efecto).</returns>
-    public static double CalcularMultiplicador(string tipoAtaque, string tipoDefensor)
+    public static double CalculeMultiplier(string typeAttack, string typeDefender)
     {
-        if (Inmunidades.ContainsKey(tipoDefensor) && Inmunidades[tipoDefensor].Contains(tipoAtaque)){
+        if (Immunities.ContainsKey(typeDefender) && Immunities[typeDefender].Contains(typeAttack)){
             return 0;
         }
 
-        if (Debilidades.ContainsKey(tipoDefensor) && Debilidades[tipoDefensor].Contains(tipoAtaque))
+        if (Weaknesses.ContainsKey(typeDefender) && Weaknesses[typeDefender].Contains(typeAttack))
         {
             return 2;
         }
 
-        if (Resistencias.ContainsKey(tipoDefensor) && Resistencias[tipoDefensor].Contains(tipoAtaque))
+        if (Recistance.ContainsKey(typeDefender) && Recistance[typeDefender].Contains(typeAttack))
         {
             return 0.5;
         }
