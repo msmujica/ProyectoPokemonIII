@@ -6,13 +6,13 @@ namespace Library
     /// </summary>
     public class ParalyzeEffect : IEffect
     {
-        public bool PuedoAtacar { get; set; }
+        public bool IcanAttack { get; set; }
         /// <summary>
         /// Inicia el efecto de "paralizar" en el Pokémon.
         /// Este efecto impide que el Pokémon pueda atacar con una probabilidad.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será paralizado.</param>
-        public string IniciarEfecto(Pokemon pokemon)
+        public string StartEffect(Pokemon pokemon)
         {
             return $"El pokemon {pokemon.Name} se le aplico el efecto paralisis.";
         }
@@ -26,10 +26,10 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha atacado debido a la parálisis).
         /// <c>false</c> si el Pokémon ha superado la parálisis y puede atacar.
         /// </returns>
-        public string ProcesarEfecto(Pokemon pokemon)
+        public string ProcessEffect(Pokemon pokemon)
         {
             PuedeAtacar();
-            if (this.PuedoAtacar)
+            if (this.IcanAttack)
             {
                 // El Pokémon puede atacar este turno.
                 return $"El pokemon {pokemon.Name} supera la parálisis en este turno y puede atacar. ";
@@ -53,8 +53,8 @@ namespace Library
         {
             // Genera un número aleatorio para determinar si puede atacar
             // Hay un 30% de probabilidad de que el Pokémon no pueda atacar.
-            this.PuedoAtacar = new Random().NextDouble() > 0.3;
-            return this.PuedoAtacar;
+            this.IcanAttack = new Random().NextDouble() > 0.3;
+            return this.IcanAttack;
         }
     }
 }

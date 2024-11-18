@@ -43,7 +43,7 @@ namespace Library
             efectosActivos[pokemon].Add(effect);
 
             // Inicia el efecto, lo que podría implicar acciones como mostrar un mensaje
-            return effect.IniciarEfecto(pokemon);
+            return effect.StartEffect(pokemon);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
         /// <c>false</c> si el efecto ha terminado o no aplica.
         /// </returns>
-        public bool PuedoAtacar(Pokemon pokem)
+        public bool IcanAttack(Pokemon pokem)
         {
             foreach (var entry in efectosActivos)
             {
@@ -65,7 +65,7 @@ namespace Library
                     IEffect effect = efectos[i];
                     if ((pokemon == pokem) && (effect is ParalyzeEffect) || (pokemon == pokem)&&(effect is SleepEffect))
                     {
-                        return effect.PuedoAtacar;
+                        return effect.IcanAttack;
                     }
 
                 }
@@ -86,11 +86,11 @@ namespace Library
                 // Procesa efectos como dormir o paralizar
                 if (v is SleepEffect)
                 {
-                    return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
+                    return v.ProcessEffect(pokem); // Devuelve si el efecto sigue activo
                 }
                 else if (v is ParalyzeEffect)
                 {
-                    return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
+                    return v.ProcessEffect(pokem); // Devuelve si el efecto sigue activo
                 }
             }
 
@@ -119,7 +119,7 @@ namespace Library
                         if (!(effect is ParalyzeEffect))
                         {
                             // Procesa el daño del efecto
-                            description += effect.ProcesarEfecto(pokemon) + "\n";
+                            description += effect.ProcessEffect(pokemon) + "\n";
                         }
                     }
                 }

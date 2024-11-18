@@ -8,7 +8,7 @@ namespace Library
     {
         // Almacena el número de turnos que el Pokémon permanecerá dormido
         public int turnosDormidos;
-        public bool PuedoAtacar { get; set; }
+        public bool IcanAttack { get; set; }
         private EffectsManager effectsManager;
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace Library
         /// El Pokémon será dormido por un número aleatorio de turnos entre 1 y 4.
         /// </summary>
         /// <param name="pokemon">El Pokémon que será afectado por el sueño.</param>
-        public string IniciarEfecto(Pokemon pokemon)
+        public string StartEffect(Pokemon pokemon)
         {
             // Determina cuántos turnos el Pokémon estará dormido, un valor aleatorio entre 1 y 4
             this.turnosDormidos = new Random().Next(1, 5);
@@ -32,13 +32,13 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue dormido).
         /// <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha despertado).
         /// </returns>
-        public string ProcesarEfecto(Pokemon pokemon)
+        public string ProcessEffect(Pokemon pokemon)
         {
             if (turnosDormidos > 0)
             {
                 // Reduce el número de turnos restantes del sueño
                 turnosDormidos--;
-                this.PuedoAtacar = false;
+                this.IcanAttack = false;
 
                 // Si ya no quedan turnos, el Pokémon se despierta
                 if (turnosDormidos == 0)
@@ -49,7 +49,7 @@ namespace Library
 
                 return $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar. "; // El efecto sigue activo (el Pokémon sigue dormido)
             }
-            this.PuedoAtacar = true;
+            this.IcanAttack = true;
             effectsManager.LimpiarEfectos(pokemon);
             return "";
             // El efecto ha terminado
