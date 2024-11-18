@@ -25,7 +25,9 @@ public class HelpCommand : ModuleBase<SocketCommandContext>
                         $"*!Item <Pokemon>, <Item> - Para usar un item se debe de agregar el numero de pokemon y el nombre del item a usar. \n" +
                         $"*!pokemonsAvaliables - Muestra los pokemones disponibles para elegir en tu equipo. \n" +
                         $"*!showPokemons <Player> - Muestra el pokemon del nombre de jugador que pusiste. \n" +
-                        $"*!Surrender - Te rendis y puedes jugador otra batalla";
+                        $"*!Surrender - Te rendis y puedes jugador otra batalla.\n" +
+                        $"*!change <Pokemon> - Cambia el pokemon activo, para cambiarlo ingresa el indice de tu equipo. \n" +
+                        $"*!getattacks -  Muestra los ataques del pokemon activo.";
         // Enviar el mensaje al canal
         await ReplyAsync($"Comandos disponibles:" + result.TrimEnd()); // Elimina cualquier salto de línea adicional al final
     }
