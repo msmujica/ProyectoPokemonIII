@@ -25,12 +25,12 @@ namespace Library
         /// </summary>
         /// <param name="efecto">El efecto a aplicar.</param>
         /// <param name="pokemon">El Pokémon que recibirá el efecto.</param>
-        public void AplicarEfecto(IEfecto efecto, Pokemon pokemon)
+        public string AplicarEfecto(IEfecto efecto, Pokemon pokemon)
         {
             if (efecto == null || pokemon == null)
             {
-                Console.WriteLine("El efecto o el Pokémon son nulos y no se puede aplicar el efecto.");
-                return;
+                // El efecto o el Pokémon son nulos y no se puede aplicar el efecto.
+                return "";
             }
 
             // Asegura que haya una lista de efectos para el Pokémon en el diccionario
@@ -43,7 +43,7 @@ namespace Library
             efectosActivos[pokemon].Add(efecto);
 
             // Inicia el efecto, lo que podría implicar acciones como mostrar un mensaje
-            efecto.IniciarEfecto(pokemon);
+            return efecto.IniciarEfecto(pokemon);
         }
 
         /// <summary>
@@ -54,33 +54,56 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
         /// <c>false</c> si el efecto ha terminado o no aplica.
         /// </returns>
-        public bool ProcesarControlMasa(Pokemon pokem)
+        public bool PuedoAtacar(Pokemon pokem)
         {
-            // Verifica si el Pokémon tiene efectos activos
-            if (!efectosActivos.ContainsKey(pokem))
+            foreach (var entry in efectosActivos)
             {
-                Console.WriteLine($"{pokem.Name} no tiene efectos activos.");
-                return false;
+                Pokemon pokemon = entry.Key;
+                List<IEfecto> efectos = entry.Value;
+                for (int i = efectos.Count - 1; i >= 0; i--)
+                {
+                    IEfecto efecto = efectos[i];
+                    if ((pokemon == pokem) && (efecto is EfectoParalizar) || (pokemon == pokem)&&(efecto is EfectoDormir))
+                    {
+                        return efecto.PuedoAtacar;
+                    }
+
+                }
             }
+            return true;
+        }
+
+    public string ProcesarControlMasa(Pokemon pokem)
+        {
+            // Inicializamos la descripción vacía
+
+            // Verifica si el Pokémon tiene efectos activos
+            if (!efectosActivos.ContainsKey(pokem)) return $"El pokemon {pokem.Name} no tiene efectos activos.";
 
             List<IEfecto> efectos = efectosActivos[pokem];
             foreach (var v in efectos)
             {
                 // Procesa efectos como dormir o paralizar
-                if (v is EfectoDormir || v is EfectoParalizar)
+                if (v is EfectoDormir)
+                {
+                    return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
+                }
+                else if (v is EfectoParalizar)
                 {
                     return v.ProcesarEfecto(pokem); // Devuelve si el efecto sigue activo
                 }
             }
 
-            return false; // Si no es un efecto de control como dormir o paralizar, retorna false
+            return ""; // Si no es un efecto de control como dormir o paralizar, retorna false
         }
+
 
         /// <summary>
         /// Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
         /// </summary>
-        public void ProcesarEfectosDaño()
+        public string ProcesarEfectosDaño(Pokemon pokem)
         {
+            string description = "";
             // Recorre todos los efectos activos
             foreach (var entry in efectosActivos)
             {
@@ -91,31 +114,34 @@ namespace Library
                 for (int i = efectos.Count - 1; i >= 0; i--)
                 {
                     IEfecto efecto = efectos[i];
-                    if (efecto is EfectoEnvenenar || efecto is EfectoQuemar)
+                    if (pokemon != pokem)
                     {
-                        // Procesa el daño del efecto
-                        efecto.ProcesarEfecto(pokemon);
+                        if (!(efecto is EfectoParalizar))
+                        {
+                            // Procesa el daño del efecto
+                            description += efecto.ProcesarEfecto(pokemon) + "\n";
+                        }
                     }
                 }
             }
+            return description;
         }
 
         /// <summary>
         /// Limpia todos los efectos activos de un Pokémon.
         /// </summary>
         /// <param name="pokemon">El Pokémon cuyo efecto se eliminará.</param>
-        public void LimpiarEfectos(Pokemon pokemon)
+        public string LimpiarEfectos(Pokemon pokemon)
         {
             // Elimina los efectos activos del Pokémon si existen
             if (efectosActivos.ContainsKey(pokemon))
             {
                 efectosActivos.Remove(pokemon);
-                Console.WriteLine($"Todos los efectos han sido eliminados de {pokemon.Name}.");
+                return ($"Todos los efectos han sido eliminados de {pokemon.Name}.");
             }
-            else
-            {
-                Console.WriteLine($"{pokemon.Name} no tiene efectos activos.");
-            }
+            
+            return "";
+            
         }
 
         /// <summary>
@@ -126,6 +152,21 @@ namespace Library
         public bool PokemonConEfecto(Pokemon pokemon)
         {
             return efectosActivos.ContainsKey(pokemon);
+        }
+
+        public bool EsParalisis(Pokemon pokem)
+        {
+            if (!efectosActivos.ContainsKey(pokem)) return false;
+            List<IEfecto> efectos = efectosActivos[pokem];
+            foreach (var v in efectos)
+            {
+                // Procesa efectos como dormir o paralizar
+                if (v is EfectoParalizar)
+                {
+                    return true; // Devuelve si el pokemon tiene paralisis.
+                }
+            }
+            return false;
         }
     }
 }
