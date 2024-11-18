@@ -272,6 +272,12 @@
             </summary>
             <returns>Lista de los Pokémon del oponente.</returns>
         </member>
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.Win">
+            <summary>
+            Muestra el mensaje de victoria cuando el jugador actual gana la batalla.
+            </summary>
+            <returns>Mensaje indicando que el jugador actual ha ganado.</returns>
+        </member>
         <member name="T:Ucu.Poo.DiscordBot.Domain.BattlesList">
             <summary>
             Esta clase representa la lista de batallas en curso.
@@ -536,7 +542,7 @@
         <member name="M:Library.Attack.SelectSpecialEffect">
             <summary>
             Selecciona un efecto especial aleatorio para aplicar (dormir, paralizar, envenenar, quemar).
-            </summary>
+            </summary>int 
             <returns>El efecto especial seleccionado.</returns>
         </member>
         <member name="T:Library.EfectoDormir">
@@ -753,7 +759,7 @@
             <param name="efecto">El efecto a aplicar.</param>
             <param name="pokemon">El Pokémon que recibirá el efecto.</param>
         </member>
-        <member name="M:Library.GestorEfectos.ProcesarControlMasa(Library.Pokemon)">
+        <member name="M:Library.GestorEfectos.PuedoAtacar(Library.Pokemon)">
             <summary>
             Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar).
             </summary>
@@ -763,7 +769,7 @@
             <c>false</c> si el efecto ha terminado o no aplica.
             </returns>
         </member>
-        <member name="M:Library.GestorEfectos.ProcesarEfectosDaño">
+        <member name="M:Library.GestorEfectos.ProcesarEfectosDaño(Library.Pokemon)">
             <summary>
             Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
             </summary>

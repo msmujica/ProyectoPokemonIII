@@ -44,10 +44,10 @@ namespace Library
             if (pokemon.Vida <= 0)
             {
                 gestorEfectos.LimpiarEfectos(pokemon);
-                return $"El pokemon {pokemon.Name} ha caído por envenenamiento.";
+                return $"El pokemon {pokemon.Name} ha caído por envenenamiento. ";
             }
             
-            return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento.";
+            return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento. ";
             // El efecto continúa (el Pokémon sigue vivo y envenenado)
         }
     }

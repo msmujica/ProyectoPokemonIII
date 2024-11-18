@@ -126,7 +126,7 @@ namespace Library
             string description = "";
             var attack = ObtainAttack(nameAttack);
             if (attack.Damage == 0)
-                return (0, "Ataque no encontrado"); // Si el ataque no existe, retorna 0 y mensaje
+                return (0, "Ataque no encontrado. "); // Si el ataque no existe, retorna 0 y mensaje
 
             int totaldmg = attack.Damage;
 
@@ -196,7 +196,6 @@ namespace Library
         public static IEfecto SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
-            effect = 2;
             switch (effect)
             {
                 case 1:
