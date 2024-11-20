@@ -7,7 +7,7 @@ namespace Library
     public class SleepEffect : IEffect
     {
         // Almacena el número de turnos que el Pokémon permanecerá dormido
-        public int turnosDormidos;
+        public int turnsSleep;
         public bool IcanAttack { get; set; }
         private EffectsManager effectsManager;
 
@@ -19,8 +19,8 @@ namespace Library
         public string StartEffect(Pokemon pokemon)
         {
             // Determina cuántos turnos el Pokémon estará dormido, un valor aleatorio entre 1 y 4
-            this.turnosDormidos = new Random().Next(1, 5);
-            return $"El pokemon {pokemon.Name} se le aplica el efecto dormir por {this.turnosDormidos} turnos. ";
+            this.turnsSleep = new Random().Next(1, 5);
+            return $"El pokemon {pokemon.Name} se le aplica el efecto dormir por {this.turnsSleep} turnos. ";
         }
 
         /// <summary>
@@ -34,23 +34,23 @@ namespace Library
         /// </returns>
         public string ProcessEffect(Pokemon pokemon)
         {
-            if (turnosDormidos > 0)
+            if (turnsSleep > 0)
             {
                 // Reduce el número de turnos restantes del sueño
-                turnosDormidos--;
+                turnsSleep--;
                 this.IcanAttack = false;
 
                 // Si ya no quedan turnos, el Pokémon se despierta
-                if (turnosDormidos == 0)
+                if (turnsSleep == 0)
                 {
-                    effectsManager.LimpiarEfectos(pokemon);
+                    effectsManager.CleanEffects(pokemon);
                     return $"El pokemon {pokemon.Name} se despierta. ";
                 }
 
-                return $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar. "; // El efecto sigue activo (el Pokémon sigue dormido)
+                return $"Al pokemon {pokemon.Name} le quedan {this.turnsSleep} turnos dormido, por lo cual no puede atacar. "; // El efecto sigue activo (el Pokémon sigue dormido)
             }
             this.IcanAttack = true;
-            effectsManager.LimpiarEfectos(pokemon);
+            effectsManager.CleanEffects(pokemon);
             return "";
             // El efecto ha terminado
         }

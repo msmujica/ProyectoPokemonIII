@@ -21,11 +21,11 @@ namespace Library.Items
         {
             if (contadorSuperPocion > 0)
             {
-                if (pokemon.Vida < 100)
+                if (pokemon.Health < 100)
                 {
-                    pokemon.Vida += 70;
-                    if (pokemon.Vida > 100)
-                        pokemon.Vida = 100; // No superar el 100%
+                    pokemon.Health += 70;
+                    if (pokemon.Health > 100)
+                        pokemon.Health = 100; // No superar el 100%
                     contadorSuperPocion--;
                     return ("Usaste una Super Pocion. Usos restantes: " + contadorSuperPocion);
                 }
@@ -46,10 +46,10 @@ namespace Library.Items
         {
             if (contadorRevivir > 0)
             {
-                if (pokemon.EstaDerrotado)
+                if (pokemon.IsDefeated)
                 {
-                    pokemon.EstaDerrotado = false;
-                    pokemon.Vida = 50; // Revive con 50% de vida
+                    pokemon.IsDefeated = false;
+                    pokemon.Health = 50; // Revive con 50% de vida
                     contadorRevivir--;
                     return ("Usaste un Revivir. Usos restantes: " + contadorRevivir);
                 }
@@ -71,9 +71,9 @@ namespace Library.Items
         {
             if (contadorCuraTotal > 0)
             {
-                pokemon.Vida = 100; // Cura completamente al Pokémon
+                pokemon.Health = 100; // Cura completamente al Pokémon
                 contadorCuraTotal--;
-                effectsManager.LimpiarEfectos(pokemon);
+                effectsManager.CleanEffects(pokemon);
                 return ($"Usaste una Cura Total en el pokemon {pokemon}. Usos restantes: {contadorCuraTotal}. ");
             }
 

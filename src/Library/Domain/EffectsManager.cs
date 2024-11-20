@@ -12,12 +12,12 @@ namespace Library
     public class EffectsManager
     {
         // Diccionario que almacena los efectos activos para cada Pokémon
-        private Dictionary<Pokemon, List<IEffect>> efectosActivos;
+        private Dictionary<Pokemon, List<IEffect>> activeEffects;
 
         // Constructor que inicializa el diccionario de efectos
         public EffectsManager()
         {
-            efectosActivos = new Dictionary<Pokemon, List<IEffect>>();
+            activeEffects = new Dictionary<Pokemon, List<IEffect>>();
         }
 
         /// <summary>
@@ -34,13 +34,13 @@ namespace Library
             }
 
             // Asegura que haya una lista de efectos para el Pokémon en el diccionario
-            if (!efectosActivos.ContainsKey(pokemon))
+            if (!activeEffects.ContainsKey(pokemon))
             {
-                efectosActivos[pokemon] = new List<IEffect>();
+                activeEffects[pokemon] = new List<IEffect>();
             }
 
             // Añade el efecto a la lista de efectos del Pokémon
-            efectosActivos[pokemon].Add(effect);
+            activeEffects[pokemon].Add(effect);
 
             // Inicia el efecto, lo que podría implicar acciones como mostrar un mensaje
             return effect.StartEffect(pokemon);
@@ -56,7 +56,7 @@ namespace Library
         /// </returns>
         public bool IcanAttack(Pokemon pokem)
         {
-            foreach (var entry in efectosActivos)
+            foreach (var entry in activeEffects)
             {
                 Pokemon pokemon = entry.Key;
                 List<IEffect> efectos = entry.Value;
@@ -78,10 +78,10 @@ namespace Library
             // Inicializamos la descripción vacía
 
             // Verifica si el Pokémon tiene efectos activos
-            if (!efectosActivos.ContainsKey(pokem)) return $"El pokemon {pokem.Name} no tiene efectos activos.";
+            if (!activeEffects.ContainsKey(pokem)) return $"El pokemon {pokem.Name} no tiene efectos activos.";
 
-            List<IEffect> efectos = efectosActivos[pokem];
-            foreach (var v in efectos)
+            List<IEffect> effects = activeEffects[pokem];
+            foreach (var v in effects)
             {
                 // Procesa efectos como dormir o paralizar
                 if (v is SleepEffect)
@@ -105,7 +105,7 @@ namespace Library
         {
             string description = "";
             // Recorre todos los efectos activos
-            foreach (var entry in efectosActivos)
+            foreach (var entry in activeEffects)
             {
                 Pokemon pokemon = entry.Key;
                 List<IEffect> efectos = entry.Value;
@@ -131,12 +131,12 @@ namespace Library
         /// Limpia todos los efectos activos de un Pokémon.
         /// </summary>
         /// <param name="pokemon">El Pokémon cuyo efecto se eliminará.</param>
-        public string LimpiarEfectos(Pokemon pokemon)
+        public string CleanEffects(Pokemon pokemon)
         {
             // Elimina los efectos activos del Pokémon si existen
-            if (efectosActivos.ContainsKey(pokemon))
+            if (activeEffects.ContainsKey(pokemon))
             {
-                efectosActivos.Remove(pokemon);
+                activeEffects.Remove(pokemon);
                 return ($"Todos los efectos han sido eliminados de {pokemon.Name}.");
             }
             
@@ -151,14 +151,14 @@ namespace Library
         /// <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
         public bool PokemonWithEffect(Pokemon pokemon)
         {
-            return efectosActivos.ContainsKey(pokemon);
+            return activeEffects.ContainsKey(pokemon);
         }
 
-        public bool EsParalisis(Pokemon pokem)
+        public bool IsParalyze(Pokemon pokem)
         {
-            if (!efectosActivos.ContainsKey(pokem)) return false;
-            List<IEffect> efectos = efectosActivos[pokem];
-            foreach (var v in efectos)
+            if (!activeEffects.ContainsKey(pokem)) return false;
+            List<IEffect> effects = activeEffects[pokem];
+            foreach (var v in effects)
             {
                 // Procesa efectos como dormir o paralizar
                 if (v is ParalyzeEffect)
