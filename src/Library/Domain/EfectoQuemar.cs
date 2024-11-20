@@ -49,5 +49,9 @@ namespace Library
             return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento. ";
             // El efecto continúa (el Pokémon sigue vivo y envenenado)
         }
+        public string Info(Pokemon pokemon)
+        {
+            return $"El {pokemon.Name} tiene el efecto quemar. ";
+        }
     }
 }

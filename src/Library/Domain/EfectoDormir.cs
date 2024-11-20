@@ -19,8 +19,8 @@ namespace Library
         public string IniciarEfecto(Pokemon pokemon)
         {
             // Determina cuántos turnos el Pokémon estará dormido, un valor aleatorio entre 1 y 4
-            this.turnosDormidos = new Random().Next(1, 5);
-            return $"El pokemon {pokemon.Name} se le aplica el efecto dormir por {this.turnosDormidos} turnos. ";
+            this.turnosDormidos = new Random().Next(1, 5) + 1;
+            return $"El pokemon {pokemon.Name} se le aplica el efecto dormir por {this.turnosDormidos - 1} turnos. ";
         }
 
         /// <summary>
@@ -43,6 +43,7 @@ namespace Library
                 // Si ya no quedan turnos, el Pokémon se despierta
                 if (turnosDormidos == 0)
                 {
+                    this.PuedoAtacar = true;
                     gestorEfectos.LimpiarEfectos(pokemon);
                     return $"El pokemon {pokemon.Name} se despierta. ";
                 }
@@ -51,8 +52,13 @@ namespace Library
             }
             this.PuedoAtacar = true;
             gestorEfectos.LimpiarEfectos(pokemon);
-            return "";
+            return "El efecto ah terminado";
             // El efecto ha terminado
+        }
+
+        public string Info(Pokemon pokemon)
+        {
+            return $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar. ";
         }
     }
 }

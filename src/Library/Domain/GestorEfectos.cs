@@ -168,5 +168,40 @@ namespace Library
             }
             return false;
         }
+        public string InfoPokemon(Pokemon pokem)
+        {
+            // Recorre todos los efectos activos
+            foreach (var entry in efectosActivos)
+            {
+                Pokemon pokemon = entry.Key;
+                List<IEfecto> efectos = entry.Value;
+
+                // Recorre cada efecto y aplica los que son de daño continuo
+                for (int i = efectos.Count - 1; i >= 0; i--)
+                {
+                    IEfecto efecto = efectos[i];
+                    if (pokemon == pokem)
+                    { 
+                        return efecto.Info(pokemon);
+                    
+                    }
+                }
+            }
+            return "";
+        }
+        public bool EsDormir(Pokemon pokem)
+        {
+            if (!efectosActivos.ContainsKey(pokem)) return false;
+            List<IEfecto> efectos = efectosActivos[pokem];
+            foreach (var v in efectos)
+            {
+                // Procesa efectos como dormir o paralizar
+                if (v is EfectoDormir)
+                {
+                    return true; // Devuelve si el pokemon tiene paralisis.
+                }
+            }
+            return false;
+        }
     }
 }

@@ -153,18 +153,24 @@ public class Battle
             {
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
-            string description = gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
-            if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
-            { 
-                if (gestorEfectos.EsParalisis(TurnoActual.Activo))
-                {
-                    string valores = $"{description}Turno terminado. " + "\n" + gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
-                    CambiarTurno();
-                    return valores;
-
-                } 
-                return gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
+            
+            if ((gestorEfectos.EsDormir(TurnoActual.Activo)))
+            {
+                return gestorEfectos.InfoPokemon(TurnoActual.Activo);
             }
+            string description = gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
+                if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
+                {
+                    if (gestorEfectos.EsParalisis(TurnoActual.Activo))
+                    {
+                        string valores = $"{description}Turno terminado. " + "\n" + 
+                                         gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
+                        CambiarTurno();
+                        return valores;
+                    }
+                }
+            
+            
             string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
             valor += $"Turno terminado. " + "\n" + gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
             CambiarTurno();

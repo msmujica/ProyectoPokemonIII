@@ -56,5 +56,10 @@ namespace Library
             this.PuedoAtacar = new Random().NextDouble() > 0.3;
             return this.PuedoAtacar;
         }
+
+        public string Info(Pokemon pokemon)
+        {
+            return $"El {pokemon.Name} tiene el efecto paralisis. ";
+        }
     }
 }

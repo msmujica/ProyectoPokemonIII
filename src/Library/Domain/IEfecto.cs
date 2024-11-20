@@ -23,5 +23,7 @@ namespace Library
         /// <param name="pokemon">El Pokémon sobre el cual se procesará el efecto.</param>
         /// <returns>Un valor booleano que indica si el efecto sigue activo o si ha terminado.</returns>
         public string ProcesarEfecto(Pokemon pokemon);
+
+        public string Info(Pokemon pokemon);
     }
 }
