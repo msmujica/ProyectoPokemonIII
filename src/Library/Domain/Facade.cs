@@ -360,4 +360,15 @@ public class Facade
 
         return false;
     }
+
+    public string ChangeTurn(string playerDisplayName)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
+        if (!(ValidacionTurno(playerDisplayName, battle)))
+        {
+            return battle.CambiarTurno();
+        }
+
+        return "No es tu turno";
+    }
 }

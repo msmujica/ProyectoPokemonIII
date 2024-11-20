@@ -12,8 +12,6 @@ namespace Library
         }
         // Porcentaje de la vida máxima que pierde el Pokémon debido a la quemadura (10%)
         private static double dmgPercentage = 0.10; 
-        private GestorEfectos gestorEfectos;
-
         /// <summary>
         /// Inicia el efecto de "quemar" en el Pokémon.
         /// Este efecto causa daño continuo al Pokémon en cada turno.
@@ -42,7 +40,6 @@ namespace Library
             // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado
             if (pokemon.Vida <= 0)
             {
-                gestorEfectos.LimpiarEfectos(pokemon);
                 return $"El pokemon {pokemon.Name} ha caído por envenenamiento. ";
             }
             

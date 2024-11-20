@@ -198,9 +198,11 @@ namespace Library
                 // Procesa efectos como dormir o paralizar
                 if (v is EfectoDormir)
                 {
-                    return true; // Devuelve si el pokemon tiene paralisis.
+                    if (!(v.PuedoAtacar)) return true; // Devuelve si el pokemon tiene dormir.
+                    LimpiarEfectos(pokem);
                 }
             }
+            LimpiarEfectos(pokem);
             return false;
         }
     }

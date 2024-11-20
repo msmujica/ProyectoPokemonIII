@@ -163,17 +163,13 @@ public class Battle
                 {
                     if (gestorEfectos.EsParalisis(TurnoActual.Activo))
                     {
-                        string valores = $"{description}Turno terminado. " + "\n" + 
-                                         gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
-                        CambiarTurno();
-                        return valores;
+                        string valores = $"{description}Turno terminado. ";
+                        return valores + CambiarTurno();
                     }
                 }
-            
-            
+                
             string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
-            valor += $"Turno terminado. " + "\n" + gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
-            CambiarTurno();
+            valor += $"Turno terminado. " + "\n" + CambiarTurno();
             return description + valor;
         }
         catch (FormatException)
@@ -214,10 +210,8 @@ public class Battle
             }
 
             // Cambiar el Pokémon activo
-            gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
             string valor = TurnoActual.cambiarActivo(opcionPokemon);
-            CambiarTurno();
-            return valor;
+            return valor + CambiarTurno();
         }
         catch (FormatException)
         {
@@ -264,10 +258,7 @@ public class Battle
             Pokemon pokemonSeleccionado = TurnoActual.Equipo[opcionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon
-            
-            gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
-            CambiarTurno();
-            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos);
+            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos) + CambiarTurno(); ;
 
         }
         catch (FormatException)
@@ -285,13 +276,14 @@ public class Battle
     /// <summary>
     /// Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguiente jugador.
     /// </summary>
-    public void CambiarTurno()
+    public string CambiarTurno()
     {
+        string info = gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
         // Cambiar al otro jugador
         TurnoActual = (TurnoActual == Player1) ? Player2 : Player1;
         TurnoPasado = (TurnoPasado == Player2) ? Player1 : Player2;
 
-        Console.WriteLine($"Es el turno de {TurnoActual.Nombre}");
+        return $"{info} Es el turno de {TurnoActual.Nombre}";
     }
 
     /// <summary>
