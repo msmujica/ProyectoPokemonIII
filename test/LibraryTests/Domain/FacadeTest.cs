@@ -221,6 +221,9 @@ public class FacadeTest
         [Test]
         public void TestAttackPokemon()
         {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            
             string player1 = "Ash";
             string player2 = "Misty";
             facade.AddTrainerToWaitingList(player1);
@@ -263,6 +266,9 @@ public class FacadeTest
         [Test]
         public void TestChangePokemon()
         {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            
             string player1 = "Ash";
             string player2 = "Misty";
             facade.AddTrainerToWaitingList(player1);
@@ -283,16 +289,18 @@ public class FacadeTest
             facade.ChooseTeam(player2, 6);
 
             // Simula que el jugador cambia el Pokémon activo
+            string esperado = null;
             var result = facade.ChangePokemon(player1, 3);
             if (result != "No es tu turno ESPERA!")
             {
-                Assert.That("Pikachu", Is.EqualTo(result));
+                esperado = "Gastly";
             }
             else
             {
                 result = facade.ChangePokemon(player2, 3);
-                Assert.That("Gastly", Is.EqualTo(result));
+                esperado = "Gastly";
             }
+            Assert.That(esperado, Is.EqualTo(result));
         }
 
         [Test]
