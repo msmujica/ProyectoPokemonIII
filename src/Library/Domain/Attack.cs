@@ -196,7 +196,7 @@ namespace Library
         public static IEffect SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
-            switch (effect)
+            switch (1)
             {
                 case 1:
                     return new SleepEffect();

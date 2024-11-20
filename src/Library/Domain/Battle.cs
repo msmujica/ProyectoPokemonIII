@@ -6,10 +6,10 @@ namespace Ucu.Poo.DiscordBot.Domain;
 /// Representa una batalla entre dos entrenadores, gestionando turnos, ataques, cambios de Pokémon y uso de ítems.
 /// Esta clase también se encarga de validar las condiciones de victoria y de manejar los efectos de estado durante la batalla.
 ///La clase Battle respeta los siguientes principios:
-/// •	SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
-/// •	LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
-/// •	ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
-/// •	DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
+/// •   SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
+/// •   LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
+/// •   ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
+/// •   DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
 /// </summary>
 public class Battle
 {
@@ -23,26 +23,26 @@ public class Battle
     /// </summary>
     public Entrenador Player2 { get; }
 
-    private Entrenador actualTurn;
-    private Entrenador lastTurn;
-    private EffectsManager effectsManager;
+    private Entrenador turnoActual;
+    private Entrenador turnoPasado;
+    private EffectsManager gestorEfectos;
 
     /// <summary>
     /// Obtiene o establece el jugador que está actuando en el turno actual.
     /// </summary>
-    public Entrenador ActualTurn
+    public Entrenador TurnoActual
     {
-        get { return actualTurn; }
-        set { actualTurn = value; }
+        get { return turnoActual; }
+        set { turnoActual = value; }
     }
     
     /// <summary>
     /// Obtiene o establece el jugador que está esperando en el turno pasado.
     /// </summary>
-    public Entrenador LastTurn
+    public Entrenador TurnoPasado
     {
-        get { return lastTurn; }
-        set { lastTurn = value; }
+        get { return turnoPasado; }
+        set { turnoPasado = value; }
     }
 
     /// <summary>
@@ -55,9 +55,9 @@ public class Battle
     {
         Player1 = player1;
         Player2 = player2;
-        ActualTurn = player1;
-        LastTurn = player2;
-        effectsManager = new EffectsManager();
+        TurnoActual = player1;
+        TurnoPasado = player2;
+        gestorEfectos = new EffectsManager();
         player1.ItemSetting();
         player2.ItemSetting();
     }
@@ -90,7 +90,7 @@ public class Battle
     public bool ValidacionWin()
     {
         int count = 0;
-        foreach (var poke in LastTurn.Equipo)
+        foreach (var poke in TurnoPasado.Equipo)
         {
             if (poke.Vida <= 0)
             {
@@ -114,14 +114,14 @@ public class Battle
     {
         if (Player1.Activo.Vida <= 0)
         {
-            effectsManager.LimpiarEfectos(Player1.Activo);
+            gestorEfectos.LimpiarEfectos(Player1.Activo);
             Player1.CambioPokemonMuerto();
             return true;
         }
 
         if (Player2.Activo.Vida <= 0)
         {
-            effectsManager.LimpiarEfectos(Player2.Activo);
+            gestorEfectos.LimpiarEfectos(Player2.Activo);
             Player2.CambioPokemonMuerto();
             return true;
         }
@@ -135,7 +135,7 @@ public class Battle
     /// </summary>
     /// <param name="opcionAtaque">El nombre del ataque seleccionado por el jugador.</param>
     /// <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
-    public string IntermediaryAttack(string opcionAtaque)
+    public string IntermediarioAtacar(string opcionAtaque)
     {
         try
         {
@@ -153,21 +153,23 @@ public class Battle
             {
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
-            string description = effectsManager.ProcesarControlMasa(ActualTurn.Activo);
-            if (!effectsManager.IcanAttack(ActualTurn.Activo))
-            { 
-                if (effectsManager.EsParalisis(ActualTurn.Activo))
-                {
-                    string valores = $"{description}Turno terminado. " + "\n" + effectsManager.ProcesarEfectosDaño(ActualTurn.Activo);
-                    CambiarTurno();
-                    return valores;
-
-                } 
-                return effectsManager.ProcesarControlMasa(ActualTurn.Activo);
+            
+            if ((gestorEfectos.EsDormir(TurnoActual.Activo)))
+            {
+                return gestorEfectos.InfoPokemon(TurnoActual.Activo);
             }
-            string valor = ActualTurn.elegirAtaque(opcionAtaque, LastTurn.Activo, effectsManager);
-            valor += $"Turno terminado. " + "\n" + effectsManager.ProcesarEfectosDaño(ActualTurn.Activo);
-            CambiarTurno();
+            string description = gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
+                if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
+                {
+                    if (gestorEfectos.EsParalisis(TurnoActual.Activo))
+                    {
+                        string valores = $"{description}Turno terminado. ";
+                        return valores + CambiarTurno();
+                    }
+                }
+                
+            string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
+            valor += $"Turno terminado. " + "\n" + CambiarTurno();
             return description + valor;
         }
         catch (FormatException)
@@ -186,7 +188,7 @@ public class Battle
     /// </summary>
     /// <param name="opcionPokemon">Índice del Pokémon seleccionado para ser el nuevo activo.</param>
     /// <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
-    public string IntermediaryChangeActivePokemon(int opcionPokemon)
+    public string IntermediarioCambiarPokemonActivo(int opcionPokemon)
     {
         try
         {
@@ -202,16 +204,14 @@ public class Battle
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Equipo.Count)
+            if (opcionPokemon < 0 || opcionPokemon >= TurnoActual.Equipo.Count)
             {
                 return "Selección de Pokémon inválida. Por favor, intenta de nuevo.";
             }
 
             // Cambiar el Pokémon activo
-            effectsManager.ProcesarEfectosDaño(ActualTurn.Activo);
-            string valor = ActualTurn.cambiarActivo(opcionPokemon);
-            CambiarTurno();
-            return valor;
+            string valor = TurnoActual.cambiarActivo(opcionPokemon);
+            return valor + CambiarTurno();
         }
         catch (FormatException)
         {
@@ -233,7 +233,7 @@ public class Battle
     /// <param name="opcionPokemon">Índice del Pokémon sobre el que se aplicará el ítem.</param>
     /// <param name="opcionItem">Nombre del ítem a usar.</param>
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
-    public string IntermediaryUseItem(int opcionPokemon, string opcionItem)
+    public string IntermediarioUsarItem(int opcionPokemon, string opcionItem)
     {
         validacionPokemon();
         
@@ -250,18 +250,15 @@ public class Battle
         try
         {
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Equipo.Count)
+            if (opcionPokemon < 0 || opcionPokemon >= TurnoActual.Equipo.Count)
             {
                 return "Selección de Pokémon inválida.";
             }
 
-            Pokemon pokemonSeleccionado = ActualTurn.Equipo[opcionPokemon];
+            Pokemon pokemonSeleccionado = TurnoActual.Equipo[opcionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon
-            
-            effectsManager.ProcesarEfectosDaño(ActualTurn.Activo);
-            CambiarTurno();
-            return ActualTurn.UsarItem(opcionItem, pokemonSeleccionado, effectsManager);
+            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos) + CambiarTurno(); ;
 
         }
         catch (FormatException)
@@ -279,13 +276,14 @@ public class Battle
     /// <summary>
     /// Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguiente jugador.
     /// </summary>
-    public void CambiarTurno()
+    public string CambiarTurno()
     {
+        string info = gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
         // Cambiar al otro jugador
-        ActualTurn = (ActualTurn == Player1) ? Player2 : Player1;
-        LastTurn = (LastTurn == Player2) ? Player1 : Player2;
+        TurnoActual = (TurnoActual == Player1) ? Player2 : Player1;
+        TurnoPasado = (TurnoPasado == Player2) ? Player1 : Player2;
 
-        Console.WriteLine($"Es el turno de {ActualTurn.Nombre}");
+        return $"{info} Es el turno de {TurnoActual.Nombre}";
     }
 
     /// <summary>
@@ -294,7 +292,7 @@ public class Battle
     /// <returns>Lista de los Pokémon del oponente.</returns>
     public List<Pokemon> MostrarPokemonEnemigo()
     {
-        return lastTurn.Equipo;
+        return turnoPasado.Equipo;
     } 
 
     /// <summary>
@@ -303,8 +301,8 @@ public class Battle
     /// <returns>Mensaje indicando que el jugador actual ha ganado.</returns>
     public string Win()
     {
-        ActualTurn = null;
-        lastTurn = null;
-        return $"El jugador {ActualTurn} a ganado";
+        TurnoActual = null;
+        turnoPasado = null;
+        return $"El jugador {TurnoActual} a ganado";
     }
 }
