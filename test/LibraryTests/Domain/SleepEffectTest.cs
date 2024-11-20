@@ -24,6 +24,6 @@ public class SleepEffectTest
         SleepEffect sleep = new SleepEffect();
         sleep.StartEffect(Pikachus);
         string result = sleep.ProcessEffect(Pikachus);
-        Assert.That(result, !Is.Null);
+        Assert.That(result, !Is.EqualTo(""));
     }
 }
