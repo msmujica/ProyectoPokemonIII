@@ -202,16 +202,12 @@ public class FacadeTest
             var result = facade.UseItem(player1, 0, "Superpocion");
             string esperado = "El Pokémon ya está a máxima vida.";
 
-            if (result != "No es tu turno ESPERA!")
-            {
-                esperado = "El Pokémon ya está a máxima vida.";
-            }
-            else
+            if (result == "No es tu turno ESPERA!")
             {
                 result = facade.UseItem(player2, 0, "Superpocion");
             }
             
-            Assert.That(esperado, Is.EqualTo(result));
+            Assert.That("El Pokémon ya está a máxima vida. Es el turno de Misty", Is.EqualTo(result));
             
         }
 
@@ -263,6 +259,9 @@ public class FacadeTest
         [Test]
         public void TestChangePokemon()
         {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            
             string player1 = "Ash";
             string player2 = "Misty";
             facade.AddTrainerToWaitingList(player1);
@@ -286,13 +285,9 @@ public class FacadeTest
             var result = facade.ChangePokemon(player1, 3);
             if (result != "No es tu turno ESPERA!")
             {
-                Assert.That("Pikachu", Is.EqualTo(result));
-            }
-            else
-            {
                 result = facade.ChangePokemon(player2, 3);
-                Assert.That("Gastly", Is.EqualTo(result));
             }
+            Assert.That("Gastly Es el turno de Ash", Is.EqualTo(result));
         }
 
         [Test]
