@@ -200,10 +200,10 @@
              Representa una batalla entre dos entrenadores, gestionando turnos, ataques, cambios de Pokémon y uso de ítems.
              Esta clase también se encarga de validar las condiciones de victoria y de manejar los efectos de estado durante la batalla.
             La clase Battle respeta los siguientes principios:
-             •	SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
-             •	LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
-             •	ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
-             •	DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
+             •   SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
+             •   LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
+             •   ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
+             •   DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
              </summary>
         </member>
         <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.Player1">
@@ -216,12 +216,12 @@
             Obtiene un valor que representa al oponente.
             </summary>
         </member>
-        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.ActualTurn">
+        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.TurnoActual">
             <summary>
             Obtiene o establece el jugador que está actuando en el turno actual.
             </summary>
         </member>
-        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.LastTurn">
+        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.TurnoPasado">
             <summary>
             Obtiene o establece el jugador que está esperando en el turno pasado.
             </summary>
@@ -248,7 +248,7 @@
             <returns>Devuelve <c>true</c> si el jugador ha ganado la batalla.</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Ucu.Poo.DiscordBot.Domain.Battle.ValidacionPokemonVivo" -->
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryAttack(System.String)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediarioAtacar(System.String)">
             <summary>
             Intermediario para realizar un ataque en la batalla.
             Valida la acción de atacar, gestiona los efectos de daño y cambia el turno al siguiente jugador.
@@ -256,7 +256,7 @@
             <param name="opcionAtaque">El nombre del ataque seleccionado por el jugador.</param>
             <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryChangeActivePokemon(System.Int32)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediarioCambiarPokemonActivo(System.Int32)">
             <summary>
             Intermediario para cambiar el Pokémon activo durante el turno del jugador.
             Valida que el índice del Pokémon esté en el rango del equipo y realiza el cambio de Pokémon.
@@ -264,7 +264,7 @@
             <param name="opcionPokemon">Índice del Pokémon seleccionado para ser el nuevo activo.</param>
             <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryUseItem(System.Int32,System.String)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediarioUsarItem(System.Int32,System.String)">
             <summary>
             Intermediario para usar un ítem en el Pokémon activo durante la batalla.
             Valida el índice del Pokémon y aplica el ítem seleccionado.
@@ -423,7 +423,7 @@
             <param name="playerDisplayName">El nombre del jugador.</param>
             <returns>Una cadena con la lista de ataques del Pokémon activo.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.ValidationTurn(System.String,Ucu.Poo.DiscordBot.Domain.Battle)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.ValidacionTurno(System.String,Ucu.Poo.DiscordBot.Domain.Battle)">
             <summary>
             Valida si es el turno del jugador durante una batalla.
             </summary>
@@ -586,20 +586,20 @@
             Gestor que maneja los efectos activos de un Pokémon en combate.
             Puede aplicar efectos, procesarlos (como daño continuo o estados) y limpiar los efectos.
             La clase GestorEfectos sigue varios principios de diseño:
-            •	SRP: La clase tiene una única responsabilidad, gestionar los efectos de los Pokémon durante las batallas, como la aplicación, el procesamiento y la limpieza de efectos. No asume otras responsabilidades, como el cálculo de daño o el control de la batalla.
-            •	OCP: Es fácil extender la funcionalidad de esta clase sin modificarla. Por ejemplo, si deseas agregar nuevos efectos (como efectos de control o efectos de daño), puedes crear nuevas clases que implementen IEfecto, y la clase GestorEfectos seguirá funcionando sin necesidad de modificación.
-            •	Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
-            •	Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
+            •   SRP: La clase tiene una única responsabilidad, gestionar los efectos de los Pokémon durante las batallas, como la aplicación, el procesamiento y la limpieza de efectos. No asume otras responsabilidades, como el cálculo de daño o el control de la batalla.
+            •   OCP: Es fácil extender la funcionalidad de esta clase sin modificarla. Por ejemplo, si deseas agregar nuevos efectos (como efectos de control o efectos de daño), puedes crear nuevas clases que implementen IEfecto, y la clase GestorEfectos seguirá funcionando sin necesidad de modificación.
+            •   Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
+            •   Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
             </summary>
         </member>
         <member name="M:Library.EffectsManager.ApplyEffect(Library.IEffect,Library.Pokemon)">
             <summary>
             Aplica un efecto específico a un Pokémon.
             </summary>
-            <param name="effect">El efecto a aplicar.</param>
+            <param name="efecto">El efecto a aplicar.</param>
             <param name="pokemon">El Pokémon que recibirá el efecto.</param>
         </member>
-        <member name="M:Library.EffectsManager.IcanAttack(Library.Pokemon)">
+        <member name="M:Library.EffectsManager.PuedoAtacar(Library.Pokemon)">
             <summary>
             Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar).
             </summary>
@@ -764,7 +764,7 @@
             <c>false</c> si el Pokémon ha superado la parálisis y puede atacar.
             </returns>
         </member>
-        <member name="M:Library.ParalyzeEffect.PuedeAtacar">
+        <member name="M:Library.ParalyzeEffect.ICanAttack">
             <summary>
             Determina si el Pokémon puede atacar o no debido a la parálisis.
             Hay un 70% de probabilidad de que el Pokémon pueda atacar.
@@ -863,30 +863,6 @@
             <param name="ataque">Nombre del ataque que se realizará.</param>
             <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
             <returns>El valor del daño causado al oponente como una cadena.</returns>
-        </member>
-        <member name="T:Library.SleepEffect">
-            <summary>
-            Clase que representa el efecto de "dormir" aplicado a un Pokémon.
-            Cuando un Pokémon está dormido, pierde turnos y no puede actuar hasta que despierte.
-            </summary>
-        </member>
-        <member name="M:Library.SleepEffect.StartEffect(Library.Pokemon)">
-            <summary>
-            Inicia el efecto de "dormir" en un Pokémon.
-            El Pokémon será dormido por un número aleatorio de turnos entre 1 y 4.
-            </summary>
-            <param name="pokemon">El Pokémon que será afectado por el sueño.</param>
-        </member>
-        <member name="M:Library.SleepEffect.ProcessEffect(Library.Pokemon)">
-            <summary>
-            Procesa el efecto de "dormir" durante cada turno del Pokémon afectado.
-            Cada vez que se llama, reduce los turnos restantes de sueño.
-            </summary>
-            <param name="pokemon">El Pokémon que está bajo el efecto del sueño.</param>
-            <returns>
-            <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue dormido).
-            <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha despertado).
-            </returns>
         </member>
         <!-- Badly formed XML comment ignored for member "T:Library.LogicaTipos" -->
         <member name="M:Library.LogicaTipos.CalculeMultiplier(System.String,System.String)">

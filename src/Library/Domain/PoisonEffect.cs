@@ -13,7 +13,6 @@ namespace Library
 
         // Porcentaje de vida que el Pokémon pierde por turno debido al veneno (5%)
         private double damagePercentage = 0.05;
-        private EffectsManager effectsManager;
 
         /// <summary>
         /// Inicia el efecto de "envenenar" en el Pokémon.
@@ -43,12 +42,16 @@ namespace Library
             // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado
             if (pokemon.Vida <= 0)
             {
-                effectsManager.LimpiarEfectos(pokemon);
                 return $"El pokemon {pokemon.Name} ha caído por envenenamiento. ";
             }
             
             return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento. ";
             // El efecto continúa (el Pokémon sigue vivo y envenenado)
+        }
+        public string Info(Pokemon pokemon)
+        {
+            return
+                $"Al pokemon {pokemon.Name} tiene el efecto envenenamiento. ";
         }
     }
 }

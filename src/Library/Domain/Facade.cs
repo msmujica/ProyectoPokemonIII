@@ -1,3 +1,4 @@
+
 using Library;
 
 namespace Ucu.Poo.DiscordBot.Domain;
@@ -269,12 +270,12 @@ public class Facade
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         
-        if (ValidationTurn(playerDisplayName, battle))
+        if (ValidacionTurno(playerDisplayName, battle))
         {
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediaryUseItem(opcionPokemon, item);
+        return battle.IntermediarioUsarItem(opcionPokemon, item);
     }
 
     /// <summary>
@@ -287,12 +288,12 @@ public class Facade
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         
-        if (ValidationTurn(playerDisplayName, battle))
+        if (ValidacionTurno(playerDisplayName, battle))
         {
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediaryAttack(opcionAtaque);
+        return battle.IntermediarioAtacar(opcionAtaque);
     }
 
     /// <summary>
@@ -304,7 +305,7 @@ public class Facade
     public string ChangePokemon(string playerDisplayName, int opcion)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
-        return battle.IntermediaryChangeActivePokemon(opcion);
+        return battle.IntermediarioCambiarPokemonActivo(opcion);
     }
 
     /// <summary>
@@ -350,14 +351,25 @@ public class Facade
     /// <param name="playerDisplayName">El nombre del jugador.</param>
     /// <param name="batt">La batalla en curso.</param>
     /// <returns>True si es el turno del jugador, False de lo contrario.</returns>
-    public bool ValidationTurn(string playerDisplayName, Battle batt)
+    public bool ValidacionTurno(string playerDisplayName, Battle batt)
     {
         Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        if (player.Nombre != batt.ActualTurn.Nombre)
+        if (player.Nombre != batt.TurnoActual.Nombre)
         {
             return true;
         }
 
         return false;
+    }
+
+    public string ChangeTurn(string playerDisplayName)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
+        if (!(ValidacionTurno(playerDisplayName, battle)))
+        {
+            return battle.CambiarTurno();
+        }
+
+        return "No es tu turno";
     }
 }
