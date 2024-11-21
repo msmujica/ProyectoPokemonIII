@@ -224,7 +224,7 @@ public class Facade
     /// <returns>Una cadena con la lista de Pokémon disponibles.</returns>
     public string ShowPokémonAvailable()
     {
-        List<string> pokedexLists = Pokedex.MostrarPokedex();
+        List<string> pokedexLists = Pokedex.ShowPokedex();
         string value = string.Join("\n", pokedexLists);
         return $"Pokemones Disponibles: \n{value}";
     }
@@ -270,12 +270,12 @@ public class Facade
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         
-        if (ValidacionTurno(playerDisplayName, battle))
+        if (ValidationTurn(playerDisplayName, battle))
         {
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediarioUsarItem(opcionPokemon, item);
+        return battle.IntermediaryUseItem(opcionPokemon, item);
     }
 
     /// <summary>
@@ -288,12 +288,12 @@ public class Facade
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         
-        if (ValidacionTurno(playerDisplayName, battle))
+        if (ValidationTurn(playerDisplayName, battle))
         {
             return "No es tu turno ESPERA!";
         }
         
-        return battle.IntermediarioAtacar(opcionAtaque);
+        return battle.IntermediaryAttack(opcionAtaque);
     }
 
     /// <summary>
@@ -305,7 +305,7 @@ public class Facade
     public string ChangePokemon(string playerDisplayName, int opcion)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
-        return battle.IntermediarioCambiarPokemonActivo(opcion);
+        return battle.IntermediaryChangeActivePokemon(opcion);
     }
 
     /// <summary>
@@ -351,7 +351,7 @@ public class Facade
     /// <param name="playerDisplayName">El nombre del jugador.</param>
     /// <param name="batt">La batalla en curso.</param>
     /// <returns>True si es el turno del jugador, False de lo contrario.</returns>
-    public bool ValidacionTurno(string playerDisplayName, Battle batt)
+    public bool ValidationTurn(string playerDisplayName, Battle batt)
     {
         Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
         if (player.Nombre != batt.ActualTurn.Nombre)
@@ -365,9 +365,9 @@ public class Facade
     public string ChangeTurn(string playerDisplayName)
     {
         Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
-        if (!(ValidacionTurno(playerDisplayName, battle)))
+        if (!(ValidationTurn(playerDisplayName, battle)))
         {
-            return battle.CambiarTurno();
+            return battle.ChangeTurn();
         }
 
         return "No es tu turno";
