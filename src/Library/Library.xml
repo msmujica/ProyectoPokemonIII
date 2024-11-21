@@ -200,10 +200,10 @@
              Representa una batalla entre dos entrenadores, gestionando turnos, ataques, cambios de Pokémon y uso de ítems.
              Esta clase también se encarga de validar las condiciones de victoria y de manejar los efectos de estado durante la batalla.
             La clase Battle respeta los siguientes principios:
-             •	SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
-             •	LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
-             •	ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
-             •	DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
+             •   SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
+             •   LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
+             •   ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
+             •   DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
              </summary>
         </member>
         <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.Player1">
@@ -523,7 +523,7 @@
             <param name="nameAttack">Nombre del ataque que se quiere obtener.</param>
             <returns>Una tupla con el daño y el tipo del ataque.</returns>
         </member>
-        <member name="M:Library.Attack.CalculeDamage(System.String,Library.Pokemon,Library.GestorEfectos)">
+        <member name="M:Library.Attack.CalculeDamage(System.String,Library.Pokemon,Library.EffectsManager)">
             <summary>
             Calcula el daño de un ataque, teniendo en cuenta la precisión, los críticos, 
             la efectividad del tipo y la posibilidad de aplicar efectos especiales.
@@ -557,102 +557,20 @@
             </summary>int 
             <returns>El efecto especial seleccionado.</returns>
         </member>
-        <member name="T:Library.EfectoDormir">
-            <summary>
-            Clase que representa el efecto de "dormir" aplicado a un Pokémon.
-            Cuando un Pokémon está dormido, pierde turnos y no puede actuar hasta que despierte.
-            </summary>
-        </member>
-        <member name="M:Library.EfectoDormir.IniciarEfecto(Library.Pokemon)">
-            <summary>
-            Inicia el efecto de "dormir" en un Pokémon.
-            El Pokémon será dormido por un número aleatorio de turnos entre 1 y 4.
-            </summary>
-            <param name="pokemon">El Pokémon que será afectado por el sueño.</param>
-        </member>
-        <member name="M:Library.EfectoDormir.ProcesarEfecto(Library.Pokemon)">
-            <summary>
-            Procesa el efecto de "dormir" durante cada turno del Pokémon afectado.
-            Cada vez que se llama, reduce los turnos restantes de sueño.
-            </summary>
-            <param name="pokemon">El Pokémon que está bajo el efecto del sueño.</param>
-            <returns>
-            <c>true</c> si el efecto sigue activo (es decir, el Pokémon sigue dormido).
-            <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha despertado).
-            </returns>
-        </member>
-        <member name="T:Library.EfectoEnvenenar">
-            <summary>
-            Clase que representa el efecto de "envenenar" a un Pokémon.
-            Un Pokémon envenenado pierde una cierta cantidad de vida por cada turno que pasa.
-            </summary>
-        </member>
-        <member name="M:Library.EfectoEnvenenar.IniciarEfecto(Library.Pokemon)">
-            <summary>
-            Inicia el efecto de "envenenar" en el Pokémon.
-            Este efecto causará daño periódico a la vida del Pokémon.
-            </summary>
-            <param name="pokemon">El Pokémon que será envenenado.</param>
-        </member>
-        <member name="M:Library.EfectoEnvenenar.ProcesarEfecto(Library.Pokemon)">
-            <summary>
-            Procesa el efecto de "envenenar" durante cada turno del Pokémon afectado.
-            Cada vez que se llama, el Pokémon pierde un porcentaje de su vida debido al veneno.
-            </summary>
-            <param name="pokemon">El Pokémon que está bajo el efecto de veneno.</param>
-            <returns>
-            <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha muerto debido al veneno).
-            <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado fuera de combate por el veneno).
-            </returns>
-        </member>
-        <member name="T:Library.EfectoParalizar">
-            <summary>
-            Clase que representa el efecto de "paralizar" a un Pokémon.
-            Un Pokémon paralizado tiene un 30% de probabilidad de no poder atacar en cada turno.
-            </summary>
-        </member>
-        <member name="M:Library.EfectoParalizar.IniciarEfecto(Library.Pokemon)">
-            <summary>
-            Inicia el efecto de "paralizar" en el Pokémon.
-            Este efecto impide que el Pokémon pueda atacar con una probabilidad.
-            </summary>
-            <param name="pokemon">El Pokémon que será paralizado.</param>
-        </member>
-        <member name="M:Library.EfectoParalizar.ProcesarEfecto(Library.Pokemon)">
-            <summary>
-            Procesa el efecto de la parálisis en el turno de un Pokémon.
-            Determina si el Pokémon puede o no atacar en el turno actual debido a la parálisis.
-            </summary>
-            <param name="pokemon">El Pokémon que está bajo el efecto de parálisis.</param>
-            <returns>
-            <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha atacado debido a la parálisis).
-            <c>false</c> si el Pokémon ha superado la parálisis y puede atacar.
-            </returns>
-        </member>
-        <member name="M:Library.EfectoParalizar.PuedeAtacar">
-            <summary>
-            Determina si el Pokémon puede atacar o no debido a la parálisis.
-            Hay un 70% de probabilidad de que el Pokémon pueda atacar.
-            </summary>
-            <returns>
-            <c>true</c> si el Pokémon puede atacar (70% de probabilidad).
-            <c>false</c> si el Pokémon no puede atacar (30% de probabilidad).
-            </returns>
-        </member>
-        <member name="T:Library.EfectoQuemar">
+        <member name="T:Library.BurnEffect">
             <summary>
             Clase que representa el efecto de "quemar" a un Pokémon.
             Un Pokémon quemado pierde un 10% de su vida máxima en cada turno.
             </summary>
         </member>
-        <member name="M:Library.EfectoQuemar.IniciarEfecto(Library.Pokemon)">
+        <member name="M:Library.BurnEffect.StartEffect(Library.Pokemon)">
             <summary>
             Inicia el efecto de "quemar" en el Pokémon.
             Este efecto causa daño continuo al Pokémon en cada turno.
             </summary>
             <param name="pokemon">El Pokémon que será quemado.</param>
         </member>
-        <member name="M:Library.EfectoQuemar.ProcesarEfecto(Library.Pokemon)">
+        <member name="M:Library.BurnEffect.ProcessEffect(Library.Pokemon)">
             <summary>
             Procesa el efecto de la quemadura en el Pokémon en cada turno.
             Reduce la vida del Pokémon en función de su vida máxima.
@@ -663,6 +581,52 @@
             <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado KO).
             </returns>
         </member>
+        <member name="T:Library.EffectsManager">
+            <summary>
+            Gestor que maneja los efectos activos de un Pokémon en combate.
+            Puede aplicar efectos, procesarlos (como daño continuo o estados) y limpiar los efectos.
+            La clase GestorEfectos sigue varios principios de diseño:
+            •   SRP: La clase tiene una única responsabilidad, gestionar los efectos de los Pokémon durante las batallas, como la aplicación, el procesamiento y la limpieza de efectos. No asume otras responsabilidades, como el cálculo de daño o el control de la batalla.
+            •   OCP: Es fácil extender la funcionalidad de esta clase sin modificarla. Por ejemplo, si deseas agregar nuevos efectos (como efectos de control o efectos de daño), puedes crear nuevas clases que implementen IEfecto, y la clase GestorEfectos seguirá funcionando sin necesidad de modificación.
+            •   Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
+            •   Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
+            </summary>
+        </member>
+        <member name="M:Library.EffectsManager.ApplyEffect(Library.IEffect,Library.Pokemon)">
+            <summary>
+            Aplica un efecto específico a un Pokémon.
+            </summary>
+            <param name="efecto">El efecto a aplicar.</param>
+            <param name="pokemon">El Pokémon que recibirá el efecto.</param>
+        </member>
+        <member name="M:Library.EffectsManager.PuedoAtacar(Library.Pokemon)">
+            <summary>
+            Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar).
+            </summary>
+            <param name="pokem">El Pokémon cuyo estado de efectos se va a procesar.</param>
+            <returns>
+            <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
+            <c>false</c> si el efecto ha terminado o no aplica.
+            </returns>
+        </member>
+        <member name="M:Library.EffectsManager.ProcesarEfectosDaño(Library.Pokemon)">
+            <summary>
+            Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
+            </summary>
+        </member>
+        <member name="M:Library.EffectsManager.LimpiarEfectos(Library.Pokemon)">
+            <summary>
+            Limpia todos los efectos activos de un Pokémon.
+            </summary>
+            <param name="pokemon">El Pokémon cuyo efecto se eliminará.</param>
+        </member>
+        <member name="M:Library.EffectsManager.PokemonWithEffect(Library.Pokemon)">
+            <summary>
+            Verifica si un Pokémon tiene efectos activos.
+            </summary>
+            <param name="pokemon">El Pokémon a verificar.</param>
+            <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:Library.Entrenador" -->
         <member name="M:Library.Entrenador.#ctor(System.String)">
             <summary>
@@ -670,7 +634,7 @@
             </summary>
             <param name="nombre">El nombre del entrenador.</param>
         </member>
-        <member name="M:Library.Entrenador.elegirEquipo(System.Int32)">
+        <member name="M:Library.Entrenador.chooseTeam(System.Int32)">
             <summary>
             Permite al entrenador elegir un Pokémon para agregar a su equipo.
             </summary>
@@ -689,22 +653,22 @@
             <param name="indexPokemonList">El índice del Pokémon en el equipo que se quiere hacer activo.</param>
             <returns>El nombre del Pokémon activo, o un mensaje de error si el índice es inválido.</returns>
         </member>
-        <member name="M:Library.Entrenador.elegirAtaque(System.String,Library.Pokemon,Library.GestorEfectos)">
+        <member name="M:Library.Entrenador.elegirAtaque(System.String,Library.Pokemon,Library.EffectsManager)">
             <summary>
             Elige un ataque para que el Pokémon activo ataque a un oponente.
             </summary>
             <param name="nombre">El nombre del ataque a utilizar.</param>
             <param name="oponente">El Pokémon oponente que recibirá el ataque.</param>
-            <param name="gestorEfectos">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
+            <param name="effectsManager">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
             <returns>El resultado de la acción de atacar.</returns>
         </member>
-        <member name="M:Library.Entrenador.UsarItem(System.String,Library.Pokemon,Library.GestorEfectos)">
+        <member name="M:Library.Entrenador.UsarItem(System.String,Library.Pokemon,Library.EffectsManager)">
             <summary>
             Utiliza un ítem en un Pokémon durante la batalla.
             </summary>
             <param name="nombreItem">El nombre del ítem a usar (Superpocion, Revivir, CuraTotal).</param>
             <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
-            <param name="gestorEfectos">El gestor de efectos que maneja los efectos del ítem.</param>
+            <param name="effectsManager">El gestor de efectos que maneja los efectos del ítem.</param>
             <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
         </member>
         <member name="M:Library.Entrenador.CambioPokemonMuerto">
@@ -712,12 +676,35 @@
             Cambia al siguiente Pokémon disponible en el equipo si el Pokémon activo está muerto.
             </summary>
         </member>
-        <member name="M:Library.Entrenador.SeteodeItems">
+        <member name="M:Library.Entrenador.ItemSetting">
             <summary>
             Inicializa los contadores de ítems disponibles para el entrenador.
             </summary>
         </member>
-        <member name="T:Library.Items.GestorDeItems">
+        <member name="T:Library.IEffect">
+            <summary>
+            Interfaz que define la estructura básica para los efectos especiales que pueden
+            aplicarse a un Pokémon durante una batalla. Cada efecto debe ser capaz de iniciar
+            su acción y procesar sus efectos de manera periódica.
+            </summary>
+        </member>
+        <member name="M:Library.IEffect.StartEffect(Library.Pokemon)">
+            <summary>
+            Inicia el efecto sobre un Pokémon. Este método debe definir cómo el efecto
+            afecta al Pokémon al momento de ser aplicado, como cambiar su estado o estadísticas.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le va a aplicar el efecto.</param>
+        </member>
+        <member name="M:Library.IEffect.ProcessEffect(Library.Pokemon)">
+            <summary>
+            Procesa el efecto sobre un Pokémon. Este método es responsable de actualizar
+            el estado del Pokémon en función de la duración o los efectos adicionales
+            que el efecto pueda tener con el tiempo (por ejemplo, daño por veneno o parálisis).
+            </summary>
+            <param name="pokemon">El Pokémon sobre el cual se procesará el efecto.</param>
+            <returns>Un valor booleano que indica si el efecto sigue activo o si ha terminado.</returns>
+        </member>
+        <member name="T:Library.Items.ItemsManager">
             <summary>
             Esta clase gestiona el uso de objetos de curación y revivir en los Pokémon durante la batalla.
             La clase GestorDeItems aplica los siguientes principios:
@@ -727,7 +714,7 @@
             •	Acoplamiento bajo: Usa GestorEfectos para manejar los efectos negativos, reduciendo la dependencia entre clases.
             </summary>
         </member>
-        <member name="M:Library.Items.GestorDeItems.UsarSuperPocion(Library.Pokemon,System.Int32)">
+        <member name="M:Library.Items.ItemsManager.UsarSuperPocion(Library.Pokemon,System.Int32)">
             <summary>
             Usa una SuperPoción en un Pokémon, restaurando su vida hasta un máximo de 100.
             </summary>
@@ -736,7 +723,7 @@
             <returns>Un mensaje indicando el resultado de usar la SuperPoción.</returns>
             
         </member>
-        <member name="M:Library.Items.GestorDeItems.UsarRevivir(Library.Pokemon,System.Int32)">
+        <member name="M:Library.Items.ItemsManager.UsarRevivir(Library.Pokemon,System.Int32)">
             <summary>
             Usa un Revivir para resucitar a un Pokémon derrotado, restaurándole 50% de vida.
             </summary>
@@ -744,92 +731,72 @@
             <param name="contadorRevivir">El número de Revivir disponibles.</param>
             <returns>Un mensaje indicando el resultado de usar el Revivir.</returns>
         </member>
-        <member name="M:Library.Items.GestorDeItems.UsarCuraTotal(Library.Pokemon,System.Int32,Library.GestorEfectos)">
+        <member name="M:Library.Items.ItemsManager.UsarCuraTotal(Library.Pokemon,System.Int32,Library.EffectsManager)">
             <summary>
             Usa una Cura Total para restaurar la vida de un Pokémon al 100% y eliminar cualquier efecto negativo.
             </summary>
             <param name="pokemon">El Pokémon al que se le aplicará la Cura Total.</param>
             <param name="contadorCuraTotal">El número de Curaciones Totales disponibles.</param>
-            <param name="gestorEfectos">El gestor de efectos que se usará para limpiar efectos negativos.</param>
+            <param name="effectsManager">El gestor de efectos que se usará para limpiar efectos negativos.</param>
             <returns>Un mensaje indicando el resultado de usar la Cura Total.</returns>
         </member>
-        <member name="T:Library.GestorEfectos">
+        <member name="T:Library.ParalyzeEffect">
             <summary>
-            Gestor que maneja los efectos activos de un Pokémon en combate.
-            Puede aplicar efectos, procesarlos (como daño continuo o estados) y limpiar los efectos.
-            La clase GestorEfectos sigue varios principios de diseño:
-            •	SRP: La clase tiene una única responsabilidad, gestionar los efectos de los Pokémon durante las batallas, como la aplicación, el procesamiento y la limpieza de efectos. No asume otras responsabilidades, como el cálculo de daño o el control de la batalla.
-            •	OCP: Es fácil extender la funcionalidad de esta clase sin modificarla. Por ejemplo, si deseas agregar nuevos efectos (como efectos de control o efectos de daño), puedes crear nuevas clases que implementen IEfecto, y la clase GestorEfectos seguirá funcionando sin necesidad de modificación.
-            •	Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
-            •	Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
+            Clase que representa el efecto de "paralizar" a un Pokémon.
+            Un Pokémon paralizado tiene un 30% de probabilidad de no poder atacar en cada turno.
             </summary>
         </member>
-        <member name="M:Library.GestorEfectos.AplicarEfecto(Library.IEfecto,Library.Pokemon)">
+        <member name="M:Library.ParalyzeEffect.StartEffect(Library.Pokemon)">
             <summary>
-            Aplica un efecto específico a un Pokémon.
+            Inicia el efecto de "paralizar" en el Pokémon.
+            Este efecto impide que el Pokémon pueda atacar con una probabilidad.
             </summary>
-            <param name="efecto">El efecto a aplicar.</param>
-            <param name="pokemon">El Pokémon que recibirá el efecto.</param>
+            <param name="pokemon">El Pokémon que será paralizado.</param>
         </member>
-        <member name="M:Library.GestorEfectos.PuedoAtacar(Library.Pokemon)">
+        <member name="M:Library.ParalyzeEffect.ProcessEffect(Library.Pokemon)">
             <summary>
-            Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar).
+            Procesa el efecto de la parálisis en el turno de un Pokémon.
+            Determina si el Pokémon puede o no atacar en el turno actual debido a la parálisis.
             </summary>
-            <param name="pokem">El Pokémon cuyo estado de efectos se va a procesar.</param>
+            <param name="pokemon">El Pokémon que está bajo el efecto de parálisis.</param>
             <returns>
-            <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
-            <c>false</c> si el efecto ha terminado o no aplica.
+            <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha atacado debido a la parálisis).
+            <c>false</c> si el Pokémon ha superado la parálisis y puede atacar.
             </returns>
         </member>
-        <member name="M:Library.GestorEfectos.ProcesarEfectosDaño(Library.Pokemon)">
+        <member name="M:Library.ParalyzeEffect.ICanAttack">
             <summary>
-            Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
+            Determina si el Pokémon puede atacar o no debido a la parálisis.
+            Hay un 70% de probabilidad de que el Pokémon pueda atacar.
+            </summary>
+            <returns>
+            <c>true</c> si el Pokémon puede atacar (70% de probabilidad).
+            <c>false</c> si el Pokémon no puede atacar (30% de probabilidad).
+            </returns>
+        </member>
+        <member name="T:Library.PoisonEffect">
+            <summary>
+            Clase que representa el efecto de "envenenar" a un Pokémon.
+            Un Pokémon envenenado pierde una cierta cantidad de vida por cada turno que pasa.
             </summary>
         </member>
-        <member name="M:Library.GestorEfectos.LimpiarEfectos(Library.Pokemon)">
+        <member name="M:Library.PoisonEffect.StartEffect(Library.Pokemon)">
             <summary>
-            Limpia todos los efectos activos de un Pokémon.
+            Inicia el efecto de "envenenar" en el Pokémon.
+            Este efecto causará daño periódico a la vida del Pokémon.
             </summary>
-            <param name="pokemon">El Pokémon cuyo efecto se eliminará.</param>
+            <param name="pokemon">El Pokémon que será envenenado.</param>
         </member>
-        <member name="M:Library.GestorEfectos.PokemonConEfecto(Library.Pokemon)">
+        <member name="M:Library.PoisonEffect.ProcessEffect(Library.Pokemon)">
             <summary>
-            Verifica si un Pokémon tiene efectos activos.
+            Procesa el efecto de "envenenar" durante cada turno del Pokémon afectado.
+            Cada vez que se llama, el Pokémon pierde un porcentaje de su vida debido al veneno.
             </summary>
-            <param name="pokemon">El Pokémon a verificar.</param>
-            <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
-        </member>
-        <member name="T:Library.IEfecto">
-            <summary>
-            Interfaz que define la estructura básica para los efectos especiales que pueden
-            aplicarse a un Pokémon durante una batalla. Cada efecto debe ser capaz de iniciar
-            su acción y procesar sus efectos de manera periódica.
-            </summary>
-        </member>
-        <member name="M:Library.IEfecto.IniciarEfecto(Library.Pokemon)">
-            <summary>
-            Inicia el efecto sobre un Pokémon. Este método debe definir cómo el efecto
-            afecta al Pokémon al momento de ser aplicado, como cambiar su estado o estadísticas.
-            </summary>
-            <param name="pokemon">El Pokémon al que se le va a aplicar el efecto.</param>
-        </member>
-        <member name="M:Library.IEfecto.ProcesarEfecto(Library.Pokemon)">
-            <summary>
-            Procesa el efecto sobre un Pokémon. Este método es responsable de actualizar
-            el estado del Pokémon en función de la duración o los efectos adicionales
-            que el efecto pueda tener con el tiempo (por ejemplo, daño por veneno o parálisis).
-            </summary>
-            <param name="pokemon">El Pokémon sobre el cual se procesará el efecto.</param>
-            <returns>Un valor booleano que indica si el efecto sigue activo o si ha terminado.</returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Library.LogicaTipos" -->
-        <member name="M:Library.LogicaTipos.CalcularMultiplicador(System.String,System.String)">
-            <summary>
-            Calcula el multiplicador de daño que se aplica a un ataque según el tipo del atacante y el tipo del defensor.
-            </summary>
-            <param name="tipoAtaque">El tipo del Pokémon atacante.</param>
-            <param name="tipoDefensor">El tipo del Pokémon defensor.</param>
-            <returns>El multiplicador de daño (1: neutral, 2: super efectivo, 0.5: poco efectivo, 0: sin efecto).</returns>
+            <param name="pokemon">El Pokémon que está bajo el efecto de veneno.</param>
+            <returns>
+            <c>true</c> si el efecto sigue activo (es decir, el Pokémon no ha muerto debido al veneno).
+            <c>false</c> si el efecto ha terminado (es decir, el Pokémon ha quedado fuera de combate por el veneno).
+            </returns>
         </member>
         <member name="T:Library.Pokedex">
             <summary>
@@ -888,14 +855,23 @@
             </summary>
             <param name="daño">Cantidad de daño recibido.</param>
         </member>
-        <member name="M:Library.Pokemon.atacar(Library.Pokemon,System.String,Library.GestorEfectos)">
+        <member name="M:Library.Pokemon.atacar(Library.Pokemon,System.String,Library.EffectsManager)">
             <summary>
             Método que permite al Pokémon realizar un ataque sobre otro Pokémon.
             </summary>
             <param name="oponente">Pokémon sobre el cual se realizará el ataque.</param>
             <param name="ataque">Nombre del ataque que se realizará.</param>
-            <param name="gestorEfectos">Gestor de efectos para calcular el daño del ataque.</param>
+            <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
             <returns>El valor del daño causado al oponente como una cadena.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Library.LogicaTipos" -->
+        <member name="M:Library.LogicaTipos.CalculeMultiplier(System.String,System.String)">
+            <summary>
+            Calcula el multiplicador de daño que se aplica a un ataque según el tipo del atacante y el tipo del defensor.
+            </summary>
+            <param name="tipoAtaque">El tipo del Pokémon atacante.</param>
+            <param name="tipoDefensor">El tipo del Pokémon defensor.</param>
+            <returns>El multiplicador de daño (1: neutral, 2: super efectivo, 0.5: poco efectivo, 0: sin efecto).</returns>
         </member>
         <member name="T:ClassLibrary.Train">
             <summary>

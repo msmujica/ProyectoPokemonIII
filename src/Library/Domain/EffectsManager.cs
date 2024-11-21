@@ -54,7 +54,7 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
         /// <c>false</c> si el efecto ha terminado o no aplica.
         /// </returns>
-        public bool IcanAttack(Pokemon pokem)
+        public bool PuedoAtacar(Pokemon pokem)
         {
             foreach (var entry in activeEffects)
             {
@@ -189,7 +189,7 @@ namespace Library
             }
             return "";
         }
-        public bool ItsSleep(Pokemon pokem)
+        public bool EsDormir(Pokemon pokem)
         {
             if (!activeEffects.ContainsKey(pokem)) return false;
             List<IEffect> efectos = activeEffects[pokem];

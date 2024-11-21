@@ -28,7 +28,7 @@ namespace Library
         /// </returns>
         public string ProcessEffect(Pokemon pokemon)
         {
-            PuedeAtacar();
+            ICanAttack();
             if (this.IcanAttack)
             {
                 // El Pokémon puede atacar este turno.
@@ -49,12 +49,17 @@ namespace Library
         /// <c>true</c> si el Pokémon puede atacar (70% de probabilidad).
         /// <c>false</c> si el Pokémon no puede atacar (30% de probabilidad).
         /// </returns>
-        private bool PuedeAtacar()
+        private bool ICanAttack()
         {
             // Genera un número aleatorio para determinar si puede atacar
             // Hay un 30% de probabilidad de que el Pokémon no pueda atacar.
             this.IcanAttack = new Random().NextDouble() > 0.3;
             return this.IcanAttack;
+        }
+        public string Info(Pokemon pokemon)
+        {
+            return
+                $"Al pokemon {pokemon.Name} tiene el efecto paralisis. ";
         }
     }
 }
