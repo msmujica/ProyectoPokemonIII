@@ -263,9 +263,12 @@ public class FacadeTest
             
             string player1 = "Ash";
             string player2 = "Misty";
+            
             facade.AddTrainerToWaitingList(player1);
             facade.AddTrainerToWaitingList(player2);
+            
             facade.StartBattle(player1, player2);
+            
             facade.ChooseTeam(player1, 1);
             facade.ChooseTeam(player1, 2);
             facade.ChooseTeam(player1, 3);
@@ -280,13 +283,14 @@ public class FacadeTest
             facade.ChooseTeam(player2, 5);
             facade.ChooseTeam(player2, 6);
 
-            // Simula que el jugador cambia el Pokémon activo
-            var result = facade.ChangePokemon(player1, 3);
-            if (result != "No es tu turno ESPERA!")
+            string playerName = "Misty";
+            var result = facade.ChangePokemon("Ash", 3);
+            if (result == "No es tu turno ESPERA!")
             {
-                result = facade.ChangePokemon(player2, 3);
+                result = facade.ChangePokemon("Misty", 3);
+                playerName = "Ash";
             }
-            Assert.That("Gastly Es el turno de Ash", Is.EqualTo(result));
+            Assert.That($"Gastly Es el turno de {playerName}", Is.EqualTo(result));
         }
 
         [Test]
@@ -326,5 +330,25 @@ public class FacadeTest
                 "Pokemon:\n\nSquirtleVida: 100/100\nSquirtleVida: 100/100\nSquirtleVida: 100/100\nSquirtleVida: 100/100\nSquirtleVida: 100/100\nSquirtleVida: 100/100";
             
             Assert.That(esperado, Is.EqualTo(result));
+        }
+        
+        [Test]
+        public void TestShowPokemonAttacks()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            facade.StartBattle(player1, player2);
+
+            facade.ChooseTeam(player1, 0);
+
+            string esperado = "Ataques:\nPistola Agua: Tipo = Agua, Daño = 40" +
+                              "\nHidrobomba: Tipo = Agua, Daño = 110\nBurbuja: Tipo = Agua, Daño = 20\n";
+
+            Assert.That(esperado, Is.EqualTo(facade.GetPokemonAtacks("Ash")));
         }
 }
