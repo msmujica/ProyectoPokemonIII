@@ -67,7 +67,7 @@ public class Pokemon
     /// Método que permite al Pokémon recibir un cierto daño.
     /// </summary>
     /// <param name="daño">Cantidad de daño recibido.</param>
-    public void recibirDaño(int daño)
+    public void recibeDamage(int daño)
     {
         if (!EstaDerrotado)
         {
@@ -92,14 +92,14 @@ public class Pokemon
     /// <param name="ataque">Nombre del ataque que se realizará.</param>
     /// <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
     /// <returns>El valor del daño causado al oponente como una cadena.</returns>
-    public string atacar(Pokemon oponente, string ataque, EffectsManager effectsManager)
+    public string attack(Pokemon oponente, string ataque, EffectsManager effectsManager)
     {
         foreach (var VARIABLE in Ataques)
         {
             if (VARIABLE == ataque)
             {
                 var (valor, mensaje) = Attack.CalculeDamage(ataque, oponente, effectsManager);
-                oponente.recibirDaño(valor);
+                oponente.recibeDamage(valor);
                 return $"El pokemon {oponente.name} recibió {valor} de daño con el ataque {ataque}. {mensaje}"; // Devolvemos el mensaje
             }
         }

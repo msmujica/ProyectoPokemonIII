@@ -54,7 +54,7 @@ namespace Library
         /// <c>true</c> si el efecto sigue activo (por ejemplo, sigue dormido o paralizado).
         /// <c>false</c> si el efecto ha terminado o no aplica.
         /// </returns>
-        public bool PuedoAtacar(Pokemon pokem)
+        public bool Canattack(Pokemon pokem)
         {
             foreach (var entry in activeEffects)
             {
@@ -73,7 +73,7 @@ namespace Library
             return true;
         }
 
-    public string ProcesarControlMasa(Pokemon pokem)
+    public string CheckEffectBool(Pokemon pokem)
         {
             // Inicializamos la descripción vacía
 
@@ -101,7 +101,7 @@ namespace Library
         /// <summary>
         /// Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
         /// </summary>
-        public string ProcesarEfectosDaño(Pokemon pokem)
+        public string ProcessEffectsDamage(Pokemon pokem)
         {
             string description = "";
             // Recorre todos los efectos activos
@@ -131,7 +131,7 @@ namespace Library
         /// Limpia todos los efectos activos de un Pokémon.
         /// </summary>
         /// <param name="pokemon">El Pokémon cuyo efecto se eliminará.</param>
-        public string LimpiarEfectos(Pokemon pokemon)
+        public string CleanEffects(Pokemon pokemon)
         {
             // Elimina los efectos activos del Pokémon si existen
             if (activeEffects.ContainsKey(pokemon))
@@ -154,7 +154,7 @@ namespace Library
             return activeEffects.ContainsKey(pokemon);
         }
 
-        public bool EsParalisis(Pokemon pokem)
+        public bool ItsParalyze(Pokemon pokem)
         {
             if (!activeEffects.ContainsKey(pokem)) return false;
             List<IEffect> efectos = activeEffects[pokem];
@@ -189,7 +189,7 @@ namespace Library
             }
             return "";
         }
-        public bool EsDormir(Pokemon pokem)
+        public bool ItsSleep(Pokemon pokem)
         {
             if (!activeEffects.ContainsKey(pokem)) return false;
             List<IEffect> efectos = activeEffects[pokem];
@@ -199,10 +199,10 @@ namespace Library
                 if (v is SleepEffect)
                 {
                     if (!(v.IcanAttack)) return true; // Devuelve si el pokemon tiene dormir.
-                    LimpiarEfectos(pokem);
+                    CleanEffects(pokem);
                 }
             }
-            LimpiarEfectos(pokem);
+            CleanEffects(pokem);
             return false;
         }
     }

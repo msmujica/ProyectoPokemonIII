@@ -54,7 +54,7 @@ public static class Pokedex
     /// </summary>
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
     /// <returns>El nombre del Pokémon en la Pokedex en el índice especificado.</returns>
-    public static string MostrarPokemonPorIndice(int indice)
+    public static string ShowPokemonByIndex(int indice)
     {
         return nombresPokemon[indice];
     }
@@ -63,7 +63,7 @@ public static class Pokedex
     /// Muestra una lista con todos los Pokémon en la Pokedex, junto con su tipo.
     /// </summary>
     /// <returns>Una lista de cadenas que representan los Pokémon en la Pokedex, con su nombre y tipo.</returns>
-    public static List<string> MostrarPokedex()
+    public static List<string> ShowPokedex()
     {
         List<string> pokedexList = new List<string>();
         for (int i = 0; i < nombresPokemon.Count; i++)
@@ -80,7 +80,7 @@ public static class Pokedex
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
     /// <param name="entrenador">El entrenador al que se le asignará el Pokémon creado.</param>
     /// <returns>El Pokémon creado, o null si el índice es inválido.</returns>
-    public static Pokemon CrearPokemonPorIndice(int indice, Entrenador entrenador)
+    public static Pokemon CreatePokemonByIndex(int indice, Entrenador entrenador)
     {
         int vidaInicial = 100;
         Pokemon nuevoPokemon = null;

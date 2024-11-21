@@ -67,7 +67,7 @@ public class Battle
     /// </summary>
     /// <returns>Devuelve <c>true</c> si algún jugador tiene menos de 6 Pokémon, de lo contrario <c>false</c>.</returns>
 
-    public bool validacionPokemon()
+    public bool validationPokemon()
     {
         if (Player1.Equipo.Count < 6)
         {
@@ -87,7 +87,7 @@ public class Battle
     /// Se considera una victoria cuando todos los Pokémon del oponente tienen vida negativa.
     /// </summary>
     /// <returns>Devuelve <c>true</c> si el jugador ha ganado la batalla.</returns>
-    public bool ValidacionWin()
+    public bool WinValidation()
     {
         int count = 0;
         foreach (var poke in LastTurn.Equipo)
@@ -110,19 +110,19 @@ public class Battle
     /// Valida el estado de los Pokémon activos de ambos jugadores.
     /// Si alguno de los Pokémon está muerto (vida <= 0), se realiza un cambio de Pokémon.
     /// </summary>
-    public bool ValidacionPokemonVivo()
+    public bool ValidationAlivePokemon()
     {
         if (Player1.Activo.Vida <= 0)
         {
-            gestorEfectos.LimpiarEfectos(Player1.Activo);
-            Player1.CambioPokemonMuerto();
+            gestorEfectos.CleanEffects(Player1.Activo);
+            Player1.ChangeDefeatedPokemon();
             return true;
         }
 
         if (Player2.Activo.Vida <= 0)
         {
-            gestorEfectos.LimpiarEfectos(Player2.Activo);
-            Player2.CambioPokemonMuerto();
+            gestorEfectos.CleanEffects(Player2.Activo);
+            Player2.ChangeDefeatedPokemon();
             return true;
         }
 
@@ -135,41 +135,41 @@ public class Battle
     /// </summary>
     /// <param name="opcionAtaque">El nombre del ataque seleccionado por el jugador.</param>
     /// <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
-    public string IntermediarioAtacar(string opcionAtaque)
+    public string IntermediaryAttack(string opcionAtaque)
     {
         try
         {
-            if (ValidacionPokemonVivo())
+            if (ValidationAlivePokemon())
             {
                 return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
             }
         
-            if (ValidacionWin())
+            if (WinValidation())
             {
                 Win();
             }
         
-            if (validacionPokemon())
+            if (validationPokemon())
             {
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             
-            if ((gestorEfectos.EsDormir(ActualTurn.Activo)))
+            if ((gestorEfectos.ItsSleep(ActualTurn.Activo)))
             {
                 return gestorEfectos.InfoPokemon(ActualTurn.Activo);
             }
-            string description = gestorEfectos.ProcesarControlMasa(ActualTurn.Activo);
-                if (!gestorEfectos.PuedoAtacar(ActualTurn.Activo))
+            string description = gestorEfectos.CheckEffectBool(ActualTurn.Activo);
+                if (!gestorEfectos.Canattack(ActualTurn.Activo))
                 {
-                    if (gestorEfectos.EsParalisis(ActualTurn.Activo))
+                    if (gestorEfectos.ItsParalyze(ActualTurn.Activo))
                     {
                         string valores = $"{description}Turno terminado. ";
-                        return valores + CambiarTurno();
+                        return valores + ChangeTurn();
                     }
                 }
                 
-            string valor = ActualTurn.elegirAtaque(opcionAtaque, LastTurn.Activo, gestorEfectos);
-            valor += $"Turno terminado. " + "\n" + CambiarTurno();
+            string valor = ActualTurn.chooseAttack(opcionAtaque, LastTurn.Activo, gestorEfectos);
+            valor += $"Turno terminado. " + "\n" + ChangeTurn();
             return description + valor;
         }
         catch (FormatException)
@@ -188,18 +188,18 @@ public class Battle
     /// </summary>
     /// <param name="opcionPokemon">Índice del Pokémon seleccionado para ser el nuevo activo.</param>
     /// <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
-    public string IntermediarioCambiarPokemonActivo(int opcionPokemon)
+    public string IntermediaryChangeActivePokemon(int opcionPokemon)
     {
         try
         {
-            validacionPokemon();
+            validationPokemon();
         
-            if (ValidacionWin())
+            if (WinValidation())
             {
                 Win();
             }
         
-            if (validacionPokemon())
+            if (validationPokemon())
             {
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
@@ -210,8 +210,8 @@ public class Battle
             }
 
             // Cambiar el Pokémon activo
-            string valor = ActualTurn.cambiarActivo(opcionPokemon);
-            return valor + CambiarTurno();
+            string valor = ActualTurn.changeActive(opcionPokemon);
+            return valor + ChangeTurn();
         }
         catch (FormatException)
         {
@@ -233,16 +233,16 @@ public class Battle
     /// <param name="opcionPokemon">Índice del Pokémon sobre el que se aplicará el ítem.</param>
     /// <param name="opcionItem">Nombre del ítem a usar.</param>
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
-    public string IntermediarioUsarItem(int opcionPokemon, string opcionItem)
+    public string IntermediaryUseItem(int opcionPokemon, string opcionItem)
     {
-        validacionPokemon();
+        validationPokemon();
         
-        if (ValidacionWin())
+        if (WinValidation())
         {
             Win();
         }
         
-        if (validacionPokemon())
+        if (validationPokemon())
         {
             return "No tenes los pokemones suficientes para empezar la batalla";
         }
@@ -258,7 +258,7 @@ public class Battle
             Pokemon pokemonSeleccionado = ActualTurn.Equipo[opcionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon
-            return ActualTurn.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos) + CambiarTurno(); ;
+            return ActualTurn.UseanItem(opcionItem, pokemonSeleccionado, gestorEfectos) + ChangeTurn(); ;
 
         }
         catch (FormatException)
@@ -276,9 +276,9 @@ public class Battle
     /// <summary>
     /// Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguiente jugador.
     /// </summary>
-    public string CambiarTurno()
+    public string ChangeTurn()
     {
-        string info = gestorEfectos.ProcesarEfectosDaño(ActualTurn.Activo);
+        string info = gestorEfectos.ProcessEffectsDamage(ActualTurn.Activo);
         // Cambiar al otro jugador
         ActualTurn = (ActualTurn == Player1) ? Player2 : Player1;
         LastTurn = (LastTurn == Player2) ? Player1 : Player2;
