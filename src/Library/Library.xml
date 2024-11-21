@@ -72,7 +72,7 @@
             Comando para mostrar los ataques de un Pokémon en el equipo de un entrenador.
             </summary>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Commands.GetPokemonAttacksCommand.ExecuteAsync(System.String)">
+        <member name="M:Ucu.Poo.DiscordBot.Commands.GetPokemonAttacksCommand.ExecuteAsync">
             <summary>
             Muestra los ataques del Pokémon especificado en el equipo de un entrenador.
             </summary>
@@ -216,12 +216,12 @@
             Obtiene un valor que representa al oponente.
             </summary>
         </member>
-        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.TurnoActual">
+        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.ActualTurn">
             <summary>
             Obtiene o establece el jugador que está actuando en el turno actual.
             </summary>
         </member>
-        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.TurnoPasado">
+        <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.LastTurn">
             <summary>
             Obtiene o establece el jugador que está esperando en el turno pasado.
             </summary>
@@ -234,21 +234,21 @@
             <param name="player1">El primer jugador (entrenador).</param>
             <param name="player2">El segundo jugador (oponente).</param>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.validacionPokemon">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.validationPokemon">
             <summary>
             Valida si ambos jugadores tienen al menos 6 Pokémon en su equipo.
             </summary>
             <returns>Devuelve <c>true</c> si algún jugador tiene menos de 6 Pokémon, de lo contrario <c>false</c>.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.ValidacionWin">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.WinValidation">
             <summary>
             Valida si el jugador actual ha ganado la batalla. 
             Se considera una victoria cuando todos los Pokémon del oponente tienen vida negativa.
             </summary>
             <returns>Devuelve <c>true</c> si el jugador ha ganado la batalla.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Ucu.Poo.DiscordBot.Domain.Battle.ValidacionPokemonVivo" -->
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediarioAtacar(System.String)">
+        <!-- Badly formed XML comment ignored for member "M:Ucu.Poo.DiscordBot.Domain.Battle.ValidationAlivePokemon" -->
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryAttack(System.String)">
             <summary>
             Intermediario para realizar un ataque en la batalla.
             Valida la acción de atacar, gestiona los efectos de daño y cambia el turno al siguiente jugador.
@@ -256,7 +256,7 @@
             <param name="opcionAtaque">El nombre del ataque seleccionado por el jugador.</param>
             <returns>Mensaje que describe el resultado de realizar el ataque.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediarioCambiarPokemonActivo(System.Int32)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryChangeActivePokemon(System.Int32)">
             <summary>
             Intermediario para cambiar el Pokémon activo durante el turno del jugador.
             Valida que el índice del Pokémon esté en el rango del equipo y realiza el cambio de Pokémon.
@@ -264,7 +264,7 @@
             <param name="opcionPokemon">Índice del Pokémon seleccionado para ser el nuevo activo.</param>
             <returns>Mensaje que describe el resultado del cambio de Pokémon.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediarioUsarItem(System.Int32,System.String)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryUseItem(System.Int32,System.String)">
             <summary>
             Intermediario para usar un ítem en el Pokémon activo durante la batalla.
             Valida el índice del Pokémon y aplica el ítem seleccionado.
@@ -273,7 +273,7 @@
             <param name="opcionItem">Nombre del ítem a usar.</param>
             <returns>Mensaje que describe el resultado del uso del ítem.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.CambiarTurno">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.ChangeTurn">
             <summary>
             Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguiente jugador.
             </summary>
@@ -423,7 +423,7 @@
             <param name="playerDisplayName">El nombre del jugador.</param>
             <returns>Una cadena con la lista de ataques del Pokémon activo.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.ValidacionTurno(System.String,Ucu.Poo.DiscordBot.Domain.Battle)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.ValidationTurn(System.String,Ucu.Poo.DiscordBot.Domain.Battle)">
             <summary>
             Valida si es el turno del jugador durante una batalla.
             </summary>
@@ -599,7 +599,7 @@
             <param name="efecto">El efecto a aplicar.</param>
             <param name="pokemon">El Pokémon que recibirá el efecto.</param>
         </member>
-        <member name="M:Library.EffectsManager.PuedoAtacar(Library.Pokemon)">
+        <member name="M:Library.EffectsManager.Canattack(Library.Pokemon)">
             <summary>
             Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar).
             </summary>
@@ -609,12 +609,12 @@
             <c>false</c> si el efecto ha terminado o no aplica.
             </returns>
         </member>
-        <member name="M:Library.EffectsManager.ProcesarEfectosDaño(Library.Pokemon)">
+        <member name="M:Library.EffectsManager.ProcessEffectsDamage(Library.Pokemon)">
             <summary>
             Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
             </summary>
         </member>
-        <member name="M:Library.EffectsManager.LimpiarEfectos(Library.Pokemon)">
+        <member name="M:Library.EffectsManager.CleanEffects(Library.Pokemon)">
             <summary>
             Limpia todos los efectos activos de un Pokémon.
             </summary>
@@ -646,14 +646,14 @@
             Muestra todos los Pokémon que el entrenador tiene en su Equipo.
             </summary>
         </member>
-        <member name="M:Library.Entrenador.cambiarActivo(System.Int32)">
+        <member name="M:Library.Entrenador.changeActive(System.Int32)">
             <summary>
             Cambia el Pokémon activo del entrenador.
             </summary>
             <param name="indexPokemonList">El índice del Pokémon en el equipo que se quiere hacer activo.</param>
             <returns>El nombre del Pokémon activo, o un mensaje de error si el índice es inválido.</returns>
         </member>
-        <member name="M:Library.Entrenador.elegirAtaque(System.String,Library.Pokemon,Library.EffectsManager)">
+        <member name="M:Library.Entrenador.chooseAttack(System.String,Library.Pokemon,Library.EffectsManager)">
             <summary>
             Elige un ataque para que el Pokémon activo ataque a un oponente.
             </summary>
@@ -662,7 +662,7 @@
             <param name="effectsManager">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
             <returns>El resultado de la acción de atacar.</returns>
         </member>
-        <member name="M:Library.Entrenador.UsarItem(System.String,Library.Pokemon,Library.EffectsManager)">
+        <member name="M:Library.Entrenador.UseanItem(System.String,Library.Pokemon,Library.EffectsManager)">
             <summary>
             Utiliza un ítem en un Pokémon durante la batalla.
             </summary>
@@ -671,7 +671,7 @@
             <param name="effectsManager">El gestor de efectos que maneja los efectos del ítem.</param>
             <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
         </member>
-        <member name="M:Library.Entrenador.CambioPokemonMuerto">
+        <member name="M:Library.Entrenador.ChangeDefeatedPokemon">
             <summary>
             Cambia al siguiente Pokémon disponible en el equipo si el Pokémon activo está muerto.
             </summary>
@@ -714,7 +714,7 @@
             •	Acoplamiento bajo: Usa GestorEfectos para manejar los efectos negativos, reduciendo la dependencia entre clases.
             </summary>
         </member>
-        <member name="M:Library.Items.ItemsManager.UsarSuperPocion(Library.Pokemon,System.Int32)">
+        <member name="M:Library.Items.ItemsManager.UseSuperPotion(Library.Pokemon,System.Int32)">
             <summary>
             Usa una SuperPoción en un Pokémon, restaurando su vida hasta un máximo de 100.
             </summary>
@@ -723,7 +723,7 @@
             <returns>Un mensaje indicando el resultado de usar la SuperPoción.</returns>
             
         </member>
-        <member name="M:Library.Items.ItemsManager.UsarRevivir(Library.Pokemon,System.Int32)">
+        <member name="M:Library.Items.ItemsManager.UseRevive(Library.Pokemon,System.Int32)">
             <summary>
             Usa un Revivir para resucitar a un Pokémon derrotado, restaurándole 50% de vida.
             </summary>
@@ -731,7 +731,7 @@
             <param name="contadorRevivir">El número de Revivir disponibles.</param>
             <returns>Un mensaje indicando el resultado de usar el Revivir.</returns>
         </member>
-        <member name="M:Library.Items.ItemsManager.UsarCuraTotal(Library.Pokemon,System.Int32,Library.EffectsManager)">
+        <member name="M:Library.Items.ItemsManager.UseTotalCure(Library.Pokemon,System.Int32,Library.EffectsManager)">
             <summary>
             Usa una Cura Total para restaurar la vida de un Pokémon al 100% y eliminar cualquier efecto negativo.
             </summary>
@@ -809,20 +809,20 @@
             •	Creator: Pokedex es responsable de crear objetos de tipo Pokemon, lo que facilita la extensibilidad al permitir la incorporación de nuevos Pokémon.
             </summary>
         </member>
-        <member name="M:Library.Pokedex.MostrarPokemonPorIndice(System.Int32)">
+        <member name="M:Library.Pokedex.ShowPokemonByIndex(System.Int32)">
             <summary>
             Muestra el nombre de un Pokémon dado su índice en la Pokedex.
             </summary>
             <param name="indice">El índice del Pokémon en la Pokedex.</param>
             <returns>El nombre del Pokémon en la Pokedex en el índice especificado.</returns>
         </member>
-        <member name="M:Library.Pokedex.MostrarPokedex">
+        <member name="M:Library.Pokedex.ShowPokedex">
             <summary>
             Muestra una lista con todos los Pokémon en la Pokedex, junto con su tipo.
             </summary>
             <returns>Una lista de cadenas que representan los Pokémon en la Pokedex, con su nombre y tipo.</returns>
         </member>
-        <member name="M:Library.Pokedex.CrearPokemonPorIndice(System.Int32,Library.Entrenador)">
+        <member name="M:Library.Pokedex.CreatePokemonByIndex(System.Int32,Library.Entrenador)">
             <summary>
             Crea un Pokémon a partir de su índice en la Pokedex y lo agrega al equipo del entrenador.
             </summary>
@@ -849,13 +849,13 @@
             <param name="ataques">Lista de ataques que puede realizar el Pokémon.</param>
             <param name="tipo">Tipo o tipos del Pokémon.</param>
         </member>
-        <member name="M:Library.Pokemon.recibirDaño(System.Int32)">
+        <member name="M:Library.Pokemon.recibeDamage(System.Int32)">
             <summary>
             Método que permite al Pokémon recibir un cierto daño.
             </summary>
             <param name="daño">Cantidad de daño recibido.</param>
         </member>
-        <member name="M:Library.Pokemon.atacar(Library.Pokemon,System.String,Library.EffectsManager)">
+        <member name="M:Library.Pokemon.attack(Library.Pokemon,System.String,Library.EffectsManager)">
             <summary>
             Método que permite al Pokémon realizar un ataque sobre otro Pokémon.
             </summary>
@@ -864,8 +864,8 @@
             <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
             <returns>El valor del daño causado al oponente como una cadena.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Library.LogicaTipos" -->
-        <member name="M:Library.LogicaTipos.CalculeMultiplier(System.String,System.String)">
+        <!-- Badly formed XML comment ignored for member "T:Library.TypeLogic" -->
+        <member name="M:Library.TypeLogic.CalculeMultiplier(System.String,System.String)">
             <summary>
             Calcula el multiplicador de daño que se aplica a un ataque según el tipo del atacante y el tipo del defensor.
             </summary>

@@ -13,12 +13,12 @@ public class GetPokemonAttacksCommand : ModuleBase<SocketCommandContext>
     /// </summary>
     /// <param name="trainerDisplayName">El nombre del entrenador que tiene el Pokémon.</param>
     /// <param name="pokemonName">El nombre del Pokémon del cual se desean ver los ataques.</param>
-    [Command("getattacks")]
+    [Command("getAttacks")]
     [Summary("Muestra los ataques de un Pokémon en el equipo de un entrenador.")]
-    public async Task ExecuteAsync(
-        [Summary("El nombre del entrenador que tiene el Pokémon.")] string trainerDisplayName){
+    public async Task ExecuteAsync(){
+        string displayName = CommandHelper.GetDisplayName(Context);
         // Construir el mensaje con los ataques del Pokémon
-        string result = $"**Ataques de {Facade.Instance.GetPokemonAtacks(trainerDisplayName)}:**\n";
+        string result = $"{Facade.Instance.GetPokemonAtacks(displayName)}";
         // Enviar el mensaje al canal
         await ReplyAsync(result.TrimEnd()); // Elimina cualquier salto de línea adicional al final
     }
