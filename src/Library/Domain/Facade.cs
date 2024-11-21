@@ -354,7 +354,7 @@ public class Facade
     public bool ValidacionTurno(string playerDisplayName, Battle batt)
     {
         Entrenador? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        if (player.Nombre != batt.TurnoActual.Nombre)
+        if (player.Nombre != batt.ActualTurn.Nombre)
         {
             return true;
         }

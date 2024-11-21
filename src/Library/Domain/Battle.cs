@@ -23,26 +23,26 @@ public class Battle
     /// </summary>
     public Entrenador Player2 { get; }
 
-    private Entrenador turnoActual;
-    private Entrenador turnoPasado;
+    private Entrenador actualTurn;
+    private Entrenador lastTurn;
     private EffectsManager gestorEfectos;
 
     /// <summary>
     /// Obtiene o establece el jugador que está actuando en el turno actual.
     /// </summary>
-    public Entrenador TurnoActual
+    public Entrenador ActualTurn
     {
-        get { return turnoActual; }
-        set { turnoActual = value; }
+        get { return actualTurn; }
+        set { actualTurn = value; }
     }
     
     /// <summary>
     /// Obtiene o establece el jugador que está esperando en el turno pasado.
     /// </summary>
-    public Entrenador TurnoPasado
+    public Entrenador LastTurn
     {
-        get { return turnoPasado; }
-        set { turnoPasado = value; }
+        get { return lastTurn; }
+        set { lastTurn = value; }
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public class Battle
     {
         Player1 = player1;
         Player2 = player2;
-        TurnoActual = player1;
-        TurnoPasado = player2;
+        ActualTurn = player1;
+        LastTurn = player2;
         gestorEfectos = new EffectsManager();
         player1.ItemSetting();
         player2.ItemSetting();
@@ -90,7 +90,7 @@ public class Battle
     public bool ValidacionWin()
     {
         int count = 0;
-        foreach (var poke in TurnoPasado.Equipo)
+        foreach (var poke in LastTurn.Equipo)
         {
             if (poke.Vida <= 0)
             {
@@ -154,21 +154,21 @@ public class Battle
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             
-            if ((gestorEfectos.EsDormir(TurnoActual.Activo)))
+            if ((gestorEfectos.EsDormir(ActualTurn.Activo)))
             {
-                return gestorEfectos.InfoPokemon(TurnoActual.Activo);
+                return gestorEfectos.InfoPokemon(ActualTurn.Activo);
             }
-            string description = gestorEfectos.ProcesarControlMasa(TurnoActual.Activo);
-                if (!gestorEfectos.PuedoAtacar(TurnoActual.Activo))
+            string description = gestorEfectos.ProcesarControlMasa(ActualTurn.Activo);
+                if (!gestorEfectos.PuedoAtacar(ActualTurn.Activo))
                 {
-                    if (gestorEfectos.EsParalisis(TurnoActual.Activo))
+                    if (gestorEfectos.EsParalisis(ActualTurn.Activo))
                     {
                         string valores = $"{description}Turno terminado. ";
                         return valores + CambiarTurno();
                     }
                 }
                 
-            string valor = TurnoActual.elegirAtaque(opcionAtaque, TurnoPasado.Activo, gestorEfectos);
+            string valor = ActualTurn.elegirAtaque(opcionAtaque, LastTurn.Activo, gestorEfectos);
             valor += $"Turno terminado. " + "\n" + CambiarTurno();
             return description + valor;
         }
@@ -204,13 +204,13 @@ public class Battle
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= TurnoActual.Equipo.Count)
+            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Equipo.Count)
             {
                 return "Selección de Pokémon inválida. Por favor, intenta de nuevo.";
             }
 
             // Cambiar el Pokémon activo
-            string valor = TurnoActual.cambiarActivo(opcionPokemon);
+            string valor = ActualTurn.cambiarActivo(opcionPokemon);
             return valor + CambiarTurno();
         }
         catch (FormatException)
@@ -250,15 +250,15 @@ public class Battle
         try
         {
             // Verificar si el índice del Pokémon está en el rango
-            if (opcionPokemon < 0 || opcionPokemon >= TurnoActual.Equipo.Count)
+            if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Equipo.Count)
             {
                 return "Selección de Pokémon inválida.";
             }
 
-            Pokemon pokemonSeleccionado = TurnoActual.Equipo[opcionPokemon];
+            Pokemon pokemonSeleccionado = ActualTurn.Equipo[opcionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon
-            return TurnoActual.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos) + CambiarTurno(); ;
+            return ActualTurn.UsarItem(opcionItem, pokemonSeleccionado, gestorEfectos) + CambiarTurno(); ;
 
         }
         catch (FormatException)
@@ -278,12 +278,12 @@ public class Battle
     /// </summary>
     public string CambiarTurno()
     {
-        string info = gestorEfectos.ProcesarEfectosDaño(TurnoActual.Activo);
+        string info = gestorEfectos.ProcesarEfectosDaño(ActualTurn.Activo);
         // Cambiar al otro jugador
-        TurnoActual = (TurnoActual == Player1) ? Player2 : Player1;
-        TurnoPasado = (TurnoPasado == Player2) ? Player1 : Player2;
+        ActualTurn = (ActualTurn == Player1) ? Player2 : Player1;
+        LastTurn = (LastTurn == Player2) ? Player1 : Player2;
 
-        return $"{info} Es el turno de {TurnoActual.Nombre}";
+        return $"{info} Es el turno de {ActualTurn.Nombre}";
     }
 
     /// <summary>
@@ -292,7 +292,7 @@ public class Battle
     /// <returns>Lista de los Pokémon del oponente.</returns>
     public List<Pokemon> MostrarPokemonEnemigo()
     {
-        return turnoPasado.Equipo;
+        return lastTurn.Equipo;
     } 
 
     /// <summary>
@@ -301,8 +301,8 @@ public class Battle
     /// <returns>Mensaje indicando que el jugador actual ha ganado.</returns>
     public string Win()
     {
-        TurnoActual = null;
-        turnoPasado = null;
-        return $"El jugador {TurnoActual} a ganado";
+        ActualTurn = null;
+        lastTurn = null;
+        return $"El jugador {ActualTurn} a ganado";
     }
 }
