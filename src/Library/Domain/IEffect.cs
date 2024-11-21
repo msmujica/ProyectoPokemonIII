@@ -7,6 +7,7 @@ namespace Library
     /// </summary>
     public interface IEffect
     {
+        public string Info(Pokemon pokemon);
         public bool IcanAttack { get; }
         /// <summary>
         /// Inicia el efecto sobre un Pokémon. Este método debe definir cómo el efecto

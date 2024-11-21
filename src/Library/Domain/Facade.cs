@@ -1,3 +1,4 @@
+
 using Library;
 
 namespace Ucu.Poo.DiscordBot.Domain;
@@ -359,5 +360,17 @@ public class Facade
         }
 
         return false;
+    }
+
+    public string ChangeTurn(string playerDisplayName)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
+        if (!(ValidationTurn(playerDisplayName, battle)))
+        {
+            battle.CambiarTurno();
+            return $"Turno cambiado. Es el turno de {battle.ActualTurn.Name}";
+        }
+
+        return "No es tu turno";
     }
 }

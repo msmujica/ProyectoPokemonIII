@@ -4,6 +4,72 @@
         <name>LibraryTests</name>
     </assembly>
     <members>
+        <member name="M:LibraryTests.Domain.FacadeTest.SetUp">
+            <summary>
+            Configuración previa a cada prueba unitaria.
+            Se asegura de que cada prueba comience con una nueva instancia de la clase <see cref="T:Ucu.Poo.DiscordBot.Domain.Facade"/>.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestAddTrainerToWaitingList">
+            <summary>
+            Prueba la funcionalidad de agregar un jugador a la lista de espera.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestAddTrainerToWaitingList_Duplicate">
+            <summary>
+            Prueba la funcionalidad de intentar agregar un jugador duplicado a la lista de espera.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestStartBattle">
+            <summary>
+            Prueba el inicio de una batalla entre dos jugadores.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestShowPokémonAvailable">
+            <summary>
+            Prueba la funcionalidad de mostrar los Pokémon disponibles en la Pokédex.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestRemoveTrainerFromWaitingList">
+            <summary>
+            Prueba la funcionalidad de remover un jugador de la lista de espera.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestTrainerIsWaiting">
+            <summary>
+            Prueba la funcionalidad de verificar si un jugador está esperando en la lista de espera.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestGetAllTrainersWaiting">
+            <summary>
+            Prueba la funcionalidad de obtener todos los jugadores esperando en la lista de espera.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestStartBattleNoPlayersWaiting">
+            <summary>
+            Prueba el comportamiento cuando no hay jugadores esperando en la lista.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestChooseTeam">
+            <summary>
+            Prueba la funcionalidad de elegir un equipo de Pokémon para un jugador durante una batalla.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestUseItem">
+            <summary>
+            Prueba la funcionalidad de usar un ítem durante una batalla.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestAttackPokemon">
+            <summary>
+            Prueba la funcionalidad de realizar un ataque con un Pokémon durante una batalla.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestChangePokemon">
+            <summary>
+            Prueba la funcionalidad de cambiar el Pokémon activo durante una batalla.
+            </summary>
+        </member>
         <member name="T:Tests.TrainTests">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.Train"/>.
