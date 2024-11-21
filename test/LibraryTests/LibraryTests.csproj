@@ -24,7 +24,4 @@
   <ItemGroup>
     <ProjectReference Include="../../src/Library/Library.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Domain\PokedexTest.cs" />
-  </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 using Library;
 using NUnit.Framework;
 using Ucu.Poo.DiscordBot.Domain;
-using NUnit.Framework.Legacy;
 
 namespace LibraryTests.Domain;
 
@@ -36,7 +35,7 @@ public class BattleTest
         var result = battle.validacionPokemon();
 
         // Verificar
-        ClassicAssert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -73,7 +72,7 @@ public class BattleTest
         var resultado = battle.ValidacionWin();
 
         // Verificar
-        ClassicAssert.IsTrue(resultado);
+        Assert.That(resultado, Is.True);
     }
 
     [Test]
@@ -104,40 +103,40 @@ public class BattleTest
         // Actuar y verificar
         if (battle.ActualTurn == trainer1)
         {
-            ClassicAssert.AreEqual(battle.ActualTurn, trainer1);
+            Assert.That(battle.ActualTurn, Is.EqualTo(trainer1));
 
             battle.CambiarTurno();
 
-            ClassicAssert.AreEqual(battle.ActualTurn, trainer2);
+            Assert.That(battle.ActualTurn, Is.EqualTo(trainer2));
 
             battle.CambiarTurno();
 
-            ClassicAssert.AreEqual(battle.ActualTurn, trainer1);
+            Assert.That(battle.ActualTurn, Is.EqualTo(trainer1));
         }
         else
         {
-            ClassicAssert.AreEqual(battle.ActualTurn, trainer2);
+            Assert.That(battle.ActualTurn, Is.EqualTo(trainer2));
 
             battle.CambiarTurno();
 
-            ClassicAssert.AreEqual(battle.ActualTurn, trainer1);
+            Assert.That(battle.ActualTurn, Is.EqualTo(trainer1));
 
             battle.CambiarTurno();
 
-            ClassicAssert.AreEqual(battle.ActualTurn, trainer2);
+            Assert.That(battle.ActualTurn, Is.EqualTo(trainer2));
         }
 
         // Actuar: se realiza el ataque
         var resultado = battle.IntermediaryAttack("Picadura");
 
         // Verificar
-        ClassicAssert.AreEqual("30", resultado);
-        ClassicAssert.AreEqual(trainer2.Active.Health, battle.ActualTurn.Active.Health);
+        Assert.That("El pokemon Caterpie no tiene efectos activos.30", Is.EqualTo(resultado));
+        Assert.That(trainer2.Active.Health, Is.EqualTo(battle.ActualTurn.Active.Health));
 
         resultado = battle.IntermediaryChangeActivePokemon(2);
 
             // Verificar
-            ClassicAssert.AreEqual(trainer1.Active, battle.ActualTurn.Active);
-            ClassicAssert.AreEqual("Hecho", resultado);
+            Assert.That(trainer1.Active, Is.EqualTo(battle.ActualTurn.Active));
+            Assert.That("Hecho", Is.EqualTo(resultado));
         }
 }

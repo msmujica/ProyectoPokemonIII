@@ -1,6 +1,5 @@
 using Library;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace LibraryTests.Domain;
 
@@ -12,16 +11,16 @@ public class AttackTest
     public void ObtainAttack_ShouldReturnCorrectData()
     {
         var result = Attack.ObtainAttack("Pistola Agua");
-        ClassicAssert.AreEqual(40, result.Damage);
-        ClassicAssert.AreEqual("Agua", result.Type);
+        Assert.That(40, Is.EqualTo(result.Damage));
+        Assert.That("Agua", Is.EqualTo(result.Type));
     }
 
     [Test]
     public void ObtainAttack_NonExistent_ShouldReturnPredeterminedData()
     {
         var result = Attack.ObtainAttack("AtaqueInexistente");
-        ClassicAssert.AreEqual(0, result.Damage);
-        ClassicAssert.AreEqual(string.Empty, result.Type);
+        Assert.That(0, Is.EqualTo(result.Damage));
+        Assert.That(string.Empty, Is.EqualTo(result.Type));
     }
 
     [Test]
@@ -34,6 +33,6 @@ public class AttackTest
         var (calculedamage, description) = Attack.CalculeDamage("Hoja Afilada", targetpokemon, effectsmanager);
 
         // Si el ataque es crítico, el daño debería multiplicarse por 1.2
-        ClassicAssert.AreEqual(calculedamage, 55);
+        Assert.That(calculedamage, Is.EqualTo( 55));
     }
 }

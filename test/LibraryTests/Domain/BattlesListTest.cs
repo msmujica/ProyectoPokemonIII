@@ -1,7 +1,6 @@
 using Library;
 using NUnit.Framework;
 using Ucu.Poo.DiscordBot.Domain;
-using NUnit.Framework.Legacy;
 
 namespace LibraryTests.Domain;
 
@@ -23,9 +22,9 @@ public class BattlesListTest
         Battle battle = battlesList.AddBattle(player1, player2);
 
         // Assert
-        ClassicAssert.IsNotNull(battle);
-        ClassicAssert.AreEqual("Player1", battle.Player1.Name);
-        ClassicAssert.AreEqual("Player2", battle.Player2.Name);
+        Assert.That(battle, Is.Not.Null);
+        Assert.That("Player1", Is.EqualTo(battle.Player1.Name));
+        Assert.That("Player2", Is.EqualTo(battle.Player2.Name));
     }
     
     [Test]
@@ -40,7 +39,7 @@ public class BattlesListTest
         var result = battlesList.FindTrainerByDisplayName("Player1");
 
         // Assert
-        ClassicAssert.IsNotNull(result);
-        ClassicAssert.AreEqual(player1, result);
+        Assert.That(result, Is.Not.Null);
+        Assert.That(player1, Is.EqualTo(result));
     }
 }

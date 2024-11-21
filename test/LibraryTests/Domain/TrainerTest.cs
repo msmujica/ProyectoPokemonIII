@@ -1,7 +1,5 @@
 using Library;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 
 namespace LibraryTests.Domain;
 
@@ -20,22 +18,24 @@ public class TrainerTest
         [Test]
         public void Constructor()
         {
-            ClassicAssert.AreEqual("Ash", trainer.Name);
+            var trainer = new Trainer("Ash");
+            Assert.That("Ash", Is.EqualTo(trainer.Name));
         }
 
         [Test]
         public void StartTeam()
         {
-            ClassicAssert.IsNotNull(trainer.Team);
-            ClassicAssert.AreEqual(0, trainer.Team.Count);
+            Assert.That(trainer.Team, Is.Not.Null);
+            Assert.That(0, Is.EqualTo(trainer.Team.Count));
         }
 
         [Test]
         public void AddPokemonToTheTeam()
         {
+            var trainer = new Trainer("Ash");
             var pokemon = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno" }, "Eléctrico");
             trainer.Team.Add(pokemon);
-            ClassicAssert.AreEqual(1, trainer.Team.Count);
+            Assert.That(1, Is.EqualTo(trainer.Team.Count));
         }
 
         [Test]
@@ -49,29 +49,30 @@ public class TrainerTest
             var newPokemon = new Pokemon("Charmander", 100, new List<string> { "Ascuas" }, "Fuego");
             trainer.Team.Add(newPokemon);
 
-            ClassicAssert.AreEqual(7, trainer.Team.Count); 
+            Assert.That(7, Is.EqualTo(trainer.Team.Count)); 
         }
 
         [Test]
         public void ChangeActivePokemon()
         {
+            var trainer = new Trainer("Ash");
             var pokemon1 = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno" }, "Eléctrico");
             var pokemon2 = new Pokemon("Charizard", 150, new List<string> { "Llamarada" }, "Fuego");
 
             trainer.Team.Add(pokemon1);
             trainer.Team.Add(pokemon2);
-
             var result = trainer.ChangeActive(1);
 
-            ClassicAssert.AreEqual(trainer.Team[1].Name, result);
-            ClassicAssert.AreEqual(trainer.Team[1], trainer.Active);
+            Assert.That(trainer.Team[1].Name, Is.EqualTo(result));
+            Assert.That(trainer.Team[1], Is.EqualTo(trainer.Active));
         }
 
         [Test]
         public void InvalidIndex()
         {
+            var trainer = new Trainer("Jessy");
             var result = trainer.ChangeActive(0);
-            ClassicAssert.AreEqual("Indice no valido. No se pudo cambiar el pokemon", result);
+            Assert.That("Indice no valido. No se pudo cambiar el pokemon", Is.EqualTo(result));
         }
 
         [Test]
@@ -82,12 +83,13 @@ public class TrainerTest
 
             trainer.ItemSetting();
             trainer.UsarItem("Superpocion", pokemon, effectsManager);
-            ClassicAssert.AreEqual(4, trainer.CounterSuperPotion);
+            Assert.That(4, Is.EqualTo(trainer.CounterSuperPotion));
         }
 
         [Test]
         public void ChangeDeadPokemon()
         {
+            var trainer = new Trainer("Brook");
             var deadPokemon = new Pokemon("Onix", 0, new List<string> { "Golpe Roca" }, "Roca") { IsDefeated = true };
             var livePokemon = new Pokemon("Jigglypuff", 100, new List<string> { "Canto" }, "Normal");
 
@@ -95,16 +97,17 @@ public class TrainerTest
             trainer.Active = deadPokemon;
 
             trainer.CambioPokemonMuerto();
-
-            ClassicAssert.AreEqual(livePokemon, trainer.Active);
+            
+            Assert.That(livePokemon, Is.EqualTo(trainer.Active));
         }
 
         [Test]
         public void SettingItems()
         {
+            var trainer = new Trainer("Misty");
             trainer.ItemSetting();
-            ClassicAssert.AreEqual(4, trainer.CounterSuperPotion);
-            ClassicAssert.AreEqual(2, trainer.CounterTotalCure);
-            ClassicAssert.AreEqual(1, trainer.CounterRevive);
+            Assert.That(4, Is.EqualTo(trainer.CounterSuperPotion));
+            Assert.That(2, Is.EqualTo(trainer.CounterTotalCure));
+            Assert.That(1, Is.EqualTo(trainer.CounterRevive));
         }
 }

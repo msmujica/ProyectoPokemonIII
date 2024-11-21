@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using Ucu.Poo.DiscordBot.Domain;
-using NUnit.Framework.Legacy;
 
 namespace LibraryTests.Domain;
 
@@ -19,26 +18,26 @@ public class WaitingListTest
     [Test]
     public void AddTrainer()
     {
-        // Act
+        var waitingList = new WaitingList();
         bool result = waitingList.AddTrainer("Player1");
 
         // Assert
-        ClassicAssert.IsTrue(result); // Debería haberse agregado correctamente.
-        ClassicAssert.AreEqual(1, waitingList.Count); // La lista debería tener un solo entrenador.
+        Assert.That(result, Is.True); // Debería haberse agregado correctamente.
+        Assert.That(1, Is.EqualTo(waitingList.Count)); // La lista debería tener un solo entrenador.
     }
 
     [Test]
     public void RemoveExistingTrainer()
     {
-        // Arrange
+        var waitingList = new WaitingList();
         waitingList.AddTrainer("Player1");
 
         // Act
         bool result = waitingList.RemoveTrainer("Player1");
 
         // Assert
-        ClassicAssert.IsTrue(result); // El entrenador debería haberse eliminado correctamente.
-        ClassicAssert.AreEqual(0, waitingList.Count); // La lista debería estar vacía.
+        Assert.That(result, Is.True); // El entrenador debería haberse eliminado correctamente.
+        Assert.That(0, Is.EqualTo(waitingList.Count)); // La lista debería estar vacía.
     }
 
 
@@ -46,13 +45,14 @@ public class WaitingListTest
     public void SearchTrainerByDisplayName()
     {
         // Arrange
+        var waitingList = new WaitingList();
         waitingList.AddTrainer("Player1");
 
         // Act
         var trainer = waitingList.FindTrainerByDisplayName("Player1");
 
         // Assert
-        ClassicAssert.IsNotNull(trainer); // El entrenador debería ser encontrado.
-        ClassicAssert.AreEqual("Player1", trainer?.Name); // El nombre del entrenador debería coincidir.
+        Assert.That(trainer, Is.Not.Null); // El entrenador debería ser encontrado.
+        Assert.That("Player1", Is.EqualTo(trainer?.Name)); // El nombre del entrenador debería coincidir.
     }
 }

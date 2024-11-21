@@ -1,6 +1,5 @@
 using Library;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace LibraryTests.Domain;
 
@@ -15,7 +14,7 @@ public class PokedexTest
             var pokemon = Pokedex.ShowPokemonByIndex(0);
 
             // Assert: Se verifica que el pokemón devuelto sea Squirtle
-            ClassicAssert.AreEqual("Squirtle", pokemon);
+            Assert.That("Squirtle", Is.EqualTo(pokemon));
         }
 
         [Test]
@@ -26,9 +25,9 @@ public class PokedexTest
             var pokedex = Pokedex.ShowPokedex();
 
             // Assert: Se verifica que la liosta contenga exactamente 15 Pokemons y que el primero sea Squirtle
-            ClassicAssert.AreEqual(15, pokedex.Count); // Hay 15 Pokémon
-            ClassicAssert.IsTrue(pokedex[0].Contains("Squirtle"));
-            ClassicAssert.IsTrue(pokedex[0].Contains("Agua"));
+            Assert.That(15, Is.EqualTo(pokedex.Count)); // Hay 15 Pokémon
+            Assert.That(pokedex[0].Contains("Squirtle"), Is.True);
+            Assert.That(pokedex[0].Contains("Agua"), Is.True);
         }
         
         [Test]
@@ -41,9 +40,9 @@ public class PokedexTest
             var pokemon = Pokedex.CreatePokemonByIndex(0, trainer);
 
             //Assert
-            ClassicAssert.IsNotNull(pokemon);  //El pokemon existe
-            ClassicAssert.AreEqual("Squirtle", pokemon.Name);    //El nombre del Pokemón debe ser Squirtle
-            ClassicAssert.AreEqual(100, pokemon.Health);     //La vida del Pokemón debe ser 100 
+            Assert.That(pokemon, Is.Not.Null);  //El pokemon existe
+            Assert.That("Squirtle", Is.EqualTo(pokemon.Name));    //El nombre del Pokemón debe ser Squirtle
+            Assert.That(100, Is.EqualTo(pokemon.Health));     //La vida del Pokemón debe ser 100 
         }
 
         [Test]
@@ -57,6 +56,6 @@ public class PokedexTest
             var pokemon = Pokedex.CreatePokemonByIndex(100, entrenador);
 
             // Assert: 
-            ClassicAssert.IsNull(pokemon); // No debe existir un Pokemón con ese índice
+            Assert.That(pokemon, Is.Null); // No debe existir un Pokemón con ese índice
         }
 }
