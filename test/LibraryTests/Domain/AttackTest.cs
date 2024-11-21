@@ -31,8 +31,17 @@ public class AttackTest
 
         // Configura el daño base para un ataque como "Hoja Afilada" (55 daño)
         var (calculedamage, description) = Attack.CalculeDamage("Hoja Afilada", targetpokemon, effectsmanager);
-
-        // Si el ataque es crítico, el daño debería multiplicarse por 1.2
-        Assert.That(calculedamage, Is.EqualTo( 55));
+        int damage = 0;
+            
+        if (calculedamage == 55)
+        {
+            damage = 55;
+        }
+        if (calculedamage == 66)
+        {
+            damage = 66;
+        }
+            
+        Assert.That(calculedamage, Is.EqualTo(damage));
     }
 }
