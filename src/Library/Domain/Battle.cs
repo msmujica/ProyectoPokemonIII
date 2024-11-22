@@ -191,7 +191,12 @@ public class Battle
         try
         {
             validacionPokemon();
-        
+            
+            if (ValidacionPokemonVivo())
+            {
+                return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
+            }
+
             if (ValidacionWin())
             {
                 Win();
@@ -201,6 +206,7 @@ public class Battle
             {
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
             }
+            
             // Verificar si el índice del Pokémon está en el rango
             if (opcionPokemon < 0 || opcionPokemon >= ActualTurn.Team.Count)
             {
@@ -235,7 +241,14 @@ public class Battle
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
     public string IntermediaryUseItem(int opcionPokemon, string opcionItem)
     {
+
         validacionPokemon();
+
+        if (ValidacionPokemonVivo())
+        {
+            return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
+        }
+
         
         if (ValidacionWin())
         {
@@ -244,7 +257,7 @@ public class Battle
         
         if (validacionPokemon())
         {
-            return "No tenes los pokemones suficientes para empezar la batalla";
+            return "No tenes los pokemones suficientes para empezar la batalla. ";
         }
 
         try
@@ -301,10 +314,8 @@ public class Battle
     /// Muestra el mensaje de victoria cuando el jugador actual gana la batalla.
     /// </summary>
     /// <returns>Mensaje indicando que el jugador actual ha ganado.</returns>
-    public string Win()
+    public void Win()
     {
-        ActualTurn = null;
-        lastTurn = null;
-        return $"El jugador {ActualTurn} a ganado";
+        Facade.Instance.Surrender(this.actualTurn.Name);
     }
 }

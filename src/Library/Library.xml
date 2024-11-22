@@ -72,7 +72,7 @@
             Comando para mostrar los ataques de un Pokémon en el equipo de un entrenador.
             </summary>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Commands.GetPokemonAttacksCommand.ExecuteAsync(System.String)">
+        <member name="M:Ucu.Poo.DiscordBot.Commands.GetPokemonAttacksCommand.ExecuteAsync">
             <summary>
             Muestra los ataques del Pokémon especificado en el equipo de un entrenador.
             </summary>

@@ -305,6 +305,12 @@ public class Facade
     public string ChangePokemon(string playerDisplayName, int opcion)
     {
         Battle? battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
+        
+        if (ValidationTurn(playerDisplayName, battle))
+        {
+            return "No es tu turno ESPERA!";
+        }
+        
         return battle.IntermediaryChangeActivePokemon(opcion);
     }
 
@@ -342,6 +348,14 @@ public class Facade
         Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
         this.BattlesList.removeBatlle(battle);
         return $"{playerDisplayName} se a rendido. Termino la Batalla";
+        
+    }
+    
+    public string Win(string playerDisplayName)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
+        this.BattlesList.removeBatlle(battle);
+        return $"{playerDisplayName} a ganado!. Termino la Batalla!";
         
     }
 
