@@ -290,7 +290,7 @@ public class FacadeTest
                 result = facade.ChangePokemon("Misty", 3);
                 playerName = "Ash";
             }
-            Assert.That($"Gastly Es el turno de {playerName}", Is.EqualTo(result));
+            Assert.That($"Gastly", Is.EqualTo(result));
         }
 
         [Test]

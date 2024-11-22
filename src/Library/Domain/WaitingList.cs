@@ -8,14 +8,14 @@ namespace Ucu.Poo.DiscordBot.Domain;
 /// </summary>
 public class WaitingList
 {
-    private readonly List<Entrenador> trainers = new List<Entrenador>();
+    private readonly List<Trainer> trainers = new List<Trainer>();
 
     public int Count
     {
         get { return trainers.Count; }
     }
 
-    public ReadOnlyCollection<Entrenador> GetAllWaiting()
+    public ReadOnlyCollection<Trainer> GetAllWaiting()
     {
         return trainers.AsReadOnly();
     }
@@ -36,7 +36,7 @@ public class WaitingList
         }
         
         if (FindTrainerByDisplayName(displayName) != null) return false;
-        trainers.Add(new Entrenador(displayName));
+        trainers.Add(new Trainer(displayName));
         return true;
 
     }
@@ -51,7 +51,7 @@ public class WaitingList
     /// contrario.</returns>
     public bool RemoveTrainer(string displayName)
     {
-        Entrenador? trainer = FindTrainerByDisplayName(displayName);
+        Trainer? trainer = FindTrainerByDisplayName(displayName);
         if (trainer == null) return false;
         trainers.Remove(trainer);
         return true;
@@ -67,11 +67,11 @@ public class WaitingList
     /// </param>
     /// <returns>El jugador encontrado o <c>null</c> en caso contrario.
     /// </returns>
-    public Entrenador? FindTrainerByDisplayName(string displayName)
+    public Trainer? FindTrainerByDisplayName(string displayName)
     {
-        foreach (Entrenador trainer in trainers)
+        foreach (Trainer trainer in trainers)
         {
-            if (trainer.Nombre == displayName)
+            if (trainer.Name == displayName)
             {
                 return trainer;
             }
@@ -87,7 +87,7 @@ public class WaitingList
     /// 
     /// </summary>
     /// <returns></returns>
-    public Entrenador? GetAnyoneWaiting()
+    public Trainer? GetAnyoneWaiting()
     {
         if (trainers.Count == 0)
         {

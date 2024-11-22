@@ -15,7 +15,7 @@ public class BattlesList
     /// <param name="player1">El primer jugador (entrenador).</param>
     /// <param name="player2">El segundo jugador (oponente).</param>
     /// <returns>La nueva batalla creada.</returns>
-    public Battle AddBattle(Entrenador player1, Entrenador player2)
+    public Battle AddBattle(Trainer player1, Trainer player2)
     {
         var battle = new Battle(player1, player2);
         battles.Add(battle);
@@ -27,16 +27,16 @@ public class BattlesList
     /// </summary>
     /// <param name="displayName">El nombre de pantalla del entrenador a buscar.</param>
     /// <returns>El entrenador encontrado o <c>null</c> si no se encuentra en ninguna batalla.</returns>
-    public Entrenador? FindTrainerByDisplayName(string displayName)
+    public Trainer? FindTrainerByDisplayName(string displayName)
     {
         foreach (Battle batlle in battles)
         {
-            if (batlle.Player1.Nombre == displayName)
+            if (batlle.Player1.Name == displayName)
             {
                 return batlle.Player1;
             }
 
-            if (batlle.Player2.Nombre == displayName)
+            if (batlle.Player2.Name == displayName)
             {
                 return batlle.Player2;
             }
@@ -59,12 +59,12 @@ public class BattlesList
     {
         foreach (Battle batlle in battles)
         {
-            if (batlle.Player1.Nombre == displayName)
+            if (batlle.Player1.Name == displayName)
             {
                 return batlle;
             }
 
-            if (batlle.Player2.Nombre == displayName)
+            if (batlle.Player2.Name == displayName)
             {
                 return batlle;
             }

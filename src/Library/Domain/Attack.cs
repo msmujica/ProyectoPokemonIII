@@ -142,7 +142,7 @@ namespace Library
                 }
 
                 // Calcula el multiplicador de daño según los tipos
-                double multiplier = TypeLogic.CalculeMultiplier(attack.Type, objetive.Tipos);
+                double multiplier = TypeLogic.CalculeMultiplier(attack.Type, objetive.Types);
                 totaldmg = (int)(totaldmg * multiplier);
                 description += $"Como el ataque es tipo {attack.Type} el daño es {totaldmg}. ";
 
@@ -196,7 +196,7 @@ namespace Library
         public static IEffect SelectSpecialEffect()
         {
             int effect = new Random().Next(1, 5);
-            switch (1)
+            switch (effect)
             {
                 case 1:
                     return new SleepEffect();

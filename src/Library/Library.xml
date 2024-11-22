@@ -200,10 +200,10 @@
              Representa una batalla entre dos entrenadores, gestionando turnos, ataques, cambios de Pokémon y uso de ítems.
              Esta clase también se encarga de validar las condiciones de victoria y de manejar los efectos de estado durante la batalla.
             La clase Battle respeta los siguientes principios:
-             •   SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
-             •   LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
-             •   ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
-             •   DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
+             •	SRP: La clase Battle se encarga solo de gestionar la lógica de la batalla (turnos, ataques, cambios de Pokémon, uso de ítems, y validaciones de victoria), lo que le da una única responsabilidad.
+             •	LSP: Los entrenadores (Entrenador) y los Pokémon (Pokemon) son objetos que pueden ser sustituidos por sus subclases sin romper la funcionalidad del sistema, lo que permite que diferentes tipos de entrenadores o Pokémon sean intercambiables en la batalla.
+             •	ISP: Aunque la clase Battle no implementa interfaces explícitas, sigue la filosofía de ISP al no sobrecargar a otras clases con métodos innecesarios; cada clase se encarga de un conjunto limitado de operaciones.
+             •	DIP: La clase Battle depende de abstracciones como GestorEfectos en lugar de clases concretas, lo que facilita la extensión o modificación de la gestión de efectos sin alterar la clase Battle.
              </summary>
         </member>
         <member name="P:Ucu.Poo.DiscordBot.Domain.Battle.Player1">
@@ -226,7 +226,7 @@
             Obtiene o establece el jugador que está esperando en el turno pasado.
             </summary>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.#ctor(Library.Entrenador,Library.Entrenador)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.#ctor(Library.Trainer,Library.Trainer)">
             <summary>
             Inicializa una nueva instancia de la clase <see cref="T:Ucu.Poo.DiscordBot.Domain.Battle"/> con los entrenadores proporcionados.
             Además, inicializa el gestor de efectos y los ítems de los entrenadores.
@@ -234,20 +234,20 @@
             <param name="player1">El primer jugador (entrenador).</param>
             <param name="player2">El segundo jugador (oponente).</param>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.validationPokemon">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.validacionPokemon">
             <summary>
             Valida si ambos jugadores tienen al menos 6 Pokémon en su equipo.
             </summary>
             <returns>Devuelve <c>true</c> si algún jugador tiene menos de 6 Pokémon, de lo contrario <c>false</c>.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.WinValidation">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.ValidacionWin">
             <summary>
             Valida si el jugador actual ha ganado la batalla. 
             Se considera una victoria cuando todos los Pokémon del oponente tienen vida negativa.
             </summary>
             <returns>Devuelve <c>true</c> si el jugador ha ganado la batalla.</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Ucu.Poo.DiscordBot.Domain.Battle.ValidationAlivePokemon" -->
+        <!-- Badly formed XML comment ignored for member "M:Ucu.Poo.DiscordBot.Domain.Battle.ValidacionPokemonVivo" -->
         <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.IntermediaryAttack(System.String)">
             <summary>
             Intermediario para realizar un ataque en la batalla.
@@ -273,7 +273,7 @@
             <param name="opcionItem">Nombre del ítem a usar.</param>
             <returns>Mensaje que describe el resultado del uso del ítem.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.ChangeTurn">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.CambiarTurno">
             <summary>
             Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguiente jugador.
             </summary>
@@ -295,7 +295,7 @@
             Esta clase representa la lista de batallas en curso.
             </summary>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.BattlesList.AddBattle(Library.Entrenador,Library.Entrenador)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.BattlesList.AddBattle(Library.Trainer,Library.Trainer)">
             <summary>
             Crea una nueva batalla entre dos jugadores y la agrega a la lista de batallas.
             </summary>
@@ -430,23 +430,6 @@
             <param name="playerDisplayName">El nombre del jugador.</param>
             <param name="batt">La batalla en curso.</param>
             <returns>True si es el turno del jugador, False de lo contrario.</returns>
-        </member>
-        <member name="T:Ucu.Poo.DiscordBot.Domain.Trainer">
-            <summary>
-            Esta clase representa un jugador en el juego Pokémon.
-            </summary>
-        </member>
-        <member name="P:Ucu.Poo.DiscordBot.Domain.Trainer.DisplayName">
-            <summary>
-            El nombre de usuario de Discord en el servidor del bot del jugador.
-            </summary>
-        </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Trainer.#ctor(System.String)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:Ucu.Poo.DiscordBot.Domain.Trainer"/> con el
-            nombre de usuario de Discord que se recibe como argumento.
-            </summary>
-            <param name="displayName">El nombre de usuario de Discord.</param>
         </member>
         <member name="T:Ucu.Poo.DiscordBot.Domain.WaitingList">
             <summary>
@@ -586,20 +569,20 @@
             Gestor que maneja los efectos activos de un Pokémon en combate.
             Puede aplicar efectos, procesarlos (como daño continuo o estados) y limpiar los efectos.
             La clase GestorEfectos sigue varios principios de diseño:
-            •   SRP: La clase tiene una única responsabilidad, gestionar los efectos de los Pokémon durante las batallas, como la aplicación, el procesamiento y la limpieza de efectos. No asume otras responsabilidades, como el cálculo de daño o el control de la batalla.
-            •   OCP: Es fácil extender la funcionalidad de esta clase sin modificarla. Por ejemplo, si deseas agregar nuevos efectos (como efectos de control o efectos de daño), puedes crear nuevas clases que implementen IEfecto, y la clase GestorEfectos seguirá funcionando sin necesidad de modificación.
-            •   Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
-            •   Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
+            •	SRP: La clase tiene una única responsabilidad, gestionar los efectos de los Pokémon durante las batallas, como la aplicación, el procesamiento y la limpieza de efectos. No asume otras responsabilidades, como el cálculo de daño o el control de la batalla.
+            •	OCP: Es fácil extender la funcionalidad de esta clase sin modificarla. Por ejemplo, si deseas agregar nuevos efectos (como efectos de control o efectos de daño), puedes crear nuevas clases que implementen IEfecto, y la clase GestorEfectos seguirá funcionando sin necesidad de modificación.
+            •	Principio de Expert: La clase es experta en la gestión de los efectos activos de los Pokémon. Sabe cómo almacenar, aplicar y procesar efectos, y cómo interactuar con otras clases como Pokemon y IEfecto para ejecutar la lógica asociada.
+            •	Bajo Acoplamiento: La clase interactúa con los efectos a través de la interfaz IEfecto, lo que significa que no depende de implementaciones específicas de efectos. Esto permite agregar efectos nuevos sin afectar al resto del sistema, mejorando la modularidad.
             </summary>
         </member>
         <member name="M:Library.EffectsManager.ApplyEffect(Library.IEffect,Library.Pokemon)">
             <summary>
             Aplica un efecto específico a un Pokémon.
             </summary>
-            <param name="efecto">El efecto a aplicar.</param>
+            <param name="effect">El efecto a aplicar.</param>
             <param name="pokemon">El Pokémon que recibirá el efecto.</param>
         </member>
-        <member name="M:Library.EffectsManager.Canattack(Library.Pokemon)">
+        <member name="M:Library.EffectsManager.IcanAttack(Library.Pokemon)">
             <summary>
             Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar).
             </summary>
@@ -609,7 +592,7 @@
             <c>false</c> si el efecto ha terminado o no aplica.
             </returns>
         </member>
-        <member name="M:Library.EffectsManager.ProcessEffectsDamage(Library.Pokemon)">
+        <member name="M:Library.EffectsManager.ProcesarEfectosDaño(Library.Pokemon)">
             <summary>
             Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
             </summary>
@@ -626,60 +609,6 @@
             </summary>
             <param name="pokemon">El Pokémon a verificar.</param>
             <returns><c>true</c> si el Pokémon tiene efectos activos, <c>false</c> si no.</returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Library.Entrenador" -->
-        <member name="M:Library.Entrenador.#ctor(System.String)">
-            <summary>
-            Inicializa un nuevo entrenador con el nombre especificado.
-            </summary>
-            <param name="nombre">El nombre del entrenador.</param>
-        </member>
-        <member name="M:Library.Entrenador.chooseTeam(System.Int32)">
-            <summary>
-            Permite al entrenador elegir un Pokémon para agregar a su equipo.
-            </summary>
-            <param name="numero">El número del Pokémon que se desea agregar al equipo.</param>
-            <returns>Un mensaje indicando si el Pokémon fue agregado con éxito o si el equipo está lleno.</returns>
-        </member>
-        <member name="M:Library.Entrenador.MostrarmiPokedex">
-            <summary>
-            Muestra todos los Pokémon que el entrenador tiene en su Equipo.
-            </summary>
-        </member>
-        <member name="M:Library.Entrenador.changeActive(System.Int32)">
-            <summary>
-            Cambia el Pokémon activo del entrenador.
-            </summary>
-            <param name="indexPokemonList">El índice del Pokémon en el equipo que se quiere hacer activo.</param>
-            <returns>El nombre del Pokémon activo, o un mensaje de error si el índice es inválido.</returns>
-        </member>
-        <member name="M:Library.Entrenador.chooseAttack(System.String,Library.Pokemon,Library.EffectsManager)">
-            <summary>
-            Elige un ataque para que el Pokémon activo ataque a un oponente.
-            </summary>
-            <param name="nombre">El nombre del ataque a utilizar.</param>
-            <param name="oponente">El Pokémon oponente que recibirá el ataque.</param>
-            <param name="effectsManager">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
-            <returns>El resultado de la acción de atacar.</returns>
-        </member>
-        <member name="M:Library.Entrenador.UseanItem(System.String,Library.Pokemon,Library.EffectsManager)">
-            <summary>
-            Utiliza un ítem en un Pokémon durante la batalla.
-            </summary>
-            <param name="nombreItem">El nombre del ítem a usar (Superpocion, Revivir, CuraTotal).</param>
-            <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
-            <param name="effectsManager">El gestor de efectos que maneja los efectos del ítem.</param>
-            <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
-        </member>
-        <member name="M:Library.Entrenador.ChangeDefeatedPokemon">
-            <summary>
-            Cambia al siguiente Pokémon disponible en el equipo si el Pokémon activo está muerto.
-            </summary>
-        </member>
-        <member name="M:Library.Entrenador.ItemSetting">
-            <summary>
-            Inicializa los contadores de ítems disponibles para el entrenador.
-            </summary>
         </member>
         <member name="T:Library.IEffect">
             <summary>
@@ -714,7 +643,7 @@
             •	Acoplamiento bajo: Usa GestorEfectos para manejar los efectos negativos, reduciendo la dependencia entre clases.
             </summary>
         </member>
-        <member name="M:Library.Items.ItemsManager.UseSuperPotion(Library.Pokemon,System.Int32)">
+        <member name="M:Library.Items.ItemsManager.UsarSuperPocion(Library.Pokemon,System.Int32)">
             <summary>
             Usa una SuperPoción en un Pokémon, restaurando su vida hasta un máximo de 100.
             </summary>
@@ -723,7 +652,7 @@
             <returns>Un mensaje indicando el resultado de usar la SuperPoción.</returns>
             
         </member>
-        <member name="M:Library.Items.ItemsManager.UseRevive(Library.Pokemon,System.Int32)">
+        <member name="M:Library.Items.ItemsManager.UsarRevivir(Library.Pokemon,System.Int32)">
             <summary>
             Usa un Revivir para resucitar a un Pokémon derrotado, restaurándole 50% de vida.
             </summary>
@@ -731,7 +660,7 @@
             <param name="contadorRevivir">El número de Revivir disponibles.</param>
             <returns>Un mensaje indicando el resultado de usar el Revivir.</returns>
         </member>
-        <member name="M:Library.Items.ItemsManager.UseTotalCure(Library.Pokemon,System.Int32,Library.EffectsManager)">
+        <member name="M:Library.Items.ItemsManager.UsarCuraTotal(Library.Pokemon,System.Int32,Library.EffectsManager)">
             <summary>
             Usa una Cura Total para restaurar la vida de un Pokémon al 100% y eliminar cualquier efecto negativo.
             </summary>
@@ -822,12 +751,12 @@
             </summary>
             <returns>Una lista de cadenas que representan los Pokémon en la Pokedex, con su nombre y tipo.</returns>
         </member>
-        <member name="M:Library.Pokedex.CreatePokemonByIndex(System.Int32,Library.Entrenador)">
+        <member name="M:Library.Pokedex.CreatePokemonByIndex(System.Int32,Library.Trainer)">
             <summary>
             Crea un Pokémon a partir de su índice en la Pokedex y lo agrega al equipo del entrenador.
             </summary>
             <param name="indice">El índice del Pokémon en la Pokedex.</param>
-            <param name="entrenador">El entrenador al que se le asignará el Pokémon creado.</param>
+            <param name="trainer">El entrenador al que se le asignará el Pokémon creado.</param>
             <returns>El Pokémon creado, o null si el índice es inválido.</returns>
         </member>
         <member name="T:Library.Pokemon">
@@ -849,13 +778,13 @@
             <param name="ataques">Lista de ataques que puede realizar el Pokémon.</param>
             <param name="tipo">Tipo o tipos del Pokémon.</param>
         </member>
-        <member name="M:Library.Pokemon.recibeDamage(System.Int32)">
+        <member name="M:Library.Pokemon.recibirDaño(System.Int32)">
             <summary>
             Método que permite al Pokémon recibir un cierto daño.
             </summary>
             <param name="daño">Cantidad de daño recibido.</param>
         </member>
-        <member name="M:Library.Pokemon.attack(Library.Pokemon,System.String,Library.EffectsManager)">
+        <member name="M:Library.Pokemon.attacks(Library.Pokemon,System.String,Library.EffectsManager)">
             <summary>
             Método que permite al Pokémon realizar un ataque sobre otro Pokémon.
             </summary>
@@ -863,6 +792,60 @@
             <param name="ataque">Nombre del ataque que se realizará.</param>
             <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
             <returns>El valor del daño causado al oponente como una cadena.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Library.Trainer" -->
+        <member name="M:Library.Trainer.#ctor(System.String)">
+            <summary>
+            Inicializa un nuevo entrenador con el nombre especificado.
+            </summary>
+            <param name="nombre">El nombre del entrenador.</param>
+        </member>
+        <member name="M:Library.Trainer.ChooseTeam(System.Int32)">
+            <summary>
+            Permite al entrenador elegir un Pokémon para agregar a su equipo.
+            </summary>
+            <param name="numero">El número del Pokémon que se desea agregar al equipo.</param>
+            <returns>Un mensaje indicando si el Pokémon fue agregado con éxito o si el equipo está lleno.</returns>
+        </member>
+        <member name="M:Library.Trainer.ShowMyPokedex">
+            <summary>
+            Muestra todos los Pokémon que el entrenador tiene en su Equipo.
+            </summary>
+        </member>
+        <member name="M:Library.Trainer.ChangeActive(System.Int32)">
+            <summary>
+            Cambia el Pokémon activo del entrenador.
+            </summary>
+            <param name="indexPokemonList">El índice del Pokémon en el equipo que se quiere hacer activo.</param>
+            <returns>El nombre del Pokémon activo, o un mensaje de error si el índice es inválido.</returns>
+        </member>
+        <member name="M:Library.Trainer.ChooseAttack(System.String,Library.Pokemon,Library.EffectsManager)">
+            <summary>
+            Elige un ataque para que el Pokémon activo ataque a un oponente.
+            </summary>
+            <param name="nombre">El nombre del ataque a utilizar.</param>
+            <param name="oponente">El Pokémon oponente que recibirá el ataque.</param>
+            <param name="effectsManager">El gestor de efectos que maneja los efectos adicionales del ataque.</param>
+            <returns>El resultado de la acción de atacar.</returns>
+        </member>
+        <member name="M:Library.Trainer.UsarItem(System.String,Library.Pokemon,Library.EffectsManager)">
+            <summary>
+            Utiliza un ítem en un Pokémon durante la batalla.
+            </summary>
+            <param name="nombreItem">El nombre del ítem a usar (Superpocion, Revivir, CuraTotal).</param>
+            <param name="pokemon">El Pokémon sobre el que se usará el ítem.</param>
+            <param name="effectsManager">El gestor de efectos que maneja los efectos del ítem.</param>
+            <returns>Un mensaje indicando el resultado de usar el ítem.</returns>
+        </member>
+        <member name="M:Library.Trainer.CambioPokemonMuerto">
+            <summary>
+            Cambia al siguiente Pokémon disponible en el equipo si el Pokémon activo está muerto.
+            </summary>
+        </member>
+        <member name="M:Library.Trainer.ItemSetting">
+            <summary>
+            Inicializa los contadores de ítems disponibles para el entrenador.
+            </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:Library.TypeLogic" -->
         <member name="M:Library.TypeLogic.CalculeMultiplier(System.String,System.String)">

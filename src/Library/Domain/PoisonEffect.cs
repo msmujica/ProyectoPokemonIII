@@ -36,11 +36,11 @@ namespace Library
         public string ProcessEffect(Pokemon pokemon)
         {
             // Calcula el daño causado por el veneno (5% de la vida actual del Pokémon)
-            int daño = (int)(pokemon.Vida * damagePercentage);
-            pokemon.Vida -= daño;
+            int daño = (int)(pokemon.Health * damagePercentage);
+            pokemon.Health -= daño;
             
             // Si la vida del Pokémon llega a cero o menos, el efecto ha terminado
-            if (pokemon.Vida <= 0)
+            if (pokemon.Health <= 0)
             {
                 return $"El pokemon {pokemon.Name} ha caído por envenenamiento. ";
             }
