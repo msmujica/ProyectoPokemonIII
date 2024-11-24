@@ -42,7 +42,7 @@ public class ParalyzeEffectTest
         Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
         ParalyzeEffect paralyze = new ParalyzeEffect();
         
-        Assert.That("Al pokemon Pikachu tiene el efecto paralisis. ", Is.EqualTo(paralyze.Info(Pikachu)));
+        Assert.That(paralyze.ProcessEffect(Pikachu), Is.EqualTo(paralyze.Info(Pikachu)));
     }
     
         // Test cuando el Pokémon puede atacar

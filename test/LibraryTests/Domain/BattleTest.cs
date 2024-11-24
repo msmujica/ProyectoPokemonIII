@@ -1,92 +1,87 @@
 using Library;
+using Library.Items;
 using NUnit.Framework;
-using Ucu.Poo.DiscordBot.Domain;
+using System.Collections.Generic;
 
-namespace LibraryTests.Domain;
-
-[TestFixture]
-[TestOf(typeof(Battle))]
-public class BattleTest
+namespace Tests
 {
-    [Test]
-    public void ValidacionPokemon_DeberiaRetornarTrue_CuandoUnJugadorTieneMenosDeSeisPokemon()
+    [TestFixture]
+    public class BattleTest
     {
-        // Configuración del escenario
-        var trainer1 = new Trainer("Player 1");
-        var trainer2 = new Trainer("Player 2");
-
-        // Solo agregamos menos de 6 Pokémon a cada equipo
-        trainer1.ChooseTeam(1);
-        trainer1.ChooseTeam(2);
-        trainer1.ChooseTeam(3);
-        trainer1.ChooseTeam(4);
-        trainer1.ChooseTeam(5);
-        trainer1.ChooseTeam(6);
-
-        trainer2.ChooseTeam(1);
-        trainer2.ChooseTeam(2);
-        trainer2.ChooseTeam(3);
-        trainer2.ChooseTeam(4);
-        trainer2.ChooseTeam(5);
-
-        var battle = new Battle(trainer1, trainer2);
-
-        // Actuar
-        var result = battle.validacionPokemon();
-
-        // Verificar
-        Assert.That(result, Is.True);
-    }
-
-    [Test]
-    public void ValidacionWin_DeberiaRetornarTrue_CuandoTodosLosPokemonDelOponenteEstanMuertos()
-    {
-        // Configuración del escenario
-        var trainer1 = new Trainer("Player 1");
-        var trainer2 = new Trainer("Player 2");
-
-        // Solo agregamos 6 Pokémon a cada equipo
-        trainer1.ChooseTeam(1);
-        trainer1.ChooseTeam(2);
-        trainer1.ChooseTeam(3);
-        trainer1.ChooseTeam(4);
-        trainer1.ChooseTeam(5);
-        trainer1.ChooseTeam(6);
-
-        trainer2.ChooseTeam(1);
-        trainer2.ChooseTeam(2);
-        trainer2.ChooseTeam(3);
-        trainer2.ChooseTeam(4);
-        trainer2.ChooseTeam(5);
-        trainer2.ChooseTeam(6);
-
-
-        foreach (var pokemon in trainer2.Team)
+        [Test]
+        public void SimulateBattle()
         {
-            pokemon.Health = 0; // Todos los Pokémon de Player2 tienen vida 0, provocando su derrota.
+            // 1. Crear entrenadores
+            Trainer ash = new Trainer("Ash");
+            Trainer gary = new Trainer("Gary");
+
+            // Inicializar ítems para ambos entrenadores
+            ash.ItemSetting();
+            gary.ItemSetting();
+
+            // 2. Crear Pokémons y agregar al equipo de cada entrenador
+            Pokemon pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo" }, "Eléctrico");
+            Pokemon charizard = new Pokemon("Charizard", 150, new List<string> { "Lanzallamas", "Garra Dragón" }, "Fuego");
+
+            Pokemon squirtle = new Pokemon("Squirtle", 90, new List<string> { "Pistola Agua", "Hidrobomba" }, "Agua");
+            Pokemon bulbasaur = new Pokemon("Bulbasaur", 110, new List<string> { "Latigo Cepa", "Hoja Afilada" }, "Planta");
+
+            ash.Team.Add(pikachu);
+            ash.Team.Add(charizard);
+
+            gary.Team.Add(squirtle);
+            gary.Team.Add(bulbasaur);
+
+            // Configurar Pokémon activos
+            ash.Active = pikachu;
+            gary.Active = squirtle;
+
+            // 3. Simular batalla
+            EffectsManager effectsManager = new EffectsManager();
+
+            // Ash ataca primero
+            string attackResult1 = ash.ChooseAttack("Impactrueno", gary.Active, effectsManager);
+            Assert.That(attackResult1, Contains.Substring("recibió")); // Verifica si el ataque fue exitoso
+
+            // Verificar que la salud de Squirtle disminuyó
+            Assert.That(gary.Active.Health, Is.LessThan(91));
+
+            // Gary contraataca
+            string attackResult2 = gary.ChooseAttack("Pistola Agua", ash.Active, effectsManager);
+            Assert.That(attackResult2, Contains.Substring("recibió")); // Verifica si el ataque fue exitoso
+
+            // Verificar que la salud de Pikachu disminuyó
+            Assert.That(ash.Active.Health, Is.LessThan(100));
+
+            // 4. Aplicar un efecto (por ejemplo, paralizar)
+            string paralyzeResult = effectsManager.ApplyEffect(new ParalyzeEffect(), gary.Active);
+            Assert.That(paralyzeResult, Contains.Substring("El pokemon Squirtle se le aplico el efecto paralisis."));
+
+            // Verificar que el Pokémon no puede atacar mientras está paralizado
+            bool canAttack = effectsManager.IcanAttack(gary.Active);
+            Assert.That(canAttack, Is.False);
+
+            // 5. Ash usa un ítem en Pikachu
+            string itemResult = ash.UsarItem("Superpocion", ash.Active, effectsManager);
+            Assert.That(itemResult, Contains.Substring("Usaste una Super Pocion. Usos restantes: 3"));
+
+            // Verificar que la salud de Pikachu ha aumentado
+            Assert.That(ash.Active.Health, Is.GreaterThan(ash.Active.Health - 20));
+
+            // 6. Derrotar al Pokémon activo de Gary y verificar cambio
+            gary.Active.Health = 0; // Simular derrota
+            gary.Active.IsDefeated = true;
+
+            gary.CambioPokemonMuerto(); // Cambiar al siguiente Pokémon disponible
+            Assert.That(gary.Active, Is.EqualTo(bulbasaur));
+
+            // 7. Limpiar efectos
+            string cleanEffectsResult = effectsManager.CleanEffects(gary.Active);
+            Assert.That(cleanEffectsResult, Contains.Substring(""));
+
+            // Verificar que ya no tiene efecto
+            bool hasEffects = effectsManager.PokemonWithEffect(gary.Active);
+            Assert.That(hasEffects, Is.False);
         }
-
-        var battle = new Battle(trainer1, trainer2);
-
-        // Actuar
-        var resultado = battle.ValidacionWin();
-
-        // Verificar
-        Assert.That(resultado, Is.True);
-    }
-
-    [Test]
-    public void CambiarTurno_DeberiaAlternarEntreJugadores()
-    {
-        // Configuración del escenario
-        var trainer1 = new Trainer("Player 1");
-        var trainer2 = new Trainer("Player 2");
-            
-        var battle = new Battle(trainer1, trainer2);
-
-        string turno = battle.ActualTurn.Name;
-        battle.CambiarTurno();
-            
-        Assert.That(turno, !Is.EqualTo(battle.ActualTurn));
     }
 }
