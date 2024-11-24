@@ -26,4 +26,22 @@ public class PoisonEffectTest
         string result = poison.ProcessEffect(Pikachu);
         Assert.That(result, !Is.Null);
     }
+    
+    [Test]
+    public void TestInfo()
+    {
+        Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+        PoisonEffect poision = new PoisonEffect();
+        
+        Assert.That("Al pokemon Pikachu tiene el efecto envenenamiento. ", Is.EqualTo(poision.Info(Pikachu)));
+    }
+
+    [Test]
+    public void TestICanAttack()
+    {
+        Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+        PoisonEffect poision = new PoisonEffect();
+        
+        Assert.That(true, Is.EqualTo(poision.IcanAttack));
+    }
 }
