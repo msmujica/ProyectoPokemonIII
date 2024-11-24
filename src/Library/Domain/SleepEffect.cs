@@ -8,7 +8,7 @@ namespace Library
 
         public string StartEffect(Pokemon pokemon)
         {
-            this.turnosDormidos = new Random().Next(1, 5) + 1;
+            this.turnosDormidos = new Random().Next(2, 6);
             return $"El pokemon {pokemon.Name} se le aplica el efecto dormir por {this.turnosDormidos - 1} turnos.";
         }
 
@@ -23,7 +23,7 @@ namespace Library
                     this.IcanAttack = true;
                     return $"El pokemon {pokemon.Name} ha despertado.";
                 }
-                return $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar.";
+                return $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos - 1} turnos dormido, por lo cual no puede atacar.";
             }
 
             this.IcanAttack = true;
@@ -33,7 +33,7 @@ namespace Library
         public string Info(Pokemon pokemon)
         {
             return
-                $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos} turnos dormido, por lo cual no puede atacar.";
+                $"Al pokemon {pokemon.Name} le quedan {this.turnosDormidos - 1} turnos dormido, por lo cual no puede atacar.";
         }
     }
 }
