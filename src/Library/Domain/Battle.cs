@@ -316,6 +316,6 @@ public class Battle
     /// <returns>Mensaje indicando que el jugador actual ha ganado.</returns>
     public void Win()
     {
-        Facade.Instance.Surrender(this.actualTurn.Name);
+        Facade.Instance.Win(this.actualTurn.Name);
     }
 }
