@@ -113,8 +113,6 @@ namespace Library.Tests
         {
             // Arrange
             manager.ApplyEffect(sleepEffect, squirtle);
-
-            // Act
             string result = manager.ProcesarControlMasa(squirtle);
 
             // Assert
