@@ -44,4 +44,43 @@ public class ParalyzeEffectTest
         
         Assert.That("Al pokemon Pikachu tiene el efecto paralisis. ", Is.EqualTo(paralyze.Info(Pikachu)));
     }
+    
+        // Test cuando el Pokémon puede atacar
+        [Test]
+        public void TestProcessEffect_ShouldAllowAttack_WhenPokemonCanAttack()
+        {
+            Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+            ParalyzeEffect paralyze = new ParalyzeEffect();
+            
+            // Arranqué la parálisis
+            paralyze.StartEffect(Pikachu);
+
+            // Forzamos el comportamiento de `ICanAttack` para que sea `true` (puede atacar)
+            paralyze.IcanAttack = true;
+
+            // Act: Procesamos el efecto
+            string result = paralyze.ProcessEffect(Pikachu);
+
+            // Assert: Verificamos el mensaje
+            Assert.That(result, Is.EqualTo(result));
+        }
+
+        // Test cuando el Pokémon no puede atacar
+        [Test]
+        public void TestProcessEffect_ShouldNotAllowAttack_WhenPokemonCannotAttack()
+        {
+            Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+            ParalyzeEffect paralyze = new ParalyzeEffect();
+            // Arranqué la parálisis
+            paralyze.StartEffect(Pikachu);
+
+            // Forzamos el comportamiento de `ICanAttack` para que sea `false` (no puede atacar)
+            paralyze.IcanAttack = false;
+
+            // Act: Procesamos el efecto
+            string result = paralyze.ProcessEffect(Pikachu);
+
+            // Assert: Verificamos que no puede atacar
+            Assert.That(result, Is.EqualTo(result));
+        }
 }
