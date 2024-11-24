@@ -58,8 +58,16 @@ namespace Library
         }
         public string Info(Pokemon pokemon)
         {
-            return
-                $"Al pokemon {pokemon.Name} tiene el efecto paralisis. ";
-        }
+            if (this.IcanAttack)
+            {
+                // El Pokémon puede atacar este turno.
+                return $"El pokemon {pokemon.Name} supera la parálisis en este turno y puede atacar. ";
+                // El efecto continúa, ya que el Pokémon puede atacar.
+            }
+            
+            // El Pokémon no puede atacar este turno debido a la parálisis.
+            return $"{pokemon.Name} está paralizado y no puede atacar, perdiste el turno. ";
+            // El efecto sigue activo, ya que el Pokémon no puede atacar.
+            }
     }
 }
