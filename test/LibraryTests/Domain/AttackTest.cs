@@ -44,4 +44,24 @@ public class AttackTest
             
         Assert.That(calculedamage, Is.EqualTo(damage));
     }
+
+    [Test]
+    public void TestSelectSpecialEffect()
+    {
+        IEffect efecto = Attack.SelectSpecialEffect();
+        
+        Assert.That(efecto, !Is.Null);
+    }
+
+    [Test]
+    public void TestCritucal()
+    {
+        Assert.That(Attack.Critical, !Is.Null);
+    }
+
+    [Test]
+    public void TestApplySpecialEffect()
+    {
+        Assert.That(Attack.ApplySpecialEffect, !Is.Null);
+    }
 }

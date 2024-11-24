@@ -26,4 +26,22 @@ public class SleepEffectTest
         string result = sleep.ProcessEffect(Pikachus);
         Assert.That(result, !Is.EqualTo(""));
     }
+    
+    [Test]
+    public void TestInfo()
+    {
+        Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+        SleepEffect sleep = new SleepEffect();
+        
+        Assert.That(sleep.Info(Pikachu), !Is.Null);
+    }
+
+    [Test]
+    public void TestICanAttack()
+    {
+        Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+        SleepEffect sleep = new SleepEffect();
+        
+        Assert.That(false, Is.EqualTo(sleep.IcanAttack));
+    }
 }
