@@ -80,63 +80,64 @@ public static class Pokedex
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
     /// <param name="trainer">El entrenador al que se le asignará el Pokémon creado.</param>
     /// <returns>El Pokémon creado, o null si el índice es inválido.</returns>
-    public static Pokemon CreatePokemonByIndex(int index, Trainer trainer)
+   public static Pokemon CreatePokemonByIndex(int index, Trainer trainer)
+{
+    int inicialHealth = 100;
+    Pokemon newPokemon = null;
+
+    switch (index)
     {
-        int inicialHealth = 100;
-        Pokemon newPokemon = null;
-
-        switch (index)
-        {
-            case 0:
-                newPokemon = new Pokemon("Squirtle", inicialHealth, new List<string> { "Pistola Agua", "Hidrobomba", "Burbuja" }, "Agua");
-                break;
-            case 1:
-                newPokemon = new Pokemon("Caterpie", inicialHealth, new List<string> { "Picadura", "Pulso Bicho", "Tijera X" }, "Bicho");
-                break;
-            case 2:
-                newPokemon = new Pokemon("Dratini", inicialHealth, new List<string> { "Garra Dragón", "Cometa Draco", "Aliento Dragón" }, "Dragón");
-                break;
-            case 3:
-                newPokemon = new Pokemon("Pikachu", inicialHealth, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
-                break;
-            case 4:
-                newPokemon = new Pokemon("Gastly", inicialHealth, new List<string> { "Bola Sombra", "Puño Spectral", "Puño Sombrío" }, "Fantasma");
-                break;
-            case 5:
-                newPokemon = new Pokemon("Charmander", inicialHealth, new List<string> { "Llamarada", "Lanzallamas", "Ascuas" }, "Fuego");
-                break;
-            case 6:
-                newPokemon = new Pokemon("Jynx", inicialHealth, new List<string> { "Rayo Hielo", "Ventisca", "Nieve Polvo" }, "Hielo");
-                break;
-            case 7:
-                newPokemon = new Pokemon("Machop", inicialHealth, new List<string> { "Golpe Karate", "A Bocajarro", "Puño Dinámico" }, "Lucha");
-                break;
-            case 8:
-                newPokemon = new Pokemon("Eevee", inicialHealth, new List<string> { "Tackle", "Puño Sombra", "Desenlace" }, "Normal");
-                break;
-            case 9:
-                newPokemon = new Pokemon("Bulbasaur", inicialHealth, new List<string> { "Hoja Afilada", "Látigo Cepa", "Rayo Solar" }, "Planta");
-                break;
-            case 10:
-                newPokemon = new Pokemon("Abra", inicialHealth, new List<string> { "Confusión", "Psíquico", "Premonición" }, "Psíquico");
-                break;
-            case 11:
-                newPokemon = new Pokemon("Geodude", inicialHealth, new List<string> { "Avalancha", "Lanzarrocas", "Roca Afilada" }, "Roca");
-                break;
-            case 12:
-                newPokemon = new Pokemon("Diglett", inicialHealth, new List<string> { "Terremoto", "Excavar", "Bofetón Lodo" }, "Tierra");
-                break;
-            case 13:
-                newPokemon = new Pokemon("Ekans", inicialHealth, new List<string> { "Ácido", "Bomba Lodo", "Cola Veneno" }, "Veneno");
-                break;
-            case 14:
-                newPokemon = new Pokemon("Pidgey", inicialHealth, new List<string> { "Tornado", "Ala de Acero", "Ataque Aéreo" }, "Volador");
-                break;
-            default:
-                Console.WriteLine("Índice inválido.");
-                return null;
-        }
-
+        case 0:
+            newPokemon = new Pokemon("Squirtle", inicialHealth, new List<string> { "Pistola Agua", "Hidrobomba", "Burbuja" }, "Agua");
+            break;
+        case 1:
+            newPokemon = new Pokemon("Caterpie", inicialHealth, new List<string> { "Picadura", "Pulso Bicho", "Tijera X" }, "Bicho");
+            break;
+        case 2:
+            newPokemon = new Pokemon("Dratini", inicialHealth, new List<string> { "Garra Dragón", "Cometa Draco", "Aliento Dragón" }, "Dragón");
+            break;
+        case 3:
+            newPokemon = new Pokemon("Pikachu", inicialHealth, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
+            break;
+        case 4:
+            newPokemon = new Pokemon("Gastly", inicialHealth, new List<string> { "Bola Sombra", "Puño Spectral", "Puño Sombrío" }, "Fantasma");
+            break;
+        case 5:
+            newPokemon = new Pokemon("Charmander", inicialHealth, new List<string> { "Llamarada", "Lanzallamas", "Ascuas" }, "Fuego");
+            break;
+        case 6:
+            newPokemon = new Pokemon("Jynx", inicialHealth, new List<string> { "Rayo Hielo", "Ventisca", "Nieve Polvo" }, "Hielo");
+            break;
+        case 7:
+            newPokemon = new Pokemon("Machop", inicialHealth, new List<string> { "Golpe Karate", "A Bocajarro", "Puño Dinámico" }, "Lucha");
+            break;
+        case 8:
+            newPokemon = new Pokemon("Eevee", inicialHealth, new List<string> { "Tackle", "Puño Sombra", "Desenlace" }, "Normal");
+            break;
+        case 9:
+            newPokemon = new Pokemon("Bulbasaur", inicialHealth, new List<string> { "Hoja Afilada", "Látigo Cepa", "Rayo Solar" }, "Planta");
+            break;
+        case 10:
+            newPokemon = new Pokemon("Abra", inicialHealth, new List<string> { "Confusión", "Psíquico", "Premonición" }, "Psíquico");
+            break;
+        case 11:
+            newPokemon = new Pokemon("Geodude", inicialHealth, new List<string> { "Avalancha", "Lanzarrocas", "Roca Afilada" }, "Roca");
+            break;
+        case 12:
+            newPokemon = new Pokemon("Diglett", inicialHealth, new List<string> { "Terremoto", "Excavar", "Bofetón Lodo" }, "Tierra");
+            break;
+        case 13:
+            newPokemon = new Pokemon("Ekans", inicialHealth, new List<string> { "Ácido", "Bomba Lodo", "Cola Veneno" }, "Veneno");
+            break;
+        case 14:
+            newPokemon = new Pokemon("Pidgey", inicialHealth, new List<string> { "Tornado", "Ala de Acero", "Ataque Aéreo" }, "Volador");
+            break;
+        default:
+            Console.WriteLine("Índice inválido.");
+            return null;
+    }
+    
+    
         // Si se crea un Pokémon, se agrega al equipo del entrenador
         if (newPokemon != null)
         {
