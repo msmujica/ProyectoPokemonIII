@@ -28,6 +28,16 @@ public class BurnEffectTest
     }
     
     [Test]
+    public void TestProcessEffectPokemonDied()
+    {
+        Pokemon Pikachu = new Pokemon("Pikachu", 0, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
+        BurnEffect burn = new BurnEffect();
+        burn.StartEffect(Pikachu);
+        string result = burn.ProcessEffect(Pikachu);
+        Assert.That(result, Is.EqualTo("El pokemon Pikachu ha caído por quemadura. "));
+    }
+    
+    [Test]
     public void TestInfo()
     {
         Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
