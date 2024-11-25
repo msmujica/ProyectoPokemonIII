@@ -4,15 +4,13 @@ using Ucu.Poo.DiscordBot.Domain;
 namespace Ucu.Poo.DiscordBot.Commands;
 
 /// <summary>
-/// Comando para mostrar los ataques de un Pokémon en el equipo de un entrenador.
+/// Comando para mostrar una lista de los comandos disponibles para el bot.
 /// </summary>
 public class HelpCommand : ModuleBase<SocketCommandContext>
 {
     /// <summary>
-    /// Muestra los ataques del Pokémon especificado en el equipo de un entrenador.
+    /// Comando para mostrar una lista de los comandos disponibles para el bot.
     /// </summary>
-    /// <param name="trainerDisplayName">El nombre del entrenador que tiene el Pokémon.</param>
-    /// <param name="pokemonName">El nombre del Pokémon del cual se desean ver los ataques.</param>
     [Command("Help")]
     [Summary("Muestra posibles comandos.")]
     public async Task ExecuteAsync(){

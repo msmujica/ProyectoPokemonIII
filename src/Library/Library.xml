@@ -30,30 +30,47 @@
             id del pokemon para cambiarlo.
             </summary>
         </member>
+        <member name="T:Ucu.Poo.DiscordBot.Commands.ChangeTurnCommand">
+            <summary>
+            Esta clase implementa el comando 'ChangeTurn' del bot. Este comando permite
+            que un jugador cambie su turno en el juego una vez que ejecute el comando en Discord.
+            </summary>
+        </member>
+        <member name="M:Ucu.Poo.DiscordBot.Commands.ChangeTurnCommand.ExecuteAsync">
+            <summary>
+            Implementa el comando 'ChangeTurn'. Este comando permite que el jugador
+            cambie su turno en el juego. El jugador ejecuta el comando en Discord para
+            que su turno sea cambiado.
+            </summary>
+        </member>
         <member name="T:Ucu.Poo.DiscordBot.Commands.ChooseAttackCommand">
             <summary>
             Esta clase implementa el comando 'attack' del bot. Este comando ordena
-            a un pokemon a atacar segun el ataque, el ataque se selecciona segun el
-            parametro que nos pasa el usuario
+            a un Pokémon a atacar según el ataque seleccionado por el jugador.
             </summary>
         </member>
         <member name="M:Ucu.Poo.DiscordBot.Commands.ChooseAttackCommand.ExecuteAsync(System.String)">
             <summary>
-            Implementa el comando 'attack'. Este commando selecciona
-            un ataque y ordena atacar.
+            Implementa el comando 'attack'. Este comando selecciona un ataque para
+            el Pokémon activo del jugador y ordena que lo realice. Si el ataque
+            seleccionado no es válido, el ataque no se ejecutará.
             </summary>
+            <param name="attackOption">La opción de ataque seleccionada por el jugador. Si no se proporciona, se solicita un ataque válido.</param>
+            <returns>Un <see cref="T:System.Threading.Tasks.Task"/> que representa la operación asincrónica de ejecutar el comando.</returns>
         </member>
         <member name="T:Ucu.Poo.DiscordBot.Commands.ChooseItemCommand">
             <summary>
-            Esta clase implementa el comando 'item' del bot. Este comando usa uno
-            de los items disponible del entrenador.
+            Esta clase implementa el comando 'item' del bot. Este comando permite
+            al jugador usar un ítem disponible en su inventario para su Pokémon.
             </summary>
         </member>
         <member name="M:Ucu.Poo.DiscordBot.Commands.ChooseItemCommand.ExecuteAsync(System.String)">
             <summary>
-            Implementa el comando 'item'. Este commando selecciona
-            un item y un pokemon, luego lo usa.
+            Implementa el comando 'item'. Este comando permite seleccionar un
+            ítem de la lista de opciones y usarlo con un Pokémon especificado.
             </summary>
+            <param name="optionList">Una cadena que contiene los detalles del ítem y el Pokémon al que se le usará el ítem, separados por coma. Ejemplo: "poción, Pikachu".</param>
+            <returns>Un <see cref="T:System.Threading.Tasks.Task"/> que representa la operación asincrónica de ejecutar el comando.</returns>
         </member>
         <member name="T:Ucu.Poo.DiscordBot.Commands.ChoosePokemonCommand">
             <summary>
@@ -792,6 +809,44 @@
             <param name="ataque">Nombre del ataque que se realizará.</param>
             <param name="effectsManager">Gestor de efectos para calcular el daño del ataque.</param>
             <returns>El valor del daño causado al oponente como una cadena.</returns>
+        </member>
+        <member name="T:Library.SleepEffect">
+            <summary>
+            Representa un efecto de estado de sueño que puede ser aplicado a un Pokémon.
+            Este efecto impide que el Pokémon ataque durante un número limitado de turnos.
+            </summary>
+        </member>
+        <member name="F:Library.SleepEffect.turnosDormidos">
+            <summary>
+            Número de turnos que el Pokémon permanecerá dormido.
+            </summary>
+        </member>
+        <member name="P:Library.SleepEffect.IcanAttack">
+            <summary>
+            Indica si el Pokémon puede atacar. 
+            Es falso mientras el Pokémon esté dormido.
+            </summary>
+        </member>
+        <member name="M:Library.SleepEffect.StartEffect(Library.Pokemon)">
+            <summary>
+            Aplica el efecto de sueño a un Pokémon y define la cantidad de turnos que estará dormido.
+            </summary>
+            <param name="pokemon">El Pokémon al que se le aplica el efecto de sueño.</param>
+            <returns>Un mensaje indicando el inicio del efecto de sueño y la cantidad de turnos.</returns>
+        </member>
+        <member name="M:Library.SleepEffect.ProcessEffect(Library.Pokemon)">
+            <summary>
+            Procesa el efecto de sueño en cada turno, disminuyendo la cantidad de turnos restantes.
+            </summary>
+            <param name="pokemon">El Pokémon que tiene el efecto de sueño.</param>
+            <returns>Un mensaje indicando el estado del Pokémon (si sigue dormido o si despertó).</returns>
+        </member>
+        <member name="M:Library.SleepEffect.Info(Library.Pokemon)">
+            <summary>
+            Proporciona información sobre el estado actual del efecto de sueño en un Pokémon.
+            </summary>
+            <param name="pokemon">El Pokémon afectado por el sueño.</param>
+            <returns>Un mensaje indicando cuántos turnos quedan para que el Pokémon despierte.</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "T:Library.Trainer" -->
         <member name="M:Library.Trainer.#ctor(System.String)">

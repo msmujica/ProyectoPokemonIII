@@ -4,6 +4,61 @@
         <name>LibraryTests</name>
     </assembly>
     <members>
+        <member name="T:LibraryTests.Domain.AttackTest">
+            <summary>
+            Clase de pruebas unitarias para validar el comportamiento de la clase <see cref="T:Library.Attack"/>.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.AttackTest.ObtainAttack_ShouldReturnCorrectData">
+            <summary>
+            Verifica que el método <see cref="M:Library.Attack.ObtainAttack(System.String)"/> retorne los datos correctos 
+            para un ataque existente.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.AttackTest.ObtainAttack_NonExistent_ShouldReturnPredeterminedData">
+            <summary>
+            Verifica que el método <see cref="M:Library.Attack.ObtainAttack(System.String)"/> retorne datos predeterminados 
+            cuando se solicita un ataque que no existe.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.AttackTest.CalculeDamage_WithCritical_ShouldIncreaseDamage">
+            <summary>
+            Verifica que el método <see cref="M:Library.Attack.CalculeDamage(System.String,Library.Pokemon,Library.EffectsManager)"/> 
+            calcule correctamente el daño de un ataque, teniendo en cuenta un golpe crítico.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.AttackTest.TestSelectSpecialEffect">
+            <summary>
+            Verifica que el método <see cref="M:Library.Attack.SelectSpecialEffect"/> retorne un efecto especial válido.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.AttackTest.TestCritucal">
+            <summary>
+            Verifica que el atributo <see cref="M:Library.Attack.Critical"/> no sea nulo.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.AttackTest.TestApplySpecialEffect">
+            <summary>
+            Verifica que el método <see cref="M:Library.Attack.ApplySpecialEffect"/> no sea nulo.
+            </summary>
+        </member>
+        <member name="T:LibraryTests.Domain.BattlesListTest">
+            <summary>
+            Clase de pruebas unitarias para validar el comportamiento de la clase <see cref="T:Ucu.Poo.DiscordBot.Domain.BattlesList"/>.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.BattlesListTest.AgregarLista">
+            <summary>
+            Verifica que el método <see cref="M:Ucu.Poo.DiscordBot.Domain.BattlesList.AddBattle(Library.Trainer,Library.Trainer)"/> agregue correctamente 
+            una nueva batalla a la lista de batallas.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.BattlesListTest.BuscarEntrenadorPorDisplayName">
+            <summary>
+            Verifica que el método <see cref="M:Ucu.Poo.DiscordBot.Domain.BattlesList.FindTrainerByDisplayName(System.String)"/> 
+            busque correctamente a un entrenador por su nombre de usuario (display name).
+            </summary>
+        </member>
         <member name="M:LibraryTests.Domain.FacadeTest.SetUp">
             <summary>
             Configuración previa a cada prueba unitaria.
