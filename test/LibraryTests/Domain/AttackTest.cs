@@ -15,7 +15,7 @@ namespace LibraryTests.Domain
         /// para un ataque existente.
         /// </summary>
         [Test]
-        public void ObtainAttack_ShouldReturnCorrectData()
+        public void ObtainAttackShouldReturnCorrectData()
         {
             var result = Attack.ObtainAttack("Pistola Agua");
             Assert.That(40, Is.EqualTo(result.Damage));
@@ -27,7 +27,7 @@ namespace LibraryTests.Domain
         /// cuando se solicita un ataque que no existe.
         /// </summary>
         [Test]
-        public void ObtainAttack_NonExistent_ShouldReturnPredeterminedData()
+        public void ObtainAttackNonExistentShouldReturnPredeterminedData()
         {
             var result = Attack.ObtainAttack("AtaqueInexistente");
             Assert.That(0, Is.EqualTo(result.Damage));
@@ -39,7 +39,7 @@ namespace LibraryTests.Domain
         /// calcule correctamente el daño de un ataque, teniendo en cuenta un golpe crítico.
         /// </summary>
         [Test]
-        public void CalculeDamage_WithCritical_ShouldIncreaseDamage()
+        public void CalculeDamageWithCriticalShouldIncreaseDamage()
         {
             var targetpokemon = new Pokemon("Bulbasaur", 100, new List<string> { "Hoja Afilada" }, "Planta");
             var effectsmanager = new EffectsManager();
