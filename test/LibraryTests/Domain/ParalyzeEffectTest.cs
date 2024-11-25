@@ -78,7 +78,7 @@ namespace LibraryTests.Domain
 
         // Test cuando el Pokémon puede atacar después de superar la parálisis
         [Test]
-        public void TestProcessEffect_ShouldAllowAttack_WhenPokemonCanAttack()
+        public void TestProcessEffectShouldAllowAttackWhenPokemonCanAttack()
         {
             // Arrange: Preparar el Pokémon y el efecto
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
@@ -97,7 +97,7 @@ namespace LibraryTests.Domain
 
         // Test cuando el Pokémon no puede atacar debido a la parálisis
         [Test]
-        public void TestProcessEffect_ShouldNotAllowAttack_WhenPokemonCannotAttack()
+        public void TestProcessEffectShouldNotAllowAttackWhenPokemonCannotAttack()
         {
             // Arrange: Preparar el Pokémon y el efecto
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
