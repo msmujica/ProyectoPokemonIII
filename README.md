@@ -1,4 +1,4 @@
-# ProyectoPokemon-II
+# ProyectoPokemon-III
 
 ## Desafíos más difíciles
 Uno de los desafíos más complicados del proyecto fue la implementación de efectos, ya que era un área en la que tuvimos que pensar varias veces para encontrar la 
