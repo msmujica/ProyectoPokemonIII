@@ -149,5 +149,90 @@ namespace Library.Tests
             string result = manager.ProcesarControlMasa(pikachu);
             Assert.That(result, Is.EqualTo( $""));
         }
+        
+        
+         [Test]
+        public void ProcesarEfectosDaño_WhenPokemonHasContinuousDamageEffect_ProcessesEffect()
+        {
+            
+            manager.ApplyEffect(poisonEffect, charmander); // Aplicamos a Charmander en vez de Pikachu
+
+           
+            string result = manager.ProcesarEfectosDaño(charmander); // Procesamos Charmander
+
+          
+            Assert.That(result, Is.Not.Empty); // Verificamos que no sea vacío
+            Assert.That(result, Does.Contain("ha sufrido")); // Confirmamos que el mensaje contiene el texto esperado
+        }
+
+
+
+        [Test]
+        public void ProcesarEfectosDaño_WhenPokemonHasNoEffects_ReturnsEmptyMessage()
+        {
+            
+            string result = manager.ProcesarEfectosDaño(squirtle);
+
+          
+            Assert.That(result, Is.EqualTo(""));
+        }
+        
+        [Test]
+        public void ProcesarEfectosDaño_WhenOtherPokemonHasEffects_ProcessesEffects()
+        {
+            
+            manager.ApplyEffect(poisonEffect, charmander); // Agregamos un efecto a Charmander
+
+            
+            string result = manager.ProcesarEfectosDaño(squirtle); // Procesamos efectos en Squirtle
+
+            
+            Assert.That(result, Is.Empty); // Confirmamos que el resultado es vacío, ya que Squirtle no tiene efectos
+        }
+        
+        [Test]
+        public void CleanEffects_WhenPokemonHasEffects_RemovesEffectsAndReturnsMessage()
+        {
+            // Arrange
+            manager.ApplyEffect(paralyzeEffect, pikachu);
+
+            // Act
+            string result = manager.CleanEffects(pikachu);
+
+            // Assert
+            Assert.That(result, Is.EqualTo($"Todos los efectos han sido eliminados de {pikachu.Name}."));
+            Assert.That(manager.PokemonWithEffect(pikachu), Is.False); // Verifica que los efectos han sido eliminados
+        }
+        
+
+        [Test]
+        public void CleanEffects_WhenPokemonHasNoEffects_ReturnsEmptyMessage()
+        {
+          
+            string result = manager.CleanEffects(charmander);
+
+           
+            Assert.That(result, Is.EqualTo(""));
+        }
+        
+        [Test]
+        public void ApplyEffect_WhenEffectIsNull_ReturnsEmptyString()
+        {
+            // Act
+            string result = manager.ApplyEffect(null, pikachu);
+
+            // Assert
+            Assert.That(result, Is.Empty);
+        }
+
+        [Test]
+        public void ApplyEffect_WhenPokemonIsNull_ReturnsEmptyString()
+        {
+            // Act
+            string result = manager.ApplyEffect(paralyzeEffect, null);
+
+            // Assert
+            Assert.That(result, Is.Empty);
+        }
     }
 }
