@@ -59,7 +59,6 @@ public class FacadeTest
             
             string player1 = "Ash";
             string player2 = "Misty";
-
             facade.AddTrainerToWaitingList(player1);
             facade.AddTrainerToWaitingList(player2);
             var result = facade.StartBattle(player1, player2);
@@ -99,7 +98,9 @@ public class FacadeTest
 
             facade.AddTrainerToWaitingList(player1);
             var result1 = facade.RemoveTrainerFromWaitingList(player1);
-
+            
+            Assert.That("lol no está en la lista de espera", Is.EqualTo(
+                facade.RemoveTrainerFromWaitingList("lol")));
             Assert.That("Ash removido de la lista de espera", Is.EqualTo(result1));
         }
 
@@ -137,6 +138,17 @@ public class FacadeTest
             var result = facade.GetAllTrainersWaiting();
 
             Assert.That("Esperan: Ash; ", Is.EqualTo(result));
+        }
+        
+        [Test]
+        public void TestGetAllTrainersWaitingNone()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            
+            var result = facade.GetAllTrainersWaiting();
+
+            Assert.That("No hay nadie esperando", Is.EqualTo(result));
         }
 
         /// <summary>
@@ -207,6 +219,40 @@ public class FacadeTest
             }
             
             Assert.That(result, !Is.Null);
+        }
+        
+        [Test]
+        public void TestUseItemNone()
+        {
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            facade.StartBattle(player1, player2);
+
+            facade.ChooseTeam(player1, 1);
+            facade.ChooseTeam(player1, 2);
+            facade.ChooseTeam(player1, 3);
+            facade.ChooseTeam(player1, 4);
+            facade.ChooseTeam(player1, 5);
+            facade.ChooseTeam(player1, 6);
+
+            facade.ChooseTeam(player2, 1);
+            facade.ChooseTeam(player2, 2);
+            facade.ChooseTeam(player2, 3);
+            facade.ChooseTeam(player2, 4);
+            facade.ChooseTeam(player2, 5);
+            facade.ChooseTeam(player2, 6);
+
+            // Simula que el jugador usa un ítem
+            var result = facade.UseItem(player2, 0, "Superpocion");
+
+            if (result == "El Pokémon ya está a máxima vida.")
+            {
+                result = facade.UseItem(player2, 0, "Superpocion");
+            }
+            
+            Assert.That(result, Is.EqualTo("No es tu turno ESPERA!"));
             
         }
 
@@ -243,13 +289,43 @@ public class FacadeTest
 
             // Simula que el jugador realiza un ataque
             var result = facade.AttackPokemon(player1, "Picadura");
+            if (result == "No es tu turno ESPERA!")
+            {
+                result = facade.AttackPokemon(player2, "Picadura");
+            }
+            
+            Assert.That(result, !Is.Null);
+        }
+        
+        [Test]
+        public void TestAttackPokemonNone()
+        {
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            facade.StartBattle(player1, player2);
+
+            facade.ChooseTeam(player1, 0);
+            facade.ChooseTeam(player1, 1);
+            facade.ChooseTeam(player1, 2);
+            facade.ChooseTeam(player1, 3);
+            facade.ChooseTeam(player1, 4);
+            facade.ChooseTeam(player1, 5);
+
+            facade.ChooseTeam(player2, 0);
+            facade.ChooseTeam(player2, 1);
+            facade.ChooseTeam(player2, 2);
+            facade.ChooseTeam(player2, 3);
+            facade.ChooseTeam(player2, 4);
+            facade.ChooseTeam(player2, 5);
+            // Simula que el jugador realiza un ataque
+            var result = facade.AttackPokemon(player1, "Picadura");
             if (result != "No es tu turno ESPERA!")
             {
-                if (opcionUno == result)
-                {
-                    Assert.That(opcionUno, Is.EqualTo(opcionUno));
-                }
+                result = facade.AttackPokemon(player1, "Picadura");
             }
+            Assert.That(result, Is.EqualTo("No es tu turno ESPERA!"));
         }
 
         /// <summary>
@@ -291,6 +367,43 @@ public class FacadeTest
                 playerName = "Ash";
             }
             Assert.That($"Gastly", Is.EqualTo(result));
+        }
+        
+        [Test]
+        public void TestChangePokemonNone()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            
+            string player1 = "Ash";
+            string player2 = "Misty";
+            
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            
+            facade.StartBattle(player1, player2);
+            
+            facade.ChooseTeam(player1, 1);
+            facade.ChooseTeam(player1, 2);
+            facade.ChooseTeam(player1, 3);
+            facade.ChooseTeam(player1, 4);
+            facade.ChooseTeam(player1, 5);
+            facade.ChooseTeam(player1, 6);
+
+            facade.ChooseTeam(player2, 1);
+            facade.ChooseTeam(player2, 2);
+            facade.ChooseTeam(player2, 3);
+            facade.ChooseTeam(player2, 4);
+            facade.ChooseTeam(player2, 5);
+            facade.ChooseTeam(player2, 6);
+
+            string playerName = "Misty";
+            var result = facade.ChangePokemon("Ash", 3);
+            if (result != "No es tu turno ESPERA!")
+            {
+                result = facade.ChangePokemon("Ash", 3);
+            }
+            Assert.That("No es tu turno ESPERA!", Is.EqualTo(result));
         }
 
         [Test]
@@ -349,6 +462,70 @@ public class FacadeTest
             string esperado = "Ataques:\nPistola Agua: Tipo = Agua, Daño = 40" +
                               "\nHidrobomba: Tipo = Agua, Daño = 110\nBurbuja: Tipo = Agua, Daño = 20\n";
 
+            facade.GetPokemonAtacks("");
+
             Assert.That(esperado, Is.EqualTo(facade.GetPokemonAtacks("Ash")));
         }
+
+        [Test]
+        public void ChangeTurnTest()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            facade.StartBattle(player1, player2);
+            string result = facade.ChangeTurn("Ash");
+            string esperado = null;
+            if (result != "No es tu turno")
+            {
+                esperado = "Turno cambiado. Es el turno de Misty";
+            }
+            else
+            {
+                result = facade.ChangeTurn("Misty");
+                esperado = "Turno cambiado. Es el turno de Ash";
+            }
+            
+            Assert.That(esperado, Is.EqualTo(result));
+        }
+        
+        [Test]
+        public void ChangeTurnNoneTest()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            facade.StartBattle(player1, player2);
+            string result = facade.ChangeTurn("Ash");
+            string esperado = "No es tu turno";
+            if (result != esperado)
+            {
+                result = facade.ChangeTurn("Ash");
+            }
+            
+            Assert.That(esperado, Is.EqualTo(result));
+        }
+        
+        [Test]
+        public void WinTest()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            facade.StartBattle(player1, player2);
+            string result = facade.Win(player1);
+            string esperado = "Ash a ganado!. Termino la Batalla!";
+            
+            Assert.That(esperado, Is.EqualTo(result));
+        }
+        
 }

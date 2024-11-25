@@ -7,6 +7,7 @@ namespace Library
     public class ParalyzeEffect : IEffect
     {
         public bool IcanAttack { get; set; }
+        
         /// <summary>
         /// Inicia el efecto de "paralizar" en el Pokémon.
         /// Este efecto impide que el Pokémon pueda atacar con una probabilidad.
@@ -56,6 +57,7 @@ namespace Library
             this.IcanAttack = new Random().NextDouble() > 0.3;
             return this.IcanAttack;
         }
+        
         public string Info(Pokemon pokemon)
         {
             if (this.IcanAttack)
