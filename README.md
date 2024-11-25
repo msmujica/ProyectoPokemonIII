@@ -1,43 +1,40 @@
-# Qué hay configurado en esta plantilla
+# ProyectoPokemon-II
 
-1. Un proyecto de biblioteca (creado con [`dotnet new classlib --name Library`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new?tabs=netcore22)) en la carpeta `src\Library`
-2. Un proyecto de aplicación de consola (creado con [`dotnet new console --name Program`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new?tabs=netcore22)) en la carpeta `src\Program`
-3. Un proyecto de prueba en [NUnit](https://nunit.org/) (creado con [`dotnet new nunit --name LibraryTests`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new?tabs=netcore22)) en la carpeta `test\LibraryTests`
-4. Un proyecto de [Doxygen](https://www.doxygen.nl/index.html) para generación de sitio web de documentación en la carpeta `docs`
-5. Análisis estático con [Roslyn analyzers](https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview) en los proyectos de biblioteca y de aplicación
-6. Análisis de estilo con [StyleCop](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/README.md) en los proyectos de biblioteca y de aplicación
-7. Una solución `ProjectTemplate.sln` que referencia todos los proyectos de C# y facilita la compilación con [`dotnet build`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-build).
-8. Tareas preconfiguradas para compilar y ejecutar los proyectos, ejecutar las pruebas, y generar documentación desde VSCode en la carpeta `.vscode`
-9. Análisis de cobertura de los casos de prueba mediante []() que aparece en los márgenes con el complemento de VS Code [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters).
-10. Ejecución automática de compilación y prueba mediante [GitHub Actions](https://docs.github.com/en/actions) configuradas en el repositorio al hacer [push](https://github.com/git-guides/git-push) o [pull request](https://docs.github.com/en/github/collaborating-with-pull-requests).
+## Desafíos más difíciles
+Uno de los desafíos más complicados del proyecto fue la implementación de efectos, ya que era un área en la que tuvimos que pensar varias veces para encontrar la 
+mejor manera de hacerlo. Sin embargo, lo más difícil no fue eso, sino tener que replantear todo el código solo dos días antes de la entrega. 
+La forma en que estábamos abordando el problema en relación con los Ataques y Tipos estaba equivocada, por lo que tuvimos que hacer ajustes significativos. 
+Para resolver esto, seguimos los consejos del profesor Sebastián, lo que nos ayudó a reencaminar el desarrollo.
 
-Vean este 🎥 [video](https://web.microsoftstream.com/video/55c6a06c-07dc-4f95-a96d-768f198c9044) que explica el funcionamiento de la plantilla.
+Otro desafío importante fue la implementación de los comandos de Pokémon en el contexto de Discord. Al intentar integrar los comandos en Discord y entender 
+cómo funciona la interacción con la API de Discord, tuvimos dificultades para conceptualizar cómo organizar las acciones del Pokémon y su interacción con los comandos. 
+Implementar comandos como "atacar", "ver pokemones disponibles", "listar ataques", etc., esto requería cómo gestionarlo 
+dentro de un bot de Discord. 
+La documentación y la estructura de Discord, aunque potente, tiene una curva de aprendizaje considerable, especialmente cuando se trata de 
+manejar interacciones entre el bot y los usuarios de forma eficiente.
 
-## Convenciones
+## Aprendizajes fuera de la clase
+En este proyecto aprendimos varias cosas que no habíamos cubierto previamente en clase, pero que fueron esenciales para el desarrollo. 
+Por ejemplo, el uso de diccionarios en programación fue algo nuevo para nosotros, ya que no habíamos utilizado esta estructura en los ejercicios anteriores. 
+Además, otro aspecto que nos costó entender fue la implementación del operador ? en el siguiente fragmento de código:
+Entrenador? player = this.WaitingList.FindTrainerByDisplayName(playerDisplayName);
+Este operador tiene que ver con la operación de nulabilidad en C#. Específicamente, se usa para indicar que la variable player puede ser de tipo Entrenador o null. 
+Esto nos permitió trabajar con datos que podrían no existir sin causar errores en el código.
 
-[Convenciones de código en C#](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions)
+## Recursos útiles
+Durante el desarrollo, utilizamos diversos recursos para superar los obstáculos encontrados. Algunas de las fuentes más útiles fueron:
 
-[Convenciones de nombres en C#](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/naming-guidelines)
+StackOverflow, donde encontramos soluciones a varios problemas técnicos.
+Documentación de Microsoft sobre C#, que fue esencial para resolver dudas específicas sobre sintaxis y mejores prácticas.
+DoxyGen, donde encontramos un guia de comandos a utilizar.
+GitHub, donde encontramos una guia para realizar este archivo ReadMe
+Y, por supuesto, los profesores, quienes nos ofrecieron orientación clave para replantear el enfoque del proyecto y pensarlo de manera diferente.
 
-## Dónde encontrar información sobre los errores/avisos al compilar
-
-[C# Compiler Errors (CS*)](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/)
-
-[Roslyn Analyzer Warnings (CA*)](https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/categories)
-
-[StyleCop Analyzer Warnings (SA*)](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md)
-
-# Cómo deshabilitar temporalmente los avisos al compilar
-
-## Roslyn Analyzer
-
-Comentar las siguientes líneas en los archivos de proyecto (`*.csproj`)
-```
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-```
-
-## StyleCop Analyzer
-
-Comentar la línea `<PackageReference Include="StyleCop.Analyzers" Version="1.1.118"/>` en los archivos de proyecto (`*.csproj`)
+## Reflexión final
+En general, creemos que este proyecto es una excelente demostración de lo que hemos aprendido hasta ahora. Nos permitió aplicar los principios y 
+conceptos que hemos estudiado en clase y entender cómo se integran en un proyecto real.
+Sin embargo, también reconocemos que uno de los aspectos más desafiantes fue imaginar cómo implementar el proyecto como un chatbot en Discord. 
+Además, sería muy útil que nos brindaran más orientación sobre cómo implementar un bot de Discord desde cero. A pesar de haber estudiado, 
+aún nos queda mucha cosas que no logramos comprender, y una guía o ejemplos adicionales sobre cómo integrar el bot con nuestro juego de Pokémon nos 
+ayudaría a superar las barreras más rápidamente.
+En conclusión, estamos satisfechos con el trabajo realizado, y creemos que este proyecto es un excelente ejemplo de aprendizaje y aplicación práctica.
