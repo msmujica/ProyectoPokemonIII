@@ -59,36 +59,6 @@
             busque correctamente a un entrenador por su nombre de usuario (display name).
             </summary>
         </member>
-        <member name="M:LibraryTests.Domain.BurnEffectTest.TestStartEffect">
-            <summary>
-            Prueba el inicio del efecto de quemadura en un Pokémon.
-            Verifica que el mensaje correcto se devuelva cuando se inicia el efecto.
-            </summary>
-        </member>
-        <member name="M:LibraryTests.Domain.BurnEffectTest.TestProcessEffect">
-            <summary>
-            Prueba el procesamiento del efecto de quemadura en un Pokémon.
-            Verifica que el resultado del procesamiento del efecto no sea nulo.
-            </summary>
-        </member>
-        <member name="M:LibraryTests.Domain.BurnEffectTest.TestProcessEffectPokemonDied">
-            <summary>
-            Prueba el procesamiento del efecto de quemadura cuando el Pokémon está derrotado.
-            Verifica que el mensaje correcto se devuelva cuando el Pokémon ha caído debido a la quemadura.
-            </summary>
-        </member>
-        <member name="M:LibraryTests.Domain.BurnEffectTest.TestInfo">
-            <summary>
-            Prueba la obtención de la información del efecto de quemadura en un Pokémon.
-            Verifica que el mensaje correcto se devuelva sobre el estado del Pokémon.
-            </summary>
-        </member>
-        <member name="M:LibraryTests.Domain.BurnEffectTest.TestICanAttack">
-            <summary>
-            Prueba si un Pokémon afectado por quemadura puede atacar.
-            Verifica que la respuesta de la propiedad <see cref="P:Library.BurnEffect.IcanAttack"/> sea verdadera.
-            </summary>
-        </member>
         <member name="M:LibraryTests.Domain.FacadeTest.SetUp">
             <summary>
             Configuración previa a cada prueba unitaria.
@@ -153,79 +123,6 @@
         <member name="M:LibraryTests.Domain.FacadeTest.TestChangePokemon">
             <summary>
             Prueba la funcionalidad de cambiar el Pokémon activo durante una batalla.
-            </summary>
-        </member>
-        <member name="T:Tests.BattleTest">
-            <summary>
-            Clase de pruebas unitarias para simular una batalla entre dos entrenadores y verificar
-            las interacciones entre los métodos de la clase <see cref="T:Library.Trainer"/>, 
-            <see cref="T:Library.Pokemon"/>, <see cref="T:Library.EffectsManager"/> y <see cref="!:Battle"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.BattleTest.SimulateBattle">
-            <summary>
-            Simula una batalla entre dos entrenadores con sus respectivos Pokémon, verificando
-            el uso de ataques, efectos, ítems, cambios de Pokémon y limpieza de efectos.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.SetUp">
-            <summary>
-            Configura el entorno de prueba antes de cada prueba, inicializando los objetos necesarios.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IsParalyze_WhenPokemonHasParalyzeEffect_ReturnsTrue">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IsParalyze(Library.Pokemon)"/> devuelva verdadero cuando un Pokémon tenga el efecto de parálisis.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IsParalyze_WhenPokemonHasNoEffects_ReturnsFalse">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IsParalyze(Library.Pokemon)"/> devuelva falso cuando un Pokémon no tenga efectos activos.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IsParalyze_WhenPokemonHasOtherEffects_ReturnsFalse">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IsParalyze(Library.Pokemon)"/> devuelva falso cuando un Pokémon tenga un efecto distinto de parálisis.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IcanAttack_WhenPokemonHasParalyzeEffectAndCannotAttack_ReturnsFalse">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IcanAttack(Library.Pokemon)"/> devuelva falso cuando un Pokémon tenga el efecto de parálisis y no pueda atacar.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IcanAttack_WhenPokemonHasSleepEffectAndCannotAttack_ReturnsFalse">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IcanAttack(Library.Pokemon)"/> devuelva falso cuando un Pokémon tenga el efecto de sueño y no pueda atacar.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IcanAttack_WhenPokemonHasNoControlEffects_ReturnsTrue">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IcanAttack(Library.Pokemon)"/> devuelva verdadero cuando un Pokémon no tenga efectos que le impidan atacar.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.IcanAttack_WhenPokemonHasNonControlEffect_ReturnsTrue">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.IcanAttack(Library.Pokemon)"/> devuelva verdadero cuando un Pokémon tenga un efecto que no controle su capacidad de atacar.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.ProcesarControlMasa_WhenPokemonHasSleepEffect_ReturnsSleepEffectDescription">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.ProcesarControlMasa(Library.Pokemon)"/> devuelva la descripción del efecto de sueño cuando un Pokémon tenga ese efecto.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.ProcesarControlMasa_WhenPokemonHasParalyzeEffect_ReturnsParalyzeEffectDescription">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.ProcesarControlMasa(Library.Pokemon)"/> devuelva la descripción del efecto de parálisis cuando un Pokémon tenga ese efecto.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.ProcesarControlMasa_WhenPokemonHasNoControlEffects_ReturnsNoEffectsMessage">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.ProcesarControlMasa(Library.Pokemon)"/> devuelva un mensaje de que el Pokémon no tiene efectos activos cuando no tenga efectos.
-            </summary>
-        </member>
-        <member name="M:Library.Tests.EffectsManagerTests.ProcesarControlMasa_WhenPokemonHasNonControlEffect_IgnoresEffect">
-            <summary>
-            Prueba que el método <see cref="M:Library.EffectsManager.ProcesarControlMasa(Library.Pokemon)"/> ignore los efectos no controlables, como el veneno.
             </summary>
         </member>
     </members>

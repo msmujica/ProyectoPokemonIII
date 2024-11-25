@@ -33,7 +33,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IsParalyze"/> devuelva verdadero cuando un Pokémon tenga el efecto de parálisis.
         /// </summary>
         [Test]
-        public void IsParalyze_WhenPokemonHasParalyzeEffect_ReturnsTrue()
+        public void IsParalyzeWhenPokemonHasParalyzeEffectReturnsTrue()
         {
             // Arrange
             manager.ApplyEffect(paralyzeEffect, pikachu);
@@ -49,7 +49,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IsParalyze"/> devuelva falso cuando un Pokémon no tenga efectos activos.
         /// </summary>
         [Test]
-        public void IsParalyze_WhenPokemonHasNoEffects_ReturnsFalse()
+        public void IsParalyzeWhenPokemonHasNoEffectsReturnsFalse()
         {
             // Act
             bool result = manager.IsParalyze(pikachu);
@@ -62,7 +62,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IsParalyze"/> devuelva falso cuando un Pokémon tenga un efecto distinto de parálisis.
         /// </summary>
         [Test]
-        public void IsParalyze_WhenPokemonHasOtherEffects_ReturnsFalse()
+        public void IsParalyzeWhenPokemonHasOtherEffectsReturnsFalse()
         {
             // Arrange
             manager.ApplyEffect(sleepEffect, pikachu);
@@ -79,7 +79,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva falso cuando un Pokémon tenga el efecto de parálisis y no pueda atacar.
         /// </summary>
         [Test]
-        public void IcanAttack_WhenPokemonHasParalyzeEffectAndCannotAttack_ReturnsFalse()
+        public void IcanAttackWhenPokemonHasParalyzeEffectAndCannotAttackReturnsFalse()
         {
             // Arrange
             manager.ApplyEffect(paralyzeEffect, pikachu);
@@ -95,7 +95,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva falso cuando un Pokémon tenga el efecto de sueño y no pueda atacar.
         /// </summary>
         [Test]
-        public void IcanAttack_WhenPokemonHasSleepEffectAndCannotAttack_ReturnsFalse()
+        public void IcanAttackWhenPokemonHasSleepEffectAndCannotAttackReturnsFalse()
         {
             // Arrange
             manager.ApplyEffect(sleepEffect, charmander);
@@ -111,7 +111,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva verdadero cuando un Pokémon no tenga efectos que le impidan atacar.
         /// </summary>
         [Test]
-        public void IcanAttack_WhenPokemonHasNoControlEffects_ReturnsTrue()
+        public void IcanAttackWhenPokemonHasNoControlEffectsReturnsTrue()
         {
             bool result = manager.IcanAttack(pikachu);
             
@@ -122,7 +122,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva verdadero cuando un Pokémon tenga un efecto que no controle su capacidad de atacar.
         /// </summary>
         [Test]
-        public void IcanAttack_WhenPokemonHasNonControlEffect_ReturnsTrue()
+        public void IcanAttackWhenPokemonHasNonControlEffectReturnsTrue()
         {
             manager.ApplyEffect(poisonEffect, pikachu);
             bool result = manager.IcanAttack(pikachu);
@@ -134,7 +134,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> devuelva la descripción del efecto de sueño cuando un Pokémon tenga ese efecto.
         /// </summary>
         [Test]
-        public void ProcesarControlMasa_WhenPokemonHasSleepEffect_ReturnsSleepEffectDescription()
+        public void ProcesarControlMasaWhenPokemonHasSleepEffectReturnsSleepEffectDescription()
         {
             
             manager.ApplyEffect(sleepEffect, squirtle);
@@ -150,7 +150,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> devuelva la descripción del efecto de parálisis cuando un Pokémon tenga ese efecto.
         /// </summary>
         [Test]
-        public void ProcesarControlMasa_WhenPokemonHasParalyzeEffect_ReturnsParalyzeEffectDescription()
+        public void ProcesarControlMasaWhenPokemonHasParalyzeEffectReturnsParalyzeEffectDescription()
         {
            
             manager.ApplyEffect(paralyzeEffect, pikachu);
@@ -166,7 +166,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> devuelva un mensaje de que el Pokémon no tiene efectos activos cuando no tenga efectos.
         /// </summary>
         [Test]
-        public void ProcesarControlMasa_WhenPokemonHasNoControlEffects_ReturnsNoEffectsMessage()
+        public void ProcesarControlMasaWhenPokemonHasNoControlEffectsReturnsNoEffectsMessage()
         {
            
             string result = manager.ProcesarControlMasa(charmander);
@@ -178,7 +178,7 @@ namespace Library.Tests
         /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> ignore los efectos no controlables, como el veneno.
         /// </summary>
         [Test]
-        public void ProcesarControlMasa_WhenPokemonHasNonControlEffect_IgnoresEffect()
+        public void ProcesarControlMasaWhenPokemonHasNonControlEffectIgnoresEffect()
         {
             manager.ApplyEffect(poisonEffect, pikachu);
             string result = manager.ProcesarControlMasa(pikachu);
@@ -187,7 +187,7 @@ namespace Library.Tests
         
         
         [Test]
-        public void ProcesarEfectosDaño_WhenPokemonHasNoEffects_ReturnsEmptyMessage()
+        public void ProcesarEfectosDañoWhenPokemonHasNoEffectsReturnsEmptyMessage()
         {
             
             string result = manager.ProcesarEfectosDaño(squirtle);
@@ -198,7 +198,7 @@ namespace Library.Tests
         
         
         [Test]
-        public void CleanEffects_WhenPokemonHasEffects_RemovesEffectsAndReturnsMessage()
+        public void CleanEffectsWhenPokemonHasEffectsRemovesEffectsAndReturnsMessage()
         {
             // Arrange
             manager.ApplyEffect(paralyzeEffect, pikachu);
@@ -213,7 +213,7 @@ namespace Library.Tests
         
 
         [Test]
-        public void CleanEffects_WhenPokemonHasNoEffects_ReturnsEmptyMessage()
+        public void CleanEffectsWhenPokemonHasNoEffectsReturnsEmptyMessage()
         {
           
             string result = manager.CleanEffects(charmander);
@@ -223,7 +223,7 @@ namespace Library.Tests
         }
         
         [Test]
-        public void ApplyEffect_WhenEffectIsNull_ReturnsEmptyString()
+        public void ApplyEffectWhenEffectIsNullReturnsEmptyString()
         {
             // Act
             string result = manager.ApplyEffect(null, pikachu);
@@ -233,7 +233,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void ApplyEffect_WhenPokemonIsNull_ReturnsEmptyString()
+        public void ApplyEffectWhenPokemonIsNullReturnsEmptyString()
         {
             // Act
             string result = manager.ApplyEffect(paralyzeEffect, null);

@@ -10,9 +10,9 @@ public class GetPokemonAttacksCommand : ModuleBase<SocketCommandContext>
 {
     /// <summary>
     /// Muestra los ataques del Pokémon especificado en el equipo de un entrenador.
+    /// Este comando permite al usuario consultar los ataques disponibles para un 
+    /// Pokémon específico en su equipo.
     /// </summary>
-    /// <param name="trainerDisplayName">El nombre del entrenador que tiene el Pokémon.</param>
-    /// <param name="pokemonName">El nombre del Pokémon del cual se desean ver los ataques.</param>
     [Command("getAttacks")]
     [Summary("Muestra los ataques de un Pokémon en el equipo de un entrenador.")]
     public async Task ExecuteAsync(){

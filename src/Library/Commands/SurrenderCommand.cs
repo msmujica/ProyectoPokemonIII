@@ -4,18 +4,21 @@ using Ucu.Poo.DiscordBot.Domain;
 namespace Ucu.Poo.DiscordBot.Commands;
 
 /// <summary>
-/// Esta clase implementa el comando 'surrender' del bot. Este comando remueve el
-/// batalla para poder jugar otra en caso de que el otro player nunca juege o se quiera rendir.
+/// Esta clase implementa el comando 'surrender' del bot. 
+/// Este comando permite a un jugador rendirse durante una batalla actual, 
+/// eliminándose de la misma y permitiéndole participar en otra batalla o continuar con el juego.
 /// </summary>
 // ReSharper disable once UnusedType.Global
 public class SurrenderCommand : ModuleBase<SocketCommandContext>
 {
     /// <summary>
-    /// Implementa el comando 'leave' del bot. Este comando remueve el jugador
-    /// que envía el mensaje de la lista de jugadores esperando para jugar.
+    /// Implementa el comando 'surrender'. Este comando permite al jugador que lo ejecuta 
+    /// rendirse en la batalla actual, removiéndose de la lista de jugadores en la batalla 
+    /// y dejándole libre para participar en otro combate o seguir con el juego.
     /// </summary>
+    /// 
     [Command("surrender")]
-    [Summary("Remueve la batalla y efectua un surrender")]
+    [Summary("Permite al jugador rendirse en la batalla actual y abandonar la misma.")]
     // ReSharper disable once UnusedMember.Global
     public async Task ExecuteAsync()
     {
