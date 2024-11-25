@@ -14,7 +14,9 @@ namespace Library
         // Diccionario que almacena los efectos activos para cada Pokémon
         private Dictionary<Pokemon, List<IEffect>> activeEffects;
 
-        // Constructor que inicializa el diccionario de efectos
+        /// <summary>
+        /// Constructor que inicializa el diccionario de efectos activos.
+        /// </summary>
         public EffectsManager()
         {
             activeEffects = new Dictionary<Pokemon, List<IEffect>>();
@@ -25,6 +27,8 @@ namespace Library
         /// </summary>
         /// <param name="effect">El efecto a aplicar.</param>
         /// <param name="pokemon">El Pokémon que recibirá el efecto.</param>
+        /// <returns>Un mensaje que indica si el efecto fue aplicado correctamente.</returns>
+
         public string ApplyEffect(IEffect effect, Pokemon pokemon)
         {
             if (effect == null || pokemon == null)
@@ -73,6 +77,11 @@ namespace Library
             return true;
         }
 
+        /// <summary>
+        /// Procesa los efectos de control, como dormir o paralizar, y devuelve un mensaje que describe el resultado.
+        /// </summary>
+        /// <param name="pokem">El Pokémon cuyo estado de efectos de control se va a procesar.</param>
+        /// <returns>Un mensaje con el resultado del procesamiento del efecto.</returns>
     public string ProcesarControlMasa(Pokemon pokem)
         {
             // Inicializamos la descripción vacía
@@ -101,6 +110,7 @@ namespace Library
         /// <summary>
         /// Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon.
         /// </summary>
+        /// <returns>Un mensaje con el resultado del procesamiento de los efectos de daño.</returns>
         public string ProcesarEfectosDaño(Pokemon pokem)
         {
             string description = "";
@@ -154,6 +164,11 @@ namespace Library
             return activeEffects.ContainsKey(pokemon);
         }
 
+        /// <summary>
+        /// Verifica si un Pokémon tiene el efecto de parálisis activo.
+        /// </summary>
+        /// <param name="pokem">El Pokémon a verificar.</param>
+        /// <returns><c>true</c> si el Pokémon está paralizado, <c>false</c> si no.</returns>
         public bool IsParalyze(Pokemon pokem)
         {
             if (!activeEffects.ContainsKey(pokem)) return false;
