@@ -134,7 +134,7 @@ namespace Library
         public string CleanEffects(Pokemon pokemon)
         {
             // Elimina los efectos activos del Pokémon si existen
-            if (activeEffects.ContainsKey(pokemon))
+            if (activeEffects.Remove(pokemon))
             {
                 activeEffects.Remove(pokemon);
                 return ($"Todos los efectos han sido eliminados de {pokemon.Name}.");

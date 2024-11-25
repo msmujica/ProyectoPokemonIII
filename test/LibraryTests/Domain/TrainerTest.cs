@@ -28,7 +28,7 @@ public class TrainerTest
         Assert.That(trainer.Team, Is.Not.Null);
         Assert.That(0, Is.EqualTo(trainer.Team.Count));
     }
-
+    
     [Test]
     public void AddPokemonToTheTeam()
     {
@@ -121,6 +121,18 @@ public class TrainerTest
         var result = trainer.UsarItem("CuraTotal", pokemon, effectsManager);
         Assert.That(2, Is.EqualTo(trainer.CounterTotalCure));
         Assert.That("Usaste una Cura Total. Usos restantes: 1", Is.EqualTo(result));  // Asumimos que ese es el resultado
+    }
+    
+    [Test]
+    public void UseItemNone()
+    {
+        var effectsManager = new EffectsManager();
+        var pokemon = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno" }, "Eléctrico");
+
+        trainer.ItemSetting();
+        var result = trainer.UsarItem("CurasTotales", pokemon, effectsManager);
+        Assert.That(2, Is.EqualTo(trainer.CounterTotalCure));
+        Assert.That("Item no valido!", Is.EqualTo(result));  // Asumimos que ese es el resultado
     }
 
     [Test]

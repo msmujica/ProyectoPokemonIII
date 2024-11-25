@@ -82,6 +82,8 @@ namespace Tests
             // Verificar que ya no tiene efecto
             bool hasEffects = effectsManager.PokemonWithEffect(gary.Active);
             Assert.That(hasEffects, Is.False);
+            
+            
         }
     }
 }
