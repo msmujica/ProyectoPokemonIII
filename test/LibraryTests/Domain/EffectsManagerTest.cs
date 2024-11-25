@@ -13,7 +13,9 @@ namespace Library.Tests
         private SleepEffect sleepEffect;
         private PoisonEffect poisonEffect; // Efecto adicional para pruebas
 
-
+        /// <summary>
+        /// Configura el entorno de prueba antes de cada prueba, inicializando los objetos necesarios.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
@@ -27,6 +29,9 @@ namespace Library.Tests
         }
 
         // Tests para IsParalyze
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IsParalyze"/> devuelva verdadero cuando un Pokémon tenga el efecto de parálisis.
+        /// </summary>
         [Test]
         public void IsParalyze_WhenPokemonHasParalyzeEffect_ReturnsTrue()
         {
@@ -40,6 +45,9 @@ namespace Library.Tests
             Assert.That(result, Is.True);
         }
 
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IsParalyze"/> devuelva falso cuando un Pokémon no tenga efectos activos.
+        /// </summary>
         [Test]
         public void IsParalyze_WhenPokemonHasNoEffects_ReturnsFalse()
         {
@@ -50,6 +58,9 @@ namespace Library.Tests
             Assert.That(result, Is.False);
         }
 
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IsParalyze"/> devuelva falso cuando un Pokémon tenga un efecto distinto de parálisis.
+        /// </summary>
         [Test]
         public void IsParalyze_WhenPokemonHasOtherEffects_ReturnsFalse()
         {
@@ -64,6 +75,9 @@ namespace Library.Tests
         }
 
         // Tests para IcanAttack
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva falso cuando un Pokémon tenga el efecto de parálisis y no pueda atacar.
+        /// </summary>
         [Test]
         public void IcanAttack_WhenPokemonHasParalyzeEffectAndCannotAttack_ReturnsFalse()
         {
@@ -77,6 +91,9 @@ namespace Library.Tests
             Assert.That(result, Is.False);
         }
 
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva falso cuando un Pokémon tenga el efecto de sueño y no pueda atacar.
+        /// </summary>
         [Test]
         public void IcanAttack_WhenPokemonHasSleepEffectAndCannotAttack_ReturnsFalse()
         {
@@ -90,6 +107,9 @@ namespace Library.Tests
             Assert.That(result, Is.False);
         }
 
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva verdadero cuando un Pokémon no tenga efectos que le impidan atacar.
+        /// </summary>
         [Test]
         public void IcanAttack_WhenPokemonHasNoControlEffects_ReturnsTrue()
         {
@@ -99,6 +119,10 @@ namespace Library.Tests
             // Assert
             Assert.That(result, Is.True);
         }
+
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.IcanAttack"/> devuelva verdadero cuando un Pokémon tenga un efecto que no controle su capacidad de atacar.
+        /// </summary>
         [Test]
         public void IcanAttack_WhenPokemonHasNonControlEffect_ReturnsTrue()
         {
@@ -108,6 +132,9 @@ namespace Library.Tests
         }
 
         // Tests para ProcesarControlMasa
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> devuelva la descripción del efecto de sueño cuando un Pokémon tenga ese efecto.
+        /// </summary>
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasSleepEffect_ReturnsSleepEffectDescription()
         {
@@ -121,6 +148,9 @@ namespace Library.Tests
             Assert.That(result, Is.EqualTo(sleepEffect.Info(squirtle)));
         }
 
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> devuelva la descripción del efecto de parálisis cuando un Pokémon tenga ese efecto.
+        /// </summary>
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasParalyzeEffect_ReturnsParalyzeEffectDescription()
         {
@@ -134,6 +164,9 @@ namespace Library.Tests
             Assert.That(result, Is.EqualTo(paralyzeEffect.Info(pikachu)));
         }
 
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> devuelva un mensaje de que el Pokémon no tiene efectos activos cuando no tenga efectos.
+        /// </summary>
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasNoControlEffects_ReturnsNoEffectsMessage()
         {
@@ -142,12 +175,16 @@ namespace Library.Tests
 
             Assert.That(result, Is.EqualTo($"El pokemon {charmander.Name} no tiene efectos activos."));
         }
+
+        /// <summary>
+        /// Prueba que el método <see cref="EffectsManager.ProcesarControlMasa"/> ignore los efectos no controlables, como el veneno.
+        /// </summary>
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasNonControlEffect_IgnoresEffect()
         {
             manager.ApplyEffect(poisonEffect, pikachu);
             string result = manager.ProcesarControlMasa(pikachu);
-            Assert.That(result, Is.EqualTo( $""));
+            Assert.That(result, Is.EqualTo($""));
         }
     }
 }
