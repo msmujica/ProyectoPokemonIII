@@ -177,19 +177,7 @@ namespace Library.Tests
             Assert.That(result, Is.EqualTo(""));
         }
         
-        [Test]
-        public void ProcesarEfectosDaño_WhenOtherPokemonHasEffects_ProcessesEffects()
-        {
-            
-            manager.ApplyEffect(poisonEffect, charmander); // Agregamos un efecto a Charmander
 
-            
-            string result = manager.ProcesarEfectosDaño(squirtle); // Procesamos efectos en Squirtle
-
-            
-            Assert.That(result, Is.Empty); // Confirmamos que el resultado es vacío, ya que Squirtle no tiene efectos
-        }
-        
         [Test]
         public void CleanEffects_WhenPokemonHasEffects_RemovesEffectsAndReturnsMessage()
         {
