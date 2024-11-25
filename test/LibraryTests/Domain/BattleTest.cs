@@ -5,9 +5,18 @@ using System.Collections.Generic;
 
 namespace Tests
 {
+    /// <summary>
+    /// Clase de pruebas unitarias para simular una batalla entre dos entrenadores y verificar
+    /// las interacciones entre los métodos de la clase <see cref="Trainer"/>, 
+    /// <see cref="Pokemon"/>, <see cref="EffectsManager"/> y <see cref="Battle"/>.
+    /// </summary>
     [TestFixture]
     public class BattleTest
     {
+        /// <summary>
+        /// Simula una batalla entre dos entrenadores con sus respectivos Pokémon, verificando
+        /// el uso de ataques, efectos, ítems, cambios de Pokémon y limpieza de efectos.
+        /// </summary>
         [Test]
         public void SimulateBattle()
         {
