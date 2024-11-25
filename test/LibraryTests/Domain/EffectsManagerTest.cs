@@ -113,10 +113,8 @@ namespace Library.Tests
         [Test]
         public void IcanAttack_WhenPokemonHasNoControlEffects_ReturnsTrue()
         {
-            // Act
             bool result = manager.IcanAttack(pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.True);
         }
 
@@ -138,13 +136,13 @@ namespace Library.Tests
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasSleepEffect_ReturnsSleepEffectDescription()
         {
-            // Arrange
+            
             manager.ApplyEffect(sleepEffect, squirtle);
 
-            // Act
+            
             string result = manager.ProcesarControlMasa(squirtle);
 
-            // Assert
+            
             Assert.That(result, Is.EqualTo(sleepEffect.Info(squirtle)));
         }
 
@@ -154,13 +152,13 @@ namespace Library.Tests
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasParalyzeEffect_ReturnsParalyzeEffectDescription()
         {
-            // Arrange
+           
             manager.ApplyEffect(paralyzeEffect, pikachu);
 
-            // Act
+            
             string result = manager.ProcesarControlMasa(pikachu);
 
-            // Assert
+            
             Assert.That(result, Is.EqualTo(paralyzeEffect.Info(pikachu)));
         }
 
@@ -170,7 +168,7 @@ namespace Library.Tests
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasNoControlEffects_ReturnsNoEffectsMessage()
         {
-            // Act
+           
             string result = manager.ProcesarControlMasa(charmander);
 
             Assert.That(result, Is.EqualTo($"El pokemon {charmander.Name} no tiene efectos activos."));
@@ -185,6 +183,63 @@ namespace Library.Tests
             manager.ApplyEffect(poisonEffect, pikachu);
             string result = manager.ProcesarControlMasa(pikachu);
             Assert.That(result, Is.EqualTo($""));
+        }
+        
+        
+        [Test]
+        public void ProcesarEfectosDaño_WhenPokemonHasNoEffects_ReturnsEmptyMessage()
+        {
+            
+            string result = manager.ProcesarEfectosDaño(squirtle);
+
+          
+            Assert.That(result, Is.EqualTo(""));
+        }
+        
+        
+        [Test]
+        public void CleanEffects_WhenPokemonHasEffects_RemovesEffectsAndReturnsMessage()
+        {
+            // Arrange
+            manager.ApplyEffect(paralyzeEffect, pikachu);
+
+            // Act
+            string result = manager.CleanEffects(pikachu);
+
+            // Assert
+            Assert.That(result, Is.EqualTo($"Todos los efectos han sido eliminados de {pikachu.Name}."));
+            Assert.That(manager.PokemonWithEffect(pikachu), Is.False); // Verifica que los efectos han sido eliminados
+        }
+        
+
+        [Test]
+        public void CleanEffects_WhenPokemonHasNoEffects_ReturnsEmptyMessage()
+        {
+          
+            string result = manager.CleanEffects(charmander);
+
+           
+            Assert.That(result, Is.EqualTo(""));
+        }
+        
+        [Test]
+        public void ApplyEffect_WhenEffectIsNull_ReturnsEmptyString()
+        {
+            // Act
+            string result = manager.ApplyEffect(null, pikachu);
+
+            // Assert
+            Assert.That(result, Is.Empty);
+        }
+
+        [Test]
+        public void ApplyEffect_WhenPokemonIsNull_ReturnsEmptyString()
+        {
+            // Act
+            string result = manager.ApplyEffect(paralyzeEffect, null);
+
+            // Assert
+            Assert.That(result, Is.Empty);
         }
     }
 }
