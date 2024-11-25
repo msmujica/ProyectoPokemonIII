@@ -28,7 +28,7 @@ public class TrainerTest
         Assert.That(trainer.Team, Is.Not.Null);
         Assert.That(0, Is.EqualTo(trainer.Team.Count));
     }
-
+    
     [Test]
     public void AddPokemonToTheTeam()
     {
