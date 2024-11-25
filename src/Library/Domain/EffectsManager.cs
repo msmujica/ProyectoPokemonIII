@@ -78,7 +78,7 @@ namespace Library
             // Inicializamos la descripción vacía
 
             // Verifica si el Pokémon tiene efectos activos
-            if (!activeEffects.ContainsKey(pokem)) return $"El pokemon {pokem.Name} no tiene efectos activos.";
+            if (!activeEffects.ContainsKey(pokem)) return $"El pokemon {pokem.Name} no tiene efectos activos. ";
 
             List<IEffect> effects = activeEffects[pokem];
             foreach (var v in effects)

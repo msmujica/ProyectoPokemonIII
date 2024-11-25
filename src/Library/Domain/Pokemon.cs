@@ -104,6 +104,6 @@ public class Pokemon
             }
         }
 
-        return "Este no es tu ataque";
+        return "Este no es tu ataque. ";
     }
 }

@@ -68,7 +68,7 @@ public class PokemonTest
 
         // Assert: La salud del oponente no debería cambiar
         Assert.That(geodude.Health, Is.EqualTo(70), "La salud del oponente no debería haber cambiado.");
-        Assert.That(result, Is.EqualTo("Este no es tu ataque"), "El mensaje debería indicar que el ataque no es válido.");
+        Assert.That(result, Is.EqualTo("Este no es tu ataque. "), "El mensaje debería indicar que el ataque no es válido.");
     }
 
     // Prueba para verificar que un Pokémon se marque como derrotado al llegar a 0 de salud

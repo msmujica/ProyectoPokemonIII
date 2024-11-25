@@ -140,7 +140,7 @@ namespace Library.Tests
             // Act
             string result = manager.ProcesarControlMasa(charmander);
 
-            Assert.That(result, Is.EqualTo($"El pokemon {charmander.Name} no tiene efectos activos."));
+            Assert.That(result, Is.EqualTo($"El pokemon {charmander.Name} no tiene efectos activos. "));
         }
         [Test]
         public void ProcesarControlMasa_WhenPokemonHasNonControlEffect_IgnoresEffect()

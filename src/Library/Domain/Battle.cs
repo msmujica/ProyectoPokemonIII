@@ -139,16 +139,15 @@ public class Battle
     {
         try
         {
+                    
+            if (ValidacionWin())
+            {
+                return Win();
+            }
             if (ValidacionPokemonVivo())
             {
                 return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
             }
-        
-            if (ValidacionWin())
-            {
-                Win();
-            }
-        
             if (validacionPokemon())
             {
                 return "No tenes los pokemones suficientes para empezar la batalla. ";
@@ -190,16 +189,16 @@ public class Battle
     {
         try
         {
+            if (ValidacionWin())
+            {
+                return Win();
+            }
+            
             validacionPokemon();
             
             if (ValidacionPokemonVivo())
             {
                 return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
-            }
-
-            if (ValidacionWin())
-            {
-                Win();
             }
         
             if (validacionPokemon())
@@ -221,14 +220,12 @@ public class Battle
         }
         catch (FormatException)
         {
-            Console.WriteLine("Entrada inválida. Asegúrate de ingresar un número.");
+            return "Entrada inválida. Asegúrate de ingresar un número.";
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ocurrió un error: {ex.Message} ");
+            return ($"Ocurrió un error: {ex.Message} ");
         }
-
-        return "Hecho";
     }
 
 
@@ -241,18 +238,17 @@ public class Battle
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
     public string IntermediaryUseItem(int opcionPokemon, string opcionItem)
     {
+                
+        if (ValidacionWin())
+        {
+            return Win();
+        }
 
         validacionPokemon();
 
         if (ValidacionPokemonVivo())
         {
             return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
-        }
-
-        
-        if (ValidacionWin())
-        {
-            Win();
         }
         
         if (validacionPokemon())
@@ -314,8 +310,10 @@ public class Battle
     /// Muestra el mensaje de victoria cuando el jugador actual gana la batalla.
     /// </summary>
     /// <returns>Mensaje indicando que el jugador actual ha ganado.</returns>
-    public void Win()
+    public string Win()
     {
-        Facade.Instance.Win(this.actualTurn.Name);
+        Facade.Instance.Win(actualTurn.Name);
+        return $"Gano el jugador {this.actualTurn.Name}";
     }
+    
 }

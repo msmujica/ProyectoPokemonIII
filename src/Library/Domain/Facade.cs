@@ -352,10 +352,10 @@ public class Facade
     }
     
     public string Win(string playerDisplayName)
-    {
+    {       
         Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
         this.BattlesList.removeBatlle(battle);
-        return $"{playerDisplayName} a ganado!. Termino la Batalla!";
+        return battle.Win();
         
     }
 

@@ -138,7 +138,7 @@ public class Trainer
                 valor = itemsManager.UsarCuraTotal(pokemon, CounterTotalCure, effectsManager);
                 break;
             default:
-                Console.WriteLine("Ítem no válido.");
+                valor = "Item no valido. ";
                 break;
         }
 

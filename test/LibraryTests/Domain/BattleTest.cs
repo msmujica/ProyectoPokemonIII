@@ -2,86 +2,164 @@ using Library;
 using Library.Items;
 using NUnit.Framework;
 using System.Collections.Generic;
+using Ucu.Poo.DiscordBot.Domain;
 
-namespace Tests
+namespace LibraryTests.Domain
 {
     [TestFixture]
-    public class BattleTest
+    public class BattleTests
     {
-        [Test]
-        public void SimulateBattle()
+        private Trainer trainer1;
+        private Trainer trainer2;
+        private Battle battle;
+
+        [SetUp]
+        public void SetUp()
         {
-            // 1. Crear entrenadores
-            Trainer ash = new Trainer("Ash");
-            Trainer gary = new Trainer("Gary");
+            // Crear entrenadores
+            trainer1 = new Trainer("Ash");
+            trainer2 = new Trainer("Misty");
+            
+            // Crear la batalla
+            battle = new Battle(trainer1, trainer2);
+            battle.ActualTurn = trainer2;
+            battle.LastTurn = trainer1;
 
-            // Inicializar ítems para ambos entrenadores
-            ash.ItemSetting();
-            gary.ItemSetting();
+            // Añadir exactamente 6 Pokémon al equipo del primer entrenador
+            battle.ActualTurn.ChooseTeam(0);       
+            battle.ActualTurn.ChooseTeam(0);        
+            battle.ActualTurn.ChooseTeam(0);        
+            battle.ActualTurn.ChooseTeam(0);        
+            battle.ActualTurn.ChooseTeam(0);     
+            battle.ActualTurn.ChooseTeam(0);
 
-            // 2. Crear Pokémons y agregar al equipo de cada entrenador
-            Pokemon pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo" }, "Eléctrico");
-            Pokemon charizard = new Pokemon("Charizard", 150, new List<string> { "Lanzallamas", "Garra Dragón" }, "Fuego");
+            battle.LastTurn.ChooseTeam(0);
+            battle.LastTurn.ChooseTeam(0);
+            battle.LastTurn.ChooseTeam(0);
+            battle.LastTurn.ChooseTeam(0);
+            battle.LastTurn.ChooseTeam(0);
+            battle.LastTurn.ChooseTeam(0);
+        }
 
-            Pokemon squirtle = new Pokemon("Squirtle", 90, new List<string> { "Pistola Agua", "Hidrobomba" }, "Agua");
-            Pokemon bulbasaur = new Pokemon("Bulbasaur", 110, new List<string> { "Latigo Cepa", "Hoja Afilada" }, "Planta");
+        [Test]
+        public void CannotStartBattle_WithLessThanSixPokemon()
+        {
+            // Crear un entrenador con menos de 6 Pokémon
+            var brock = new Trainer("Brock");
+            var misty = new Trainer("a");
+            Battle invalid = new Battle(brock, misty);
+            invalid.ActualTurn.ChooseTeam(0);
+            invalid.LastTurn.ChooseTeam(0);
+            
+            // Intentar iniciar la batalla y capturar la excepción
+            Assert.That(invalid.IntermediaryAttack("Burbuja"), Is.EqualTo("No tenes los pokemones suficientes para empezar la batalla. "));
+        }
 
-            ash.Team.Add(pikachu);
-            ash.Team.Add(charizard);
+        [Test]
+        public void SwitchingPokemon_WorksCorrectly()
+        {
+            // Cambiar el Pokémon activo de Trainer1 al segundo Pokémon
+            string result = battle.IntermediaryChangeActivePokemon(1);
 
-            gary.Team.Add(squirtle);
-            gary.Team.Add(bulbasaur);
+            // Verificar que el Pokémon activo ha cambiado correctamente
+            Assert.That(result, Is.Not.Empty, "El cambio de Pokémon debería generar un mensaje de resultado.");
+            Assert.That(trainer1.Active.Name, Is.EqualTo("Squirtle"), "El Pokémon activo debería ser el segundo del equipo.");
+        }
 
-            // Configurar Pokémon activos
-            ash.Active = pikachu;
-            gary.Active = squirtle;
+        [Test]
+        public void IntermediaryAttack_WithInvalidAttackName()
+        {
+            // Intentar realizar un ataque con un nombre inválido
+            string result = battle.IntermediaryAttack("AtaqueInvalido");
 
-            // 3. Simular batalla
-            EffectsManager effectsManager = new EffectsManager();
+            // Verificar que el resultado es un mensaje de error
+            Assert.That(result, Is.EqualTo("El pokemon Squirtle no tiene efectos activos. Este no es tu ataque. Turno terminado. \n"));
+        }
 
-            // Ash ataca primero
-            string attackResult1 = ash.ChooseAttack("Impactrueno", gary.Active, effectsManager);
-            Assert.That(attackResult1, Contains.Substring("recibió")); // Verifica si el ataque fue exitoso
 
-            // Verificar que la salud de Squirtle disminuyó
-            Assert.That(gary.Active.Health, Is.LessThan(91));
 
-            // Gary contraataca
-            string attackResult2 = gary.ChooseAttack("Pistola Agua", ash.Active, effectsManager);
-            Assert.That(attackResult2, Contains.Substring("recibió")); // Verifica si el ataque fue exitoso
+        [Test]
+        public void ValidacionPokemonVivo_HandlesFaintedPokemon()
+        {
+            while (trainer1.Active.Health > 0)
+            {
+                battle.IntermediaryAttack("Burbuja");
+                battle.CambiarTurno();
+            }
+            battle.CambiarTurno();
 
-            // Verificar que la salud de Pikachu disminuyó
-            Assert.That(ash.Active.Health, Is.LessThan(100));
+            // Verificar que se realiza el cambio de Pokémon automáticamente
+            bool result = battle.ValidacionPokemonVivo();
 
-            // 4. Aplicar un efecto (por ejemplo, paralizar)
-            string paralyzeResult = effectsManager.ApplyEffect(new ParalyzeEffect(), gary.Active);
-            Assert.That(paralyzeResult, Contains.Substring("El pokemon Squirtle se le aplico el efecto paralisis."));
+            Assert.That(result, Is.True);
+            Assert.That(trainer1.Active.Health, Is.GreaterThan(0));
+        }
 
-            // Verificar que el Pokémon no puede atacar mientras está paralizado
-            bool canAttack = effectsManager.IcanAttack(gary.Active);
-            Assert.That(canAttack, Is.False);
+        [Test]
+        public void IntermediaryUseItem_AppliesItemCorrectly()
+        {
+            while (trainer1.Active.Health == 100)
+            {
+                battle.IntermediaryAttack("Burbuja");
+                battle.CambiarTurno();
+            }
+            battle.CambiarTurno();
+            // Usar un ítem de curación en un Pokémon
+            string result = battle.IntermediaryUseItem(0, "Superpocion");
 
-            // 5. Ash usa un ítem en Pikachu
-            string itemResult = ash.UsarItem("Superpocion", ash.Active, effectsManager);
-            Assert.That(itemResult, Contains.Substring("Usaste una Super Pocion. Usos restantes: 3"));
+            // Verificar que la salud del Pokémon activo ha aumentado
+            Assert.That(result, Does.Contain("Usaste una Super Pocion. Usos restantes: 3"));
+            Assert.That(trainer1.Active.Health, Is.EqualTo(100));
+        }
 
-            // Verificar que la salud de Pikachu ha aumentado
-            Assert.That(ash.Active.Health, Is.GreaterThan(ash.Active.Health - 20));
+        [Test]
+        public void IntermediaryChangeActivePokemon_WithInvalidIndex()
+        {
+            // Intentar cambiar a un Pokémon que no existe en el equipo
+            string result = battle.IntermediaryChangeActivePokemon(10);
 
-            // 6. Derrotar al Pokémon activo de Gary y verificar cambio
-            gary.Active.Health = 0; // Simular derrota
-            gary.Active.IsDefeated = true;
+            // Verificar que la respuesta es la esperada
+            Assert.That(result, Is.EqualTo("Selección de Pokémon inválida. Por favor, intenta de nuevo."));
+        }
 
-            gary.CambioPokemonMuerto(); // Cambiar al siguiente Pokémon disponible
-            Assert.That(gary.Active, Is.EqualTo(bulbasaur));
+        [Test]
+        public void IntermediaryUseItem_WithInvalidItem()
+        {
+            // Intentar usar un ítem que no existe
+            string result = battle.IntermediaryUseItem(0, "ItemInvalido");
 
-            // 7. Limpiar efectos
-            string cleanEffectsResult = effectsManager.CleanEffects(gary.Active);
-            Assert.That(cleanEffectsResult, Contains.Substring(""));
+            // Verificar que el resultado sea el esperado
+            Assert.That(result, Is.EqualTo("Item no valido. "));
+            result = battle.IntermediaryUseItem(10, "Superpocion");
+            Assert.That(result, Is.EqualTo("Selección de Pokémon inválida."));
 
-            // Verificar que ya no tiene efecto
-            bool hasEffects = effectsManager.PokemonWithEffect(gary.Active);
-            Assert.That(hasEffects, Is.False);
+
+        }
+
+        [Test]
+        public void ValidacionPokemon_ReturnsFalse_WhenBothHaveSixPokemons()
+        {
+            // Ambos jugadores tienen 6 Pokémon
+            bool result = battle.validacionPokemon();
+
+            // Verificar que la validación sea correcta
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void ValidacionWin_RecognizesWinnerWhenAllOpponentPokemonAreFainted()
+        {
+
+            while (!battle.ValidacionWin())
+            {
+                battle.IntermediaryAttack("Burbuja");
+                battle.CambiarTurno();
+            }
+            
+            // Verificar que se detecta la victoria
+            bool result = battle.ValidacionWin();
+
+            Assert.That(result, Is.True, "El jugador debería ganar si todos los Pokémon del oponente están derrotados.");
         }
     }
 }
