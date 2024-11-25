@@ -137,7 +137,6 @@ public static class Pokedex
             return null;
     }
     
-    
         // Si se crea un Pokémon, se agrega al equipo del entrenador
         if (newPokemon != null)
         {

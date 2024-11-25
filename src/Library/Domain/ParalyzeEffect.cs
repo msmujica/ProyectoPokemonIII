@@ -6,6 +6,9 @@ namespace Library
     /// </summary>
     public class ParalyzeEffect : IEffect
     {
+        /// <summary>
+        /// Indica si el Pokémon puede atacar durante su turno o no debido a la parálisis.
+        /// </summary>
         public bool IcanAttack { get; set; }
         
         /// <summary>
@@ -58,6 +61,13 @@ namespace Library
             return this.IcanAttack;
         }
         
+        /// <summary>
+        /// Muestra el estado actual de la parálisis en el Pokémon.
+        /// Indica si el Pokémon puede atacar o está paralizado.
+        /// </summary>
+        /// <returns>
+        /// Un mensaje indicando si el Pokémon está paralizado y no puede atacar, o si puede atacar.
+        /// </returns>
         public string Info(Pokemon pokemon)
         {
             if (this.IcanAttack)

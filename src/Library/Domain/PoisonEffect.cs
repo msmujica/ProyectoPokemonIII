@@ -6,6 +6,10 @@ namespace Library
     /// </summary>
     public class PoisonEffect : IEffect
     {
+        /// <summary>
+        /// Propiedad que indica si el Pokémon puede atacar mientras está bajo el efecto de envenenamiento.
+        /// En este caso, el Pokémon puede atacar independientemente del envenenamiento.
+        /// </summary>
         public bool IcanAttack
         {
             get { return true; }
@@ -48,6 +52,15 @@ namespace Library
             return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento. ";
             // El efecto continúa (el Pokémon sigue vivo y envenenado)
         }
+        
+        /// <summary>
+        /// Proporciona información sobre el estado de envenenamiento del Pokémon.
+        /// Indica si el Pokémon está bajo el efecto de veneno.
+        /// </summary>
+        /// <param name="pokemon">El Pokémon que está bajo el efecto de veneno.</param>
+        /// <returns>
+        /// Un mensaje indicando que el Pokémon tiene el efecto de envenenamiento activo.
+        /// </returns>
         public string Info(Pokemon pokemon)
         {
             return
