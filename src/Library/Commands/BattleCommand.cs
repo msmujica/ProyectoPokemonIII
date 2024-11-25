@@ -11,7 +11,6 @@ namespace Ucu.Poo.DiscordBot.Commands;
 /// si lo hubiera, en una batalla; si no se recibe un oponente, lo une con
 /// cualquiera que esté esperando para jugar.
 /// </summary>
-// ReSharper disable once UnusedType.Global
 public class BattleCommand : ModuleBase<SocketCommandContext>
 {
     /// <summary>
@@ -25,7 +24,7 @@ public class BattleCommand : ModuleBase<SocketCommandContext>
         como parámetro, si lo hubiera, en una batalla; si no se recibe un
         oponente, lo une con cualquiera que esté esperando para jugar.
         """)]
-    // ReSharper disable once UnusedMember.Global
+
     public async Task ExecuteAsync(
         [Remainder]
         [Summary("Display name del oponente, opcional")]
