@@ -6,9 +6,11 @@ using Ucu.Poo.DiscordBot.Domain;
 namespace Ucu.Poo.DiscordBot.Commands;
 
 /// <summary>
-/// Esta clase implementa el comando 'choose' del bot. Este comando nos sirve para que el
-/// jugador eliga su equipo.
+/// Implementa el comando 'choose'. Este comando permite que un jugador
+/// elija un Pokémon utilizando su ID para agregarlo a su equipo.
 /// </summary>
+/// <param name="pokemonInt">El ID del Pokémon que el jugador desea agregar a su equipo.</param>
+/// <returns>Un <see cref="Task"/> que representa la operación asincrónica de ejecutar el comando.</returns>
 // ReSharper disable once UnusedType.Global
 public class ChoosePokemonCommand : ModuleBase<SocketCommandContext>
 {
@@ -19,12 +21,12 @@ public class ChoosePokemonCommand : ModuleBase<SocketCommandContext>
     [Command("choose")]
     [Summary(
         """
-        Un jugador que elije un pokemon para agregar a su propio equipo.;
+        Permite al jugador elegir un Pokémon utilizando su ID para agregarlo a su equipo.
         """)]
     // ReSharper disable once UnusedMember.Global
     public async Task ExecuteAsync(
         [Remainder]
-        [Summary("Display del id del pokemon")]
+        [Summary("El ID del Pokémon a elegir.")]
         int pokemonInt)
     {
         string displayName = CommandHelper.GetDisplayName(Context);

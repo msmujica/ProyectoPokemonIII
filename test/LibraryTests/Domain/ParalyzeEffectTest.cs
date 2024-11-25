@@ -67,7 +67,7 @@ public class ParalyzeEffectTest
     
         // Test cuando el Pokémon puede atacar
         [Test]
-        public void TestProcessEffect_ShouldAllowAttack_WhenPokemonCanAttack()
+        public void TestProcessEffectShouldAllowAttackWhenPokemonCanAttack()
         {
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
             ParalyzeEffect paralyze = new ParalyzeEffect();
@@ -87,7 +87,7 @@ public class ParalyzeEffectTest
 
         // Test cuando el Pokémon no puede atacar
         [Test]
-        public void TestProcessEffect_ShouldNotAllowAttack_WhenPokemonCannotAttack()
+        public void TestProcessEffectShouldNotAllowAttackWhenPokemonCannotAttack()
         {
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno"}, "Eléctrico");
             ParalyzeEffect paralyze = new ParalyzeEffect();
