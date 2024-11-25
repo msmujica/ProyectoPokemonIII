@@ -807,11 +807,6 @@
             <param name="numero">El número del Pokémon que se desea agregar al equipo.</param>
             <returns>Un mensaje indicando si el Pokémon fue agregado con éxito o si el equipo está lleno.</returns>
         </member>
-        <member name="M:Library.Trainer.ShowMyPokedex">
-            <summary>
-            Muestra todos los Pokémon que el entrenador tiene en su Equipo.
-            </summary>
-        </member>
         <member name="M:Library.Trainer.ChangeActive(System.Int32)">
             <summary>
             Cambia el Pokémon activo del entrenador.

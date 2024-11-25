@@ -72,20 +72,6 @@ public class Trainer
         string name = Pokedex.ShowPokemonByIndex(number);
         return $"El pokemon {name} se agrego a la lista, quedan {6 - Team.Count} espacios.";
     }
-
-    /// <summary>
-    /// Muestra todos los Pokémon que el entrenador tiene en su Equipo.
-    /// </summary>
-    public void ShowMyPokedex()
-    {
-        int number = 0;
-        Console.WriteLine("Lista de Pokemones en tu Pokedex");
-        foreach (var list in Team)
-        {
-            Console.WriteLine($"{number} - {list.Name}");
-            number += 1;
-        }
-    }
     
     /// <summary>
     /// Cambia el Pokémon activo del entrenador.
@@ -138,7 +124,7 @@ public class Trainer
                 valor = itemsManager.UsarCuraTotal(pokemon, CounterTotalCure, effectsManager);
                 break;
             default:
-                Console.WriteLine("Ítem no válido.");
+                valor = "Item no valido!";
                 break;
         }
 
