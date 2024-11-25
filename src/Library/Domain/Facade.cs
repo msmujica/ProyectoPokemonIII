@@ -326,11 +326,9 @@ public class Facade
         {
             return "Entrenador no encontrado.";
         }
+        
         Pokemon activo = player.Active;
-        if (activo == null)
-        {
-            return "El Pokémon activo del entrenador no está disponible.";
-        }
+
         string result = "Ataques:\n";
 
         foreach (var ataque in activo.Attacks)
