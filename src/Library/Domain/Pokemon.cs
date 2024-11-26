@@ -17,30 +17,45 @@ public class Pokemon
     private string type;
     private bool isDefeated;
 
+    /// <summary>
+    /// Nombre del Pokémon.
+    /// </summary>
     public string Name
     {
         get { return name; }
         set { name = value; }
     }
 
+    /// <summary>
+    /// Puntos de vida del Pokémon. Este valor disminuye cuando el Pokémon recibe daño.
+    /// </summary>
     public int Health
     {
         get { return health; }
         set { health = value; }
     }
 
+    /// <summary>
+    /// Lista de ataques disponibles para el Pokémon. Cada ataque es una cadena con el nombre del ataque.
+    /// </summary>
     public List<string> Attacks
     {
         get { return attack; }
         set { attack = value; }
     }
-
+    
+    /// <summary>
+    /// Tipo o tipos del Pokémon, como "Fuego", "Agua", "Eléctrico", etc.
+    /// </summary>
     public string Types
     {
         get { return type; }
         set { type = value; }
     }
 
+    /// <summary>
+    /// Estado del Pokémon, indica si el Pokémon ha sido derrotado.
+    /// </summary>
     public bool IsDefeated
     {
         get { return isDefeated; }

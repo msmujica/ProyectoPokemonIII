@@ -6,12 +6,18 @@ namespace Library
     /// </summary>
     public class BurnEffect : IEffect
     {
+        /// <summary>
+        /// Obtiene si el Pokémon bajo el efecto de quemadura puede atacar.
+        /// En este caso, el Pokémon aún puede atacar, por lo que siempre devuelve <c>true</c>.
+        /// </summary>
         public bool IcanAttack
         {
             get { return true; }
         }
         // Porcentaje de la vida máxima que pierde el Pokémon debido a la quemadura (10%)
         private static double dmgPercentage = 0.10; 
+        
+        
         /// <summary>
         /// Inicia el efecto de "quemar" en el Pokémon.
         /// Este efecto causa daño continuo al Pokémon en cada turno.
@@ -46,6 +52,14 @@ namespace Library
             return $"El pokemon {pokemon.Name} ha sufrido {daño} de daño por envenenamiento. ";
             // El efecto continúa (el Pokémon sigue vivo y envenenado)
         }
+        
+        /// <summary>
+        /// Obtiene información sobre el efecto de quemadura aplicado al Pokémon.
+        /// </summary>
+        /// <param name="pokemon">El Pokémon que tiene el efecto de quemadura.</param>
+        /// <returns>
+        /// Un mensaje indicando que el Pokémon tiene el efecto de quemadura.
+        /// </returns>
         public string Info(Pokemon pokemon)
         {
             return
