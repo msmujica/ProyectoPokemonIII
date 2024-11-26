@@ -190,8 +190,6 @@ public class Battle
     {
         try
         {
-            validacionPokemon();
-            
             if (ValidacionPokemonVivo())
             {
                 return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
@@ -241,9 +239,6 @@ public class Battle
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
     public string IntermediaryUseItem(int opcionPokemon, string opcionItem)
     {
-
-        validacionPokemon();
-
         if (ValidacionPokemonVivo())
         {
             return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
