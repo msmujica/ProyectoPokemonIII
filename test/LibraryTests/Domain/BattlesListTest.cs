@@ -43,16 +43,13 @@ namespace LibraryTests.Domain
         [Test]
         public void BuscarEntrenadorPorDisplayName()
         {
-            // Arrange
             player1 = new Trainer("Player1");
             player2 = new Trainer("Player2");
             battlesList = new BattlesList();
             battlesList.AddBattle(player1, player2);
-
-            // Act
+            
             var result = battlesList.FindTrainerByDisplayName("Player1");
-
-            // Assert
+            
             Assert.That(result, Is.Not.Null);
             Assert.That(player1, Is.EqualTo(result));
         }

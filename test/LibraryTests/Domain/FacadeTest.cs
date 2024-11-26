@@ -140,6 +140,9 @@ public class FacadeTest
             Assert.That("Esperan: Ash; ", Is.EqualTo(result));
         }
         
+        /// <summary>
+        /// Prueba el comportamiento en caso de que no haya ningun entrenador.
+        /// </summary>
         [Test]
         public void TestGetAllTrainersWaitingNone()
         {

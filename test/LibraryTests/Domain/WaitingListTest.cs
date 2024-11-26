@@ -27,11 +27,12 @@ namespace LibraryTests.Domain
         {
             bool result = waitingList.AddTrainer("Player1");
             
-            Assert.That(result, Is.True); // Debería haberse agregado correctamente.
-            Assert.That(waitingList.Count, Is.EqualTo(1)); // La lista debería tener un solo entrenador.
+            Assert.That(result, Is.True); 
+            Assert.That(waitingList.Count, Is.EqualTo(1));
+            
         }
-        
-        
+
+
         /// <summary> 
         /// Comprueba que no se pueda agregar un entrenador con un nombre duplicado. 
         /// </summary>
@@ -40,13 +41,13 @@ namespace LibraryTests.Domain
         public void AddTrainerShouldReturnFalseWhenDisplayNameIsDuplicate()
         {
             waitingList.AddTrainer("Player1");
-            
+
             bool result = waitingList.AddTrainer("Player1");
-            
-            Assert.That(result, Is.False); // Debería retornar false al ser un nombre duplicado.
-            Assert.That(waitingList.Count, Is.EqualTo(1)); // La lista debería seguir teniendo un solo entrenador.
+
+            Assert.That(result, Is.False); 
+            Assert.That(waitingList.Count, Is.EqualTo(1));
         }
-        
+
         /// <summary> 
         /// Valida que se arroje una excepción si el nombre proporcionado es nulo o vacío. 
         /// </summary>
@@ -54,8 +55,9 @@ namespace LibraryTests.Domain
         [Test]
         public void AddTrainerShouldThrowArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => waitingList.AddTrainer(null)); // Debería lanzar una excepción si es null.
-            Assert.Throws<ArgumentException>(() => waitingList.AddTrainer(string.Empty)); // Debería lanzar una excepción si es vacío.
+            Assert.Throws<ArgumentException>(() => waitingList.AddTrainer(null));
+            Assert.Throws<ArgumentException>(() => waitingList.AddTrainer(string.Empty));
+            
         }
         
         /// <summary> 
@@ -69,8 +71,9 @@ namespace LibraryTests.Domain
             
             bool result = waitingList.RemoveTrainer("Player1");
             
-            Assert.That(result, Is.True); // El entrenador debería haberse eliminado correctamente.
-            Assert.That(waitingList.Count, Is.EqualTo(0)); // La lista debería estar vacía.
+            Assert.That(result, Is.True);
+            Assert.That(waitingList.Count, Is.EqualTo(0));
+            
         }
         
         /// <summary> 
@@ -82,8 +85,8 @@ namespace LibraryTests.Domain
         {
             bool result = waitingList.RemoveTrainer("Player1");
             
-            Assert.That(result, Is.False); // Debería retornar false si el jugador no existe.
-            Assert.That(waitingList.Count, Is.EqualTo(0)); // La lista sigue vacía.
+            Assert.That(result, Is.False);
+            Assert.That(waitingList.Count, Is.EqualTo(0)); 
         }
         
         
@@ -98,8 +101,9 @@ namespace LibraryTests.Domain
             
             var trainer = waitingList.FindTrainerByDisplayName("Player1");
             
-            Assert.That(trainer, Is.Not.Null); // El entrenador debería ser encontrado.
-            Assert.That(trainer?.Name, Is.EqualTo("Player1")); // El nombre del entrenador debería coincidir.
+            Assert.That(trainer, Is.Not.Null);
+            Assert.That(trainer?.Name, Is.EqualTo("Player1"));
+            
         }
         
         
@@ -112,7 +116,8 @@ namespace LibraryTests.Domain
         {
             var trainer = waitingList.FindTrainerByDisplayName("Player1");
             
-            Assert.That(trainer, Is.Null); // No debería encontrar al entrenador, ya que no está en la lista.
+            Assert.That(trainer, Is.Null);
+            
         }
         
         /// <summary> 
@@ -127,8 +132,9 @@ namespace LibraryTests.Domain
             
             var trainer = waitingList.GetAnyoneWaiting();
             
-            Assert.That(trainer, Is.Not.Null); // Debería retornar un entrenador.
-            Assert.That(trainer?.Name, Is.EqualTo("Player1")); // El primer entrenador debería ser "Player1".
+            Assert.That(trainer, Is.Not.Null); 
+            Assert.That(trainer?.Name, Is.EqualTo("Player1"));
+            
         }
         
         /// <summary> 
@@ -140,7 +146,7 @@ namespace LibraryTests.Domain
         {
             var trainer = waitingList.GetAnyoneWaiting();
             
-            Assert.That(trainer, Is.Null); // Debería retornar null si no hay entrenadores en la lista.
+            Assert.That(trainer, Is.Null);
         }
         
         /// <summary> 
@@ -155,9 +161,10 @@ namespace LibraryTests.Domain
             
             var allTrainers = waitingList.GetAllWaiting();
             
-            Assert.That(allTrainers.Count, Is.EqualTo(2)); // Debería haber dos entrenadores en la lista.
-            Assert.That(allTrainers[0].Name, Is.EqualTo("Player1")); // El primer entrenador debería ser "Player1".
-            Assert.That(allTrainers[1].Name, Is.EqualTo("Player2")); // El segundo entrenador debería ser "Player2".
+            Assert.That(allTrainers.Count, Is.EqualTo(2));
+            Assert.That(allTrainers[0].Name, Is.EqualTo("Player1")); 
+            Assert.That(allTrainers[1].Name, Is.EqualTo("Player2"));
+            
         }
     }
 }
