@@ -7,6 +7,10 @@ namespace LibraryTests.Domain;
 [TestOf(typeof(PoisonEffect))]
 public class PoisonEffectTest
 {
+    /// <summary>
+    /// Prueba que verifica el inicio del efecto de envenenamiento en un Pokemon.
+    /// Se asegura de que el mensaje correcto se devuelva cuando el efecto es aplicado.
+    /// </summary>
 
     [Test]
     public void TestStartEffect()
@@ -16,7 +20,9 @@ public class PoisonEffectTest
         string result = poison.StartEffect(Pikachu);
         Assert.That("El pokemon Pikachu ha sido envenenado, perdera vida cada turno.", Is.EqualTo(result));
     }
-
+    /// <summary>
+    /// Verifica el procesamiento del efecto de envenenamiento en un pokemon
+    /// </summary>
     [Test]
     public void TestProcessEffect()
     {
@@ -27,6 +33,9 @@ public class PoisonEffectTest
         Assert.That(result, !Is.Null);
     }
     
+    /// <summary>
+    /// Verifica el processamiento del efecto envenenamiento cuando el pokemon es derrotado
+    /// </summary>
     [Test]
     public void TestProcessEffectPokemonDied()
     {
@@ -37,6 +46,9 @@ public class PoisonEffectTest
         Assert.That(result, Is.EqualTo("El pokemon Pikachu ha caído por envenenamiento. "));
     }
     
+    /// <summary>
+    /// Verifica la informacion sobre el efecto de envenenamiento en un pokemon.
+    /// </summary>
     [Test]
     public void TestInfo()
     {
@@ -45,7 +57,10 @@ public class PoisonEffectTest
         
         Assert.That("Al pokemon Pikachu tiene el efecto envenenamiento. ", Is.EqualTo(poision.Info(Pikachu)));
     }
-
+    
+    /// <summary>
+    /// Verifica si un pokemon puede atacar mientras tiene el efecto de envenamiento.
+    /// </summary>
     [Test]
     public void TestICanAttack()
     {
