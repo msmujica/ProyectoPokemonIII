@@ -1,0 +1,18 @@
+digraph "C:/Users/Estudiante UCU/Desktop/ProyectoPokemonIII/test/LibraryTests"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_13e138d54eb8818da29c3992edef070a {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="test", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_13e138d54eb8818da29c3992edef070a.html",tooltip=""]
+  subgraph clusterdir_6c8e1213d96547949c4ad1dee757a549 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_6c8e1213d96547949c4ad1dee757a549.html",tooltip=""]
+    dir_6c8e1213d96547949c4ad1dee757a549 [shape=plaintext, label="LibraryTests"];
+  dir_6f09199cd2fdafe26a0e5b97f3177651 [label="Domain", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_6f09199cd2fdafe26a0e5b97f3177651.html",tooltip=""];
+  dir_0567e4b2e116c46e2bf644a8aa059564 [label="obj", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_0567e4b2e116c46e2bf644a8aa059564.html",tooltip=""];
+  }
+  }
+}

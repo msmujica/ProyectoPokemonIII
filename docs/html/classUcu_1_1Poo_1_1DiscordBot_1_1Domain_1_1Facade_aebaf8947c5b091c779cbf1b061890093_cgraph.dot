@@ -1,0 +1,38 @@
+digraph "Ucu.Poo.DiscordBot.Domain.Facade.ChangePokemon"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Ucu.Poo.DiscordBot.Domain.\lFacade.ChangePokemon",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Permite al jugador cambiar de Pokémon activo durante una batalla."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Ucu.Poo.DiscordBot.Domain.\lBattlesList.FindBattleByDisplayName",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1BattlesList.html#a76dbb2ce6d7c5b3b1a7249d153dac760",tooltip="Busca una batalla en la lista por el nombre de pantalla de uno de los jugadores."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Ucu.Poo.DiscordBot.Domain.\lBattle.IntermediaryChangeActive\lPokemon",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#ab7a1279b06a1790481bea286ae4d6824",tooltip="Intermediario para cambiar el Pokémon activo durante el turno del jugador. Valida que el índice del P..."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Ucu.Poo.DiscordBot.Domain.\lBattle.CambiarTurno",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a5284c6dbe547bb1dc6d3a34c1a037b33",tooltip="Cambia el turno entre los dos jugadores. Resetea el estado de acción y determina quién es el siguient..."];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="Library.Trainer.ChangeActive",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1Trainer.html#a7988fd07f9142750bb2a5936791e7c81",tooltip="Cambia el Pokémon activo del entrenador."];
+  Node3 -> Node6 [id="edge5_Node000003_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="Library.EffectsManager.Procesar\lEfectosDaño",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1EffectsManager.html#a90fc62b441ff3691e1430bfbc06592f6",tooltip="Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon."];
+  Node6 -> Node7 [id="edge6_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="Library.IEffect.ProcessEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interfaceLibrary_1_1IEffect.html#a3912490698280590ec5966e2477e671f",tooltip="Procesa el efecto sobre un Pokémon. Este método es responsable de actualizar el estado del Pokémon en..."];
+  Node3 -> Node8 [id="edge7_Node000003_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="Ucu.Poo.DiscordBot.Domain.\lBattle.validacionPokemon",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a0c0419a149a6419f5f3fa5dc5070fbe2",tooltip="Valida si ambos jugadores tienen al menos 6 Pokémon en su equipo."];
+  Node3 -> Node9 [id="edge8_Node000003_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="Ucu.Poo.DiscordBot.Domain.\lBattle.ValidacionPokemonVivo",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a3c8843ee6801d84965dbe2deefdf0efd",tooltip="Valida el estado de los Pokémon activos de ambos jugadores. Si alguno de los Pokémon está muerto (vid..."];
+  Node9 -> Node10 [id="edge9_Node000009_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="Library.Trainer.CambioPokemon\lMuerto",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1Trainer.html#a40e8a32f4e61e51a2b38dfb9ea2001cf",tooltip="Cambia al siguiente Pokémon disponible en el equipo si el Pokémon activo está muerto."];
+  Node9 -> Node11 [id="edge10_Node000009_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="Library.EffectsManager.Clean\lEffects",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1EffectsManager.html#a2f2cf03bd3ebcf2e2274f67d85ce9cd5",tooltip="Limpia todos los efectos activos de un Pokémon."];
+  Node3 -> Node12 [id="edge11_Node000003_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="Ucu.Poo.DiscordBot.Domain.\lBattle.ValidacionWin",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a344b4ccc5c8c196ba7b406294a95e61a",tooltip="Valida si el jugador actual ha ganado la batalla. Se considera una victoria cuando todos los Pokémon ..."];
+  Node3 -> Node13 [id="edge12_Node000003_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="Ucu.Poo.DiscordBot.Domain.\lBattle.Win",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a51f107114664c960965d3a3bf70c9985",tooltip="Muestra el mensaje de victoria cuando el jugador actual gana la batalla."];
+  Node1 -> Node14 [id="edge13_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="Ucu.Poo.DiscordBot.Domain.\lFacade.ValidationTurn",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Facade.html#a6da72f5b6815a28284aebca1a4ebd009",tooltip="Valida si es el turno del jugador durante una batalla."];
+  Node14 -> Node15 [id="edge14_Node000014_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="Ucu.Poo.DiscordBot.Domain.\lBattlesList.FindTrainerByDisplayName",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1BattlesList.html#a6285b78cc1f21423f3ba446d5b380222",tooltip="Busca un entrenador en todas las batallas por su nombre de pantalla (display name)."];
+}

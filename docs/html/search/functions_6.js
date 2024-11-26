@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['icanattack_0',['IcanAttack',['../classLibrary_1_1EffectsManager.html#a49efe4162caa271c6dff16e93404745e',1,'Library::EffectsManager']]],
+  ['icanattackwhenpokemonhasnocontroleffectsreturnstrue_1',['IcanAttackWhenPokemonHasNoControlEffectsReturnsTrue',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a9847940ad8d5f9c219ad014e9b7a6d34',1,'Library::Tests::EffectsManagerTests']]],
+  ['icanattackwhenpokemonhasnoncontroleffectreturnstrue_2',['IcanAttackWhenPokemonHasNonControlEffectReturnsTrue',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#acecf925bda09e71a05e5c39129b5d393',1,'Library::Tests::EffectsManagerTests']]],
+  ['icanattackwhenpokemonhasparalyzeeffectandcannotattackreturnsfalse_3',['IcanAttackWhenPokemonHasParalyzeEffectAndCannotAttackReturnsFalse',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a9018e71197dace93da1aa0ec7f11e419',1,'Library::Tests::EffectsManagerTests']]],
+  ['icanattackwhenpokemonhassleepeffectandcannotattackreturnsfalse_4',['IcanAttackWhenPokemonHasSleepEffectAndCannotAttackReturnsFalse',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a4a9c96b0d16140f3bbd8af6844c16e11',1,'Library::Tests::EffectsManagerTests']]],
+  ['immunities_5',['Immunities',['../classLibraryTests_1_1Domain_1_1TypeLogicTest.html#aa6bcaa8fbe33bb4c551d623219cdf602',1,'LibraryTests::Domain::TypeLogicTest']]],
+  ['info_6',['Info',['../classLibrary_1_1BurnEffect.html#a4f0235a6ea0a13ad61ee35ee36e5f34f',1,'Library.BurnEffect.Info()'],['../classLibrary_1_1ParalyzeEffect.html#ad2a317949fee8468a98f3338b75ccfa5',1,'Library.ParalyzeEffect.Info()'],['../classLibrary_1_1PoisonEffect.html#a15620f9a1eafc7891942fe377d6dc915',1,'Library.PoisonEffect.Info()'],['../classLibrary_1_1SleepEffect.html#ad95fb53aaaf12e26fdd0d86579ae5762',1,'Library.SleepEffect.Info()']]],
+  ['intermediaryattack_7',['IntermediaryAttack',['../classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a5bf8452d63b73ef60dd6bd44346065d2',1,'Ucu::Poo::DiscordBot::Domain::Battle']]],
+  ['intermediarychangeactivepokemon_8',['IntermediaryChangeActivePokemon',['../classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#ab7a1279b06a1790481bea286ae4d6824',1,'Ucu::Poo::DiscordBot::Domain::Battle']]],
+  ['intermediaryuseitem_9',['IntermediaryUseItem',['../classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a9ce76174a562b11ec576314621245e1f',1,'Ucu::Poo::DiscordBot::Domain::Battle']]],
+  ['invalidindex_10',['InvalidIndex',['../classLibraryTests_1_1Domain_1_1TrainerTest.html#ae8508c6fe53fafadea253159d1fc6101',1,'LibraryTests::Domain::TrainerTest']]],
+  ['isparalyze_11',['IsParalyze',['../classLibrary_1_1EffectsManager.html#a7ffaa4df57bce601d9d5c70058e79eb5',1,'Library::EffectsManager']]],
+  ['isparalyzewhenpokemonhasnoeffectsreturnsfalse_12',['IsParalyzeWhenPokemonHasNoEffectsReturnsFalse',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#ace23aeaa56a51f12b783d0f30a704638',1,'Library::Tests::EffectsManagerTests']]],
+  ['isparalyzewhenpokemonhasothereffectsreturnsfalse_13',['IsParalyzeWhenPokemonHasOtherEffectsReturnsFalse',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a93cdb33901bbfc19127aa9b9c6c2b687',1,'Library::Tests::EffectsManagerTests']]],
+  ['isparalyzewhenpokemonhasparalyzeeffectreturnstrue_14',['IsParalyzeWhenPokemonHasParalyzeEffectReturnsTrue',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#ad9fdd1e3ad15140089adb0719085a940',1,'Library::Tests::EffectsManagerTests']]],
+  ['itemsetting_15',['ItemSetting',['../classLibrary_1_1Trainer.html#a1551b8371e0bd2892c44168e80d6cc14',1,'Library::Trainer']]]
+];

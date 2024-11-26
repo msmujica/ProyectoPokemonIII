@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['paralyzeeffect_0',['ParalyzeEffect',['../classLibrary_1_1ParalyzeEffect.html',1,'Library']]],
+  ['paralyzeeffecttest_1',['ParalyzeEffectTest',['../classLibraryTests_1_1Domain_1_1ParalyzeEffectTest.html',1,'LibraryTests::Domain']]],
+  ['player1_2',['Player1',['../classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a6790646142c82b15d1f4189ddce29b6c',1,'Ucu::Poo::DiscordBot::Domain::Battle']]],
+  ['player2_3',['Player2',['../classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a005753b1eecbcff78aceaed92d19dade',1,'Ucu::Poo::DiscordBot::Domain::Battle']]],
+  ['poisoneffect_4',['PoisonEffect',['../classLibrary_1_1PoisonEffect.html',1,'Library']]],
+  ['poisoneffecttest_5',['PoisonEffectTest',['../classLibraryTests_1_1Domain_1_1PoisonEffectTest.html',1,'LibraryTests::Domain']]],
+  ['pokedextest_6',['PokedexTest',['../classLibraryTests_1_1Domain_1_1PokedexTest.html',1,'LibraryTests::Domain']]],
+  ['pokemon_7',['Pokemon',['../classLibrary_1_1Pokemon.html',1,'Library.Pokemon'],['../classLibrary_1_1Pokemon.html#ae2827783f2625d761980fc983a1d9a87',1,'Library.Pokemon.Pokemon()']]],
+  ['pokemonnamecommand_8',['PokemonNameCommand',['../classUcu_1_1Poo_1_1DiscordBot_1_1Commands_1_1PokemonNameCommand.html',1,'Ucu.Poo.DiscordBot.Commands.PokemonNameCommand'],['../classUcu_1_1Poo_1_1DiscordBot_1_1Commands_1_1PokemonNameCommand.html#a9bef2e1f53cb8e3c39e4efadeed644c3',1,'Ucu.Poo.DiscordBot.Commands.PokemonNameCommand.PokemonNameCommand()']]],
+  ['pokemontest_9',['PokemonTest',['../classLibraryTests_1_1Domain_1_1PokemonTest.html',1,'LibraryTests::Domain']]],
+  ['pokemonwitheffect_10',['PokemonWithEffect',['../classLibrary_1_1EffectsManager.html#a6c6e3177c4cf920886cabd56f335a297',1,'Library::EffectsManager']]],
+  ['procesarcontrolmasa_11',['ProcesarControlMasa',['../classLibrary_1_1EffectsManager.html#a0b9a49a0fc0ecd8a0e3a2e005e283944',1,'Library::EffectsManager']]],
+  ['procesarcontrolmasawhenpokemonhasnocontroleffectsreturnsnoeffectsmessage_12',['ProcesarControlMasaWhenPokemonHasNoControlEffectsReturnsNoEffectsMessage',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a0b062356930c856a456e3ca08e74979b',1,'Library::Tests::EffectsManagerTests']]],
+  ['procesarcontrolmasawhenpokemonhasnoncontroleffectignoreseffect_13',['ProcesarControlMasaWhenPokemonHasNonControlEffectIgnoresEffect',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#ab78c9d9bcf4afcd077c87389c9597870',1,'Library::Tests::EffectsManagerTests']]],
+  ['procesarcontrolmasawhenpokemonhasparalyzeeffectreturnsparalyzeeffectdescription_14',['ProcesarControlMasaWhenPokemonHasParalyzeEffectReturnsParalyzeEffectDescription',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a130d7fcf63ad7a0de119cdc4f0362992',1,'Library::Tests::EffectsManagerTests']]],
+  ['procesarcontrolmasawhenpokemonhassleepeffectreturnssleepeffectdescription_15',['ProcesarControlMasaWhenPokemonHasSleepEffectReturnsSleepEffectDescription',['../classLibrary_1_1Tests_1_1EffectsManagerTests.html#a4785fb1e42d0e785147fdf572dbda324',1,'Library::Tests::EffectsManagerTests']]],
+  ['procesarefectosdaño_16',['ProcesarEfectosDaño',['../classLibrary_1_1EffectsManager.html#a90fc62b441ff3691e1430bfbc06592f6',1,'Library::EffectsManager']]],
+  ['processeffect_17',['ProcessEffect',['../classLibrary_1_1BurnEffect.html#ab86ed348949a594c2b0c5e3b5d2175d6',1,'Library.BurnEffect.ProcessEffect()'],['../interfaceLibrary_1_1IEffect.html#a3912490698280590ec5966e2477e671f',1,'Library.IEffect.ProcessEffect()'],['../classLibrary_1_1ParalyzeEffect.html#a0fb1e08d3c3186ff4c2f580bc76e6e98',1,'Library.ParalyzeEffect.ProcessEffect()'],['../classLibrary_1_1PoisonEffect.html#a5cf769818caacf856dafbb95f4aeb6b0',1,'Library.PoisonEffect.ProcessEffect()'],['../classLibrary_1_1SleepEffect.html#a4583ac4d6477e018cf6d44ac3d7dc54b',1,'Library.SleepEffect.ProcessEffect()']]],
+  ['program_18',['Program',['../namespaceProgram.html',1,'']]],
+  ['proyectopokemon_20iii_19',['ProyectoPokemon-III',['../md_C_1_2Users_2Estudiante_01UCU_2Desktop_2ProyectoPokemonIII_2README.html',1,'']]]
+];

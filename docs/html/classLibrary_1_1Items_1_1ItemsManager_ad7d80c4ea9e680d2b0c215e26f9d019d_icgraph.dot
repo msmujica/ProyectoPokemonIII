@@ -1,0 +1,30 @@
+digraph "Library.Items.ItemsManager.UsarCuraTotal"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="Library.Items.ItemsManager.\lUsarCuraTotal",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Usa una Cura Total para restaurar la vida de un Pokémon al 100% y eliminar cualquier efecto negativo."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Library.Trainer.UsarItem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1Trainer.html#ac660c65346dede89c28242e6a54b7e5a",tooltip="Utiliza un ítem en un Pokémon durante la batalla."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Ucu.Poo.DiscordBot.Domain.\lBattle.IntermediaryUseItem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Battle.html#a9ce76174a562b11ec576314621245e1f",tooltip="Intermediario para usar un ítem en el Pokémon activo durante la batalla. Valida el índice del Pokémon..."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Ucu.Poo.DiscordBot.Domain.\lFacade.UseItem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Facade.html#a36b5dc38fff97f40224fc5ad833f26a7",tooltip="Permite al jugador usar un ítem durante una batalla."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="Ucu.Poo.DiscordBot.Commands.\lChooseItemCommand.ExecuteAsync",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Commands_1_1ChooseItemCommand.html#a5a110d084bbb5d1f88f14121ac629df3",tooltip="Implementa el comando 'item'. Este comando permite seleccionar un ítem de la lista de opciones y usar..."];
+  Node4 -> Node6 [id="edge5_Node000004_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="LibraryTests.Domain.Facade\lTest.TestUseItem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1FacadeTest.html#a5d58c2e7e38f177c67df40f285c5f222",tooltip="Prueba la funcionalidad de usar un ítem durante una batalla."];
+  Node2 -> Node7 [id="edge6_Node000002_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="Tests.BattleTest.Simulate\lBattle",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classTests_1_1BattleTest.html#a68461692bba7299b56336fdd9788ceeb",tooltip="Simula una batalla entre dos entrenadores con sus respectivos Pokémon, verificando el uso de ataques,..."];
+  Node2 -> Node8 [id="edge7_Node000002_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="LibraryTests.Domain.Trainer\lTest.UseItemCuraTotal",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1TrainerTest.html#a60ea742ddda9f8034ef108f4b572cf87",tooltip="Verifica el uso de una cura total en un Pokémon."];
+  Node2 -> Node9 [id="edge8_Node000002_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="LibraryTests.Domain.Trainer\lTest.UseItemNone",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1TrainerTest.html#a7f80d505eff92b31bd23cdede8996588",tooltip="Verifica el uso de un ítem no válido."];
+  Node2 -> Node10 [id="edge9_Node000002_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="LibraryTests.Domain.Trainer\lTest.UseItemRevivir",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1TrainerTest.html#adbab27776a9ae793b9a457ddf50ef7ee",tooltip="Verifica el uso de un revivir en un Pokémon derrotado."];
+  Node2 -> Node11 [id="edge10_Node000002_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="LibraryTests.Domain.Trainer\lTest.UseItemSuperpotion",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1TrainerTest.html#a2bd7ea1c1c8989e7c6a000bd2fb1452a",tooltip="Verifica el uso de una superpoción en un Pokémon."];
+}

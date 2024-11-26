@@ -1,0 +1,12 @@
+digraph "Library.EffectsManager.ProcesarEfectosDaño"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Library.EffectsManager.Procesar\lEfectosDaño",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Procesa efectos de daño continuo (como veneno o quemadura) que afectan a la vida del Pokémon."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Library.IEffect.ProcessEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interfaceLibrary_1_1IEffect.html#a3912490698280590ec5966e2477e671f",tooltip="Procesa el efecto sobre un Pokémon. Este método es responsable de actualizar el estado del Pokémon en..."];
+}

@@ -1,0 +1,20 @@
+digraph "Ucu.Poo.DiscordBot.Domain.WaitingList.RemoveTrainer"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="Ucu.Poo.DiscordBot.Domain.\lWaitingList.RemoveTrainer",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Remueve un jugador de la lista de espera."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="LibraryTests.Domain.Waiting\lListTest.RemoveExistingTrainerShould\lRemoveTrainer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1WaitingListTest.html#a0e9ba6ac70b2583bb8e6e5822852c54c",tooltip="Verifica que se pueda eliminar correctamente a un entrenador existente."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Ucu.Poo.DiscordBot.Domain.\lFacade.RemoveTrainerFromWaitingList",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Facade.html#a89a4414772440d41adf0930bff407a7e",tooltip="Remueve un jugador de la lista de espera."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Ucu.Poo.DiscordBot.Commands.\lLeaveCommand.ExecuteAsync",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Commands_1_1LeaveCommand.html#a4d859d792ce4f73491ea0108dd881f9f",tooltip="Implementa el comando 'leave' del bot. Este comando remueve el jugador que envía el mensaje de la lis..."];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="LibraryTests.Domain.Facade\lTest.TestRemoveTrainerFromWaitingList",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1FacadeTest.html#a918c8808a50e6ba6c4e0df2767f93fa4",tooltip="Prueba la funcionalidad de remover un jugador de la lista de espera."];
+  Node1 -> Node6 [id="edge5_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="LibraryTests.Domain.Waiting\lListTest.RemoveTrainerShouldReturnFalse",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1WaitingListTest.html#a56abba81fd9d7d9c6995090c2d97cb31",tooltip="Comprueba que intentar eliminar un entrenador inexistente retorne false."];
+}

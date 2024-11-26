@@ -1,0 +1,14 @@
+digraph "Ucu.Poo.DiscordBot.Commands.ShowEnemiesPokemonCommand.ExecuteAsync"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Ucu.Poo.DiscordBot.Commands.\lShowEnemiesPokemonCommand.ExecuteAsync",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Implementa el comando 'showpokemon', que muestra los Pokémon disponibles en el equipo de un entrenado..."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Ucu.Poo.DiscordBot.Domain.\lFacade.ShowEnemiesPokemon",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1Facade.html#ab1d458439500b3a7dcb724fe27faaef9",tooltip="Muestra los Pokémon del equipo del jugador especificado."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Ucu.Poo.DiscordBot.Domain.\lBattlesList.FindTrainerByDisplayName",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classUcu_1_1Poo_1_1DiscordBot_1_1Domain_1_1BattlesList.html#a6285b78cc1f21423f3ba446d5b380222",tooltip="Busca un entrenador en todas las batallas por su nombre de pantalla (display name)."];
+}

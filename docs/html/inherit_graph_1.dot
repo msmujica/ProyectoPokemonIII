@@ -1,0 +1,18 @@
+digraph "Graphical Class Hierarchy"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="Library.IEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interfaceLibrary_1_1IEffect.html",tooltip="Interfaz que define la estructura básica para los efectos especiales que pueden aplicarse a un Pokémo..."];
+  Node0 -> Node1 [id="edge1_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="Library.BurnEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1BurnEffect.html",tooltip="Clase que representa el efecto de \"quemar\" a un Pokémon. Un Pokémon quemado pierde un 10% de su vida ..."];
+  Node0 -> Node2 [id="edge2_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Library.ParalyzeEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1ParalyzeEffect.html",tooltip="Clase que representa el efecto de \"paralizar\" a un Pokémon. Un Pokémon paralizado tiene un 30% de pro..."];
+  Node0 -> Node3 [id="edge3_Node000000_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Library.PoisonEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1PoisonEffect.html",tooltip="Clase que representa el efecto de \"envenenar\" a un Pokémon. Un Pokémon envenenado pierde una cierta c..."];
+  Node0 -> Node4 [id="edge4_Node000000_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Library.SleepEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1SleepEffect.html",tooltip="Representa un efecto de estado de sueño que puede ser aplicado a un Pokémon. Este efecto impide que e..."];
+}

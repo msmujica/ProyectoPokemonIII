@@ -1,0 +1,16 @@
+digraph "Library.Pokemon.recibirDaño"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="Library.Pokemon.recibirDaño",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Método que permite al Pokémon recibir un cierto daño."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="LibraryTests.Domain.Pokemon\lTest.ReceiveDamageDecreasesHealth\lCorrectly",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1PokemonTest.html#aa84073222f0c4836dbef2b39b3b8c2f1",tooltip="Prueba para verificar que un Pokémon reciba daño correctamente."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="LibraryTests.Domain.Pokemon\lTest.ReceiveDamageIsDefeated",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1PokemonTest.html#ab2324c1b028bd7dbdbbb46b2e75acc12",tooltip="Prueba para verificar que un Pokémon se marque como derrotado al llegar a 0 de salud."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="LibraryTests.Domain.Pokemon\lTest.ReceiveDamageWhenDefeated",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibraryTests_1_1Domain_1_1PokemonTest.html#a8bb5a4760902d87dc3476f1f59eb71f5",tooltip="Prueba para verificar que un Pokémon no pueda recibir daño una vez derrotado."];
+}

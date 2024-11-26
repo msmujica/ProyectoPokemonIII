@@ -1,0 +1,12 @@
+digraph "Ucu.Poo.DiscordBot.Domain.Battle.Battle"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Ucu.Poo.DiscordBot.Domain.\lBattle.Battle",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Inicializa una nueva instancia de la clase Battle con los entrenadores proporcionados...."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Library.Trainer.ItemSetting",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1Trainer.html#a1551b8371e0bd2892c44168e80d6cc14",tooltip="Inicializa los contadores de ítems disponibles para el entrenador."];
+}

@@ -1,0 +1,16 @@
+digraph "Library.Tests.EffectsManagerTests.IcanAttackWhenPokemonHasParalyzeEffectAndCannotAttackReturnsFalse"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Library.Tests.EffectsManager\lTests.IcanAttackWhenPokemonHasParalyze\lEffectAndCannotAttackReturnsFalse",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Prueba que el método EffectsManager.IcanAttack devuelva falso cuando un Pokémon tenga el efecto de pa..."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Library.EffectsManager.Apply\lEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1EffectsManager.html#aae0813f486b305c6ecdaf7fd7e4a7695",tooltip="Aplica un efecto específico a un Pokémon."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Library.IEffect.StartEffect",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interfaceLibrary_1_1IEffect.html#adaeb62144a700e69f5f08d859ccaca64",tooltip="Inicia el efecto sobre un Pokémon. Este método debe definir cómo el efecto afecta al Pokémon al momen..."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Library.EffectsManager.Ican\lAttack",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classLibrary_1_1EffectsManager.html#a49efe4162caa271c6dff16e93404745e",tooltip="Procesa los efectos que alteran el comportamiento del Pokémon (como dormir o paralizar)."];
+}
