@@ -35,13 +35,10 @@ namespace Library.Tests
         [Test]
         public void IsParalyzeWhenPokemonHasParalyzeEffectReturnsTrue()
         {
-            // Arrange
             manager.ApplyEffect(paralyzeEffect, pikachu);
 
-            // Act
             bool result = manager.IsParalyze(pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.True);
         }
 
@@ -51,10 +48,8 @@ namespace Library.Tests
         [Test]
         public void IsParalyzeWhenPokemonHasNoEffectsReturnsFalse()
         {
-            // Act
             bool result = manager.IsParalyze(pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.False);
         }
 
@@ -64,13 +59,10 @@ namespace Library.Tests
         [Test]
         public void IsParalyzeWhenPokemonHasOtherEffectsReturnsFalse()
         {
-            // Arrange
             manager.ApplyEffect(sleepEffect, pikachu);
-
-            // Act
+            
             bool result = manager.IsParalyze(pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.False);
         }
 
@@ -81,13 +73,10 @@ namespace Library.Tests
         [Test]
         public void IcanAttackWhenPokemonHasParalyzeEffectAndCannotAttackReturnsFalse()
         {
-            // Arrange
             manager.ApplyEffect(paralyzeEffect, pikachu);
-
-            // Act
+            
             bool result = manager.IcanAttack(pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.False);
         }
 
@@ -97,13 +86,10 @@ namespace Library.Tests
         [Test]
         public void IcanAttackWhenPokemonHasSleepEffectAndCannotAttackReturnsFalse()
         {
-            // Arrange
             manager.ApplyEffect(sleepEffect, charmander);
 
-            // Act
             bool result = manager.IcanAttack(charmander);
-
-            // Assert
+            
             Assert.That(result, Is.False);
         }
 
@@ -200,13 +186,10 @@ namespace Library.Tests
         [Test]
         public void CleanEffectsWhenPokemonHasEffectsRemovesEffectsAndReturnsMessage()
         {
-            // Arrange
             manager.ApplyEffect(paralyzeEffect, pikachu);
-
-            // Act
+            
             string result = manager.CleanEffects(pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.EqualTo($"Todos los efectos han sido eliminados de {pikachu.Name}."));
             Assert.That(manager.PokemonWithEffect(pikachu), Is.False); // Verifica que los efectos han sido eliminados
         }
@@ -225,20 +208,16 @@ namespace Library.Tests
         [Test]
         public void ApplyEffectWhenEffectIsNullReturnsEmptyString()
         {
-            // Act
             string result = manager.ApplyEffect(null, pikachu);
-
-            // Assert
+            
             Assert.That(result, Is.Empty);
         }
 
         [Test]
         public void ApplyEffectWhenPokemonIsNullReturnsEmptyString()
         {
-            // Act
             string result = manager.ApplyEffect(paralyzeEffect, null);
-
-            // Assert
+            
             Assert.That(result, Is.Empty);
         }
     }

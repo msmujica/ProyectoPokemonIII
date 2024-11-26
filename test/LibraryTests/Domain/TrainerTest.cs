@@ -213,14 +213,12 @@ public class TrainerTest
         var opponent = new Pokemon("Charmander", 100, new List<string> { "Ascuas" }, "Fuego");
         var activePokemon = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno" }, "Eléctrico");
 
-        // Inicializar el entrenador y asignar el Pokémon activo
         trainer = new Trainer("Ash");
         trainer.Team.Add(activePokemon);
-        trainer.Active = activePokemon; // Asegúrate de que el Pokémon activo esté configurado
+        trainer.Active = activePokemon;
         
         var result = trainer.ChooseAttack("Impactrueno", opponent, effectsManager);
-
-        // Verificar el resultado (ajustar la expectativa según el comportamiento real de ChooseAttack)
-        Assert.That(result, Is.Not.Null); // El resultado debe ser un string válido
+        
+        Assert.That(result, Is.Not.Null);
     }
 }

@@ -374,6 +374,10 @@ public class Facade
         return false;
     }
 
+    /// <summary>
+    /// Cambia el turno en caso del que el jugador lo decida.
+    /// </summary>
+    /// <returns>Turno Cambiado. Es el Turno de X, en caso contrario No es tu turno</returns>
     public string ChangeTurn(string playerDisplayName)
     {
         Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
