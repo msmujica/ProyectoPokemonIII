@@ -35,7 +35,7 @@ public class ChooseItemCommand : ModuleBase<SocketCommandContext>
         string[] options = optionList.Split(",");
 
         string result;
-        if (options == null)
+        if (options != null)
         {
             result = Facade.Instance.UseItem(displayName, Int32.Parse(options[1]), options[0]);
         }

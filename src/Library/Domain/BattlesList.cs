@@ -45,6 +45,9 @@ public class BattlesList
         return null;
     }
 
+    /// <summary>
+    /// Remueve una batalla de la lista de batallas, esto se realiza cuando se gana o se rinde una persona.
+    /// </summary>
     public void removeBatlle(Battle batt)
     {
         this.battles.Remove(batt);
