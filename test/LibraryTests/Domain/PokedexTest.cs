@@ -7,38 +7,42 @@ namespace LibraryTests.Domain;
 [TestOf(typeof(Pokedex))]
 public class PokedexTest
 {
+    /// <summary>
+    /// Prueba que verifica que se puede obtener un Pokemon por suu indice valido.
+    /// </summary>
     [Test]
-        public void TestShowPokemonByIndex_Valid()
+        public void TestShowPokemonByIndexValid()
         {
-            // Act: se obtiene pokemon con indice 0
+            
             var pokemon = Pokedex.ShowPokemonByIndex(0);
-
-            // Assert: Se verifica que el pokemón devuelto sea Squirtle
+            
             Assert.That("Squirtle", Is.EqualTo(pokemon));
         }
-
+    
+        /// <summary>
+        /// Prueba para que Mostrar Pokédex devuelve la lista completa.
+        /// </summary>
         [Test]
-        //Prueba para que Mostrar Pokédex devuelve la lista completa
         public void TestShowPokedex()
         {
-            // Act: Se obtiene la lista de Pokemón de la Pokédex
-            var pokedex = Pokedex.ShowPokedex();
-
-            // Assert: Se verifica que la liosta contenga exactamente 15 Pokemons y que el primero sea Squirtle
-            Assert.That(15, Is.EqualTo(pokedex.Count)); // Hay 15 Pokémon
+            var pokedex = Pokedex.ShowPokedex(); 
+            
+            Assert.That(15, Is.EqualTo(pokedex.Count)); 
             Assert.That(pokedex[0].Contains("Squirtle"), Is.True);
             Assert.That(pokedex[0].Contains("Agua"), Is.True);
         }
         
+        
+        /// <summary>
+        /// Verifica la creacion de Pokemon a partir de su indice en la Pokedex.
+        /// </summary>
         [Test]
         public void TestCreatePokemonByIndex()
         {
-            // Arrange: Se crea un entrenador 
             var trainer = new Trainer("Ash");
             var trainer2 = new Trainer("Misty");
             var trainer3 = new Trainer("Pikachu");
-
-            // Act: Se crea un Pokemón de inidice 0 para el entrenador 
+            
             var pokemon = Pokedex.CreatePokemonByIndex(0, trainer);
             var pokemon1 = Pokedex.CreatePokemonByIndex(1, trainer);
             var pokemon2 = Pokedex.CreatePokemonByIndex(2, trainer);
@@ -56,23 +60,21 @@ public class PokedexTest
             var pokemon14 = Pokedex.CreatePokemonByIndex(14, trainer3);
 
             
-            //Assert
-            Assert.That(pokemon, Is.Not.Null);  //El pokemon existe
-            Assert.That("Squirtle", Is.EqualTo(pokemon.Name));    //El nombre del Pokemón debe ser Squirtle
-            Assert.That(100, Is.EqualTo(pokemon.Health));     //La vida del Pokemón debe ser 100 
+            Assert.That(pokemon, Is.Not.Null);  
+            Assert.That("Squirtle", Is.EqualTo(pokemon.Name));   
+            Assert.That(100, Is.EqualTo(pokemon.Health));    
         }
-
+        
+        /// <summary>
+        ///Se prueba el comportamiento cuando se intenta crear un Pokemón con un índice inválido
+        /// </summary>
         [Test]
-        // Se prueba el comportamiento cuando se intenta crear un Pokemón con un índice inválido
-        public void TestCreatePokemonByIndex_Invalid()
+        public void TestCreatePokemonByIndexInvalid()
         {
-            // Arrange: Se crea un entrenador
             var entrenador = new Trainer("Ash");
-
-            // Act: Se crea un Pokemón con índice inválido (100) para el entrenador
+            
             var pokemon = Pokedex.CreatePokemonByIndex(100, entrenador);
-
-            // Assert: 
-            Assert.That(pokemon, Is.Null); // No debe existir un Pokemón con ese índice
+            
+            Assert.That(pokemon, Is.Null); 
         }
 }

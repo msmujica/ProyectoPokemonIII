@@ -6,8 +6,10 @@ namespace LibraryTests.Domain;
 [TestFixture]
 [TestOf(typeof(SleepEffect))]
 public class SleepEffectTest
-{
-
+{ 
+    /// <summary>
+    /// Prueba que verifica que el efecto de sueño se inicia correctamente en un Pokémon.
+    /// </summary>
     [Test]
     public void TestStartEffect()
     {
@@ -16,6 +18,11 @@ public class SleepEffectTest
         string result = sleep.StartEffect(Pikachu);
         Assert.That(result, !Is.Null);
     }
+    
+    
+    /// <summary> 
+    /// Prueba que verifica el procesamiento del efecto de sueño en un Pokémon. 
+    /// </summary>
 
     [Test]
     public void TestProcessEffect()
@@ -27,6 +34,10 @@ public class SleepEffectTest
         Assert.That(result, !Is.EqualTo(""));
     }
     
+    /// <summary> 
+    /// Prueba que verifica que la información del efecto de sueño sea retornada correctamente.
+    /// </summary>
+
     [Test]
     public void TestInfo()
     {
@@ -35,7 +46,12 @@ public class SleepEffectTest
         
         Assert.That(sleep.Info(Pikachu), !Is.Null);
     }
+    
+    /// <summary>
+    /// Prueba que verifica que un Pokémon bajo el efecto de sueño no pueda atacar.
+    /// </summary>
 
+    
     [Test]
     public void TestICanAttack()
     {
@@ -45,77 +61,81 @@ public class SleepEffectTest
         Assert.That(false, Is.EqualTo(sleep.IcanAttack));
     }
     
-    [Test]
+    /// <summary> 
+    /// Prueba que verifica que un Pokémon dormido no pueda atacar mientras aún está bajo el efecto.
+    /// </summary>
+
+        [Test]
         public void TestProcessEffectShouldNotAllowAttackWhenStillSleeping()
         {
-            // Arrange
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
             SleepEffect sleep = new SleepEffect();
             sleep.StartEffect(Pikachu);
-
-            // Act
+            
             string result = sleep.ProcessEffect(Pikachu);
-
-            // Assert: Verificar que el Pokémon aún está dormido y no puede atacar
+            
             Assert.That(sleep.IcanAttack, Is.False);
         }
+
+    /// <summary> 
+    /// Prueba que verifica que un Pokémon despierte después de que termine el número de turnos de sueño. 
+    /// </summary>
 
         [Test]
         public void TestProcessEffectShouldWakeUpWhenTurnsEnd()
         {
-            // Arrange
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
             SleepEffect sleep = new SleepEffect();
             sleep.StartEffect(Pikachu);
-
-            // Simular que el Pokémon ha pasado los turnos de sueño
+            
             for (int i = 0; i < 4; i++)
             {
                 sleep.ProcessEffect(Pikachu);
             }
-
-            // Act
+            
             string result = sleep.ProcessEffect(Pikachu);
-
-            // Assert: Verificar que el Pokémon se haya despertado
+            
             Assert.That(sleep.IcanAttack, Is.True);
             Assert.That(result, Is.EqualTo($"El pokemon Pikachu ha despertado."));
         }
+        
+        
+    /// <summary> 
+    /// Prueba que verifica que un Pokémon pueda atacar después de despertar del efecto de sueño.
+    /// </summary>
 
         [Test]
         public void TestProcessEffectShouldAllowAttackWhenPokemonWakesUp()
         {
-            // Arrange
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
             SleepEffect sleep = new SleepEffect();
             sleep.StartEffect(Pikachu);
-
-            // Act: Pasar por los turnos de sueño hasta que el Pokémon despierte
+            
             for (int i = 0; i < 4; i++)
             {
                 sleep.ProcessEffect(Pikachu);
             }
-
-            // Verificar que el Pokémon esté despierto
+            
             string result = sleep.ProcessEffect(Pikachu);
-
-            // Assert: El Pokémon debe poder atacar ahora
+            
             Assert.That(sleep.IcanAttack, Is.True);
             Assert.That(result, Is.EqualTo($"El pokemon Pikachu ha despertado."));
         }
+    
+        
+    /// <summary>
+    /// Prueba que verifica que los turnos de sueño disminuyan correctamente con cada procesamiento. 
+    /// </summary>
 
         [Test]
         public void TestProcessEffectShouldDecrementSleepTurns()
         {
-            // Arrange
             Pokemon Pikachu = new Pokemon("Pikachu", 100, new List<string> { "Impactrueno", "Rayo", "Trueno" }, "Eléctrico");
             SleepEffect sleep = new SleepEffect();
             sleep.StartEffect(Pikachu);
-
-            // Act: Llamar a ProcessEffect varias veces para comprobar la reducción de turnos
-            string resultTurn1 = sleep.ProcessEffect(Pikachu); // Debería ser el turno 1
-
-            // Assert: Verificar que los turnos se decrecen correctamente
+            
+            string resultTurn1 = sleep.ProcessEffect(Pikachu); 
+            
             Assert.That(resultTurn1, Is.EqualTo(resultTurn1));
         }
 }
