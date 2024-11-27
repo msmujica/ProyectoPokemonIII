@@ -124,7 +124,7 @@ public class Facade
     }
 
 
-    private string CreateBattle(string playerDisplayName, string opponentDisplayName)
+    private string CreateBattle(string playerDisplayName, string opponentDisplayName, string rTipos, string rPokemon, string rItems)
     {
         // Aunque playerDisplayName y opponentDisplayName no estén en la lista
         // esperando para jugar los removemos igual para evitar preguntar si
@@ -147,17 +147,18 @@ public class Facade
         switch (turnoRandom)
         {
             case 0:
-                BattlesList.AddBattle(player, opponent);
+                BattlesList.AddBattle(player, opponent, rTipos, rPokemon, rItems);
                 actual = $"Empieza {player.Name}";
                 break;
             case 1:
-                BattlesList.AddBattle(opponent, player);
+                BattlesList.AddBattle(opponent, player, rTipos, rPokemon, rItems);
                 actual = $"Empieza {opponent.Name}";
                 break;
         }
 
         return $"Comienza {player.Name} vs {opponent.Name}\n" +
-               $"{actual}";
+               $"{actual}" +
+               $"Las reglas son: {rTipos}, {rPokemon}, {rItems}";
     }
 
     /// <summary>
@@ -166,7 +167,7 @@ public class Facade
     /// <param name="playerDisplayName">El primer jugador.</param>
     /// <param name="opponentDisplayName">El oponente.</param>
     /// <returns>Un mensaje con el resultado.</returns>
-    public string StartBattle(string playerDisplayName, string? opponentDisplayName)
+    public string StartBattle(string playerDisplayName, string? opponentDisplayName, string rTipos, string rPokemon, string rItems)
     {
         // El símbolo ? luego de Trainer indica que la variable opponent puede
         // referenciar una instancia de Trainer o ser null.
@@ -185,7 +186,7 @@ public class Facade
             // variable no es null. Estamos seguros porque SomebodyIsWaiting
             // retorna true si y solo si hay usuarios esperando y en tal caso
             // GetAnyoneWaiting nunca retorna null.
-            return CreateBattle(playerDisplayName, opponentDisplayName);
+            return CreateBattle(playerDisplayName, opponentDisplayName, rTipos, rPokemon, rItems);
         }
 
         // El símbolo ! luego de opponentDisplayName indica que sabemos que esa
@@ -198,7 +199,7 @@ public class Facade
             return $"{opponentDisplayName} no está esperando";
         }
         
-        return CreateBattle(playerDisplayName, opponentDisplayName);
+        return CreateBattle(playerDisplayName, opponentDisplayName, rTipos, rPokemon, rItems);
         
         // Funciones locales a continuación para mejorar la legibilidad
 
@@ -246,7 +247,7 @@ public class Facade
 
         return value;
     }
-
+    
     /// <summary>
     /// Permite al jugador elegir un equipo de Pokémon para una batalla.
     /// </summary>
@@ -255,8 +256,9 @@ public class Facade
     /// <returns>Un mensaje indicando el Pokémon elegido.</returns>
     public string ChooseTeam(string playerDisplayName, int number)
     {
+        Battle battle = BattlesList.FindBattleByDisplayName(playerDisplayName);
         Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        return player.ChooseTeam(number);
+        return player.ChooseTeam(number, battle);
     }
 
     /// <summary>
@@ -388,5 +390,13 @@ public class Facade
         }
 
         return "No es tu turno";
+    }
+    
+    public string LeaveInstance(string playerDisplayName)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(playerDisplayName);
+        this.BattlesList.removeBatlle(battle);
+        return $"{playerDisplayName} se a rendido. Termino la Batalla";
+        
     }
 }

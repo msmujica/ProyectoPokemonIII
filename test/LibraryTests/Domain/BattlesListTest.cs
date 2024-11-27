@@ -14,7 +14,9 @@ namespace LibraryTests.Domain
         private BattlesList battlesList;
         private Trainer player1;
         private Trainer player2;
-
+        private string tipos = "Agua";
+        private string pokemon = "Pikachu";
+        private string items = "superPocion";
         /// <summary>
         /// Verifica que el método <see cref="BattlesList.AddBattle(Trainer, Trainer)"/> agregue correctamente 
         /// una nueva batalla a la lista de batallas.
@@ -28,7 +30,7 @@ namespace LibraryTests.Domain
             battlesList = new BattlesList();
 
             // Act
-            Battle battle = battlesList.AddBattle(player1, player2);
+            Battle battle = battlesList.AddBattle(player1, player2, tipos, pokemon, items);
 
             // Assert
             Assert.That(battle, Is.Not.Null);
@@ -46,7 +48,7 @@ namespace LibraryTests.Domain
             player1 = new Trainer("Player1");
             player2 = new Trainer("Player2");
             battlesList = new BattlesList();
-            battlesList.AddBattle(player1, player2);
+            battlesList.AddBattle(player1, player2, tipos, pokemon, items);
             
             var result = battlesList.FindTrainerByDisplayName("Player1");
             

@@ -61,17 +61,20 @@ public class FacadeTest
         
         string player1 = "Ash";
         string player2 = "Misty";
+        string tipos = "Agua";
+        string pokemon = "Pikachu";
+        string items = "superPocion";
         facade.AddTrainerToWaitingList(player1);
         facade.AddTrainerToWaitingList(player2);
-        var result = facade.StartBattle(player1, player2);
+        var result = facade.StartBattle(player1, player2, tipos, pokemon, items);
         string resultadoEsperado = null;
-        if (result == "Comienza Ash vs Misty\nEmpieza Ash")
+        if (result == "Comienza Ash vs Misty\nEmpieza AshLas reglas son: Agua, Pikachu, superPocion")
         {
-            resultadoEsperado = "Comienza Ash vs Misty\nEmpieza Ash";
+            resultadoEsperado = "Comienza Ash vs Misty\nEmpieza AshLas reglas son: Agua, Pikachu, superPocion";
         }
         else
         {
-            resultadoEsperado = "Comienza Ash vs Misty\nEmpieza Misty";
+            resultadoEsperado = "Comienza Ash vs Misty\nEmpieza MistyLas reglas son: Agua, Pikachu, superPocion";
         }
         Assert.That(resultadoEsperado, Is.EqualTo(result)); 
     }
@@ -169,8 +172,11 @@ public class FacadeTest
     public void TestStartBattleNoPlayersWaiting()
     {
         string player1 = "Ash";
+        string tipos = "Agua";
+        string pokemon = "Pikachu";
+        string items = "superPocion";
 
-        var result = facade.StartBattle(player1, null);
+        var result = facade.StartBattle(player1, null, tipos, pokemon, items);
 
         Assert.That("No hay nadie esperando", Is.EqualTo(result));
     }
@@ -187,9 +193,13 @@ public class FacadeTest
         
         string player1 = "Ash";
         string player2 = "Misty";
+        string tipos = "Volador";
+        string pokemon = "Pidgey";
+        string items = "superPocion";
+
         facade.AddTrainerToWaitingList(player1);
         facade.AddTrainerToWaitingList(player2);
-        facade.StartBattle(player1, player2);
+        facade.StartBattle(player1, player2, tipos, pokemon, items);
 
         var result = facade.ChooseTeam(player1, 0);
 
@@ -205,9 +215,13 @@ public class FacadeTest
     {
         string player1 = "Ash";
         string player2 = "Misty";
+        string tipos = "Agua";
+        string pokemon = "Pikachu";
+        string items = "superPocion";
+
         facade.AddTrainerToWaitingList(player1);
         facade.AddTrainerToWaitingList(player2);
-        facade.StartBattle(player1, player2);
+        facade.StartBattle(player1, player2, tipos, pokemon, items);
 
         facade.ChooseTeam(player1, 1);
         facade.ChooseTeam(player1, 2);
@@ -224,11 +238,11 @@ public class FacadeTest
         facade.ChooseTeam(player2, 6);
 
         // Simula que el jugador usa un ítem
-        var result = facade.UseItem(player1, 0, "Superpocion");
+        var result = facade.UseItem(player1, 0, "superPocion");
 
         if (result == "No es tu turno ESPERA!")
         {
-            result = facade.UseItem(player2, 0, "Superpocion");
+            result = facade.UseItem(player2, 0, "superPocion");
         }
         
         Assert.That(result, !Is.Null);
@@ -242,9 +256,13 @@ public class FacadeTest
             {
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
 
                 facade.ChooseTeam(player1, 1);
                 facade.ChooseTeam(player1, 2);
@@ -280,9 +298,13 @@ public class FacadeTest
             {
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
 
                 facade.ChooseTeam(player1, 0);
                 facade.ChooseTeam(player1, 1);
@@ -322,9 +344,13 @@ public class FacadeTest
             {
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
 
                 facade.ChooseTeam(player1, 0);
                 facade.ChooseTeam(player1, 1);
@@ -361,11 +387,15 @@ public class FacadeTest
                 
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Volador";
+                string pokemon = "Pidgey";
+                string items = "superPocion";
+
                 
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
                 
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
                 
                 facade.ChooseTeam(player1, 1);
                 facade.ChooseTeam(player1, 2);
@@ -403,11 +433,15 @@ public class FacadeTest
                 
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Volador";
+                string pokemon = "Pidgey";
+                string items = "superPocion";
+
                 
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
                 
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
                 
                 facade.ChooseTeam(player1, 1);
                 facade.ChooseTeam(player1, 2);
@@ -441,9 +475,13 @@ public class FacadeTest
             {
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
 
                 string resultado = facade.Surrender(player1);
                 
@@ -461,9 +499,13 @@ public class FacadeTest
                 facade = Facade.Instance;
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Volador";
+                string pokemon = "Pidgey";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
                 facade.ChooseTeam(player1, 0);
                 facade.ChooseTeam(player1, 0);
                 facade.ChooseTeam(player1, 0);
@@ -491,9 +533,13 @@ public class FacadeTest
 
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Volador";
+                string pokemon = "Pidgey";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
 
                 facade.ChooseTeam(player1, 0);
 
@@ -516,9 +562,13 @@ public class FacadeTest
                 facade = Facade.Instance;
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
                 string result = facade.ChangeTurn("Ash");
                 string esperado = null;
                 if (result != "No es tu turno")
@@ -545,9 +595,13 @@ public class FacadeTest
                 facade = Facade.Instance;
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
                 string result = facade.ChangeTurn("Ash");
                 string esperado = "No es tu turno";
                 if (result != esperado)
@@ -568,9 +622,13 @@ public class FacadeTest
                 facade = Facade.Instance;
                 string player1 = "Ash";
                 string player2 = "Misty";
+                string tipos = "Agua";
+                string pokemon = "Pikachu";
+                string items = "superPocion";
+
                 facade.AddTrainerToWaitingList(player1);
                 facade.AddTrainerToWaitingList(player2);
-                facade.StartBattle(player1, player2);
+                facade.StartBattle(player1, player2, tipos, pokemon, items);
                 string result = facade.Win(player1);
                 string esperado = "Ash a ganado!. Termino la Batalla!";
                 

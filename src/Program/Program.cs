@@ -17,15 +17,7 @@ internal static class Program
         //DemoFacade();
          DemoBot();
     }
-
-    private static void DemoFacade()
-    {
-        Console.WriteLine(Facade.Instance.AddTrainerToWaitingList("player"));
-        Console.WriteLine(Facade.Instance.AddTrainerToWaitingList("opponent"));
-        Console.WriteLine(Facade.Instance.GetAllTrainersWaiting());
-        Console.WriteLine(Facade.Instance.StartBattle("player", "opponent"));
-        Console.WriteLine(Facade.Instance.GetAllTrainersWaiting());
-    }
+    
 
     private static void DemoBot()
     {

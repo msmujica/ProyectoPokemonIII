@@ -15,9 +15,9 @@ public class BattlesList
     /// <param name="player1">El primer jugador (entrenador).</param>
     /// <param name="player2">El segundo jugador (oponente).</param>
     /// <returns>La nueva batalla creada.</returns>
-    public Battle AddBattle(Trainer player1, Trainer player2)
+    public Battle AddBattle(Trainer player1, Trainer player2, string tipos, string pokemon, string items)
     {
-        var battle = new Battle(player1, player2);
+        var battle = new Battle(player1, player2, tipos, pokemon, items);
         battles.Add(battle);
         return battle;
     }

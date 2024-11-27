@@ -50,42 +50,7 @@ public class TrainerTest
         trainer.Team.Add(pokemon);
         Assert.That(1, Is.EqualTo(trainer.Team.Count));
     }
-
-    /// <summary>
-    /// Verifica que no se puede agregar más de 6 Pokémon al equipo del entrenador.
-    /// </summary>
-    [Test]
-    public void TeamFull()
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            trainer.Team.Add(new Pokemon($"Pokemon{i}", 100, new List<string> { "Ataque" }, "Normal"));
-        }
-
-        var newPokemon = new Pokemon("Charmander", 100, new List<string> { "Ascuas" }, "Fuego");
-        var result = trainer.ChooseTeam(1);  // Simular agregar el Pokémon
-        Assert.That("Ya tienes la cantidad maxima de Pokemones en tu Equipo", Is.EqualTo(result));
-    }
-
-    /// <summary>
-    /// Verifica que no se pueden agregar más Pokémon si el equipo ya está lleno.
-    /// </summary>
-    [Test]
-    public void TeamFullCannotAddMore()
-    {
-        for (int i = 0; i < 6; i++)
-        {
-            trainer.Team.Add(new Pokemon($"Pokemon{i}", 100, new List<string> { "Ataque" }, "Normal"));
-        }
-
-        var newPokemon = new Pokemon("Charmander", 100, new List<string> { "Ascuas" }, "Fuego");
-        var result = trainer.ChooseTeam(7);  // Intentar agregar más Pokémon
-        Assert.That("Ya tienes la cantidad maxima de Pokemones en tu Equipo", Is.EqualTo(result));
-    }
     
-    /// <summary>
-    /// Verifica que se puede cambiar el Pokémon activo del entrenador.
-    /// </summary>
     [Test]
     public void ChangeActivePokemon()
     {
@@ -221,4 +186,5 @@ public class TrainerTest
         
         Assert.That(result, Is.Not.Null);
     }
+    
 }

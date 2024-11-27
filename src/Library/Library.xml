@@ -132,6 +132,21 @@
             que envía el mensaje de la lista de jugadores esperando para jugar.
             </summary>
         </member>
+        <member name="T:Ucu.Poo.DiscordBot.Commands.NoneAcceptCommand">
+            <summary>
+            Esta clase implementa el comando 'surrender' del bot. 
+            Este comando permite a un jugador rendirse durante una batalla actual, 
+            eliminándose de la misma y permitiéndole participar en otra batalla o continuar con el juego.
+            </summary>
+        </member>
+        <member name="M:Ucu.Poo.DiscordBot.Commands.NoneAcceptCommand.ExecuteAsync">
+            <summary>
+            Implementa el comando 'surrender'. Este comando permite al jugador que lo ejecuta 
+            rendirse en la batalla actual, removiéndose de la lista de jugadores en la batalla 
+            y dejándole libre para participar en otro combate o seguir con el juego.
+            </summary>
+            
+        </member>
         <member name="T:Ucu.Poo.DiscordBot.Commands.PokemonNameCommand">
             <summary>
             Esta clase implementa el comando 'name' del bot. Este comando retorna el
@@ -252,7 +267,7 @@
             Obtiene o establece el jugador que está esperando en el turno pasado.
             </summary>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.#ctor(Library.Trainer,Library.Trainer)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Battle.#ctor(Library.Trainer,Library.Trainer,System.String,System.String,System.String)">
             <summary>
             Inicializa una nueva instancia de la clase <see cref="T:Ucu.Poo.DiscordBot.Domain.Battle"/> con los entrenadores proporcionados.
             Además, inicializa el gestor de efectos y los ítems de los entrenadores.
@@ -321,7 +336,7 @@
             Esta clase representa la lista de batallas en curso.
             </summary>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.BattlesList.AddBattle(Library.Trainer,Library.Trainer)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.BattlesList.AddBattle(Library.Trainer,Library.Trainer,System.String,System.String,System.String)">
             <summary>
             Crea una nueva batalla entre dos jugadores y la agrega a la lista de batallas.
             </summary>
@@ -393,7 +408,7 @@
             <param name="displayName">El jugador.</param>
             <returns>Un mensaje con el resultado.</returns>
         </member>
-        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.StartBattle(System.String,System.String)">
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.StartBattle(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Crea una batalla entre dos jugadores.
             </summary>
@@ -461,6 +476,12 @@
             <param name="playerDisplayName">El nombre del jugador.</param>
             <param name="batt">La batalla en curso.</param>
             <returns>True si es el turno del jugador, False de lo contrario.</returns>
+        </member>
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.ChangeTurn(System.String)">
+            <summary>
+            Cambia el turno en caso del que el jugador lo decida.
+            </summary>
+            <returns>Turno Cambiado. Es el Turno de X, en caso contrario No es tu turno</returns>
         </member>
         <member name="T:Ucu.Poo.DiscordBot.Domain.WaitingList">
             <summary>
@@ -848,7 +869,7 @@
             </summary>
             <returns>Una lista de cadenas que representan los Pokémon en la Pokedex, con su nombre y tipo.</returns>
         </member>
-        <member name="M:Library.Pokedex.CreatePokemonByIndex(System.Int32,Library.Trainer)">
+        <member name="M:Library.Pokedex.CreatePokemonByIndex(System.Int32,Library.Trainer,Ucu.Poo.DiscordBot.Domain.Battle)">
             <summary>
             Crea un Pokémon a partir de su índice en la Pokedex y lo agrega al equipo del entrenador.
             </summary>
@@ -960,7 +981,7 @@
             </summary>
             <param name="nombre">El nombre del entrenador.</param>
         </member>
-        <member name="M:Library.Trainer.ChooseTeam(System.Int32)">
+        <member name="M:Library.Trainer.ChooseTeam(System.Int32,Ucu.Poo.DiscordBot.Domain.Battle)">
             <summary>
             Permite al entrenador elegir un Pokémon para agregar a su equipo.
             </summary>

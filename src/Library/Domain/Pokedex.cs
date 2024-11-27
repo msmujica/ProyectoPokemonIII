@@ -1,3 +1,5 @@
+using Ucu.Poo.DiscordBot.Domain;
+
 namespace Library;
 
 /// <summary>
@@ -11,7 +13,7 @@ namespace Library;
 /// </summary>
 public static class Pokedex
 {
-    private static List<string> namesPokemon = new List<string>
+    public static List<string> namesPokemon = new List<string>
     {
         "Squirtle", // Agua
         "Caterpie", // Bicho
@@ -30,7 +32,7 @@ public static class Pokedex
         "Pidgey" // Volador
     };
 
-    private static List<string> typesPokemon = new List<string>
+    public static List<string> typesPokemon = new List<string>
     {
         "Agua",
         "Bicho",
@@ -48,16 +50,7 @@ public static class Pokedex
         "Veneno",
         "Volador"
     };
-
-    /// <summary>
-    /// Muestra el nombre de un Pokémon dado su índice en la Pokedex.
-    /// </summary>
-    /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
-    /// <returns>El nombre del Pokémon en la Pokedex en el índice especificado.</returns>
-    public static string ShowPokemonByIndex(int index)
-    {
-        return namesPokemon[index];
-    }
+    
 
     /// <summary>
     /// Muestra una lista con todos los Pokémon en la Pokedex, junto con su tipo.
@@ -80,7 +73,7 @@ public static class Pokedex
     /// <param name="indice">El índice del Pokémon en la Pokedex.</param>
     /// <param name="trainer">El entrenador al que se le asignará el Pokémon creado.</param>
     /// <returns>El Pokémon creado, o null si el índice es inválido.</returns>
-   public static Pokemon CreatePokemonByIndex(int index, Trainer trainer)
+   public static Pokemon CreatePokemonByIndex(int index, Trainer trainer, Battle batlle)
 {
     int inicialHealth = 100;
     Pokemon newPokemon = null;
@@ -140,10 +133,24 @@ public static class Pokedex
         // Si se crea un Pokémon, se agrega al equipo del entrenador
         if (newPokemon != null)
         {
-            trainer.Team.Add(newPokemon);
-            if (trainer.Active == null)
+            if (!batlle.rTipo.Contains(newPokemon.Types))
             {
-                trainer.Active = newPokemon;
+                if (!batlle.rPokemon.Contains(newPokemon.Name))
+                {
+                    trainer.Team.Add(newPokemon);
+                    if (trainer.Active == null)
+                    {
+                        trainer.Active = newPokemon;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
             }
         }
 

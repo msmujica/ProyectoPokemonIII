@@ -27,6 +27,13 @@ public class Battle
     private Trainer lastTurn;
     private EffectsManager effectsManager;
 
+    public string[] rTipo { get; }
+    
+    public string[] rPokemon { get; }
+    
+    public string[] rItems { get; }
+    
+
     /// <summary>
     /// Obtiene o establece el jugador que está actuando en el turno actual.
     /// </summary>
@@ -51,12 +58,16 @@ public class Battle
     /// </summary>
     /// <param name="player1">El primer jugador (entrenador).</param>
     /// <param name="player2">El segundo jugador (oponente).</param>
-    public Battle(Trainer player1, Trainer player2)
+    public Battle(Trainer player1, Trainer player2, string rTipo, string rPokemon, string rItems)
     {
         Player1 = player1;
         Player2 = player2;
         ActualTurn = player1;
         LastTurn = player2;
+        
+        this.rTipo = rTipo.Split("-");
+        this.rPokemon = rPokemon.Split("-");
+        this.rItems = rItems.Split("-");
         effectsManager = new EffectsManager();
         player1.ItemSetting();
         player2.ItemSetting();
@@ -239,11 +250,15 @@ public class Battle
     /// <returns>Mensaje que describe el resultado del uso del ítem.</returns>
     public string IntermediaryUseItem(int opcionPokemon, string opcionItem)
     {
+        if (this.rItems.Contains(opcionItem))
+        {
+            return "No se puede usar el item";
+        }
+        
         if (ValidacionPokemonVivo())
         {
             return "Se a cambiado tu pokemon por que murio. Vuelve a realziar el ataque. ";
         }
-
         
         if (ValidacionWin())
         {

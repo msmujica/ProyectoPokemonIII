@@ -1,4 +1,5 @@
 using Library.Items;
+using Ucu.Poo.DiscordBot.Domain;
 
 namespace Library;
 
@@ -62,15 +63,22 @@ public class Trainer
     /// <param name="numero">El número del Pokémon que se desea agregar al equipo.</param>
     /// <returns>Un mensaje indicando si el Pokémon fue agregado con éxito o si el equipo está lleno.</returns>
 
-    public string ChooseTeam(int number)
+    public string ChooseTeam(int number, Battle batlle)
     {
         if (Team.Count >= 6)
         {
             return "Ya tienes la cantidad maxima de Pokemones en tu Equipo";
         }
-        Pokedex.CreatePokemonByIndex(number, this);
-        string name = Pokedex.ShowPokemonByIndex(number);
-        return $"El pokemon {name} se agrego a la lista, quedan {6 - Team.Count} espacios.";
+        
+        Pokemon resultado = Pokedex.CreatePokemonByIndex(number, this, batlle);
+        
+        if (resultado != null)
+        {
+            return $"El pokemon {resultado.Name} se agrego a la lista, quedan {6 - Team.Count} espacios.";
+
+        }
+
+        return "No se puede crear ya que no esta permitido";
     }
     
     /// <summary>
