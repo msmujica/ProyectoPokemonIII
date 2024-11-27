@@ -2,6 +2,21 @@ using Library;
 
 namespace Ucu.Poo.DiscordBot.Domain;
 
+/*
+Buenas Dias!
+Si bien funciona y esta correctamente hecho no es exactamente respetando algunos principios.
+A decir verdad no se me ocurrió otra forma de realizarlo hasta las 11 AM.
+En ese horario me di cuenta que para poder respetar muchos principios y de mas y que sea un buen uso de 
+código tuve que realizar una clase llamada reglas que se comunicara con battle, una ves de ahi a cada 
+accion desde el propio facade u accion que realzara se debería de realizar la validación previa. 
+Esta clase también permite agregar nuevas reglas sin modificar todo el código provisto desde el inicio.
+Tome la decision de no realizar esta opción ya que era muy tarde y pensé que es preferible entregar el código funcionando pero no respetando el principio OCP entre otros a que entregar todo a medio hacer.
+
+Por otro lado solucion dada, consiste en if de validacion para verificar si las batallas estan cumpliendo las reglas, ademas de todo cabe recalcar que para mi el responsable de saber las reglas seria la 
+batalla por lo cual seria una buena implementacion, no la mas adecuada pero una correcta.
+ */
+
+
 /// <summary>
 /// Representa una batalla entre dos entrenadores, gestionando turnos, ataques, cambios de Pokémon y uso de ítems.
 /// Esta clase también se encarga de validar las condiciones de victoria y de manejar los efectos de estado durante la batalla.
@@ -27,6 +42,7 @@ public class Battle
     private Trainer lastTurn;
     private EffectsManager effectsManager;
 
+    private bool accepted;
     public string[] rTipo { get; }
     
     public string[] rPokemon { get; }
@@ -41,6 +57,12 @@ public class Battle
     {
         get { return actualTurn; }
         set { actualTurn = value; }
+    }
+
+    public bool Accepted
+    {
+        get { return accepted; }
+        set { accepted = value; }
     }
     
     /// <summary>
