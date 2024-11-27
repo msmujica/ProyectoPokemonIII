@@ -133,11 +133,11 @@ public static class Pokedex
             newPokemon = new Pokemon("Pidgey", inicialHealth, new List<string> { "Tornado", "Ala de Acero", "Ataque Aéreo" }, "Volador");
             break;
         default:
-            Console.WriteLine("Índice inválido.");
             return null;
     }
-    
-        // Si se crea un Pokémon, se agrega al equipo del entrenador
+
+    if (trainer != null)
+    {
         if (newPokemon != null)
         {
             trainer.Team.Add(newPokemon);
@@ -146,8 +146,9 @@ public static class Pokedex
                 trainer.Active = newPokemon;
             }
         }
+    }
 
-        return newPokemon;
+    return newPokemon;
     }
 
 }

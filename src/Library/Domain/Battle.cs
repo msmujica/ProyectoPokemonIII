@@ -263,6 +263,8 @@ public class Battle
                 return "Selección de Pokémon inválida.";
             }
 
+            if (Facade.Instance.Restricion.EsteItem(opcionItem)) return "Este item esta reestringido";
+
             Pokemon pokemonSeleccionado = ActualTurn.Team[opcionPokemon];
 
             // Aplicar el ítem seleccionado al Pokémon

@@ -13,7 +13,7 @@ namespace Library;
 public static class TypeLogic
 {
     // Diccionario de cada tipo de debilidades (tipos que son fuertes contra ese tipo).
-    private static readonly Dictionary<string, List<string>> Debilidades = new Dictionary<string, List<string>>
+    public static readonly Dictionary<string, List<string>> Debilidades = new Dictionary<string, List<string>>
     {
         { "Agua", new List<string> { "Eléctrico", "Planta" } },
         { "Bicho", new List<string> { "Fuego", "Roca", "Volador", "Veneno" } },

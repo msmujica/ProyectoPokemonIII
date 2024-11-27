@@ -99,60 +99,496 @@
             <summary>
             Prueba la funcionalidad de agregar un jugador a la lista de espera.
             </summary>
+            <returns>Devuelve el mensaje de confirmación de que el jugador fue agregado.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestAddTrainerToWaitingList_Duplicate">
             <summary>
             Prueba la funcionalidad de intentar agregar un jugador duplicado a la lista de espera.
             </summary>
+            <returns>Devuelve el mensaje de error indicando que el jugador ya está en la lista de espera.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestStartBattle">
             <summary>
             Prueba el inicio de una batalla entre dos jugadores.
             </summary>
+            <returns>Devuelve el mensaje que indica el comienzo de la batalla y quién inicia.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestShowPokémonAvailable">
             <summary>
             Prueba la funcionalidad de mostrar los Pokémon disponibles en la Pokédex.
             </summary>
+            <returns>Devuelve una lista de los Pokémon disponibles con su tipo.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestRemoveTrainerFromWaitingList">
             <summary>
             Prueba la funcionalidad de remover un jugador de la lista de espera.
             </summary>
+            <returns>Devuelve el mensaje indicando si un jugador fue removido o no se encontraba en la lista.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestTrainerIsWaiting">
             <summary>
             Prueba la funcionalidad de verificar si un jugador está esperando en la lista de espera.
             </summary>
+            <returns>Devuelve el mensaje indicando si un jugador está esperando o no.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestGetAllTrainersWaiting">
             <summary>
             Prueba la funcionalidad de obtener todos los jugadores esperando en la lista de espera.
             </summary>
+            <returns>Devuelve la lista de jugadores que están esperando.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestGetAllTrainersWaitingNone">
+            <summary>
+            Prueba el comportamiento en caso de que no haya ningún entrenador esperando.
+            </summary>
+            <returns>Devuelve el mensaje indicando que no hay nadie esperando.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestStartBattleNoPlayersWaiting">
             <summary>
             Prueba el comportamiento cuando no hay jugadores esperando en la lista.
             </summary>
+            <returns>Devuelve el mensaje indicando que no hay jugadores para iniciar una batalla.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestChooseTeam">
             <summary>
             Prueba la funcionalidad de elegir un equipo de Pokémon para un jugador durante una batalla.
             </summary>
+            <returns>Devuelve el mensaje confirmando que el Pokémon fue agregado al equipo del jugador.</returns>
         </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestUseItem">
             <summary>
             Prueba la funcionalidad de usar un ítem durante una batalla.
             </summary>
+            <returns>Devuelve el mensaje indicando si el uso del ítem fue válido o no.</returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:LibraryTests.Domain.FacadeTest.TestUseItemNone" -->
         <member name="M:LibraryTests.Domain.FacadeTest.TestAttackPokemon">
             <summary>
             Prueba la funcionalidad de realizar un ataque con un Pokémon durante una batalla.
             </summary>
         </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestAttackPokemonNone">
+            <summary>
+            Prueba la funcionalidad de atacar a un Pokémon durante una batalla cuando el jugador no tiene turno.
+            Verifica que el sistema no permita realizar el ataque si no es el turno del jugador.
+            </summary>
+            <returns>Devuelve "No es tu turno ESPERA!" si el jugador no tiene turno.</returns>
+        </member>
         <member name="M:LibraryTests.Domain.FacadeTest.TestChangePokemon">
             <summary>
             Prueba la funcionalidad de cambiar el Pokémon activo durante una batalla.
+            Verifica que el cambio de Pokémon sea realizado correctamente cuando es el turno del jugador.
+            </summary>
+            <returns>Devuelve el nombre del Pokémon cambiado (por ejemplo, "Gastly").</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestChangePokemonNone">
+            <summary>
+            Prueba la funcionalidad de intentar cambiar el Pokémon activo cuando no es el turno del jugador.
+            Verifica que el sistema no permita realizar el cambio si no es el turno del jugador.
+            </summary>
+            <returns>Devuelve "No es tu turno ESPERA!" si el jugador no tiene turno.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestSurrender">
+            <summary>
+            Prueba la funcionalidad de rendirse durante una batalla.
+            Verifica que el jugador que se rinde termine la batalla correctamente.
+            </summary>
+            <returns>Devuelve un mensaje indicando que el jugador se rindió y terminó la batalla.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestVida">
+            <summary>
+            Prueba la funcionalidad de mostrar la vida de los Pokémon durante una batalla.
+            Verifica que el sistema devuelva la vida correcta de los Pokémon en el equipo de un jugador.
+            </summary>
+            <returns>Devuelve un string con la información de la vida de los Pokémon en el equipo del jugador.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.TestShowPokemonAttacks">
+            <summary>
+            Prueba la funcionalidad de mostrar los ataques de un Pokémon.
+            Verifica que el sistema devuelva correctamente los ataques disponibles para un Pokémon.
+            </summary>
+            <returns>Devuelve un string con los ataques disponibles de un Pokémon, incluyendo el tipo y daño de cada ataque.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.ChangeTurnTest">
+            <summary>
+            Prueba la funcionalidad de cambiar el turno durante una batalla.
+            Verifica que el sistema permita cambiar el turno entre los jugadores correctamente.
+            </summary>
+            <returns>Devuelve un mensaje que indica quién tiene el turno después de cambiarlo.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.ChangeTurnNoneTest">
+            <summary>
+            Prueba la funcionalidad de intentar cambiar el turno cuando no es el turno del jugador.
+            Verifica que el sistema no permita cambiar el turno si no es el turno del jugador.
+            </summary>
+            <returns>Devuelve "No es tu turno" si el jugador intenta cambiar el turno cuando no le corresponde.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.FacadeTest.WinTest">
+            <summary>
+            Prueba la funcionalidad de declarar al jugador como ganador en una batalla.
+            Verifica que el mensaje de victoria se devuelva correctamente cuando un jugador gana.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseSuperPotion">
+            <summary>
+            Verifica el uso de una Super poción cuando el Pokémon tiene menos de su vida máxima.
+            </summary>
+            <returns>
+            Un mensaje indicando que se usó una Super poción y el número de usos restantes.
+            Además, la vida del Pokémon se restaura al máximo
+            </returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseSuperPotionNone">
+            <summary>
+            Verifica el comportamiento al intentar usar una Super Poción cuando no hay disponibles.
+            </summary>
+            <returns>Un mensaje indicando que no hay Super Pociones disponibles.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseSuperPotion_MaxHealth">
+            <summary>
+            Verifica que no se pueda usar una Super Poción si el Pokémon ya tiene su vida al máximo.
+            </summary>
+            <returns>Un mensaje indicando que el Pokémon ya está a su vida máxima.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseRevive_IsNotDefeated">
+            <summary>
+            Verifica que no se pueda usar un Revivir en un Pokémon que no está derrotado.
+            </summary>
+            <returns>Un mensaje indicando que el Pokémon no está derrotado.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseReviveNone">
+            <summary>
+            Verifica el comportamiento al intentar usar un Revivir cuando no hay disponibles.
+            </summary>
+            <returns>Un mensaje indicando que no hay Revivires disponibles.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseTotalCure">
+            <summary>
+            Verifica el uso de una Cura Total para restaurar la vida del Pokémon a su máximo y eliminar efectos negativos.
+            </summary>
+            <returns>
+            Un mensaje indicando que se usó una Cura Total y el número de usos restantes.
+            Además, la vida del Pokémon se restaura a su valor máximo.
+            </returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ItemsManagerTest.TestUseTotalCureNone">
+            <summary>
+            Verifica el comportamiento al intentar usar una Cura Total cuando no hay disponibles.
+            </summary>
+            <returns>Un mensaje indicando que no hay Curaciones Totales disponibles.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ParalyzeEffectTest.TestStartEffect">
+            <summary>
+            Verifica que el efecto de parálisis se inicie correctamente en un Pokémon.
+            </summary>
+            <returns>Un mensaje indicando que el efecto de parálisis se aplicó correctamente.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ParalyzeEffectTest.TestProcessEffect">
+            <summary>
+            Procesa el efecto de parálisis y verifica si el Pokémon puede atacar o no en el turno actual.
+            </summary>
+            <returns>
+            Un mensaje indicando si el Pokémon supera la parálisis y puede atacar, 
+            o si está paralizado y pierde el turno.
+            </returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ParalyzeEffectTest.TestProcessEffectNone">
+            <summary>
+            Procesa el efecto de parálisis en el caso donde el Pokémon no puede atacar debido al estado de parálisis.
+            </summary>
+            <returns>
+            Un mensaje indicando si el Pokémon supera la parálisis y puede atacar, 
+            o si permanece paralizado y pierde el turno.
+            </returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ParalyzeEffectTest.TestInfo">
+            <summary>
+            Verifica que el método <c>Info</c> del efecto de parálisis retorna el mismo mensaje 
+            que el procesamiento del efecto (<c>ProcessEffect</c>).
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.ParalyzeEffectTest.TestProcessEffectShouldAllowAttackWhenPokemonCanAttack">
+            <summary>
+            Procesa el efecto de parálisis cuando el Pokémon puede atacar 
+            después de superar el estado de parálisis.
+            </summary>
+            <returns>Un mensaje indicando que el Pokémon puede atacar.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.ParalyzeEffectTest.TestProcessEffectShouldNotAllowAttackWhenPokemonCannotAttack">
+            <summary>
+            Procesa el efecto de parálisis cuando el Pokémon no puede atacar debido al estado de parálisis.
+            </summary>
+            <returns>Un mensaje indicando que el Pokémon no puede atacar y pierde el turno.</returns>
+        </member>
+        <member name="M:LibraryTests.Domain.PoisonEffectTest.TestStartEffect">
+            <summary>
+            Prueba que verifica el inicio del efecto de envenenamiento en un Pokemon.
+            Se asegura de que el mensaje correcto se devuelva cuando el efecto es aplicado.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PoisonEffectTest.TestProcessEffect">
+            <summary>
+            Verifica el procesamiento del efecto de envenenamiento en un pokemon
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PoisonEffectTest.TestProcessEffectPokemonDied">
+            <summary>
+            Verifica el processamiento del efecto envenenamiento cuando el pokemon es derrotado
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PoisonEffectTest.TestInfo">
+            <summary>
+            Verifica la informacion sobre el efecto de envenenamiento en un pokemon.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PoisonEffectTest.TestICanAttack">
+            <summary>
+            Verifica si un pokemon puede atacar mientras tiene el efecto de envenamiento.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokedexTest.TestShowPokemonByIndexValid">
+            <summary>
+            Prueba que verifica que se puede obtener un Pokemon por suu indice valido.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokedexTest.TestShowPokedex">
+            <summary>
+            Prueba para que Mostrar Pokédex devuelve la lista completa.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokedexTest.TestCreatePokemonByIndex">
+            <summary>
+            Verifica la creacion de Pokemon a partir de su indice en la Pokedex.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokedexTest.TestCreatePokemonByIndexInvalid">
+             <summary>
+            Se prueba el comportamiento cuando se intenta crear un Pokemón con un índice inválido
+             </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokemonTest.ReceiveDamageDecreasesHealthCorrectly">
+            <summary>
+            Prueba para verificar que un Pokémon reciba daño correctamente
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokemonTest.ReceiveDamageWhenDefeated">
+            <summary>
+            Prueba para verificar que un Pokémon no pueda recibir daño una vez derrotado
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokemonTest.AttacksValidAttackCausesDamage">
+            <summary>
+            Prueba para verificar que un ataque válido cause daño al oponente
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokemonTest.AttacksInvalidAttackNoDamage">
+            <summary>
+            Prueba para verificar que un ataque inválido no cause daño
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.PokemonTest.ReceiveDamageIsDefeated">
+            <summary>
+            Prueba para verificar que un Pokémon se marque como derrotado al llegar a 0 de salud
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestStartEffect">
+            <summary>
+            Prueba que verifica que el efecto de sueño se inicia correctamente en un Pokémon.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestProcessEffect">
+            <summary> 
+            Prueba que verifica el procesamiento del efecto de sueño en un Pokémon. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestInfo">
+            <summary> 
+            Prueba que verifica que la información del efecto de sueño sea retornada correctamente.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestICanAttack">
+            <summary>
+            Prueba que verifica que un Pokémon bajo el efecto de sueño no pueda atacar.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestProcessEffectShouldNotAllowAttackWhenStillSleeping">
+            <summary> 
+            Prueba que verifica que un Pokémon dormido no pueda atacar mientras aún está bajo el efecto.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestProcessEffectShouldWakeUpWhenTurnsEnd">
+            <summary> 
+            Prueba que verifica que un Pokémon despierte después de que termine el número de turnos de sueño. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestProcessEffectShouldAllowAttackWhenPokemonWakesUp">
+            <summary> 
+            Prueba que verifica que un Pokémon pueda atacar después de despertar del efecto de sueño.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.SleepEffectTest.TestProcessEffectShouldDecrementSleepTurns">
+            <summary>
+            Prueba que verifica que los turnos de sueño disminuyan correctamente con cada procesamiento. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.SetUp">
+            <summary>
+            Configura un entrenador antes de cada prueba.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.Constructor">
+            <summary>
+            Verifica que el constructor inicializa correctamente el nombre del entrenador.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.StartTeam">
+            <summary>
+            Verifica que el equipo del entrenador se inicializa vacio.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.AddPokemonToTheTeam">
+            <summary>
+            Verifica que se puede agregar un Pokémon al equipo del entrenador.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.TeamFull">
+            <summary>
+            Verifica que no se puede agregar más de 6 Pokémon al equipo del entrenador.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.TeamFullCannotAddMore">
+            <summary>
+            Verifica que no se pueden agregar más Pokémon si el equipo ya está lleno.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.ChangeActivePokemon">
+            <summary>
+            Verifica que se puede cambiar el Pokémon activo del entrenador.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.InvalidIndex">
+            <summary>
+            Verifica que no se puede cambiar el Pokémon activo con un índice no válido.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.UseItemSuperpotion">
+            <summary>
+            Verifica el uso de una superpoción en un Pokémon.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.UseItemRevivir">
+            <summary>
+            Verifica el uso de un revivir en un Pokémon derrotado.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.UseItemCuraTotal">
+            <summary>
+            Verifica el uso de una cura total en un Pokémon.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.UseItemNone">
+            <summary>
+            Verifica el uso de un ítem no válido.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.ChangeDeadPokemon">
+            <summary>
+            Verifica que se cambie automáticamente un Pokémon activo derrotado.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.SettingItems">
+            <summary>
+            Verifica que los contadores de ítems se configuren correctamente.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TrainerTest.ChooseAttack">
+            <summary>
+            Verifica la funcionalidad para elegir un ataque.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TypeLogicTest.Weaknesses">
+            <summary>
+            Prueba para verificar que el tipo "Fuego" es super efectivo contra "Planta"
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TypeLogicTest.Resistances">
+            <summary>
+            Prueba para verificar que el tipo "Fuego" es poco efectivo contra "Agua"
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TypeLogicTest.Immunities">
+            <summary>
+            Prueba para verificar que el tipo "Eléctrico" no tiene efecto sobre "Tierra"
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TypeLogicTest.NeutralEffect">
+            <summary>
+            Prueba para un caso neutral (ataque que no es efectivo ni poco efectivo)
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TypeLogicTest.UnknownAttackerType">
+            <summary>
+            Prueba para un tipo inexistente como atacante
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.TypeLogicTest.UnknownDefenderType">
+            <summary>
+            Prueba para un tipo inexistente como defensor
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.Setup">
+            <summary>
+            Verifica que la WaitingList se inicializa correctamente.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.AddTrainerShouldAddTrainerWhenDisplayNameIsValid">
+            <summary> 
+            Verifica que un entrenador se agregue correctamente si el nombre es válido.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.AddTrainerShouldReturnFalseWhenDisplayNameIsDuplicate">
+            <summary> 
+            Comprueba que no se pueda agregar un entrenador con un nombre duplicado. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.AddTrainerShouldThrowArgumentException">
+            <summary> 
+            Valida que se arroje una excepción si el nombre proporcionado es nulo o vacío. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.RemoveExistingTrainerShouldRemoveTrainer">
+            <summary> 
+            Verifica que se pueda eliminar correctamente a un entrenador existente.
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.RemoveTrainerShouldReturnFalse">
+            <summary> 
+            Comprueba que intentar eliminar un entrenador inexistente retorne false. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.SearchTrainerByDisplayNameShouldReturnTrainer">
+            <summary> 
+            Verifica que se pueda encontrar a un entrenador por su nombre si existe en la lista. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.SearchTrainerByDisplayNameShouldReturnNull">
+            <summary> 
+            Comprueba que buscar a un entrenador inexistente retorne null. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.GetAnyoneWaitingShouldReturnFirstTrainer">
+            <summary> 
+            Valida que se obtenga el primer entrenador de la lista cuando hay entrenadores esperando. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.GetAnyoneWaitingShouldReturnNull">
+            <summary> 
+            Comprueba que intentar obtener un entrenador de una lista vacía retorne null. 
+            </summary>
+        </member>
+        <member name="M:LibraryTests.Domain.WaitingListTest.GetAllWaitingShouldReturnAllTrainers">
+            <summary> 
+            Verifica que se puedan obtener todos los entrenadores en espera. 
             </summary>
         </member>
         <member name="T:Tests.BattleTest">

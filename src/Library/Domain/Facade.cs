@@ -45,6 +45,8 @@ public class Facade
         _instance = null;
     }
     
+    public Restricion Restricion { get; }
+    
     private WaitingList WaitingList { get; }
     
     private BattlesList BattlesList { get; }
@@ -106,6 +108,8 @@ public class Facade
         
         return result;
     }
+    
+    
 
     /// <summary>
     /// Determina si un jugador está esperando para jugar.
@@ -124,6 +128,57 @@ public class Facade
     }
 
 
+    public bool Reestricciones(string playerDisplayName, string opponentDisplayName)
+    {
+        bool turnplayer = true;
+        bool blop = true;
+        string respuesta = "";
+        while (blop == true)
+        {
+            Console.WriteLine($"{playerDisplayName}: Si queres reestringir un item, escribi el nombre del item, sino escribi no.");
+            respuesta = Console.ReadLine();
+            if (respuesta != "no")
+            {
+                Restricion.ReestriccionItem(respuesta);
+            }
+            else
+            {
+                blop = false;
+            }
+        }
+        while (blop == false)
+        {
+            Console.WriteLine($"{playerDisplayName}: Si queres reestringir un tipo, escribi el nombre del tipo, sino escribi no.");
+            respuesta = Console.ReadLine();
+            if (respuesta != "no")
+            {
+                Restricion.ReestriccionTipos(respuesta);
+            }
+            else
+            {
+                blop = true;
+            }
+        }
+        while (blop == true)
+        {
+            Console.WriteLine($"{playerDisplayName}: Si queres reestringir un pokemon, escribi el indice, sino escribi no.");
+            respuesta = Console.ReadLine();
+            if (respuesta != "no")
+            {
+                Restricion.ReestriccionPokemon(respuesta);
+            }
+            else
+            {
+                blop = false;
+            }
+        }
+        Console.WriteLine($"{opponentDisplayName}: Si estas de acuerdo con las reestricciones escribi si, de no ser asi escribi no. ");
+        Console.WriteLine(Restricion.Reestricciones());
+        respuesta = Console.ReadLine();
+        if (respuesta == "no") return false;
+        return true;
+
+    }
     private string CreateBattle(string playerDisplayName, string opponentDisplayName)
     {
         // Aunque playerDisplayName y opponentDisplayName no estén en la lista
@@ -136,6 +191,8 @@ public class Facade
         {
             return $"{(player == null ? playerDisplayName : opponentDisplayName)} no está en la lista de espera";
         }
+
+        if (!Reestricciones(playerDisplayName, opponentDisplayName)) return "No se aceptaron los terminos de reestriccion. ";
 
         // Remover jugadores de la lista de espera
         WaitingList.RemoveTrainer(playerDisplayName);
@@ -256,7 +313,9 @@ public class Facade
     public string ChooseTeam(string playerDisplayName, int number)
     {
         Trainer? player = BattlesList.FindTrainerByDisplayName(playerDisplayName);
-        return player.ChooseTeam(number);
+        if (Restricion.EstePokemon(number)) return player.ChooseTeam(number);
+        return "Pokemon reestringido";
+
     }
 
     /// <summary>

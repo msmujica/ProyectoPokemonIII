@@ -462,6 +462,12 @@
             <param name="batt">La batalla en curso.</param>
             <returns>True si es el turno del jugador, False de lo contrario.</returns>
         </member>
+        <member name="M:Ucu.Poo.DiscordBot.Domain.Facade.ChangeTurn(System.String)">
+            <summary>
+            Cambia el turno en caso del que el jugador lo decida.
+            </summary>
+            <returns>Turno Cambiado. Es el Turno de X, en caso contrario No es tu turno</returns>
+        </member>
         <member name="T:Ucu.Poo.DiscordBot.Domain.WaitingList">
             <summary>
             Esta clase representa la lista de jugadores esperando para jugar.
