@@ -313,4 +313,15 @@ public class Battle
     {
         Facade.Instance.Win(this.actualTurn.Name);
     }
+    
+    
+    public List<string> AllowedPokemonTypes { get; set; }
+    public int MaxPokemon { get; set; }
+    public List<string> AllowedItems { get; set; }
+
+    public Battle()
+    {
+        AllowedPokemonTypes = new List<string>();
+        AllowedItems = new List<string>();
+    }
 }

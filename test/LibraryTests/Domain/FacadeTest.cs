@@ -528,4 +528,57 @@ public class FacadeTest
             Assert.That(esperado, Is.EqualTo(result));
         }
         
-}
+        // No consigo que retorne los battle.AllowedPokemonTypes, battle.MaxPokemon y battle.AllowedItems
+      
+        [Test]
+        public void BattleRestrictionsAllowedPokemonTypes()
+        {
+            
+            List<string> allowedPokemonTypes = new List<string> { "Fuego", "Agua" };
+            facade.SetBattleRestrictions("Battle1", allowedPokemonTypes, 3, new List<string>());
+            
+            Assert.That(allowedPokemonTypes, Is.EqualTo());
+        }
+
+        [Test]
+        public void BattleRestrictionsMaxPokemon()
+        {
+            
+            int maxPokemon = 3;
+            facade.SetBattleRestrictions("Battle1", new List<string>(), maxPokemon, new List<string>());
+
+            Assert.That(maxPokemon, Is.EqualTo(battle.MaxPokemon));
+        }
+
+        [Test]
+        public void BattleRestrictionsAllowedItems()
+        {
+            
+            List<string> allowedItems = new List<string> { "Poción", "Superpoción" };
+            facade.SetBattleRestrictions("Battle1", new List<string>(), 3, allowedItems);
+            
+            Assert.That(allowedItems, Is.EqualTo());
+        }
+
+        [Test]
+        public void GetBattleRules()
+        {
+            Facade.Reset(); // Reiniciar el singleton si es necesario.
+            facade = Facade.Instance;
+            string player1 = "Ash";
+            string player2 = "Misty";
+            facade.AddTrainerToWaitingList(player1);
+            facade.AddTrainerToWaitingList(player2);
+            List<string> allowedPokemonTypes = new List<string> { "Fuego", "Agua" };
+            int maxPokemon = 3;
+            List<string> allowedItems = new List<string> { "CuraTotal", "Superpoción" };
+            facade.SetBattleRestrictions("Battle1", allowedPokemonTypes, maxPokemon, allowedItems);
+            
+            string rules = facade.GetBattleRules("Battle1");
+            string expectedRules = "Reglas de la batalla:\n" +
+                                   "Tipos de Pokémon permitidos: Fuego, Agua\n" +
+                                   "Número máximo de Pokémon: 3\n" +
+                                   "Items permitidos: CuraTotal, Superpoción\n";
+            Assert.That(expectedRules, Is.EqualTo(rules));
+        }
+    }

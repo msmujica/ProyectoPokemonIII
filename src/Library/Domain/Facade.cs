@@ -2,6 +2,11 @@
 using Library;
 
 namespace Ucu.Poo.DiscordBot.Domain;
+//Hacer tests sobre 
+//Restriccion de tipos de pokemon
+//Restriccion de pokemoms
+//Restriccion de items
+//Estas reglas se muestran a los jugadores
 
 /// <summary>
 /// Esta clase recibe las acciones y devuelve los resultados que permiten
@@ -385,4 +390,30 @@ public class Facade
 
         return "No es tu turno";
     }
+    public void SetBattleRestrictions(string battleDisplayName, List<string> allowedPokemonTypes, int maxPokemon, List<string> allowedItems)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(battleDisplayName);
+        if (battle != null)
+        {
+            battle.AllowedPokemonTypes = allowedPokemonTypes;
+            battle.MaxPokemon = maxPokemon;
+            battle.AllowedItems = allowedItems;
+        }
+    }
+
+    public string GetBattleRules(string battleDisplayName)
+    {
+        Battle? battle = this.BattlesList.FindBattleByDisplayName(battleDisplayName);
+            if (battle != null)
+            {
+                string rules = "Reglas de la batalla:\n";
+                rules += $"Tipos de Pokémon permitidos: {string.Join(", ", battle.AllowedPokemonTypes)}\n";
+                rules += $"Número máximo de Pokémon: {battle.MaxPokemon}\n";
+                rules += $"Items permitidos: {string.Join(", ", battle.AllowedItems)}\n";
+                return rules;
+            }
+
+        return "No se encontró la batalla";
+        }
 }
+
